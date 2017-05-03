@@ -1,0 +1,293 @@
+{%extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig'%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__admin_list')}}">{{icon('tower')}} &nbsp; {{'breadcrumb.admin.list'|trans}}</a></li>
+  <li class="active">
+    <a href="{{path('Admin__admin_edit_get', {'id': admin.id})}}">{{icon('edit')}} &nbsp; {{'breadcrumb.admin.edit'|trans({'%admin%': admin.fullname})|raw}}</a>
+  </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+        <form action="{{ path('Admin__admin_search') }}" method="get"  class="form-search form-inline">
+            <div class="form-group">
+	            <label for="q">{{'_search'|trans}}</label>
+	            <input class="input-sm" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="" >
+	        </div>
+	        <div class="form-group">
+	            <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+	        </div>
+        </form>
+    </div>
+    <ul class="nav nav-tabs">
+      {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+      <li{%if tabActive==1%} class="active"{%endif%}><a href="#preview" data-toggle="tab">{{'Admin.tab.preview'|trans|raw}}</a></li>
+      {%if is_granted('ROLE_SUPER_ADMIN') and superiorRole == false%}
+      <li{%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Admin.tab.edit'|trans|raw}}</a></li>
+      {%endif%}
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+        <br>
+        <h3 class="legend">{{'Admin.tlabel.preview'|trans}}</h3>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Admin.avatar'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if admin.avatar is not null%}
+                <img src="{{path('Admin__admin_avatar', {'id': admin.id})}}" alt="{{admin.Fullname}}">
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Admin.username'|trans|raw}} :</div>
+              <div class="col-lg-9">{{admin.username}}</div>
+              <div class="col-lg-3 text-right">{{'Admin.email'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if admin.email is not null%}
+                <a href="mailto:{{admin.email}}">{{admin.email}}</a>
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+              <div class="col-lg-3 text-right">{{'Admin.lockout'|trans|raw}} :</div>
+              <div class="col-lg-9">{{('Admin.lockout.'~admin.lockout)|trans|raw}}</div>
+
+              <div class="col-lg-3 text-right">{{'Admin.dtCrea'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if admin.dtCrea is null%}
+                {{label_warning('_NA'|trans)}}
+                {%else%}
+                {{admin.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{admin.dtCrea|date('H:i:s')}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Admin.logins'|trans|raw}} :</div>
+              <div class="col-lg-9">{{badge(admin.logins)}}</div>
+
+              <div class="col-lg-3 text-right">{{'Admin.lastLogin'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if admin.lastLogin is null%}
+                {{label_info('_NA'|trans)}}
+                {%else%}
+                {{admin.lastLogin|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{admin.lastLogin|date('H:i:s')}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Admin.lastActivity'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if admin.lastActivity is null%}
+                {{label_info('_NA'|trans)}}
+                {%else%}
+                {{admin.lastActivity|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{admin.lastActivity|date('H:i:s')}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Admin.adminRoles'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%for r in admin.adminRoles%}
+                <a href="{{path('Admin__role_edit_get',{id: r.id})}}">{{r.name|trans|raw}}</a>
+                {%else%}
+                {{label_danger('_NA'|trans)}}
+                {%endfor%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Admin.preferedLocale'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if admin.preferedLocale is not null%}
+                {{admin.preferedLocale.name}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Admin.sexe'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if admin.sexe is not null%}
+                {{('Admin.sexe.'~admin.sexe)|trans|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Admin.lastName'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if admin.lastName is not null%}
+                {{admin.lastName}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Admin.firstName'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if admin.firstName is not null%}
+                {{admin.firstName}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Admin.birthday'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if admin.birthday is not null%}
+                {{admin.birthday|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Admin.address'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if admin.address is not null%}
+                {{admin.address|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Admin.country'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if admin.country is not null%}
+                {{admin.country|country}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Admin.phone'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if admin.phone is not empty%}
+                <a href="tel:{{admin.phone}}">{{icon('phone-alt')}} {{admin.phone}}</a>
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Admin.mobile'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if admin.mobile is not empty%}
+                <a href="tel:{{admin.mobile}}">{{icon('phone')}} {{admin.mobile}}</a>
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%if is_granted('ROLE_SUPER_ADMIN') and superiorRole == false%}
+      <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+        <br>
+        <h3 class="legend">{{'Admin.tlabel.editProfile'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(adminProfileForm, {'method':'POST', 'action': path('Admin__admin_edit_post', {'id': admin.id}), 'style': 'horizontal'})}}
+            {{form_row(adminProfileForm.sexe, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('user') }})}}
+            {{form_row(adminProfileForm.lastName, {'label_col': 3, 'widget_col': 3})}}
+            {{form_row(adminProfileForm.firstName, {'label_col': 3, 'widget_col': 3})}}
+            {{form_row(adminProfileForm.birthday, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('calendar') }})}}
+            {{form_row(adminProfileForm.address, {'label_col': 3, 'widget_col': 6})}}
+            {{form_row(adminProfileForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
+            {{form_row(adminProfileForm.phone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'} }) }}
+            {{form_row(adminProfileForm.mobile, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}}) }}
+            {{form_row(adminProfileForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(adminProfileForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Admin.tlabel.editPreferedLocale'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(adminPreferedLocaleForm, {'method':'POST', 'action': path('Admin__admin_edit_post', {'id': admin.id}), 'style': 'horizontal'})}}
+            {{form_row(adminPreferedLocaleForm.preferedLocale, {'label_col': 3, 'widget_col': 4, 'input_group': { 'append': icon('flag') }})}}
+            {{form_row(adminPreferedLocaleForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(adminPreferedLocaleForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Admin.tlabel.editEmail'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(adminEmailForm, {'method':'POST', 'action': path('Admin__admin_edit_post', {'id': admin.id}), 'style': 'horizontal'})}}
+            {{form_row(adminEmailForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
+            {{form_row(adminEmailForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(adminEmailForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Admin.tlabel.editLockout'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(adminLockoutForm, {'method':'POST', 'action': path('Admin__admin_edit_post', {'id': admin.id}), 'style': 'horizontal'})}}
+            {{form_row(adminLockoutForm.lockout, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('lock') }})}}
+            {{form_row(adminLockoutForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(adminLockoutForm)}}
+          </div>
+        </div>
+
+        {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+        <br>
+        <h3 class="legend">{{'Admin.tlabel.editRoles'|trans}}</h3>
+        <div class="panel panel-danger">
+          <div class="panel-body">
+            {{form_start(adminRoleForm, {'method':'POST', 'action': path('Admin__admin_edit_post', {'id': admin.id}), 'style': 'horizontal'})}}
+            {{form_row(adminRoleForm.adminRoles, {'label_col': 3, 'widget_col': 9})}}
+            {{form_row(adminRoleForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(adminRoleForm)}}
+          </div>
+        </div>
+        {%endif%}
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+{%if is_granted('ROLE_SUPER_ADMIN') and superiorRole == false%}
+$(function()
+    {
+        $('#AdminProfileForm_birthday').datetimepicker(
+            {
+                weekStart: 1,
+                startView: 4,
+                minView: 2,
+                autoclose: true,
+                todayHighlight: true,
+                language: "{{app.request.locale}}",
+                format: 'yyyy-mm-dd'
+            }
+        );
+    }
+);
+{%endif%}
+{%endblock dynamic_jstxt%}

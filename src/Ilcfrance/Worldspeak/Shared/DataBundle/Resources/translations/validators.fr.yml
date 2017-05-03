@@ -1,0 +1,43 @@
+_phone.invalid: Un numéro de Télephone doit être au format +CCC.NNNNNNNNNN
+#Admin
+Admin.username.unique: Cet identifiant est déja utilisé par un autre Administrateur
+Admin.email.unique: Cet email est déja utilisé par un autre Administrateur
+
+#ClosedDay
+ClosedDay.unique: Ce Jour férié existe déjà
+
+#Company
+Company.prefix.unique: Ce Prefix est déjà utilisé par une autre Entreprise
+Company.codeMA.unique: Ce Code ManageAll est déjà utilisé par une autre Entreprise
+Company.prefix.invalid: Le Préfix de l'Entreprise doit être au format <b>^[a-z][a-z0-9]{1,19}$</b> 
+Company.name.notblank: Le nom de l'Entreprise ne doit pas être vide
+
+#Cours
+Cours.codeMA.unique: Ce Code ManageAll est déjà utilisé par un autre Cours
+Cours.teacher.invalid: Le Formateur Choisi a déjà un autre cours au mème moment
+
+#Locale
+Locale.prefix.unique: Ce Préfix est déjà utilisé pour un autre Paramètre Régional
+Locale.prefix.invalid: Le Préfix choisi est invalide<br>(@see doc Sf2)
+
+#Role
+Role.name.unique: Ce Nom est déjà utilisé par un autre Privilège
+Role.name.regex: Le nom du Privilège doit être au format <b>^ROLE\_[A-Z](([A-Z0-9\_]+[A-Z0-9])|[A-Z0-9])$</b>
+
+#Teacher
+Teacher.username.unique: Cet identifiant est déja utilisé par un autre Formateur
+Teacher.email.unique: Cet email est déja utilisé par un autre Formateur
+Teacher.codeMA.unique: Ce Code ManageAll est déja utilisé par un autre Formateur
+
+#Trainee
+Trainee.username.unique: Cet identifiant est déja utilisé par un autre Stagiaire
+Trainee.email.unique: Cet email est déja utilisé par un autre Stagiaire
+Trainee.codeMA.unique: Ce Code ManageAll est déja utilisé par un autre Stagiaire
+
+# TimeCredit
+TimeCredit.deadLine.graterThanNow: La date Limite doit être supérieure à la date actuelle
+TimeCredit.totalHours.invalid: Le nombre d'Heures total du Crédit horaire ne peux pas etre inférieur à la sommes des heures effectuées, perdues et planifiées
+
+# TimeCreditDocument
+TimeCreditDocument.teachingResource.null: Un de ces deux champs doit etre rempli
+TimeCreditDocument.msg.null: Un de ces deux champs doit etre rempli

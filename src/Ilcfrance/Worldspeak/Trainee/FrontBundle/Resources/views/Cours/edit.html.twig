@@ -1,0 +1,266 @@
+{%extends 'IlcfranceWorldspeakTraineeFrontBundle::layout.html.twig'%} {%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Trainee__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li class="active">
+        <a href="{{path('Trainee__cours_edit_get', {'id': cours.id})}}">
+            {{icon('earphone')}} &nbsp;
+            {{'breadcrumb.cours.edit'|trans({'%dStart%':cours.dtStart|localizeddate('long', 'none', app.request.locale )|capitalize, '%tStart%':
+                cours.dtStart|localizeddate('none', 'medium', app.request.locale ), '%dtEnd%': cours.dtEnd|localizeddate('long', 'none', app.request.locale)})|raw }}
+        </a>
+    </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+            <li {%if tabActive==1%}class="active"{%endif%}>
+                <a href="#details" data-toggle="tab">{{'Cours.tab.preview'|trans}}</a>
+            </li>
+            {%if cours.finished==false or cours.documents|length!=0%}
+            <li {%if tabActive==2%}class="active"{%endif%}>
+                <a href="#docs" data-toggle="tab">{{'Cours.tab.coursDocuments'|trans}}</a>
+            </li>
+            {%endif%}
+        </ul>
+        <div class="tab-content" id="tab">
+            <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="details">
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.preview'|trans}}</h3>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.timeCredit'|trans}} :</div>
+                            <div class="col-lg-9">{{icon('time')}} {{('TimeCredit.ftype.'~cours.timeCredit.ftype)|trans}}
+                                {{cours.timeCredit.totalHours}} {{'_hours'|trans}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.dtStart'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                            {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}</div>
+
+                            <div class="col-lg-3 text-right">{{'Cours.dtEnd'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                            {{cours.dtEnd|localizeddate('long', 'none', app.request.locale)}}</div>
+                            <div class="col-lg-3 text-right">{{'Cours.duration'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.duration}} {{'_minutes'|trans}}</div>
+                        </div>
+                        <br>
+                        {%if cours.status is constant('STATUS_PLANNED', cours)%}
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.phone'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.phone is not empty%}
+                                <a href="tel:{{cours.phone}}">{{icon('earphone')}} {{cours.phone}}</a>
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        {%endif%}
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.type'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.type is not null and cours.type is not constant('TYPE_UNDEFINED', cours)%}
+                                    {{('Cours.type.'~cours.type)|trans}}
+                                {%else%}
+                                    {{label_danger(('Cours.type.'~constant('TYPE_UNDEFINED', cours))|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.status'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.status is not null
+                                    and cours.status is not constant('STATUS_PLANNED_PENDING', cours)%}
+                                    {{('Cours.status.'~cours.status)|trans}}
+                                {%elseif cours.status is constant('STATUS_PLANNED_PENDING', cours)%}
+                                    {{label_danger(('Cours.status.'~cours.status)|trans)}}
+                                {%else%}
+                                    {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.dtCrea'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                            {{cours.dtCrea|localizeddate('none', 'medium', app.request.locale )}}</div>
+                        </div>
+                        {%if cours.status is constant('STATUS_DONE', cours)%}
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.download'|trans|raw}} :</div>
+                            <div class="col-lg-9"><a class="btn btn-lg btn-primary" href="{{path('Trainee__cours_download', {'id': cours.id})}}">{{icon('download-alt')}}</a></div>
+                        </div>
+                        {%endif%}
+                    </div>
+                </div>
+                {%if cours.status is constant('STATUS_DONE', cours)%}
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.corrections'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionVocabulairy'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.correctionVocabulairy is not empty%}
+                                {{cours.correctionVocabulairy|raw}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionStructure'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.correctionStructure is not empty%}
+                                {{cours.correctionStructure|raw}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionPrononciation'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.correctionPrononciation is not empty%}
+                                {{cours.correctionPrononciation|raw}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endif%}
+            </div>
+            {%if cours.finished==false or cours.documents|length!=0%}
+            <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="docs">
+                {%if cours.finished==false%}
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.addCoursDocument'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        {{form_start(coursDocumentAddForm, {'method': 'POST', 'action': path('Trainee__coursDocument_add_post',
+                        {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursDocumentAddForm.msg, {'label_col': 3, 'widget_col': 9, 'attr': {'class': 'wysiwyg'} })}}
+                        {{form_row(coursDocumentAddForm.file, {'label_col': 3, 'widget_col': 6})}}
+                        {{form_row(coursDocumentAddForm.submit, {'label_col': 3, 'widget_col': 1})}}
+                        {{form_end(coursDocumentAddForm)}}
+                    </div>
+                </div>
+                <br>
+                {%endif%}
+                {%if cours.documents|length!=0%} <br>
+                <h3 class="legend">{{'Cours.tlabel.CoursDocuments'|trans}}</h3>
+                <div class="panel panel-success">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'CoursDocument.msg'|trans}}</th>
+                                    <th>{{'CoursDocument.traineeFile'|trans}}</th>
+                                    <th>{{'CoursDocument.dtCrea'|trans}}</th>
+                                    {%if cours.finished==false%}
+                                    <th class="oneBtn">{{'_actions'|trans}}</th>
+                                    {%endif%}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for coursDocument in cours.documents%}
+                                <tr>
+                                    <td>
+                                        {%if coursDocument.msg is not empty%}
+                                            {{coursDocument.msg|raw}}
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        {%if coursDocument.traineeFile is not null%}
+                                            <a class="btn btn-xs btn-info" href="{{path('Trainee__coursDocument_download',{'id':coursDocument.id})}}" >
+                                            {{coursDocument.traineeFile.filename}} {{icon('download')}}
+                                            </a>
+                                        {%endif%}
+                                    </td>
+                                    <td>{{coursDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                        {{coursDocument.dtCrea|localizeddate('none', 'medium', app.request.locale )}}
+                                    </td>
+                                    {%if cours.finished==false%}
+                                    <td>
+                                        <a class="btn btn-xs btn-danger deleteConfirmCoursDocument"
+                                            href="{{path('Trainee__coursDocument_delete',{'id':coursDocument.id})}}">
+                                                {{icon('remove')}}
+                                        </a>
+                                    </td>
+                                    {%endif%}
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {%endif%}
+            </div>
+            {%endif%}
+        </div>
+    </div>
+</div>
+<div id="deleteConfirmCoursDocument" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'CoursDocument.deleteConfirm'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">{{'CoursDocument.deleteConfirm.txt'|trans|raw}}</div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+    </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('.deleteConfirmCoursDocument').click(function(e)
+            {
+                e.preventDefault();
+                var lnk = $(this).attr('href');
+                modalDeleteBtn = $('#deleteConfirmCoursDocument').find('.danger');
+                modalDeleteBtn.attr('href', lnk);
+                $('#deleteConfirmCoursDocument').modal('show');
+            }
+        );
+        $(":file").filestyle({buttonText: "{{'TraineeFile.file'|trans}}", classButton: "btn btn-primary btn-sm"});
+        $('textarea.wysiwyg').each(function()
+	      {
+	        var options =
+	        {
+	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          theme: "modern",
+	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+	        };
+	        $this = $(this);
+	        if($this.is('[required]'))
+	        {
+	          options.oninit = function(editor)
+	            {
+	              editor.on('change', function(e)
+	                {
+	                  editor.save();
+	                }
+	              );
+	            }
+	        }
+	        $this.tinymce(options);
+	      }
+	    );
+    }
+);
+{%endblock dynamic_jstxt%}

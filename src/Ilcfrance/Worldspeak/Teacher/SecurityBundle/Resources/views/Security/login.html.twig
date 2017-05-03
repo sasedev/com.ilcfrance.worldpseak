@@ -1,0 +1,27 @@
+{%extends 'IlcfranceWorldspeakTeacherFrontBundle::layout.html.twig'%}
+{%block breadcrumb%}{%endblock breadcrumb%}
+{%block pagetitle%}{%endblock pagetitle%}
+{%block pagebody_content%}
+<div class="row">
+	<div class="col-lg-12">
+		<br>
+		{{form_start(LoginForm, {'method':'POST', 'action': path('teacher_security_check'), 'style': 'horizontal', 'attr':{'class':'form-signin'}})}}
+			<h3 class="form-signin-heading">{{'_sec.login'|trans}}</h3>
+			<br>
+			{%include 'IlcfranceWorldspeakSharedResBundle::flash.html.twig' with { 'close': true }%}
+			{{form_row(LoginForm.username, {'label_col': 3, 'widget_col': 9, 'attr': {'placeholder': '_sec.username.placeholder'} })}}
+			{{form_row(LoginForm.password, {'label_col': 3, 'widget_col': 9, 'attr': {'placeholder': '_sec.password.placeholder'} })}}
+			{{form_row(LoginForm.remember_me, {'label_col': 3, 'widget_col': 9, 'attr': {'align_with_widget': true} })}}
+			{{form_row(LoginForm.target_path, {'label_col': 12, 'widget_col': 0})}}
+			<div class="form-group">
+				<div class="col-lg-offset-1 col-lg-10">
+					<button class="btn btn-primary btn-block" type="submit">{{ '_action.btnLogin'|trans|raw }}</button>
+				</div>
+			</div>
+			<br>
+			<br>
+		{{form_end(LoginForm)}}
+		<br>
+	</div>
+</div>
+{%endblock pagebody_content%}

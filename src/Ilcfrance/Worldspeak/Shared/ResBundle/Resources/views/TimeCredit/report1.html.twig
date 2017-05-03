@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ILCWorldSpeak">
+<meta name="author" content="Salah Abdelkader Seif Eddine">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/fontawesome/css/font-awesome.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap-theme.min.css')}}">
+<title>{%if pagetitle_txt is defined%}{{pagetitle_txt}}{%else%}ILCWorldSpeak{%endif%}</title>
+</head>
+<body>
+{%set dtStart=null%}{%set dtEnd=null%}{%set i=0%}{%for cours in timeCredit.courses%}{%if i==0%}{%set dtEnd = cours.dtEnd%}{%endif%}{%if loop.last==true%}{%set dtStart = cours.dtStart%}{% endif%}{%set i=i+1%}{%endfor%}
+<img alt="ILCWorldSpeak" src="{{asset('bundles/ilcfranceworldspeaksharedres/images/ilcfrance.jpg')}}">
+<h2 style="text-align: center;">{%if pagetitle is defined%}{{pagetitle|raw}}{%else%}ILCWorldSpeak{%endif%}</h2>
+<br>
+<br>
+<table style="width: 150%;">
+    <tbody>
+        <tr>
+            <td style="width: 30%">&nbsp;</td>
+            <td style="width: 4%">&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>{{'Trainee.company.pdf'|trans}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.trainee.company.name}}</b></th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.trainee.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.trainee.fullname}}</b></th>
+        </tr>
+        <tr>
+            <td>{{'Trainee.email.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.trainee.email}}</b></th>
+        </tr>
+        {%if timeCredit.trainee.phone is not empty%}
+        <tr>
+            <td>{{'Trainee.phone.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.trainee.phone}}</b></th>
+        </tr>
+        {%endif%}
+        {%if timeCredit.trainee.mobile is not empty%}
+        <tr>
+            <td>{{'Trainee.mobile.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.trainee.mobile}}</b></th>
+        </tr>
+        {%endif%}
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.dtStart.pdf'|trans}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if dtStart is null%}<span style="color:red;">{{'_NA'|trans}}</span>{%else%}<b>{{dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{dtStart|localizeddate('none', 'medium', app.request.locale )}}</b>{%endif%}</th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.dtEnd.pdf'|trans}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if dtEnd is null%}<span style="color:red;">{{'_NA'|trans}}</span>{%else%}<b>{{dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{dtEnd|localizeddate('none', 'medium', app.request.locale )}}</b>{%endif%}</th>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.ftype.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.ftype is not null and timeCredit.ftype is not constant('FTYPE_UNDEFINED', timeCredit)%}<b style="color:red">{{('TimeCredit.ftype.'~timeCredit.ftype~'.pdf')|trans}}</b>{%else%}<span style="color:red;">{{'_NA'|trans}}</span>{%endif%}</th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.totalHours.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.totalHours}} {{'_hours'|trans}}</b></th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.percentHours.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b><u>{{'%.2f'|format((timeCredit.doneHours/timeCredit.totalHours)*100)}} %</u></b></th>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.cefBegin.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.cefBegin is not empty%}<b>{{timeCredit.cefBegin}}</b>{%else%}<span style="color:red;">{{'_NA'|trans}}</span>{%endif%}</th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.cefEnd.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.cefEnd is not empty%}<b>{{timeCredit.cefEnd}}</b>{%else%}<span style="color:red;">{{'_NA'|trans}}</span>{%endif%}</th>
+        </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<h4>{{'TimeCredit.kpis'|trans}}</h4>
+<br>
+<br>
+<table style="width: 150%;">
+    <tbody>
+        <tr>
+            <td style="width: 30%">{{'TimeCredit.globalKpiHomeworkPerformed.pdf'|trans|raw}} :</td>
+            <td style="width: 4%">&nbsp;</td>
+            <th>{%if timeCredit.globalKpiHomeworkPerformed is not empty%}<b>{{('TimeCredit.kpi.'~timeCredit.globalKpiHomeworkPerformed)|trans}}</b>{%else%}<span style="color:red;">{{'_NA'|trans}}</span> {%endif%}</th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.globalKpiParticipation.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.globalKpiParticipation is not empty%}<b>{{('TimeCredit.kpi.'~timeCredit.globalKpiParticipation)|trans}}</b>{%else%}<span style="color:red;">{{'_NA'|trans}}</span> {%endif%}</th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.globalKpiVocabularyRetention.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.globalKpiVocabularyRetention is not empty%}<b>{{('TimeCredit.kpi.'~timeCredit.globalKpiVocabularyRetention)|trans}}</b>{%else%}<span style="color:red;">{{'_NA'|trans}}</span> {%endif%}</th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.globalKpiCorrectionConsideration.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.globalKpiCorrectionConsideration is not empty%}<b>{{('TimeCredit.kpi.'~timeCredit.globalKpiCorrectionConsideration)|trans}}</b>{%else%}<span style="color:red;">{{'_NA'|trans}}</span> {%endif%}</th>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

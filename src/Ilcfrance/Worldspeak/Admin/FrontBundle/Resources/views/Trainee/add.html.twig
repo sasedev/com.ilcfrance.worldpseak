@@ -1,0 +1,42 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__trainee_list')}}"><i class="fa fa-user"></i> &nbsp; {{'breadcrumb.trainee.list'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__trainee_add_get')}}">{{icon('plus')}} &nbsp; {{'breadcrumb.trainee.add'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+        <form action="{{ path('Admin__trainee_search') }}" method="get"  class="form-search form-inline">
+            <div class="form-group">
+	            <label for="q">{{'_search'|trans}}</label>
+	            <input class="input-sm" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="" >
+	        </div>
+	        <div class="form-group">
+	            <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+	        </div>
+        </form>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+      {{form_start(traineeAddForm, {'method':'POST', 'action': path('Admin__trainee_add_post'), 'style': 'horizontal'})}}
+              {{form_row(traineeAddForm.company, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': '<i class="fa fa-umbrella"></i>' }})}}
+              {{form_row(traineeAddForm.project, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': '<i class="fa fa-flask"></i>' }})}}
+              {{form_row(traineeAddForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
+              {{form_row(traineeAddForm.lockout, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('lock') }})}}
+              {{form_row(traineeAddForm.sexe, {'label_col': 3, 'widget_col': 2})}}
+	          {{form_row(traineeAddForm.lastName, {'label_col': 3, 'widget_col': 3})}}
+	          {{form_row(traineeAddForm.firstName, {'label_col': 3, 'widget_col': 3})}}1
+	          {{form_row(traineeAddForm.preferedLocale, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
+              {{form_row(traineeAddForm.registerMail, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('envelope') }})}}
+	          {{form_row(traineeAddForm.phone, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'}})}}
+              {{form_row(traineeAddForm.mobile, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}})}}
+              {{form_row(traineeAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+            {{form_end(traineeAddForm)}}
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}

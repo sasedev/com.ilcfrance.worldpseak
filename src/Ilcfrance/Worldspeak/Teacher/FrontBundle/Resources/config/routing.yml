@@ -1,0 +1,105 @@
+Teacher__default_homepage:
+    path:  /
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:Default:index" }
+
+Teacher__default_planning:
+    path:  /{year}/{week}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:Default:planning", year: null, week: null }
+    requirements:
+        year:  \d+
+        week:  \d+
+
+Teacher__default_notifs:
+    path:  /notifs/{page}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:Default:notifs", page: 1 }
+    requirements:
+        page:  \d+
+
+
+
+# TeacherAvailability
+Teacher__teacherAvailability_ajaxAdd:
+    path: /teacherAvailability/ajaxAdd
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TeacherAvailability:ajaxAdd"}
+    methods: [POST]
+
+Teacher__teacherAvailability_ajaxEdit:
+    path: /teacherAvailability/ajaxEdit
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TeacherAvailability:ajaxEdit"}
+    methods: [POST]
+
+Teacher__teacherAvailability_ajaxDelete:
+    path: /teacherAvailability/ajaxDelete
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TeacherAvailability:ajaxDelete"}
+    methods: [POST]
+
+# Trainee
+Teacher__trainee_avatar:
+    path:  /trainee/avatar/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:Trainee:avatar" }
+    methods: [GET]
+
+Teacher__trainee_edit_get:
+    path:  /trainee/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:Trainee:edit" }
+    methods: [GET]
+
+Teacher__trainee_edit_post:
+    path:  /trainee/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:Trainee:editPost" }
+    methods: [POST]
+
+#TimeCredit
+Teacher__timeCredit_edit_get:
+    path:  /timeCredit/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TimeCredit:edit" }
+    methods: [GET]
+
+Teacher__timeCredit_edit_post:
+    path:  /timeCredit/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TimeCredit:editPost" }
+    methods: [POST]
+
+# TimeCreditDocument
+Teacher__timeCreditDocument_add_post:
+    path:  /timeCreditDocument/add/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TimeCreditDocument:addPost" }
+    methods: [POST]
+
+Teacher__timeCreditDocument_download:
+    path:  /timeCreditDocument/download/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TimeCreditDocument:download" }
+
+Teacher__timeCreditDocument_notifyByMail:
+    path:  /timeCreditDocument/notifyByMail/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TimeCreditDocument:notifyByMail" }
+
+Teacher__timeCreditDocument_edit_get:
+    path:  /timeCreditDocument/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TimeCreditDocument:edit" }
+    methods: [GET]
+
+Teacher__timeCreditDocument_edit_post:
+    path:  /timeCreditDocument/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TimeCreditDocument:editPost" }
+    methods: [POST]
+
+Teacher__timeCreditDocument_edit:
+    path:  /timeCreditDocument/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:TimeCreditDocument:delete" }
+
+# Cours
+Teacher__cours_edit_get:
+    path:  /cours/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:Cours:edit" }
+    methods: [GET]
+
+Teacher__cours_edit_post:
+    path:  /cours/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:Cours:editPost" }
+    methods: [POST]
+
+# CoursDocument
+Teacher__coursDocument_download:
+    path:  /coursDocument/download/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherFrontBundle:CoursDocument:download" }

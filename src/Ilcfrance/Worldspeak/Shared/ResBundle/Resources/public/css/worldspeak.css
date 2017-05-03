@@ -1,0 +1,112 @@
+.navbar-brand {
+    padding-top: 4px;
+    padding-bottom: 0px;
+    padding-left: 2px;
+    font-size: 24px;
+}
+
+
+.legend {
+	display: block;
+	width: 100%;
+	padding: 0;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	color: #333;
+	border: 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+a.dropdown-toggle {
+	cursor: pointer;
+}
+
+/* form-signin */
+.form-signin {
+	background-color: white;
+  max-width: 550px;
+  padding: 15px;
+  margin: 0 auto;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 4px;
+}
+
+.form-signin .form-signin-heading {
+	text-align: center;
+}
+
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 4px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+/* ul tree */
+ul.tree, ul.tree ul { 
+	list-style-type: none;
+}
+ul.tree, ul.tree ul { 
+	list-style-type: none; 
+	background: url("../images/vline.png") repeat-y; 
+	margin: 0; 
+	padding: 0; 
+} 
+ul.tree ul { 
+	margin-left: 10px; 
+} 
+ul.tree li { 
+	margin: 0; 
+	padding: 0 12px; 
+	line-height: 20px; 
+	background: url("../images/node.png") no-repeat;
+}
+
+ ul.tree li.last { 
+ 	background: #fff url("../images/lastnode.png") no-repeat; 
+ }
+
+.oneBtn {
+  width: 40px;
+}
+
+.twoBtn {
+  width: 85px;
+}
+
+.threeBtn {
+  width: 130px;
+}
+
+.fourBtn {
+  width: 175px;
+}
+
+.fc-grid th {
+  background-color: #428BCA;
+}
+
+.fc-agenda-days th {
+  background-color: #428BCA;
+}
+
+.fc-agenda-slots th {
+  background-color: #D9EDF7;
+}
+

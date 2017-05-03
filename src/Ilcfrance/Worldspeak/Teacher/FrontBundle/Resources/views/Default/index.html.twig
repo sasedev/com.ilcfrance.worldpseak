@@ -1,0 +1,401 @@
+{% extends 'IlcfranceWorldspeakTeacherFrontBundle::layout.html.twig' %}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Teacher__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li class="active">
+        <a href="{{path('Teacher__default_planning', {'year': currentYear, 'week': currentWeek})}}">{{'breadcrumb.planning'|trans({'%year%': currentYear, '%week%': currentWeek})|raw}} {%if currentWeek < 10 %}{%set cweek='0'~currentWeek%}{%else%}{%set cweek=currentWeek%}{%endif%}({{sasedevphp_strtotime(currentYear~'-W'~cweek~'-1')|localizeddate('full', 'none', app.request.locale )|capitalize}} - {{sasedevphp_strtotime(currentYear~'-W'~cweek~'-7')|localizeddate('full', 'none', app.request.locale )|capitalize}})</a>
+    </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well text-right">
+            <form method="get" class="form-inline" id="gotoWeek">
+                <div class="form-group">
+                    <label for="changeWeek">{{'_week'|trans|capitalize}} :</label>
+                    <select id="changeWeek" name="changeWeek">
+                        {%for i in 1..countCurrentYearWeeks%}
+                        {%if i < 10 %}{%set cweek='0'~i%}{%else%}{%set cweek=i%}{%endif%}
+                        <option value="{{i}}" {%if i==currentWeek%} selected="selected"{%endif%}>
+                            {{'_from'|trans|capitalize}}
+                            {{sasedevphp_strtotime(currentYear~'-W'~cweek~'-1')|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                            {{'_to'|trans}}
+                            {{sasedevphp_strtotime(currentYear~'-W'~cweek~'-7')|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                        </option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button id="changePlanning" name="changePlanning" class="btn btn-sm btn-primary" type="button">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <ul class="pager centred">
+            <li class="previous"><a href="{{ path('Teacher__default_planning', {'year':prevYear, 'week':prevWeek}) }}">
+                &laquo;&nbsp;{{'_prev'|trans }}</a></li>
+            <li class="next"><a href="{{ path('Teacher__default_planning', {'year':nextYear,'week':nextWeek}) }}">
+                {{'_next'|trans }}&nbsp;&raquo;</a></li>
+        </ul>
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#calendar" data-toggle="tab">{{'default.tab.Calendar'|trans|raw}}</a></li>
+                    <li><a href="#list" data-toggle="tab">{{'default.tab.List'|trans|raw}}</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="calendar">
+                        <br>
+                        {%if closedDays|length<7%}
+                        <div id="calendar"></div>
+                        {%else%}
+                        <br>
+                        <br>
+                        <br>
+                        <div class="text-center">{{label_danger('_NA'|trans)}}</div>
+                        <br>
+                        <br>
+                        <br>
+                        {%endif%}
+                    </div>
+                    <div class="tab-pane fade" id="list">
+                        <br>
+                        <h3 class="legend">{{'default.tlabel.ClosedDays'|trans|raw}}</h3>
+                        <br>
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'ClosedDay.day'|trans}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for closedDay in closedDays%}
+                                <tr>
+                                    <td>{{closedDay.day|localizeddate('full', 'none', app.request.locale )|capitalize}}</td>
+                                </tr>
+                                {%else%}
+                                <tr>
+                                    <td class="warning">{{'ClosedDay.dbemptyWeek'|trans}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                        <br>
+                        <h3 class="legend">{{'default.tlabel.TeacherAvailabilities'|trans|raw}}</h3>
+                        <br>
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'TeacherAvailability.dtStart'|trans}}</th>
+                                    <th>{{'TeacherAvailability.dtEnd'|trans}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for teacherAvailability in teacherAvailabilities%}
+                                <tr>
+                                    <td>{{teacherAvailability.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                        {{teacherAvailability.dtStart|localizeddate('long', 'none', app.request.locale)}}</td>
+                                    <td>{{teacherAvailability.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                        {{teacherAvailability.dtEnd|localizeddate('long', 'none', app.request.locale)}}</td>
+                                </tr>
+                                {%else%}
+                                <tr>
+                                    <td colspan="2" class="warning">{{'TeacherAvailability.dbemptyWeek'|trans}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                        <br>
+                        <h3 class="legend">{{'default.tlabel.Cours'|trans|raw}}</h3>
+                        <br>
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'Cours.trainee'|trans}}</th>
+                                    <th>{{'Cours.dtStart'|trans}}</th>
+                                    <th>{{'Cours.duration'|trans}}</th>
+                                    <th>{{'Cours.type'|trans}}</th>
+                                    <th>{{'Cours.phone'|trans}}</th>
+                                    <th>{{'Cours.status'|trans}}</th>
+                                    <th class="twoBtn">{{ '_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for cours in courses%}
+                                <tr {%if cours.buggy is constant('HEALTH_BUGGY', cours)%}class="danger"{%endif%}>
+                                    <td>
+                                        <a href="{{path('Teacher__trainee_edit_get', {'id': cours.timeCredit.trainee.id})}}">
+                                            <i class="fa fa-user"></i> {{cours.timeCredit.trainee.fullname}}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                        {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}
+                                    </td>
+                                    <td>
+                                        {{cours.duration}} {{'_minutes'|trans}}
+                                    </td>
+                                    <td>
+                                        {%if cours.type is not null and cours.type is not constant('TYPE_UNDEFINED', cours)%}
+                                        {{('Cours.type.'~cours.type)|trans}}
+                                        {%else%}
+                                        {{label_danger(('Cours.type.'~constant('TYPE_UNDEFINED', cours))|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        {%if cours.phone is not empty%}
+                                        <a href="tel:{{cours.phone}}">{{icon('earphone')}} {{cours.phone}}</a>
+                                        {%else%}
+                                        {{label_danger('_NA'|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        {%if cours.status is not null
+                                        and cours.status is not constant('STATUS_PLANNED_PENDING', cours)%}
+                                        {{('Cours.status.'~cours.status)|trans}}
+                                        {%elseif cours.status is constant('STATUS_PLANNED_PENDING', cours)%}
+                                        {{label_danger(('Cours.status.'~cours.status)|trans)}}
+                                        {%else%}
+                                        {{label_danger('_NA'|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-info"
+                                        href="{{path('Teacher__cours_edit_get',{'id':cours.id})}}">{{icon('edit')}}</a>
+                                    </td>
+                                </tr>
+                                {%else%}
+                                <tr>
+                                    <td colspan="7" class="warning">{{'Cours.dbemptyWeek'|trans}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul class="pager centred">
+            <li class="previous"><a href="{{ path('Teacher__default_planning', {'year':prevYear, 'week':prevWeek}) }}">
+                &laquo;&nbsp;{{'_prev'|trans }}</a></li>
+            <li class="next"><a href="{{ path('Teacher__default_planning', {'year':nextYear,'week':nextWeek}) }}">
+                {{'_next'|trans }}&nbsp;&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+{%if currentUser.type is constant('TYPE_EXTERNAL', currentUser)%}
+var currentMousePos = {x: -1,y: -1};
+function isElemOverDiv()
+{
+  var trashEl = $('#calendarTrash');
+  var ofs = trashEl.offset();
+  var x1 = ofs.left;
+  var x2 = ofs.left + trashEl.outerWidth(true);
+  var y1 = ofs.top;
+  var y2 = ofs.top + trashEl.outerHeight(true);
+  if (currentMousePos.x >= x1 && currentMousePos.x <= x2 && currentMousePos.y >= y1 && currentMousePos.y <= y2) {
+    return true;
+  }
+  return false;
+};
+{%endif%}
+$(function()
+  {
+    $('#changePlanning').click(function()
+        {
+            var changeYear = '{{currentYear}}';
+            var changeWeek = $('#changeWeek').val();
+            var changeUrl = '/'+changeYear+'/'+changeWeek;
+            window.location = changeUrl;
+        }
+    );
+    var date = new Date("{{ weekDays[1]|date("m/d/Y") }}");
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    var calendar = $('#calendar').fullCalendar(
+      {
+{%if currentUser.type is constant('TYPE_EXTERNAL', currentUser)%}
+        startEditable: true,
+        durationEditable: true,
+        dragRevertDuration: 0,
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end, allDay) {
+            var evStart = start.getTime();
+            var evEnd = end.getTime();
+            var postdata = 'start='+evStart+'&end='+evEnd;
+            $.ajax({
+                type: "POST",
+                url: "{{ path('Teacher__teacherAvailability_ajaxAdd') }}",
+                data: postdata,
+                cache: false,
+                success: function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    alert(data.msg);
+                    location.reload();
+
+                },
+                error: function(jqXHR, textStatus, errorThrown ) {
+                    alert(jqXHR.responseText);
+                }
+            });
+            calendar.fullCalendar('unselect');
+        },
+        eventMouseover: function( event, jsEvent, view ) {
+            $(this).mousemove(function (e) {
+                var trashEl = $('#calendarTrash');
+                if (isElemOverDiv()) {
+                    if (!trashEl.hasClass("to-trash")) {
+                        trashEl.addClass("to-trash");
+                    }
+                } else {
+                    if (trashEl.hasClass("to-trash")) {
+                        trashEl.removeClass("to-trash");
+                    }
+                }
+            });
+        },
+        eventDragStop: function( event, jsEvent, ui, view ) {
+            if (isElemOverDiv()) {
+                var postdata = 'taId='+event.id;
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('Teacher__teacherAvailability_ajaxDelete') }}",
+                    data: postdata,
+                    cache: false,
+                    success: function(data, textStatus, jqXHR) {
+                        console.log(data);
+                        alert(data.msg);
+                        location.reload();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown ) {
+                        alert(jqXHR.responseText);
+                    }
+                });
+            }
+            calendar.fullCalendar('unselect');
+        },
+        eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ) {
+            var evStart = event.start.getTime();
+            var evEnd = event.end.getTime();
+            var postdata = 'start='+evStart+'&end='+evEnd+'&taId='+event.id;
+            $.ajax({
+                type: "POST",
+                url: "{{ path('Teacher__teacherAvailability_ajaxEdit') }}",
+                data: postdata,
+                cache: false,
+                success: function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    alert(data.msg);
+                    location.reload();
+
+                },
+                error: function(jqXHR, textStatus, errorThrown ) {
+                    alert(jqXHR.responseText);
+                    revertFunc();
+                }
+            });
+            calendar.fullCalendar('unselect');
+        },
+        eventResize: function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ) {
+            var evStart = event.start.getTime();
+            var evEnd = event.end.getTime();
+            var postdata = 'start='+evStart+'&end='+evEnd+'&taId='+event.id;
+            $.ajax({
+                type: "POST",
+                url: "{{ path('Teacher__teacherAvailability_ajaxEdit') }}",
+                data: postdata,
+                cache: false,
+                success: function(data, textStatus, jqXHR) {
+                    console.log(data);
+                    alert(data.msg);
+                    location.reload();
+                },
+                error: function(jqXHR, textStatus, errorThrown ) {
+                    alert(jqXHR.responseText);
+                    revertFunc();
+                }
+            });
+            calendar.fullCalendar('unselect');
+        },
+{%endif%}
+{%if closedDays|length!=0%}
+        hiddenDays: [
+  {%for cd in closedDays%}
+    {%set currentDay=cd.day|date("N")%}
+    {%if currentDay==7%}{%set currentDay= 0%}{%endif%}
+          {{currentDay}}{%if loop.last==false%},{% endif%}
+  {%endfor%}
+        ],
+{%endif%}
+{%if teacherAvailabilities|length!=0 or courses|length!=0%}
+        events: [
+  {%for ev in teacherAvailabilities%}
+          {
+            id: '{{ ev.id }}',
+            title:'{{'TeacherAvailability'|trans}}',
+            start:new Date().setTime({{ ev.evStart}}),
+            end:new Date().setTime({{ ev.evEnd}}),
+            allDay:{{ev.allDay}},
+            backgroundColor:'{{ev.backgroundColor}}',
+            borderColor: '{{ev.borderColor}}',
+            textColor : '{{ev.textColor}}',
+            editable: {%if currentUser.type is constant('TYPE_EXTERNAL', currentUser)%}true{%else%}false{%endif%}
+          }{%if loop.last==false%},{% endif%}
+  {%endfor%}
+  {%if teacherAvailabilities|length!=0 and courses|length!=0%},{% endif%}
+  {%for ev in courses%}
+          {
+            id: '{{ ev.id }}',
+            title:'{{ev.timeCredit.trainee.fullname}}',
+            start:new Date().setTime({{ ev.evStart}}),
+            end:new Date().setTime({{ ev.evEnd}}),
+            allDay:{{ev.allDay}},
+            backgroundColor:'{{ev.backgroundColor}}',
+            borderColor: '{{ev.borderColor}}',
+            textColor : '{{ev.textColor}}',
+            editable: false,
+            url: '{{path('Teacher__cours_edit_get', {'id': ev.id})}}'
+          }{%if loop.last==false%},{% endif%}
+  {%endfor%}
+        ],
+{%endif%}
+        header: {left: '',center: '', right: '' },
+        contentHeight: 450,
+        firstHour: 8,
+        year : y,
+        month: m,
+        date : d,
+        allDaySlot: false,
+        slotMinutes: 30,
+        defaultView: 'agendaWeek',
+        firstDay: 1,
+        ignoreTimezone: false,
+        aspectRatio: 4,
+        monthNames: {{'monthNames'|trans|raw}},
+        monthNamesShort: {{'monthNamesShort'|trans|raw}},
+        dayNames: {{'dayNames'|trans|raw}},
+        dayNamesShort: {{'dayNamesShort'|trans|raw}},
+        columnFormat: {week: 'dddd dd/MM/yyyy'},
+        timeFormat: 'HH:mm{ - HH:mm}',
+        axisFormat: 'HH:mm',
+        editable: {%if currentUser.type is constant('TYPE_EXTERNAL', currentUser)%}true{%else%}false{%endif%}
+      }
+    );
+{%if currentUser.type is constant('TYPE_EXTERNAL', currentUser)%}
+    $('.fc-header-right').append('<div id="calendarTrash" class="calendar-trash"><img src="{{asset('bundles/ilcfranceworldspeaksharedres/images/cal-trash.png')}}" /></div>');
+    $(document).on("mousemove", function (event)
+      {
+        currentMousePos.x = event.pageX; currentMousePos.y = event.pageY;
+      }
+    );
+{%endif%}
+  }
+);
+{%endblock dynamic_jstxt%}

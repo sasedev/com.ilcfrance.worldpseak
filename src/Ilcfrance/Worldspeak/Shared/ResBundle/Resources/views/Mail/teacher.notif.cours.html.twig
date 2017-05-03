@@ -1,0 +1,10 @@
+<html>
+<body>
+{{'_mail.teacher.notif.cours.body'|trans({
+    '%fullname%':notif.teacher.fullname,
+    '%cours.trainee%': notif.timeCredit.trainee.fullname,
+    '%cours.dtStart%': notif.cours.dtStart|localizeddate('full', 'long', app.request.locale )|capitalize,
+    '%cours.duration%': notif.cours.duration}, "messages", userPreferedLocale)|raw}}
+{{'_mail.teacher.signature'|trans({}, "messages", userPreferedLocale)|raw}}
+</body>
+</html>

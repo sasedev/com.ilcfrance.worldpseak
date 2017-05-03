@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ILCWorldSpeak">
+<meta name="author" content="Salah Abdelkader Seif Eddine">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/fontawesome/css/font-awesome.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap-theme.min.css')}}">
+<title>{%if pagetitle_txt is defined%}{{pagetitle_txt}}{%else%}ILCWorldSpeak{%endif%}</title>
+</head>
+<body>
+<div><img alt="ILCWorldSpeak" src="{{asset('bundles/ilcfranceworldspeaksharedres/images/logo.png')}}"></div>
+<h3 style="text-align: justify;">
+{%if pagetitle is defined%}{{pagetitle|raw}}{%else%}ILCWorldSpeak <small> {{
+'homepage'|trans|raw }}</small>{%endif%}
+</h3>
+<table class="table table-bordered table-condensed table-hover" style="width: 100%">
+    <tbody>
+        <tr>
+            <td style="width: 30%">{{'Trainee.company'|trans}} :</td>
+            <td style="width: 5%">&nbsp;</td>
+            <th style="width: 65%"><b><i class="fa fa-umbrella"></i> {{timeCredit.trainee.company.name}}</b></th>
+        </tr>
+        <tr>
+            <td>{{'TimeCredit.trainee'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b><i class="fa fa-user"></i> {{timeCredit.trainee.fullname}}</b></th>
+        </tr>
+        <tr>
+            <td>{{'Trainee.email'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{icon('envelope')}} {{timeCredit.trainee.email}}</b></th>
+        </tr>
+        <tr>
+            <td>{{'Trainee.phone'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{icon('phone-alt')}} {%if timeCredit.trainee.phone is not empty%}{{timeCredit.trainee.phone}}{%else%}{{label('_NA'|trans)}}{%endif%}</b></th>
+        </tr>
+        <tr>
+            <td>{{'Trainee.mobile'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{icon('phone')}} {%if timeCredit.trainee.mobile is not empty%}{{timeCredit.trainee.mobile}}{%else%}{{label('_NA'|trans)}}{%endif%}</b></th>
+        </tr>
+    </tbody>
+</table>
+<br>
+
+</body>
+</html>

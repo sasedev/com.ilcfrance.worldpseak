@@ -1,0 +1,13 @@
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    form_themes:
+        - 'IlcfranceWorldspeakSharedResBundle:Form:form_layout.html.twig'
+    globals:
+        schemes: "%schemes%"
+        domain: "%domain%"
+        default_locale: "%locale%"
+        sitename: "%sitename%"
+        siteversion:               "%siteversion%"
+        timezone:               "Europe/Paris"

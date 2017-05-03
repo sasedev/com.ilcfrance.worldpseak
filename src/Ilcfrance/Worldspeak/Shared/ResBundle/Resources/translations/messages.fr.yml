@@ -1,0 +1,373 @@
+# VFS
+
+indexof: Index de %dir%
+indexof_raw: Index de <b>%dir%</b>
+
+# general
+
+_phone.format: +CCC.NNNNNNNNNN
+_prev: Précédent
+_next: Suivant
+_from: de
+_to: à
+_at: à
+_NA: Non disponible
+_ND: Non Défini
+_default: Valeur par défaut
+_actions: Actions
+_search: "Rechercher :"
+_search_result: Résultat(s) trouvé(s)
+_keywords: "Mots Clés :"
+_yes: Oui
+_no: Non
+
+_month: mois
+_year: année
+_week: semaine
+_month1: Janvier
+_month2: Février
+_month3: Mars
+_month4: Avril
+_month5: Mai
+_month6: Juin
+_month7: Juillet
+_month8: Aout
+_month9: Septembre
+_month01: Janvier
+_month02: Février
+_month03: Mars
+_month04: Avril
+_month05: Mai
+_month06: Juin
+_month07: Juillet
+_month08: Aout
+_month09: Septembre
+_month10: Octobre
+_month11: Novembre
+_month12: Décembre
+
+_hour: Heure
+_hours: Heures
+_minute: Minute
+_minutes: Minutes
+# boutons/actions
+_action.btnAdd: Ajouter
+_action.btnCancel: Annuler
+_action.btnDownload: Télécharger
+_action.btnDelete: Supprimer
+_action.btnEdit: Modifier
+_action.btnLogin: Connexion
+_action.btnSave: Sauvegarder
+_action.btnSelect: Sélectionner
+_action.btnPlanning: Planning
+_action.btnSend: Envoyer
+_action.btnNewPass: Nouveau Mot de passe
+_action.btnUpload: Charger
+_action.btnMailNotif: Notifier
+_action.btnShow: Voir
+_action.lnkdelete: Supprimer
+_action.lnkdownload: Télécharger
+_action.lnkedit: Détails
+_action.lnkavailabilty: Disponibilité
+_action.lnkshow: Voir
+
+#menu
+_menu.home: "Accueil"
+_menu.accounts: "Comptes"
+_menu.login: "Connexion"
+_menu.dontRememberUsername: "Mon Identifiant ?"
+_menu.lostPassword: "Mot de passe Perdu"
+_menu.logout: "Déconnexion"
+_menu.myProfile: "Mon Profile"
+_menu.register: "Créer un Compte"
+
+
+# mail
+_mail.admin.signature: '<br><br><hr><br>Cordialement<br><a href="http://admin.worldspeak.ilcfrance.com"><b>ILCFrance WorldSpeak Team</b></a><br><small>Ce message vous est envoyé par un automate. Veuillez ne pas y répondre</small>'
+_mail.teacher.signature: '<br><br><hr><br>Cordialement<br><a href="http://teacher.worldspeak.ilcfrance.com"><b>ILCFrance WorldSpeak Team</b></a><br><small>Ce message vous est envoyé par un automate. Veuillez ne pas y répondre</small>'
+_mail.trainee.signature: '<hr><b style="color:red">IMPORTANT: La plateforme fonctionne avec les navigateurs suivants : Firefox (préconisé), Chrome ,Opéra ,Safari</b><br>Cliquez sur le lien suivant pour acceder au site : <a href="http://worldspeak.ilcfrance.com">http://worldspeak.ilcfrance.com</a><br><hr>&nbsp;&nbsp;&nbsp;Cordialement,<br><br><b>Responsable Planning <a href="http://worldspeak.ilcfrance.com">WORLDSPEAK</a></b><br>Jane GUILLIER<br><b>Tél :</b> 01 44 41 80 24<br><b>Email :</b> <a href="mailto:jane.guillier@ilcfrance.com">jane.guillier@ilcfrance.com<a><br><br><br><a href="http://worldspeak.ilcfrance.com"><b>ILCFrance WorldSpeak Team</b></a><br><small style="color:grey">Ce message vous est envoyé par un automate. Veuillez ne pas y répondre</small>'
+
+_mail.trainee.signature.old: '<br><br><hr><br>Cordialement,<br><a href="http://worldspeak.ilcfrance.com"><b>ILCFrance WorldSpeak Team</b></a><br><small>Ce message vous est envoyé par un automate. Veuillez ne pas y répondre</small>'
+
+_mail.dontRememberUsername_subject: '[ILCFrance WorldSpeak] Rappel de votre identifiant'
+_mail.dontRememberUsername_body: "Bonjour <u><i>%fullname%</i></u>,<br><br>ILCWorldSpeak a reçu une requête de rappel d'Identifiant.<br><br>Votre Identifiant ILCWorldSpeak est <b>%username%</b>" 
+
+
+_mail.lostPassword_subject: '[ILCFrance WorldSpeak] Procédure de réinitialisation de mot de passe'
+_mail.lostPassword_body: Bonjour <u><i>%fullname%</i></u>,<br><br>ILCWorldSpeak a reçu un requête pour réinitialiser votre Mot de passe.<br><br>Pour réinitialiser votre Mot de passe ILCWorldSpeak, veuiller cliquer sur le lien suivant <a href="%url%">%url%</a>.<br><br>Si vous n'êtes pas à l'origine de cette demande, Vous pouvez ignorer cette procédure.<br><br>Le lien fourni Expire après une heure.
+
+
+_mail.genNewPassword_subject: '[ILCFrance WorldSpeak] Votre nouveau mot de passe' 
+_mail.genNewPassword_body: 'Bonjour <u><i>%fullname%</i></u>,<br><br>Votre Mot de passe ILCWorldSpeak a été réinitialisé avec succès!<br><br>Pour vous connecter en utilisant les paramètres suivants:<br><br>Identifiant : <b>%username%</b><br><br>Mot de passe: <b>%password%</b>'
+
+
+_mail.registerAdmin_admin_subject: '[ILCFrance WorldSpeak] Nouveau Compte Administrateur'
+_mail.registerAdmin_admin_body: 'Bonjour <u><i>%fullname%</i></u>,<br><br>Bienvenue sur ILCFrance WorldSpeak.<br><br> Un nouveau compte Administrateur a été créé pour vous avec les paramètres suivant:<br><br>Identifiant: <b>%username%</b><br/>Mot de passe: <b>%password%</b><br><br>Pensez à choisir un nouveau mot de passe'
+
+_mail.registerAdmin_teacher_subject: '[ILCFrance WorldSpeak] Nouveau Compte Formateur'
+_mail.registerAdmin_teacher_body: "Bonjour <u><i>%fullname%</i></u>,<br><br>Bienvenue sur ILCFrance WorldSpeak.<br><br> Un nouveau compte a été créé pour vous avec les paramètres suivant:<br><br>Identifiant: <b>%username%</b><br/>Mot de passe: <b>%password%</b><br><br>Pensez à choisir un nouveau mot de passe"
+
+_mail.registerAdmin_trainee_subject: '[ILCFrance WorldSpeak] Nouveau Compte Stagiaire'
+_mail.registerAdmin_trainee_body: "Bonjour <u><i>%fullname%</i></u>,<br><br><b>ILC France met en place  un outil de réservation en ligne pour vos cours par téléphone.</b><br><br>Vous pouvez  dès à présent  vous connecter à votre <b>compte personnel</b> sur l’outil de planification à l’adresse suivante : <a href='http://worldspeak.ilcfrance.com'>http://worldspeak.ilcfrance.com</a><br><br><u style='color:red'>Quel navigateur Internet utiliser ?</u><br><br>La plateforme fonctionne avec les navigateurs suivants :<br><br>- Firefox (préconisé)<br>- Chrome<br>- Opéra<br>- Safari<br><br><u style='color:red'>Vos paramètres d’accès</u><br><br>Vous devez saisir votre login et mot de passe en respectant les majuscules et minuscules indiquées dans le courriel puis vous cliquez sur CONNEXION.<br><br><br><b>Votre identifiant  est : %username%</b><br><br><b>Votre mot de passe est : %password%</b><br><br><u style='color:red'>Format et fréquence</u><br><br>- Cours individuels par téléphone organisés en sessions <b><u>de 60 minutes</u></b>,<br>- Les créneaux disponibles pour les cours <i style='color:red;'>World Speak</i> sont du <b><u>lundi au vendredi de 8h30 à 17h (fin du dernier cours à 18h)</u></b><br><br><u style='color:red'>Mise en relation avec votre Formateur</u><br><br><b><u>Vous recevez un email  24 heures avant votre cours avec  le numéro de téléphone à appeler.</u></b><br><br>En cas de problème , n'hésitez pas à prendre contact avec nous."
+
+_mail.new_timeCredit_subject: '[ILCFrance WorldSpeak] Nouveau Crédit de cours par téléphone'
+_mail.new_timeCredit_body: Bonjour <u><i>%fullname%</i></u>,<br><br>Un nouveau Crédit de <b>%totalHours%</b> Heures de cours par téléphone en Anglais vient d'être ajouté à votre compte ILCWorldSpeak.
+_mail.new_timeCredit_body2: <br>Vous devez planifier vos heures de cours en fonction de la disponibilité des Formateurs avant le <b>%deadLine%</b>.
+
+
+_mail.new_timeCreditDocument_subject:  '[ILCFrance WorldSpeak] Nouvelle Resource Pédagogique'
+_mail.new_timeCreditDocument_body: Bonjour <u><i>%fullname%</i></u>,<br><br>Une Ressource Pédagogique vient d'etre affectée à votre à votre espace personnel sur la plateforme ILCWorldSpeak..<br>Veuillez Consulter la Plateforme ILCWorldSpeak pour pouvoir la visualiser.
+
+_mail.newpass_teacher_subject: '[ILCFrance WorldSpeak] Paramètres de Compte Formateur'
+_mail.newpass_teacher_body: 'Bonjour <u><i>%fullname%</i></u>,<br><br>Bienvenue sur ILCFrance WorldSpeak.<br><br> Votre Mot de passe a été modifié. Veuillez utiliser les paramètres suivants:<br><br>Identifiant: <b>%username%</b><br/>Mot de passe: <b>%password%</b><br><br>Pensez à choisir un nouveau mot de passe'
+
+_mail.newpass_trainee_subject: '[ILCFrance WorldSpeak] Paramètres de Compte Stagiaire'
+_mail.newpass_trainee_body: 'Bonjour <u><i>%fullname%</i></u>,<br><br>Bienvenue sur ILCFrance WorldSpeak.<br><br> Votre Mot de passe a été modifié. Veuillez utiliser les paramètres suivants:<br><br>Identifiant: <b>%username%</b><br/>Mot de passe: <b>%password%</b><br><br>Pensez à choisir un nouveau mot de passe'
+
+_mail.teacher.notif.cours.subject: '[ILCFrance WorldSpeak] Notification de Cours non Mis à jours'
+_mail.teacher.notif.cours.body: 'Bonjour <u><i>%fullname%</i></u>,<br><br>Le status et/ou les Corrections et KPI du Cours du Stagiaire <b>%cours.trainee%</b> du <b>%cours.dtStart%</b> (durée <b>%cours.duration%</b> min) doivent etre modifiées'
+
+_mail.teacher.notif.timeCredit.subject: '[ILCFrance WorldSpeak] Rapport de fin de Stage'
+_mail.teacher.notif.timeCredit.body: 'Bonjour <u><i>%fullname%</i></u>,<br><br>Le Rapport de fin de stage du Stagiaire <b>%timeCredit.trainee%</b> (<b>%timeCredit.totalHours%</b> heures) doit être remplie'
+
+
+_mail.trainee.notif.cours24h.subject: '[ILCFrance WorldSpeak] Rappel de Cours dans moins de 24 Heures'
+_mail.trainee.notif.cours24h.body: 'Bonjour <u><i>%fullname%</i></u>,<br><br>Nous vous rappelons que vous avez un Cours le <b>%cours.dtStart%</b> (durée <b>%cours.duration%</b> min)'
+_mail.trainee.notif.cours24h.body2: ' <br><br>Le Numéro de Téléphone à appeler est le <b>%phone%</b>'
+
+_mail.trainee.notif.timeCredit15d.subject: '[ILCFrance WorldSpeak] Rappel de Necessité de Planification de Cours'
+_mail.trainee.notif.timeCredit15d.body: "Bonjour <u><i>%fullname%</i></u>,<br><br>Nous vous rappelons que votre crédit de formation est <b>%timeCredit.totalHours%</b> heures.<br>Avez-vous pensé à planifier le restant de vos Cours ?"
+
+
+_mail.trainee.notif.timeCredit30d.subject: '[ILCFrance WorldSpeak] Rappel de necessité de Planification de Cours'
+_mail.trainee.notif.timeCredit30d.body: "Bonjour <u><i>%fullname%</i></u>,<br><br>Nous vous rappelons que votre crédit de formation est <b>%timeCredit.totalHours%</b> heures.<br>Avez-vous pensé à planifier le restant de vos Cours ?"
+
+_mail.trainee.notif.timeCreditSB.subject: '[ILCFrance WorldSpeak] Questionnaire de début de Formation'
+_mail.trainee.notif.timeCreditSB.body: "Bonjour <u><i>%fullname%</i></u>,<br><br>Un questionnaire de début de Stage est disponible sur votre espace ILC WORLDSPEAK. Veuillez consulter vos notifications.."
+
+_mail.trainee.notif.timeCreditSE.subject: '[ILCFrance WorldSpeak] Questionnaire de fin de Formation'
+_mail.trainee.notif.timeCreditSE.body: "Bonjour <u><i>%fullname%</i></u>,<br><br>Un questionnaire de fin de Stage est disponible sur votre espace ILC WORLDSPEAK. Veuillez consulter vos notifications."
+
+# login
+_pagetitle_login: Connectez-vous
+_sec.login: Identification
+_sec.username.label: "Identifiant :"
+_sec.username.placeholder: Veuillez entrer votre Identifiant
+_sec.password.label: "Mot de passe :"
+_sec.password.placeholder: Veuillez entrer votre Mot de passe
+_sec.rememberme: Se souvenir de moi
+'Bad credentials': <b>Identifiant</b> or <b>Mot de Passe</b> Erroné.
+
+# forgotusername
+_pagetitle_dontRememberUsername: Vous avez oublier votre Identifiant ?
+_sec.dontRememberUsername: Recevez Votre Identifiant oublié par Mail
+_sec.email.label: "Votre Email :"
+_sec.email.placeholder: Veuillez entrer votre Adresse Email
+_sec.dontRememberUsername_notfound: Aucun compte n'a été trouvé pour l'Adresse "<b>%mail%</b>"
+_sec.dontRememberUsername_mail_username_sent: Un Email avec votre Identifiant a été envoyé à l'adresse suivante "<b>%mail%</b>"
+
+
+# lost password
+_pagetitle_lostPassword: Mot de passe Perdu ?
+_sec.lostPassword: Veuillez entrer votre <strong>Identifiant</strong> pour recevoir un lien de réinitalisation par Email
+_sec.lostPassword_notfound: Compte inconnu "<b>%username%</b>"
+_sec.lostPassword.already_sent: "Ce compte a déjà une procédure de réinitialisation de mot de passe en Cours!<br>Veuillez consulter votre Boite Email."
+_sec.lostPassword_mail_newpass_sent: Un email contenant le lien de réinitalisation a été envoyé à l'adresse suivante "<b>%mail%</b>"
+# Reset Password
+_sec.genNewPassword_errorparams1: Compte Inconnu.
+_sec.genNewPassword_errorparams2: Lien Expiré.
+_sec.genNewPassword_errorparams3: Code Invalide.
+_sec.genNewPassword_errorparams4: Lien Invalide.
+_sec.genNewPassword_ok: Un nouveau mot de passe a été généré et vous a été envoyé par Mail
+
+
+
+
+# profile
+_pagetitle_myProfile: Mon Profile
+
+profile.tab.preview: Aperçu
+profile.tlabel.preview: Aperçu de Mon Profile
+profile.tab.edit: Editer
+profile.edit.password: Mettre à jour Mon Mot de passe
+profile.edit.email: Mettre à jour Mon Adresse Email
+profile.edit.coursPhone: Mettre à jour le Numéro de Téléphone par défaut des Cours
+profile.edit.preferedLocale: Mettre à jour Mon Paramètre Linguistique d'affichage préféré de l'outil WorldSpeak
+profile.edit.avatarUpload: Envoyer un nouvel Avatar
+profile.edit.personnaldata: Mettre à jour mes informations personnelles
+profile.avatar.upload.dialog: Envoie de Fichier
+profile.tlabel.avatar.crop: Selectionner la partie qui sera visible de l'Image
+profile.updatefailure.avatar: Une Erreur s'est produite lors de l'envoie de votre Avatar
+profile.updatesuccess.advancedprofile: Vos informations personnelles ont été mis à jour avec succès
+profile.updatesuccess.avatar: Votre Avatar a été mis à jour avec succès
+profile.updatesuccess.mail: Vote Adresse Email a été mis à jour avec succès
+profile.updatesuccess.password: Votre Mot de passe a été mis à jour avec succès
+profile.updatesuccess.preferedLocale:  Votre Paramètre Linguistique d'affichage préféré de l'outil WorldSpeak a été mis à jour avec succès
+profile.updatesuccess.coursPhone: Votre numéro de Téléphone par défaut des Cours a été mis à jour avec succès  
+
+user.avatar: "Votre Photo :"
+user.username: "Identifiant :"
+user.email: "Email :"
+user.dtCrea: "Date d'ajout :"
+user.logins: "Nombre de Connexions :"
+user.lastLogin: "Dernière connexion :"
+user.preferedLocale: "Paramètre Linguistique préféré d'affichage :"
+user.sexe: "Civilité :"
+user.sexe.1: Mlle
+user.sexe.2: Mme
+user.sexe.3: Mr
+user.lastName: "Nom de Famille :"
+user.firstName: "Prénom :"
+user.birthday: "Date de Naissance :"
+user.address: "Adresse :"
+user.country: "Pays :"
+user.phone: "Téléphone :"
+user.mobile: "Mobile :"
+user.coursPhone: "Téléphones des Cours :"
+
+_sec.avatar.label: "Choisissez une Image :"
+_sec.sexe.label: "Votre Civilité :"
+_sec.lastName.label: "Votre Nom de Famille :"
+_sec.firstName.label: "Votre Prénom :"
+_sec.birthday.label: "Votre Date de Naissance :"
+_sec.address.label: "Votre Adresse :"
+_sec.country.label: "Votre Pays :"
+_sec.coursPhone.label: "Votre Numéro de Téléphone des Cours :"
+_sec.phone.label: "Votre Numéro de Téléphone :"
+_sec.mobile.label: "Votre Numéro de Mobile :"
+_sec.oldPassword.label: "Votre Ancien Mot de passe :"
+_sec.newPassword.first: "Votre Nouveau Mot de passe :"
+_sec.newPassword.second: "Veuillez le réecrire :"
+_sec.preferedLocale.label: "Votre Paramètre Linguistique d'affichage préférée :"
+
+
+# jquery calendar
+monthNames: "['Janvier','Fevrier','Mars','Avril','Mai','Juin','Juillet','Aout','Septembrr','Octobre','Novembre','Decembre']"
+monthNamesShort: "['Jan','Fev','Mar','Avr','Mai','Jun','Jul','Aou','Sep','Oct','Nov','Dec']"
+dayNames: "['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi']"
+dayNamesShort: "['Dim','Lun','Mar','Mer','Jeu','Ven','Sam']"
+
+# Guide CEF
+guide.comparison.grid: Grille de comparaison des niveaux linguistiques
+lvlList.levelMinALTE: Niveau minimum ALTE
+lvlList.levelMaxALTE: Niveau maximum ALTE <br>(Association of Language  Testers in Europe)
+lvlList.level: Niveau
+lvlList.cef: CEF (Council of European Framework)
+lvlList.desc: Description des Compétences Linguistiques
+lvlList.toic_bulats: "*Tests d'anglais des affaires: TOEIC/BULATS<br><br>(*durée de validité: 2 ans)"
+lvlList.cambridge: "*Examens Cambridge d'anglais général et d'anglais des affaires<br><br>(*durée de validité:  à vie)"
+
+lvlList.levelMinALTE.1: "0-0"
+lvlList.levelMaxALTE.1: "0-4"
+lvlList.level.1: "Débutant"
+lvlList.cef.1: "A1"
+lvlList.desc.1: "Peut comprendre et utiliser des expressions familières et quotidiennes ainsi que des énoncés très simples qui visent à satisfaire des besoins concrets. Peut se présenter ou présenter quelqu'un et poser à une personne des questions la concernant - par exemple, sur son lieu d'habitation, ses relations, ce qui lui appartient, etc. - et peut répondre au même type de questions. Peut communiquer de façon simple si l'interlocuteur parle lentement et distinctement et se montre coopératif."
+lvlList.toic_bulats.1: "TOEIC: 10-250/990<br><br>BULATS:0-19" 
+lvlList.cambridge.1: ""
+
+lvlList.levelMinALTE.2: "0-5"
+lvlList.levelMaxALTE.2: "1-9"
+lvlList.level.2: "Elémentaire"
+lvlList.cef.2: "A2"
+lvlList.desc.2: "Peut comprendre des phrases isolées et des expressions fréquemment utilisées en relation avec des domaines immédiats de priorité (par exemple, informations personnelles et familiales simples, achats, environnement proche, travail). Peut communiquer lors de tâches simples et habituelles ne demandant qu'un échange d'informations simple et direct sur des sujets familiers et habituels. Peut décrire avec des moyens simples sa formation, son environnement immédiat et évoquer des sujets qui correspondent à des besoins immédiats."
+lvlList.toic_bulats.2: "TOEIC:255-400<br><br>BULATS:20-39" 
+lvlList.cambridge.2: "<u>General English:</u><br><br>Key English Test (KET)"
+
+lvlList.levelMinALTE.3: "2-0"
+lvlList.levelMaxALTE.3: "2-4"
+lvlList.level.3: "Pré-intermédiaire"
+lvlList.cef.3: "B1"
+lvlList.desc.3: "Peut comprendre les points essentiels quand un langage clair et standard est utilisé et s'il s'agit de choses familières dans le travail, à l'école, dans les loisirs, etc. Peut se débrouiller dans la plupart des situations rencontrées en voyage dans une région où la langue cible est parlée. Peut produire un discours simple et cohérent sur des sujets familiers et dans ses domaines d'intérêt. Peut raconter un événement, une expérience ou un rêve, décrire un espoir ou un but et exposer brièvement des raisons ou explications pour un projet ou une idée."
+lvlList.toic_bulats.3: "TOEIC:405-600<br><br>BULATS:40-59"
+lvlList.cambridge.3: "<u>General English:</u><br><br>Preliminary English Test (KET)"
+
+lvlList.levelMinALTE.4: "2-5"
+lvlList.levelMaxALTE.4: "2-9"
+lvlList.level.4: "Intermédiaire"
+lvlList.cef.4: "B1"
+lvlList.desc.4: "Peut comprendre le contenu essentiel de sujets concrets ou abstraits dans un texte complexe, y compris une discussion technique dans sa spécialité. Peut communiquer avec un degré de spontanéité et d'aisance tel qu'une conversation avec un locuteur natif ne comportant de tension ni pour l'un ni pour l'autre. Peut s'exprimer de façon claire et détaillée sur une grande gamme de sujets, émettre un avis sur un sujet d’actualité et exposer les avantages et les inconvénients de différentes possibilités."
+lvlList.toic_bulats.4: "TOEIC:405-600<br><br>BULATS:40-59"
+lvlList.cambridge.4: "<u>General English:</u><br>Preliminary English Test (KET)<br><br><u>Business English:</u><br>BEC Preliminary (Business English Certificate)"
+
+lvlList.levelMinALTE.5: "3-0"
+lvlList.levelMaxALTE.5: "3-9"
+lvlList.level.5: "Intermédiaire fort"
+lvlList.cef.5: "B2"
+lvlList.desc.5: "Peut comprendre une grande gamme de textes longs et exigeants, ainsi que saisir des significations implicites. Peut s'exprimer spontanément et couramment sans trop apparemment devoir chercher ses mots. Peut utiliser la langue de façon efficace et souple dans sa vie sociale, professionnelle ou académique. Peut s'exprimer sur des sujets complexes de façon claire et bien structurée et manifester son contrôle des outils d'organisation, d'articulation et de cohésion du discours."
+lvlList.toic_bulats.5: "TOEIC:605-780<br><br>BULATS:60-74"
+lvlList.cambridge.5: "<u>General English:</u><br>First Certificate in English (FCE)<br><br><u>Business English:</u><br>BEC Vantage<br><br>(Business English Certificate)"
+
+lvlList.levelMinALTE.6: "4-0"
+lvlList.levelMaxALTE.6: "4-9"
+lvlList.level.6: "Avancé"
+lvlList.cef.6: "C1"
+lvlList.desc.6: "Peut comprendre sans effort pratiquement tout ce qu'il/elle lit ou entend. Peut restituer faits et arguments de diverses sources écrites et orales en les résumant de façon cohérente. Peut s'exprimer spontanément, très couramment et de façon précise et peut rendre distinctes de fines nuances de sens en rapport avec des sujets complexes."
+lvlList.toic_bulats.6: "TOEIC:785-900<br><br>BULATS:75-89"
+lvlList.cambridge.6: "<u>General English:</u><br>Certificate in Advanced English (CAE)<br><br><u>Business English:</u><br>BEC Higher<br><br>(Business English Certificate)<br><br><u>Legal English:</u><br>ILEC (International Legal English Certificate)"
+
+lvlList.levelMinALTE.7: "5-0"
+lvlList.levelMaxALTE.7: "5-0"
+lvlList.level.7: "Bilingue"
+lvlList.cef.7: "C2"
+lvlList.desc.7: ""
+lvlList.toic_bulats.7: "TOEIC:905-990<br><br>BULATS:90-100"
+lvlList.cambridge.7: "<u>General English:</u><br>Certificate of Proficiency in English (CPE)" 
+
+
+# TimeCredit.report
+
+TimeCredit.report.pdf: Rapport de Fin de Stage de Cours par Téléphone en Anglais
+Trainee.company.pdf: Entreprise
+TimeCredit.trainee.pdf: Stagiaire
+Trainee.email.pdf: Email
+Trainee.phone.pdf: Téléphone
+Trainee.mobile.pdf: Mobile
+TimeCredit.dtStart.pdf: Date du début du stage
+TimeCredit.dtEnd.pdf: Date de fin de stage
+TimeCredit.ftype.pdf: Type de formation
+TimeCredit.ftype.100.pdf: Cours par téléphone en anglais
+TimeCredit.totalHours.pdf: Heures totales
+TimeCredit.percentHours.pdf: Assiduité
+TimeCredit.cefBegin.pdf: Niveau CEF au début du stage
+TimeCredit.cefEnd.pdf: Niveau CEF à la fin du stage
+TimeCredit.kpis: KPI's (Key Performance Indicators)
+TimeCredit.globalKpiHomeworkPerformed.pdf:  Devoirs Maison
+TimeCredit.globalKpiParticipation.pdf: Participation
+TimeCredit.globalKpiVocabularyRetention.pdf: Rétention du Vocabulaire
+TimeCredit.globalKpiCorrectionConsideration.pdf: Prise en considération des corrections
+TimeCredit.progress: PROGRESSION
+TimeCredit.progress1.pdf: Révision des structures  grammaticales et de la syntaxe élémentaire
+TimeCredit.progress2.pdf: Acquisition de la concordance des temps
+TimeCredit.progress3.pdf: Développement de la syntaxe et des structures complexes
+TimeCredit.progress4.pdf: Enrichissement du vocabulaire général
+TimeCredit.progress5.pdf: Développement du lexique professionnel
+TimeCredit.progress6.pdf: Travail sur la prononciation
+TimeCredit.progress7.pdf: Amélioration de la compréhension orale
+TimeCredit.levelDesc: DESCRIPTION DU NIVEAU D'EXPRESSION ET DE COMPREHENSION ORALE
+TimeCredit.levelDesc1.pdf: La précision lexicale de l'expression orale-le vocabulaire
+TimeCredit.levelDesc2.pdf: La précision grammaticale de l'expression orale -la grammaire
+TimeCredit.levelDesc3.pdf: La clarté de l'expression orale (construction et cohérence)
+TimeCredit.levelDesc4.pdf: La rapidité d'interaction à l'oral (temps de réponse)
+TimeCredit.levelDesc5.pdf: La fluidité de l'expression orale
+TimeCredit.levelDesc6.pdf: La compréhension orale
+TimeCredit.levelDesc7.pdf: La prononciation
+TimeCredit.improvement: POINTS A AMELIORER
+TimeCredit.improvement1.pdf: "La précision lexicale de l'expression orale-le vocabulaire"
+TimeCredit.improvement2.pdf: "La précision grammaticale de l'expression orale -la grammaire"
+TimeCredit.improvement3.pdf: "La fluidité de l'expression orale"
+TimeCredit.improvement4.pdf: "La compréhension orale"
+TimeCredit.improvement5.pdf: "La prononciation"
+TimeCredit.lastTeacherReport.pdf: COMMENTAIRES
+
+# Cours.download
+Cours.pdf: Cours du %dStart% à %tStart% (%duration% min) 
+Cours.timeCredit.pdf: Crédit 
+Cours.dtStart.pdf: Début du Cours
+Cours.dtEnd.pdf: Fin du Cours
+Cours.phone.pdf: Téléphone
+Cours.type.pdf: Type de Cours
+Cours.status.pdf: Etat
+Cours.correctionVocabulairy.pdf: Correction du Vocabulaire
+Cours.correctionStructure.pdf: Correction de la Structure
+Cours.correctionPrononciation.pdf: Correction de la Prononciation
+Cours.download: Télécharger PDF

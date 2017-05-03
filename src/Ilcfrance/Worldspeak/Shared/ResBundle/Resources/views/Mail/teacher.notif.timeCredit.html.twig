@@ -1,0 +1,9 @@
+<html>
+<body>
+{{'_mail.teacher.notif.timeCredit.body'|trans({
+    '%fullname%':notif.teacher.fullname,
+    '%timeCredit.trainee%': notif.timeCredit.trainee.fullname,
+    '%timeCredit.totalHours%': notif.timeCredit.totalHours}, "messages", userPreferedLocale)|raw}}
+{{'_mail.teacher.signature'|trans({}, "messages", userPreferedLocale)|raw}}
+</body>
+</html>

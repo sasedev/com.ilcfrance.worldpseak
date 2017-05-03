@@ -1,0 +1,76 @@
+security:
+    encoders:
+        Ilcfrance\Worldspeak\Shared\DataBundle\Entity\Admin:
+            algorithm:            pbkdf2
+            hash_algorithm:       sha512
+            encode_as_base64:     true
+            iterations:           1000
+    providers:
+        main:
+            entity: { class: "IlcfranceWorldspeakSharedDataBundle:Admin" }
+                     
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt))/
+            security: false
+            anonymous:  true
+        resources:
+            pattern:  ^/(css|images|js|bundles)/
+            security: false
+            anonymous:  true
+        secoff:
+            pattern:  ^/(register|login|login_check|lostid|lostpass|resetpass)/
+            security: false
+            anonymous:  true
+        main:
+            pattern:      .*
+            form_login:
+                check_path:     /login_check
+                login_path:     /login
+                use_forward:    false
+                default_target_path: /
+                use_referer:    true
+                remember_me:    true
+                require_previous_session: true
+#                success_handler: login.listener
+            logout:
+                path:   /logout
+                target: /
+#                success_handler: logout_listener
+            remember_me:
+                key: %secret%
+                name: WorldspeakAdminSec
+                lifetime: 172800 # 2 days in seconds
+                path: ^/
+                always_remember_me: false
+                remember_me_parameter: _remember_me
+            security: true
+            anonymous:    true
+    acl:
+        connection: default
+
+    access_control:
+        # Liste des pages accessibles à tous les utilisateurs (ne pas toucher)
+        - { path: ^/_wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login_check, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/dontRememberUsername, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/lostPassword, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/genNewPassword, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/resseting$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # PAGES NON A TOUS
+#        - { path: ^/.*, role: "IS_AUTHENTICATED_FULLY" }
+#        - { path: ^/profile*, role: ROLE_USER }
+        - { path: ^/.*, role: ROLE_USER }
+
+    role_hierarchy:
+        ROLE_USER:              ROLE_USER
+        ROLE_TRAINEE:       [ROLE_USER]
+        ROLE_EXTERNAL_TEACHER:       [ROLE_USER]
+        ROLE_INTERNAL_TEACHER:       [ROLE_USER]
+        ROLE_ADMIN:             [ROLE_USER]
+        ROLE_SUPER_ADMIN:        [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_SUPER_ADMIN:        [ROLE_SUPER_ADMIN, ROLE_ALLOWED_TO_SWITCH]

@@ -1,0 +1,90 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__role_list')}}"><i class="fa fa-flag"></i> &nbsp; {{'breadcrumb.role.list'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__role_edit_get', {'id': role.id})}}">{{icon('edit')}} &nbsp; {{'breadcrumb.role.edit'|trans({'%role%': role.name})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <br>
+    <ul class="nav nav-tabs">
+      {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+      <li {%if tabActive==1%} class="active" {%endif%}><a href="#preview" data-toggle="tab">{{'Role.tab.preview'|trans|raw}}</a></li>
+      {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}<li {%if tabActive==2%} class="active" {%endif%}><a href="#edit" data-toggle="tab">{{'Role.tab.edit'|trans|raw}}</a></li>{%endif%}
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+        <br>
+        <h3 class="legend">{{'Role.tlabel.preview'|trans}}</h3>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Role.name'|trans|raw}} :</div>
+              <div class="col-lg-9">{{role.name}}</div>
+              <div class="col-lg-3 text-right">{{'Role.description'|trans|raw}} :</div>
+              <div class="col-lg-9">{%if role.description is not null%}{{role.description|raw}}{%else%}{{label('_NA'|trans)}}{%endif%}</div>
+              <div class="col-lg-3 text-right">{{'Role.users'|trans|raw}} :</div>
+              <div class="col-lg-9">
+              {%if role.admins|length!=0 or role.teachers|length!=0 or role.trainees|length!=0%}
+                {%if role.admins|length!=0%}{{badge(role.admins|length)}} {{'Role.admins'|trans}}<br>{%endif%}
+                {%if role.teachers|length!=0%}{{badge(role.teachers|length)}} {{'Role.teachers'|trans}}<br>{%endif%}
+                {%if role.trainees|length!=0%}{{badge(role.trainees|length)}} {{'Role.trainees'|trans}}<br>{%endif%}
+              {%else%}
+                {{label_info('_NA'|trans)}}
+              {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+      <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+        <br>
+        <h3 class="legend">{{'Role.tlabel.edit'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(roleEditForm, {'method':'POST', 'action': path('Admin__role_edit_post', {'id': role.id}), 'style': 'horizontal'})}}
+              {{form_row(roleEditForm.name, {'label_col': 3, 'widget_col': 2})}}
+              {{form_row(roleEditForm.description, {'label_col': 3, 'widget_col': 9, 'attr': {'class':'wysiwyg'}})}}
+              {{form_row(roleEditForm.submit, {'label_col': 3,'widget_col': 2}) }}
+            {{form_end(roleEditForm)}}
+          </div>
+        </div>
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+  {
+    $('textarea.wysiwyg').each(function()
+      {
+        var options =
+        {
+          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+          theme: "modern",
+          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+        };
+        $this = $(this);
+        if($this.is('[required]'))
+        {
+          options.oninit = function(editor)
+            {
+              editor.on('change', function(e)
+                {
+                  editor.save();
+                }
+              );
+            }
+        }
+        $this.tinymce(options);
+      }
+    );
+  }
+);
+{%endblock dynamic_jstxt%}

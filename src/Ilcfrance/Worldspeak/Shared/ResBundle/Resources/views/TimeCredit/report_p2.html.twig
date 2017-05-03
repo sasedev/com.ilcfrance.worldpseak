@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ILCWorldSpeak">
+<meta name="author" content="Salah Abdelkader Seif Eddine">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/fontawesome/css/font-awesome.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap-theme.min.css')}}">
+<title>{%if pagetitle_txt is defined%}{{pagetitle_txt}}{%else%}ILCWorldSpeak{%endif%}</title>
+</head>
+<body>
+{%set dtStart=null%}{%set dtEnd=null%}{%set i=0%}{%for cours in timeCredit.courses%}{%if i==0%}{%set dtStart = cours.dtStart%}{%endif%}{%if loop.last==true%}{%set dtEnd = cours.dtEnd%}{% endif%}{%set i=i+1%}{%endfor%}
+<br>
+<br>
+<br>
+<table class="table table-bordered table-condensed table-hover" style="width: 100%">
+    <tbody>
+        <tr>
+            <td style="text-align: right; width: 35%">{{'TimeCredit.dtStart'|trans}} :</td>
+            <td style="width: 5%">&nbsp;</td>
+            <th style="width: 60%">{%if dtStart is null%}{{label_warning('_NA'|trans)}}{%else%}<b>{{dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{dtStart|localizeddate('long', 'none', app.request.locale)}}</b>{%endif%}</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.dtEnd'|trans}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if dtEnd is null%}{{label_warning('_NA'|trans)}}{%else%}<b>{{dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{dtEnd|localizeddate('long', 'none', app.request.locale)}}</b>{%endif%}</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.ftype'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.ftype is not null and timeCredit.ftype is not constant('FTYPE_UNDEFINED', timeCredit)%}<b>{{('TimeCredit.ftype.'~timeCredit.ftype)|trans}}</b>{%else%}{{label_warning('_NA'|trans)}}{%endif%}</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.level'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.level is not null and timeCredit.level is not constant('LEVEL_UNDEFINED', timeCredit)%}<b>{{('TimeCredit.level.'~timeCredit.level)|trans}}</b>{%else%}{{label_warning('_NA'|trans)}}{%endif%}</th>
+        </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table class="table table-bordered table-condensed table-hover" style="width: 100%">
+    <tbody>
+        <tr>
+            <td style="text-align: right; width: 35%">{{'TimeCredit.totalHours'|trans|raw}} :</td>
+            <td style="width: 5%">&nbsp;</td>
+            <th style="width: 60%"><b>{{timeCredit.totalHours}} {{'_hours'|trans}}</b></th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.doneHours'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.doneHours}} {{'_hours'|trans}}</b></th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.lostHours'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.lostHours}} {{'_hours'|trans}}</b></th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.reservedHours'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.reservedHours}} {{'_hours'|trans}}</b></th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.notPlanifiedHours'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{timeCredit.notPlanifiedHours}} {{'_hours'|trans}}</b></th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.percentHours'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b><u>{{(timeCredit.doneHours/timeCredit.totalHours)*100}} %</u></b></th>
+        </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table class="table table-bordered table-condensed table-hover" style="width: 100%">
+    <tbody>
+        <tr>
+            <td style="text-align: right; width: 35%">{{'TimeCredit.cefBegin'|trans|raw}} :</td>
+            <td style="width: 5%">&nbsp;</td>
+            <th style="width: 60%">{%if timeCredit.cefBegin is not empty%}<b>{{timeCredit.cefBegin}}</b>{%else%}{{label_warning('_NA'|trans)}}{%endif%}</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.cefEnd'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.cefEnd is not empty%}<b>{{timeCredit.cefEnd}}</b>{%else%}{{label_warning('_NA'|trans)}}{%endif%}</th>
+        </tr>
+    </tbody>
+</table>
+<br>
+<br>
+<br>
+<br>
+<table class="table table-bordered table-condensed table-hover" style="width: 100%">
+    <tbody>
+        <tr>
+            <td style="text-align: right; width: 35%">{{'TimeCredit.globalKpiHomeworkPerformed'|trans|raw}} :</td>
+            <td style="width: 5%">&nbsp;</td>
+            <th style="width: 60%">{%if timeCredit.globalKpiHomeworkPerformed is not empty%}<b>{{('TimeCredit.kpi.'~timeCredit.globalKpiHomeworkPerformed)|trans}}</b>{%else%}{{label_warning('_NA'|trans|raw)}} {%endif%}</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.globalKpiParticipation'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.globalKpiParticipation is not empty%}<b>{{('TimeCredit.kpi.'~timeCredit.globalKpiParticipation)|trans}}</b>{%else%}{{label_warning('_NA'|trans|raw)}} {%endif%}</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.globalKpiVocabularyRetention'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.globalKpiVocabularyRetention is not empty%}<b>{{('TimeCredit.kpi.'~timeCredit.globalKpiVocabularyRetention)|trans}}</b>{%else%}{{label_warning('_NA'|trans|raw)}} {%endif%}</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td style="text-align: right;">{{'TimeCredit.globalKpiCorrectionConsideration'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if timeCredit.globalKpiCorrectionConsideration is not empty%}<b>{{('TimeCredit.kpi.'~timeCredit.globalKpiCorrectionConsideration)|trans}}</b>{%else%}{{label_warning('_NA'|trans|raw)}} {%endif%}</th>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

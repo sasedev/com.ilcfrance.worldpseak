@@ -1,0 +1,159 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__closedDay_list', {'year':currentYear, 'month': currentMonth})}}"><i class="fa fa-eye-slash"></i> &nbsp; {{'breadcrumb.closedDay.list'|trans({'%year%':currentYear, '%month%': ('_month'~currentMonth)|trans|raw})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+        <form method="get"  class="form-inline" id="gotoMonth">
+            <div class="form-group">
+	            <label for="changeMonth">{{'_month'|trans}} :</label>
+	            <select id="changeMonth" name="changeMonth">
+	               {%for i in 1..12 %}
+	               <option value="{{i}}"{%if i == currentMonth %} selected="selected"{%endif%}>{{('_month'~i)|trans}}</option>
+	               {%endfor%}
+	            </select>
+	        </div>
+	        <div class="form-group">
+	            <label for="changeYear">{{'_year'|trans}} :</label>
+	            <select id="changeYear" name="changeYear">
+	               <option value="{{currentYear-1}}">{{currentYear-1}}</option>
+	               <option value="{{currentYear}}" selected="selected">{{currentYear}}</option>
+	               <option value="{{currentYear+1}}">{{currentYear+1}}</option>
+	            </select>
+	        </div>
+	        <div class="form-group">
+	            <button id="changeClosedDays" name="changeClosedDays" class="btn btn-sm btn-primary" type="button"><i class="fa fa-calendar"></i></button>
+	        </div>
+        </form>
+    </div>
+    <ul class="pager centred">
+        <li class="previous"><a href="{{path('Admin__closedDay_list', {'year':prevYear,'month':prevMonth})}}">&laquo;&nbsp;{{'_prev'|trans}}</a></li>
+        <li class="next"><a href="{{path('Admin__closedDay_list', {'year':nextYear,'month':nextMonth})}}">{{'_next'|trans}}&nbsp;&raquo;</a></li>
+    </ul>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div id="calendar"></div>
+      </div>
+    </div>
+    <ul class="pager centred">
+        <li class="previous"><a href="{{path('Admin__closedDay_list', {'year':prevYear,'month':prevMonth})}}">&laquo;&nbsp;{{'_prev'|trans}}</a></li>
+        <li class="next"><a href="{{path('Admin__closedDay_list', {'year':nextYear,'month':nextMonth})}}">{{'_next'|trans}}&nbsp;&raquo;</a></li>
+    </ul>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+  {
+    $('#changeClosedDays').click(function()
+        {
+            var changeYear = $('#changeYear').val();
+            var changeMonth = $('#changeMonth').val();
+            var changeUrl = '{{path('Admin__closedDay_list')}}'+'/'+changeYear+'/'+changeMonth;
+            window.location = changeUrl;
+        }
+    );
+    var date = new Date("{{monthDays[0]|date("m/d/Y") }}");
+    var d = date.getDate();
+    var m = date.getMonth();
+    var y = date.getFullYear();
+    var calendar = $('#calendar').fullCalendar(
+      {
+        header: {left: '',center: '', right: '' },
+        year : y,
+        month: m,
+        date : d,
+        ignoreTimezone: false,
+        aspectRatio: 4,
+        monthNames: {{'monthNames'|trans|raw}},
+        monthNamesShort: {{'monthNamesShort'|trans|raw}},
+        dayNames: {{'dayNames'|trans|raw}},
+        dayNamesShort: {{'dayNamesShort'|trans|raw}},
+        allDaySlot: false,
+        defaultView: 'month',
+        allDayDefault: false,
+        weekMode: 'variable',
+        timeFormat: '',
+        titleFormat: '',
+        firstDay: 1,
+        editable: false,
+        selectable: true,
+        select: function(start, end, allDay) {
+            var evYear = start.getFullYear();
+            var evMonth = start.getMonth()+1;
+            var evDay = start.getDate();
+            var eid = evYear+"-"+evMonth+"-"+evDay;
+            var events = calendar.fullCalendar('clientEvents', eid);
+            var length = events.length;
+            var postdata = 'closedDay=' + eid;
+            if(length == 0) {
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "{{path('Admin__closedDay_ajaxAdd')}}",
+                        data: postdata,
+                        cache: false,
+                        success: function(data, textStatus, jqXHR ) {
+                            console.log(data);
+                            alert(jqXHR.responseText);
+                            calendar.fullCalendar('renderEvent', {
+                                    id: eid,
+                                    title: '{{'ClosedDay'|trans}}',
+                                    start: start,
+                                    end: end
+                                },
+                                true
+                            );
+                        },
+                        error: function(jqXHR, textStatus, errorThrown ) {
+                            alert(jqXHR.responseText);
+                            if(jqXHR.status&&jqXHR.status==409){
+                                location.reload();
+                            }
+                        }
+                    }
+                );
+            } else {
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "{{path('Admin__closedDay_ajaxDelete')}}",
+                        data: postdata,
+                        cache: false,
+                        success: function(data, textStatus, jqXHR ) {
+                            console.log(data);
+                            alert(jqXHR.responseText);
+                            calendar.fullCalendar( 'removeEvents' , eid );
+                        },
+                        error: function(jqXHR, textStatus, errorThrown ) {
+                            alert(jqXHR.responseText);
+                            if(jqXHR.status&&jqXHR.status==404){
+                                location.reload();
+                            }
+                        }
+                    }
+                );
+            }
+            calendar.fullCalendar('unselect');
+        }{%if closedDays|length!=0%},
+        events: [
+    {%for cd in closedDays%}
+            {
+                id: '{{cd.day|date("Y-n-j")}}',
+                title: '{{'ClosedDay'|trans}}',
+                start: new Date("{{cd.day|date("m/d/Y") }}"),
+                end: new Date("{{cd.day|date("m/d/Y") }}")
+            }{%if loop.last==false%},{% endif%}
+    {% endfor %}
+        ]
+{% endif %}
+
+      }
+    );
+  }
+);
+{%endblock dynamic_jstxt%}

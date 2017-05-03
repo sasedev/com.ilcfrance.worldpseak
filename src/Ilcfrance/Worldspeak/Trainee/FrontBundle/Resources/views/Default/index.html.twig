@@ -1,0 +1,213 @@
+{%extends 'IlcfranceWorldspeakTraineeFrontBundle::layout.html.twig'%} {%block breadcrumb%}
+<ol class="breadcrumb">
+    <li class="active"><a href="{{path('Trainee__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%} {%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        {%for timeCredit in timeCredits%}
+        <div class="panel panel-info">
+            <div class="panel-body">
+                <h4 class="legend">{{'TimeCredit.title'|trans}}</h4>
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{'TimeCredit.ftype'|trans}}</th>
+                            <th>{{'TimeCredit.level'|trans}}</th>
+                            <th>{{'TimeCredit.totalHours'|trans}}</th>
+                            <th>{{'TimeCredit.reservedHours'|trans}}</th>
+                            <th>{{'TimeCredit.notPlanifiedHours'|trans}}</th>
+                            <th>{{'TimeCredit.doneHours'|trans}}</th>
+                            <th>{{'TimeCredit.lostHours'|trans}}</th>
+                            <th>{{'TimeCredit.deadLine'|trans}}</th>
+                            <th class="oneBtn">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                {%if timeCredit.ftype is not null and timeCredit.ftype != 0%}
+                                {{('TimeCredit.ftype.'~timeCredit.ftype)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </td>
+                            <td>
+                                {%if timeCredit.level is not null and timeCredit.level != 0%}
+                                {{('TimeCredit.level.'~timeCredit.level)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </td>
+                            <td>{{timeCredit.totalHours}}</td>
+                            <td>{{timeCredit.reservedHours}}</td>
+                            <td class="warning">{{timeCredit.notPlanifiedHours}}</td>
+                            <td>{{timeCredit.doneHours}}</td>
+                            <td>{{timeCredit.lostHours}}</td>
+                            <td>
+                                {%if timeCredit.deadLine is not null%}
+                                {%if timeCredit.deadLine|date('Y-m-d') < 'now'|date('Y-m-d')%}
+                                {{label_danger(timeCredit.deadLine|localizeddate('full', 'none', app.request.locale )|capitalize)}}
+                                {%else%}
+                                {{timeCredit.deadLine|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                                {%endif%}
+                                {%else%}
+                                {{label_primary('_ND'|trans)}}
+                                {%endif%}
+                             </td>
+                            <td>
+                            {%if timeCredit.showReport is constant("SHOWREPORT_SHOW", timeCredit)%}
+                                <a class="btn btn-sm btn-warning" href="{{ path('Trainee__timeCredit_report',{'id':timeCredit.id}) }}">
+                                    {{'TimeCredit.report'|trans}} &nbsp; <i class="fa fa-download"></i>
+                                </a>
+                            {%endif%}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {%if (timeCredit.courses|length) != 0%}
+                <br>
+                <h4 class="legend">{{'TimeCredit.tlabel.Courses'|trans}}</h4>
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{'Cours.dtStart'|trans}}</th>
+                            <th>{{'Cours.duration'|trans}}</th>
+                            <th>{{'Cours.type'|trans}}</th>
+                            <th>{{'Cours.phone'|trans}}</th>
+                            <th>{{'Cours.teacher'|trans}}</th>
+                            <th>{{'Cours.status'|trans}}</th>
+                            <th class="twoBtn">{{ '_actions.courses'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for cours in timeCredit.courses%}
+                        <tr>
+                            <td>
+                                {{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                                {{'_at'|trans}}
+                                {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}
+                            </td>
+                            <td>{{cours.duration}} {{'_minutes'|trans}}</td>
+                            <td>
+                                {%if cours.type is not null and cours.type is not constant('TYPE_UNDEFINED', cours)%}
+                                {{('Cours.type.'~cours.type)|trans}}
+                                {%else%}
+                                {{label_danger(('Cours.type.'~constant('TYPE_UNDEFINED', cours))|trans)}}
+                                {%endif%}
+                            </td>
+                            <td>
+                                {%if cours.status is constant('STATUS_PLANNED', cours)%}
+                                {%if cours.phone is not empty%}
+                                <a href="tel:{{cours.phone}}">{{icon('earphone')}} {{cours.phone}}</a>
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                                {%endif%}
+                            </td>
+                            <td>
+                                {%if cours.status is constant('STATUS_DONE', cours)
+                                    or cours.status is constant('STATUS_PLANNED_PENDING', cours)%}
+                                    {%if cours.teacher is not null%}
+                                        <b>{{cours.teacher.fullname}}</b>
+                                    {%else%}
+                                        {{label_danger('_NA'|trans)}}
+                                    {%endif%}
+                                {%endif%}
+                            </td>
+                            <td>
+                                {%if cours.status is not null
+                                and cours.status is not constant('STATUS_PLANNED_PENDING', cours)%}
+                                {{('Cours.status.'~cours.status)|trans}}
+                                {%elseif cours.status is constant('STATUS_PLANNED_PENDING', cours)%}
+                                {{label_danger(('Cours.status.'~cours.status)|trans)}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </td>
+                            <td>
+                                <a class="btn btn-xs btn-info" href="{{path('Trainee__cours_edit_get',{'id':cours.id})}}">
+                                    {{icon('edit')}}
+                                </a>
+                                {%if cours.deletable==true%}
+                                <a class="btn btn-xs btn-danger deleteConfirmCours"
+                                    href="{{path('Trainee__cours_delete',{'id':cours.id})}}">
+                                    {{icon('remove')}}
+                                </a>
+                                {%endif%}
+                            </td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+                {%endif%}
+                {%if (timeCredit.documents|length) != 0%}
+                <br>
+                <h4 class="legend">{{'TimeCredit.tlabel.TimeCreditDocuments'|trans}}</h4>
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{'TimeCreditDocument.title'|trans}}</th>
+                            <th>{{'TimeCreditDocument.dtCrea'|trans}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {%for timeCreditDocument in timeCredit.documents%}
+                        <tr>
+                            <td>
+                                {%if timeCreditDocument.msg is not empty%}{{timeCreditDocument.msg|raw}}{%endif%}
+                                {%if timeCreditDocument.teachingResource is not null%}
+                                <a class="btn btn-sm btn-primary"
+                                    href="{{ path('Trainee__timeCreditDocument_download', {'id': timeCreditDocument.id}) }}">
+                                    {{timeCreditDocument.teachingResource.filename}} {{icon('download')}}
+                                </a>
+                                {%endif%}
+                            </td>
+                            <td>
+                                {{timeCreditDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                {{timeCreditDocument.dtCrea|localizeddate('none', 'medium', app.request.locale )}}
+                            </td>
+                        </tr>
+                    {%endfor%}
+                    </tbody>
+                </table>
+                {%endif%}
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        {%else%}
+        <div class="panel panel-warning">
+            <div class="panel-body">{{ label_warning('TimeCredit.dbEmpty') }}</div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+<div id="deleteConfirmCours" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'Cours.deleteConfirm'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">{{'Cours.deleteConfirm.txt'|trans|raw}}</div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+    </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('.deleteConfirmCours').click(function(e)
+            {
+                e.preventDefault();
+                var lnk = $(this).attr('href');
+                modalDeleteBtn = $('#deleteConfirmCours').find('.danger');
+                modalDeleteBtn.attr('href', lnk);
+                $('#deleteConfirmCours').modal('show');
+            }
+        );
+    }
+);
+{%endblock dynamic_jstxt%}

@@ -1,0 +1,9 @@
+<html>
+<body>
+{{'_mail.new_timeCredit_body'|trans({'%fullname%':timeCredit.trainee.fullname,'%totalHours%':timeCredit.totalHours,'%ftype%': ('TimeCredit.ftype.'~timeCredit.ftype)|trans,'%level%': ('TimeCredit.level.'~timeCredit.level)|trans}, "messages", userPreferedLocale)|raw}}
+{%if timeCredit.deadLine is not null%}
+{{'_mail.new_timeCredit_body2'|trans({'%deadLine%': timeCredit.deadLine|localizeddate('full', 'none', userPreferedLocale)}, "messages", userPreferedLocale)|raw}}
+{%endif%}
+{{'_mail.trainee.signature'|trans({}, "messages", userPreferedLocale)|raw}}
+</body>
+</html>

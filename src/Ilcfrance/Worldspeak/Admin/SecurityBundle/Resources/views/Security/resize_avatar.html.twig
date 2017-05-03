@@ -1,0 +1,58 @@
+{{ form_start(userAvatarResizeForm, {'method':'POST','action': path('admin_security_profile') ,'style': 'horizontal', 'attr': {'id':'avatar_resize'} }) }}
+	<div class="form-group row">
+	   <div class="col-lg-offset-3 col-lg-9">
+	     <img src="{{ path('vfs_tmp_files', {'file': '/'}) }}{{ tmp_avatar }}" alt="" id="avatar_big" style="max-width: 400px; min-width: 130px">
+	   </div>
+	</div>
+	<div class="form-group">
+    <div class="col-lg-offset-3 col-lg-9">
+	     <button type="submit" id="resize_avatar_tmp" class="btn btn-primary">{{'_action.btnSelect' | trans|raw}}</button>
+	     <button type="button" id="cancel_avatar_tmp" class="btn">{{'_action.btnCancel' | trans|raw}}</button>
+	  </div>
+	</div>
+		{{ form_row(userAvatarResizeForm.x1) }}
+		{{ form_row(userAvatarResizeForm.y1) }}
+		{{ form_row(userAvatarResizeForm.w) }}
+		{{ form_row(userAvatarResizeForm.h) }}
+		{{ form_row(userAvatarResizeForm.avatar_tmp) }}
+		{{ form_rest(userAvatarResizeForm) }}
+{{ form_end(userAvatarResizeForm) }}
+<br>
+<script type="text/javascript">
+$(function ()
+	{
+		$('#avatar_big').Jcrop(
+			{
+				aspectRatio: 13 / 17,
+				onChange: showCoords,
+				onSelect: showCoords
+			}
+		);
+		function showCoords(c)
+		{
+			$('#UserAvatarResizeForm_x1').val(c.x);
+			$('#UserAvatarResizeForm_y1').val(c.y);
+			$('#UserAvatarResizeForm_w').val(c.w);
+			$('#UserAvatarResizeForm_h').val(c.h);
+			if(c.w == 0)
+			{
+				$('#resize_avatar_tmp').attr('disabled', 'disabled');
+			} else
+			{
+				$('#resize_avatar_tmp').removeAttr('disabled');
+			}
+		};
+		$('#avatar_upload').hide();
+		$('#resize_avatar_tmp').attr('disabled', 'disabled');
+		$("#cancel_avatar_tmp").click(function()
+			{
+				$('#UserAvatarForm_avatar').val('');
+				$('#avatar_upload').show();
+				$('#avatar_sel').html('');
+
+			}
+		);
+	}
+);
+</script>
+<br/>

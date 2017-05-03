@@ -1,0 +1,11 @@
+<div class="panel panel-danger">
+    <div class="panel-heading text-center">
+        <span class="fa-2x">
+            {{render(controller('IlcfranceWorldspeakAdminFrontBundle:Widget:countAdminsBuggy'))}} <i class="fa fa-bug"></i>
+            /
+            {{render(controller('IlcfranceWorldspeakAdminFrontBundle:Widget:countAdmins'))}} {{icon('tower')}}
+        </span>
+    </div>
+    <a href="{{path('Admin__admin_list')}}"><div class="panel-footer">{{icon('tower')}} &nbsp; &nbsp; {{'_menu.admin.list'|trans}}</div></a>
+    <a href="{{path('Admin__admin_listBuggy')}}"><div class="panel-footer"> <i class="fa fa-bug"></i> &nbsp; &nbsp; {{'_menu.admin.listBuggy'|trans}}</div></a>
+</div>

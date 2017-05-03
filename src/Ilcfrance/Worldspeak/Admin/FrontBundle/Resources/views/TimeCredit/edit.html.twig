@@ -1,0 +1,1040 @@
+{%extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig'%} {%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li><a href="{{path('Admin__trainee_list')}}"><i class="fa fa-user"></i> &nbsp; {{'breadcrumb.trainee.list'|trans}}</a></li>
+    <li>
+        <a href="{{path('Admin__trainee_edit_get', {'id': timeCredit.trainee.id})}}">{{icon('edit')}} &nbsp; {{'breadcrumb.trainee.edit'|trans({'%trainee%': timeCredit.trainee.fullname})|raw}}</a>
+    </li>
+    <li class="active"><a href="{{path('Admin__timeCredit_edit_get', {'id': timeCredit.id})}}">{{icon('time')}} &nbsp;
+            {{'breadcrumb.timeCredit.edit'|trans({'%totalHours%':timeCredit.totalHours,'%ftype%':
+            ('TimeCredit.ftype.'~timeCredit.ftype)|trans,'%level%': ('TimeCredit.level.'~timeCredit.level)|trans})|raw}}</a>
+    </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+    <div class="well text-right">
+        <form action="{{ path('Admin__timeCredit_search') }}" method="get"  class="form-search form-inline">
+            <div class="form-group">
+	            <label for="q">{{'_search'|trans}}</label>
+	            <input class="input-sm" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="" >
+	        </div>
+	        <div class="form-group">
+	            <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+	        </div>
+        </form>
+    </div>
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+            <li {%if tabActive==1%} class="active"{%endif%}><a href="#preview" data-toggle="tab">{{'TimeCredit.tab.preview'|trans|raw}}</a></li>
+            <li {%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'TimeCredit.tab.edit'|trans|raw}}</a></li>
+            <li {%if tabActive==3%} class="active"{%endif%}><a href="#cours" data-toggle="tab">{{'TimeCredit.tab.Cours'|trans|raw}}</a></li>
+            <li {%if tabActive==4%} class="active"{%endif%}><a href="#timeCreditDocument" data-toggle="tab">{{'TimeCredit.tab.TimeCreditDocument'|trans|raw}}</a></li>
+            {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+            <li {%if tabActive==5%} class="active"{%endif%}><a href="#notifs" data-toggle="tab">{{'TimeCredit.tab.Notifs'|trans|raw}}</a></li>
+            {%endif%}
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.preview'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.trainee'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                <a href="{{path('Admin__trainee_edit_get', {'id': timeCredit.trainee.id})}}"><i
+                                    class="fa fa-user"
+                                ></i> {{timeCredit.trainee.fullname}}</a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.dtCrea'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCredit.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                {{timeCredit.dtCrea|localizeddate('none', 'medium', app.request.locale )}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.ftype'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                            {%if timeCredit.ftype is not null
+                                and timeCredit.ftype is not constant('FTYPE_UNDEFINED', timeCredit)%}
+                                {{('TimeCredit.ftype.'~timeCredit.ftype)|trans}}
+                            {%else%}
+                                {{label_danger('_NA'|trans)}}
+                            {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.level'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                            {%if timeCredit.level is not null
+                                and timeCredit.level is not constant('LEVEL_UNDEFINED', timeCredit)%}
+                                {{('TimeCredit.level.'~timeCredit.level)|trans}}
+                            {%else%}
+                                {{label_danger('_NA'|trans)}}
+                            {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.totalHours'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCredit.totalHours}} {{'_hours'|trans}}</div>
+                            <div class="col-lg-3 text-right">{{'TimeCredit.doneHours'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCredit.doneHours}} {{'_hours'|trans}}</div>
+                            <div class="col-lg-3 text-right">{{'TimeCredit.lostHours'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCredit.lostHours}} {{'_hours'|trans}}</div>
+                            <div class="col-lg-3 text-right">{{'TimeCredit.reservedHours'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCredit.reservedHours}} {{'_hours'|trans}}</div>
+                            <div class="col-lg-3 text-right">{{'TimeCredit.notPlanifiedHours'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{badge(timeCredit.notPlanifiedHours)}} {{'_hours'|trans}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.deadLine'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.deadLine is not null%}
+                                {{timeCredit.deadLine|localizeddate('full', 'none', app.request.locale )|capitalize}} {%else%}
+                                {{label_info('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.status'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{('TimeCredit.status.'~timeCredit.status)|trans}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.lockout'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{('TimeCredit.lockout.'~timeCredit.lockout)|trans}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.showReport'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{('TimeCredit.showReport.'~timeCredit.showReport)|trans}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.cefBegin'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.cefBegin is not
+                                empty%}{{timeCredit.cefBegin}}{%else%}{{label_danger('_NA'|trans)}}{%endif%}</div>
+                            <div class="col-lg-3 text-right">{{'TimeCredit.cefEnd'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.cefEnd is not empty%}{{timeCredit.cefEnd}} {%else%} {%if
+                                timeCredit.status is constant('STATUS_FULL_FINISHED', timeCredit)%}
+                                {{label_danger('_NA'|trans)}} {%elseif timeCredit.status is constant('STATUS_FINISHED',
+                                timeCredit)%} {{label_warning('_NA'|trans)}} {%else%} {{label_info('_NA'|trans)}}
+                                {%endif%} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.objectives'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.objectives is not empty%}
+                                {{timeCredit.objectives|raw}} {%else%} {{label_info('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.comments'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.comments is not empty%} {{timeCredit.comments|raw}}
+                                {%else%} {{label_info('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.notifyByMail'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if timeCredit.notifyByMail is not null%}
+                                {{('TimeCredit.notifyByMail.'~timeCredit.notifyByMail)|trans}} {%if
+                                timeCredit.notifyByMail is constant('NOTIFYBYMAIL_NOTSENT', timeCredit)%} | <a
+                                    class="btn btn-xs btn-primary"
+                                    href="{{ path('Admin__timeCredit_notifyByMail', {'id':timeCredit.id}) }}"
+                                >{{ '_action.btnSend'|trans|raw}} {{icon('envelope')}}</a> {%endif%} {%else%}
+                                {{label_danger('_NA'|trans|raw)}} {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%if timeCredit.status is not constant('STATUS_NEW', timeCredit)%} <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.kpi'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.calculatedKpiHomeworkPerformed'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.calculatedKpiHomeworkPerformed is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.calculatedKpiHomeworkPerformed)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.forcedKpiHomeworkPerformed'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.forcedKpiHomeworkPerformed is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.forcedKpiHomeworkPerformed)|trans}} {%else%}
+                                {{label_info('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.globalKpiHomeworkPerformed'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.globalKpiHomeworkPerformed is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.globalKpiHomeworkPerformed)|trans}} {%else%}
+                                {{label_danger('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.calculatedKpiParticipation'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.calculatedKpiParticipation is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.calculatedKpiParticipation)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.forcedKpiParticipation'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.forcedKpiParticipation is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.forcedKpiParticipation)|trans}} {%else%}
+                                {{label_info('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.globalKpiParticipation'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.globalKpiParticipation is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.globalKpiParticipation)|trans}} {%else%}
+                                {{label_danger('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.calculatedKpiVocabularyRetention'|trans|raw}}
+                                :</div>
+                            <div class="col-lg-9">{%if timeCredit.calculatedKpiVocabularyRetention is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.calculatedKpiVocabularyRetention)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.forcedKpiVocabularyRetention'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.forcedKpiVocabularyRetention is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.forcedKpiVocabularyRetention)|trans}} {%else%}
+                                {{label_info('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.globalKpiVocabularyRetention'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.globalKpiVocabularyRetention is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.globalKpiVocabularyRetention)|trans}} {%else%}
+                                {{label_danger('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.calculatedKpiCorrectionConsideration'|trans|raw}}
+                                :</div>
+                            <div class="col-lg-9">{%if timeCredit.calculatedKpiCorrectionConsideration is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.calculatedKpiCorrectionConsideration)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.forcedKpiCorrectionConsideration'|trans|raw}}
+                                :</div>
+                            <div class="col-lg-9">{%if timeCredit.forcedKpiCorrectionConsideration is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.forcedKpiCorrectionConsideration)|trans}} {%else%}
+                                {{label_info('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.globalKpiCorrectionConsideration'|trans|raw}}
+                                :</div>
+                            <div class="col-lg-9">{%if timeCredit.globalKpiCorrectionConsideration is not empty%}
+                                {{('TimeCredit.kpi.'~timeCredit.globalKpiCorrectionConsideration)|trans}} {%else%}
+                                {{label_danger('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                {%endif%} {%if timeCredit.status is constant('STATUS_FULL_FINISHED', timeCredit) or timeCredit.status is
+                constant('STATUS_FINISHED', timeCredit) or timeCredit.status is constant('STATUS_DEADLINE_EXCEEDED',
+                timeCredit)%} <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.endReport'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.report'|trans|raw}} :</div>
+                            <div class="col-lg-9"><a class="btn btn-primary" href="{{path('Admin__timeCredit_report', {'id': timeCredit.id})}}">{{icon('download-alt')}}</a></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress1'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress1 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress1)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress2'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress2 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress2)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress3'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress3 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress3)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress4'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress4 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress4)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress5'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress5 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress5)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress6'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress6 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress6)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress7'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress7 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress7)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc1'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc1 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc1)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc2'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc2 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc2)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc3'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc3 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc3)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc4'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc4 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc4)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc5'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc5 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc5)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc6'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc6 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc6)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc7'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc7 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc7)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement1'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement1 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement1)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement2'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement2 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement2)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement3'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement3 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement3)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement4'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement4 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement4)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement5'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement5 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement5)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.lastTeacherReport'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.lastTeacherReport is not empty%}
+                                {{timeCredit.lastTeacherReport|raw}} {%else%} {{label_warning('_NA'|trans|raw)}}
+                                {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                {%endif%} {%if timeCredit.surveyBegin is constant('SURVEY_FILLED', timeCredit) or timeCredit.status is
+                constant('STATUS_FULL_FINISHED', timeCredit) or timeCredit.status is constant('STATUS_FINISHED',
+                timeCredit) or timeCredit.status is constant('STATUS_DEADLINE_EXCEEDED', timeCredit)%} <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.surveyBegin'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyBeginQ01'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyBeginQ01 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyBeginQ01)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyBeginQ02'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyBeginQ02 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyBeginQ02)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyBeginQ03'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyBeginQ03 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyBeginQ03)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyBeginQ04'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyBeginQ04 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyBeginQ04)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyBeginQ05'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyBeginQ05 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyBeginQ05)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyBeginQ06'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyBeginQ06 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyBeginQ06)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyBeginQ07'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyBeginQ07 is not empty%}
+                                {{timeCredit.surveyBeginQ07|raw}} {%else%} {{label_warning('_NA'|trans|raw)}} {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyBeginQ08'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyBeginQ08 is not empty%}
+                                {{timeCredit.surveyBeginQ08|raw}} {%else%} {{label_warning('_NA'|trans|raw)}} {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endif%} {%if timeCredit.surveyEnd is constant('SURVEY_FILLED', timeCredit) or timeCredit.status is
+                constant('STATUS_FULL_FINISHED', timeCredit) or timeCredit.status is constant('STATUS_FINISHED',
+                timeCredit) or timeCredit.status is constant('STATUS_DEADLINE_EXCEEDED', timeCredit)%} <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.surveyEnd'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ01'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ01 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyEndQ01)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ02'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ02 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyEndQ02)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ03'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ03 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyEndQ03)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ04'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ04 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyEndQ04)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ05'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ05 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyEndQ05)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ06'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ06 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyEndQ06)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ07'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ07 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyEndQ07)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ08'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ08 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyEndQ08)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ09'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ09 is not null%}
+                                {{('TimeCredit.survey.'~timeCredit.surveyEndQ09)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.surveyEndQ10'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.surveyEndQ10 is not empty%}
+                                {{timeCredit.surveyEndQ10|raw}} {%else%} {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                {%endif%}
+            </div>
+            <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editFtype'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditFtypeForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditFtypeForm.ftype, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditFtypeForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        {{form_end(timeCreditFtypeForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editLevel'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditLevelForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditLevelForm.level, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditLevelForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        {{form_end(timeCreditLevelForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editTotalHours'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditTotalHoursForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditTotalHoursForm.totalHours, {'label_col': 3, 'widget_col': 2, 'input_group':
+                        { 'append': icon('time') }})}} {{form_row(timeCreditTotalHoursForm.submit, {'label_col':
+                        3,'widget_col': 2})}} {{form_end(timeCreditTotalHoursForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editDeadLine'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditDeadLineForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditDeadLineForm.deadLine, {'label_col': 3, 'widget_col': 2, 'input_group': {
+                        'append': icon('calendar') }})}} {{form_row(timeCreditDeadLineForm.submit, {'label_col':
+                        3,'widget_col': 2})}} {{form_end(timeCreditDeadLineForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editDetails'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditDetailsForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditDetailsForm.objectives, {'label_col': 3, 'widget_col': 9, 'attr': {
+                        'class': 'wysiwyg' }})}} {{form_row(timeCreditDetailsForm.comments, {'label_col': 3,
+                        'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} {{form_row(timeCreditDetailsForm.submit,
+                        {'label_col': 3,'widget_col': 2})}} {{form_end(timeCreditDetailsForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editCefBegin'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditCefBeginForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditCefBeginForm.cefBegin, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditCefBeginForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        {{form_end(timeCreditCefBeginForm)}}</div>
+                </div>
+                {%if timeCredit.status is constant('STATUS_FULL_FINISHED', timeCredit) or timeCredit.status is
+                constant('STATUS_FINISHED', timeCredit) or timeCredit.status is constant('STATUS_DEADLINE_EXCEEDED',
+                timeCredit)%}
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editCefEnd'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditCefEndForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditCefEndForm.cefEnd, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditCefEndForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        {{form_end(timeCreditCefEndForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editForcedKpi'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditForcedKpiForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditForcedKpiForm.forcedKpiHomeworkPerformed, {'label_col': 3, 'widget_col':
+                        2})}} {{form_row(timeCreditForcedKpiForm.forcedKpiParticipation, {'label_col': 3, 'widget_col':
+                        2})}} {{form_row(timeCreditForcedKpiForm.forcedKpiVocabularyRetention, {'label_col': 3,
+                        'widget_col': 2})}} {{form_row(timeCreditForcedKpiForm.forcedKpiCorrectionConsideration,
+                        {'label_col': 3, 'widget_col': 2})}} {{form_row(timeCreditForcedKpiForm.submit, {'label_col':
+                        3,'widget_col': 2})}} {{form_end(timeCreditForcedKpiForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editLockout'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditLockoutForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditLockoutForm.lockout, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditLockoutForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        {{form_end(timeCreditLockoutForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editEndReport'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditEndReportForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditEndReportForm.progress1, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress2, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress3, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress4, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress5, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress6, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress7, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc1, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc2, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc3, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc4, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc5, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc6, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc7, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement1, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement2, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement3, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement4, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement5, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.lastTeacherReport, {'label_col': 3, 'widget_col': 9, 'attr':
+                        { 'class': 'wysiwyg' }})}} {{form_row(timeCreditEndReportForm.submit, {'label_col':
+                        3,'widget_col': 2})}} {{form_end(timeCreditEndReportForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editShowReport'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditShowReportForm, {'method':'POST', 'action':
+                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditShowReportForm.showReport, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditShowReportForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        {{form_end(timeCreditShowReportForm)}}</div>
+                </div>
+                {%endif%}
+            </div>
+            <div class="tab-pane fade{%if tabActive==3%} in active{%endif%}" id="cours" >
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.cours'|trans}}</h3>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'Cours.dtStart'|trans}}</th>
+                                    <th>{{'Cours.duration'|trans}}</th>
+                                    <th>{{'Cours.type'|trans}}</th>
+                                    <th>{{'Cours.phone'|trans}}</th>
+                                    <th>{{'Cours.teacher'|trans}}</th>
+                                    <th>{{'Cours.status'|trans}}</th>
+                                    <th class="twoBtn">{{ '_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for cours in timeCredit.courses%}
+                                <tr {%if cours.buggy is constant('HEALTH_BUGGY', cours)%}class="danger"{%endif%}>
+                                    <td>
+                                        {{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                                        {{'_at'|trans}}
+                                        {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}
+                                    </td>
+                                    <td>
+                                        {{cours.duration}} {{'_minutes'|trans}}
+                                    </td>
+                                    <td>
+                                        {%if cours.type is not null and cours.type is not constant('TYPE_UNDEFINED', cours)%}
+                                            {{('Cours.type.'~cours.type)|trans}}
+                                        {%else%}
+                                            {{label_danger(('Cours.type.'~constant('TYPE_UNDEFINED', cours))|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        {%if cours.phone is not empty%}
+                                            <a href="tel:{{cours.phone}}">{{icon('earphone')}} {{cours.phone}}</a>
+                                        {%else%}
+                                            {{label_danger('_NA'|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        {%if cours.teacher is not null%}
+                                            <a href="{{path('Admin__teacher_edit_get', {'id': cours.teacher.id})}}">
+                                            {{icon('user')}} {{cours.teacher.fullname}}
+                                            </a>
+                                        {%else%}
+                                            {{label_danger('_NA'|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        {%if cours.status is not null
+                                        and cours.status is not constant('STATUS_PLANNED_PENDING', cours)%}
+                                            {{('Cours.status.'~cours.status)|trans}}
+                                        {%elseif cours.status is constant('STATUS_PLANNED_PENDING', cours)%}
+                                            {{label_danger(('Cours.status.'~cours.status)|trans)}}
+                                        {%else%}
+                                            {{label_danger('_NA'|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-sm btn-info"
+                                        href="{{path('Admin__cours_edit_get',{'id':cours.id})}}">{{icon('edit')}}</a>
+                                        {%if cours.status is null
+                                        or cours.status is constant('STATUS_PLANNED', cours)
+                                        or cours.status is constant('STATUS_PLANNED_PENDING', cours)
+                                        or cours.status is constant('STATUS_ABSENT', cours)%}
+                                        <a class="btn btn-sm btn-danger deleteConfirmCours"
+                                        href="{{path('Admin__cours_delete', {'id': cours.id})}}">
+                                        {{icon('remove')}}</a>
+                                        {%endif%}
+                                    </td>
+                                </tr>
+                                {%else%}
+                                <tr>
+                                    <td colspan="7" class="warning">{{'Cours.dbemptyTimeCredit'|trans}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade{%if tabActive==4%} in active{%endif%}" id="timeCreditDocument">
+                {%if timeCredit.status is not constant('STATUS_FULL_FINISHED', timeCredit) and timeCredit.status is
+                not constant('STATUS_FINISHED', timeCredit) and timeCredit.status is not
+                constant('STATUS_DEADLINE_EXCEEDED',timeCredit)%}
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.timeCreditDocumentAdd'|trans}}</h3>
+                <div class="panel panel-warning">
+                    <div class="panel-body">
+                    {{form_start(timeCreditDocumentAddForm, {'method':'POST', 'action': path('Admin__timeCreditDocument_add_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditDocumentAddForm.teachingResource, {'label_col': 3, 'widget_col': 3, 'input_group': {'append': icon('file') }})}}
+                        {{form_row(timeCreditDocumentAddForm.msg, {'label_col': 3, 'widget_col': 9, 'attr' : {'class': 'wysiwyg'}})}}
+                        {{form_row(timeCreditDocumentAddForm.notifyByMail, {'label_col': 3, 'widget_col': 2, 'input_group': {'append': icon('envelope') }})}}
+                        {{form_row(timeCreditDocumentAddForm.submit, {'label_col': 3,'widget_col': 2})}}
+                    {{form_end(timeCreditDocumentAddForm)}}
+                    </div>
+                </div>
+                {%endif%}
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.timeCreditDocument'|trans}}</h3>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'TimeCreditDocument.msg'|trans}}</th>
+                                    <th>{{'TimeCreditDocument.teachingResource'|trans}}</th>
+                                    <th>{{'TimeCreditDocument.dtCrea'|trans}}</th>
+                                    <th class="threeBtn">{{ '_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for timeCreditDocument in timeCredit.documents%}
+                                <tr>
+                                    <td>{%if timeCreditDocument.msg is not empty%}
+                                        {{timeCreditDocument.msg|raw}} {%else%} {{label_info('_NA'|trans)}}
+                                        {%endif%}</td>
+                                    <td>{%if timeCreditDocument.teachingResource is not null%}
+                                        {{timeCreditDocument.teachingResource|trans}} {%else%} {{label_info('_NA'|trans)}}
+                                        {%endif%}</td>
+                                    <td>{{timeCreditDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                        {{timeCreditDocument.dtCrea|localizeddate('long', 'none', app.request.locale)}}</td>
+                                    <td>
+                                        {%if timeCreditDocument.teachingResource is not null%}
+                                        <a class="btn btn-sm btn-primary"
+                                        href="{{path('Admin__timeCreditDocument_download', {'id': timeCreditDocument.id})}}">{{icon('download')}}</a>
+                                        {%endif%}
+                                        <a class="btn btn-sm btn-info"
+                                        href="{{path('Admin__timeCreditDocument_edit_get',{'id':timeCreditDocument.id})}}">
+                                            {{icon('edit')}}</a>
+                                        <a class="btn btn-sm btn-danger deleteConfirmTimeCreditDocument"
+                                        href="{{path('Admin__timeCreditDocument_delete', {'id': timeCreditDocument.id})}}">
+                                        {{icon('remove')}}
+                                        </a>
+                                    </td>
+                                </tr>
+                                {%else%}
+                                <tr>
+                                    <td colspan="4" class="warning">{{'TimeCreditDocument.dbemptyTimeCredit'|trans}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+            <div class="tab-pane fade{%if tabActive==5%} in active{%endif%}" id="notifs">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'AdminNotif.type'|trans}}</th>
+                                    <th>{{'AdminNotif.dtStart'|trans}}</th>
+                                    <th>{{'AdminNotif.status'|trans}}</th>
+                                    <th class="oneBtn">{{ '_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for n in timeCredit.adminNotifs%}
+                                <tr>
+                                    <td>{{('AdminNotif.type.'~n.type)|trans|raw}} (<a
+                                        href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i
+                                            class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a>)
+                                    </td>
+                                    <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+                                    <td>{{('AdminNotif.status.'~n.status)|trans}}</td>
+                                    <td><a class="btn btn-sm btn-info"
+                                        href="{{path('Admin__timeCredit_edit_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a></td>
+                                </tr>
+                                {%else%}
+                                <tr>
+                                    <td colspan="4" class="warning">{{'AdminNotif.dbempty'|trans}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr>
+                <div class="panel panel-primary">
+                      <div class="panel-body">
+                          <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'TeacherNotif.type'|trans}}</th>
+                                    <th>{{'TeacherNotif.dtStart'|trans}}</th>
+                                    <th>{{'TeacherNotif.status'|trans}}</th>
+                                    <th class="oneBtn">{{ '_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {%for n in timeCredit.teacherNotifs%}
+                                <tr>
+                                    <td>
+                                        {{('TeacherNotif.type.'~n.type)|trans|raw}}
+                                        {%if n.type is constant('TYPE_TXT_COURS_EDIT', n) or n.type is constant('TYPE_EMAIL_COURS_EDIT', n)%}
+                                            (<a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a> -
+                                             {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('long', 'none', app.request.locale)}})
+                                        {%endif%}
+                                        {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n) or n.type is constant('TYPE_EMAIL_TIMECREDIT_EDIT', n)%}
+                                            ({{ 'TimeCredit'|trans }} : <a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}">{{ n.timeCredit.trainee.fullname }}</a>)
+                                        {%endif%}
+                                    </td>
+                                    <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+                                    <td>{{('TeacherNotif.status.'~n.status)|trans}}</td>
+                                    <td>
+                                        {%if n.type is constant('TYPE_TXT_COURS_EDIT', n) or n.type is constant('TYPE_EMAIL_COURS_EDIT', n)%}
+                                            <a class="btn btn-sm btn-info" href="{{path('Admin__cours_edit_get',{'id':n.cours.id})}}">{{icon('edit')}}</a>
+                                        {%endif%}
+                                        {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n) or n.type is constant('TYPE_EMAIL_TIMECREDIT_EDIT', n) %}
+                                            <a class="btn btn-sm btn-info" href="{{path('Admin__timeCredit_edit_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a>
+                                        {%endif%}
+                                    </td>
+                                </tr>
+                            {%else%}
+                                <tr>
+                                    <td colspan="4" class="warning">{{'TeacherNotif.dbempty'|trans}}</td>
+                                </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'TraineeNotif.type'|trans}}</th>
+                                    <th>{{'TraineeNotif.dtStart'|trans}}</th>
+                                    <th>{{'TraineeNotif.status'|trans}}</th>
+                                    <th class="oneBtn">{{ '_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {%for n in timeCredit.traineeNotifs%}
+                                <tr>
+                                    <td>{{('TraineeNotif.type.'~n.type)|trans|raw}}
+                                    {%if n.type is constant('TYPE_EMAIL_24H_BEFORE_COURS', n)%}
+                                            (<a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a> -
+                                             {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('long', 'none', app.request.locale)}})
+                                    {%endif%}
+                                    </td>
+                                    <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+                                    <td>{{('TraineeNotif.status.'~n.status)|trans}}</td>
+                                    <td>
+                                        {%if n.type is constant('TYPE_TXT_SURVEYBEGIN', n) or n.type is constant('TYPE_EMAIL_SURVEYBEGIN', n)
+                                         or n.type is constant('TYPE_TXT_SURVEYEND', n) or n.type is constant('TYPE_EMAIL_SURVEYEND', n)
+                                         or n.type is constant('TYPE_EMAIL_15D_AFTER_COURS', n) or n.type is constant('TYPE_EMAIL_30D_AFTER_COURS', n)%}
+                                            <a class="btn btn-sm btn-info" href="{{path('Admin__timeCredit_edit_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a>
+                                        {%endif%}
+                                        {%if n.type is constant('TYPE_EMAIL_24H_BEFORE_COURS', n)%}
+                                            <a class="btn btn-sm btn-info" href="{{path('Admin__cours_edit_get',{'id':n.cours.id})}}">{{icon('edit')}}</a>
+                                        {%endif%}
+                                    </td>
+                                </tr>
+                            {%else%}
+                                <tr>
+                                    <td colspan="4" class="warning">{{'TraineeNotif.dbempty'|trans}}</td>
+                                </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+        </div>
+    </div>
+</div>
+<div id="deleteConfirmCours" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'Cours.deleteConfirm'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">{{'Cours.deleteConfirm.txt'|trans|raw}}</div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+    </div>
+</div>
+<div id="deleteConfirmTimeCreditDocument" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'TimeCreditDocument.deleteConfirm'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">{{'TimeCreditDocument.deleteConfirm.txt'|trans|raw}}</div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+    </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('#TimeCreditDeadLineForm_deadLine').datetimepicker(
+            {
+                weekStart: 1,
+                startView: 4,
+                minView: 2,
+                autoclose: true,
+                todayHighlight: true,
+                language: "{{app.request.locale}}",
+                format: 'yyyy-mm-dd'
+            }
+        );
+        $('.deleteConfirmCours').click(function(e)
+            {
+                e.preventDefault();
+                var lnk = $(this).attr('href');
+                modalDeleteBtn = $('#deleteConfirmCours').find('.danger');
+                modalDeleteBtn.attr('href', lnk);
+                $('#deleteConfirmCours').modal('show');
+            }
+        );
+        $('.deleteConfirmTimeCreditDocument').click(function(e)
+            {
+                e.preventDefault();
+                var lnk = $(this).attr('href');
+                modalDeleteBtn = $('#deleteConfirmTimeCreditDocument').find('.danger');
+                modalDeleteBtn.attr('href', lnk);
+                $('#deleteConfirmTimeCreditDocument').modal('show');
+            }
+        );
+        $('textarea.wysiwyg').each(function()
+          {
+            var options =
+            {
+              script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+              theme: "modern",
+              plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+              toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+            };
+            $this = $(this);
+            if($this.is('[required]'))
+            {
+              options.oninit = function(editor)
+                {
+                  editor.on('change', function(e)
+                    {
+                      editor.save();
+                    }
+                  );
+                }
+            }
+            $this.tinymce(options);
+          }
+        );
+    }
+);
+{%endblock dynamic_jstxt%}

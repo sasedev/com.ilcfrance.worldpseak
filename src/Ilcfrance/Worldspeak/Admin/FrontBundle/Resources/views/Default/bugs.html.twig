@@ -1,0 +1,111 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li class="active"><a href="{{path('Admin__default_bugs')}}"><i class="fa fa-bug"></i> &nbsp; {{'breadcrumb.bugs.list'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <h3 class="legend">{{'_pagetitleAdmin__timeCredit_listBuggy'|trans}}</h3>
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{'TimeCredit.trainee'|trans}}</th>
+                            <th>{{'TimeCredit.ftype'|trans}}</th>
+                            <th>{{'TimeCredit.level'|trans}}</th>
+                            <th>{{'TimeCredit.totalHours'|trans}}</th>
+                            <th>{{'TimeCredit.reservedHours'|trans}}</th>
+                            <th>{{'TimeCredit.notPlanifiedHours'|trans}}</th>
+                            <th>{{'TimeCredit.doneHours'|trans}}</th>
+                            <th>{{'TimeCredit.lostHours'|trans}}</th>
+                            <th>{{'TimeCredit.cefBegin'|trans}}</th>
+                            <th>{{'TimeCredit.cefEnd'|trans}}</th>
+                            <th>{{'TimeCredit.deadLine'|trans}}</th>
+                            <th>{{'TimeCredit.status'|trans}}</th>
+                            <th class="oneBtn">{{ '_actions'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for timeCredit in timeCredits%}
+                        <tr   {%if timeCredit.buggy is constant('HEALTH_BUGGY', timeCredit)%} class="danger"  {%endif%}>
+                            <td><a href="{{path('Admin__trainee_edit_get', {'id': timeCredit.trainee.id})}}"> <i
+                                    class="fa fa-user"></i> {{timeCredit.trainee.fullname}}
+                            </a></td>
+                            <td>{%if timeCredit.ftype is not null and timeCredit.ftype is not
+                                constant('FTYPE_UNDEFINED', timeCredit)%}
+                                {{('TimeCredit.ftype.'~timeCredit.ftype)|trans}} {%else%} {{label_danger('_NA'|trans)}}
+                                {%endif%}</td>
+                            <td>{%if timeCredit.level is not null and timeCredit.level is not
+                                constant('LEVEL_UNDEFINED', timeCredit)%}
+                                {{('TimeCredit.level.'~timeCredit.level)|trans}} {%else%} {{label_danger('_NA'|trans)}}
+                                {%endif%}</td>
+                            <td>{{timeCredit.totalHours}}</td>
+                            <td>{{timeCredit.reservedHours}}</td>
+                            <td class="warning">{{timeCredit.notPlanifiedHours}}</td>
+                            <td>{{timeCredit.doneHours}}</td>
+                            <td>{{timeCredit.lostHours}}</td>
+                            <td>{%if timeCredit.cefBegin is not
+                                empty%}{{timeCredit.cefBegin}}{%else%}{{label_danger('_NA'|trans)}}{%endif%}</td>
+                            <td>{%if timeCredit.cefEnd is not empty%}{{timeCredit.cefEnd}} {%else%} {%if
+                                timeCredit.status is constant('STATUS_FULL_FINISHED', timeCredit)%}
+                                {{label_danger('_NA'|trans)}} {%elseif timeCredit.status is constant('STATUS_FINISHED',
+                                timeCredit)%} {{label_warning('_NA'|trans)}} {%else%} {{label_info('_NA'|trans)}}
+                                {%endif%} {%endif%}</td>
+                            <td>{%if timeCredit.deadLine is not null%} {%if timeCredit.deadLine|date('Y-m-d') <
+                                'now'|date('Y-m-d')%}
+                                {{label_warning(timeCredit.deadLine|localizeddate('full', 'none', app.request.locale )|capitalize)}} {%else%}
+                                {{timeCredit.deadLine|localizeddate('full', 'none', app.request.locale )|capitalize}} {%endif%} {%else%}
+                                {{label_info('_NA'|trans)}} {%endif%}</td>
+                            <td>{{('TimeCredit.status.'~timeCredit.status)|trans}}</td>
+                            <td><a class="btn btn-sm btn-info"
+                                href="{{path('Admin__timeCredit_edit_get',{'id':timeCredit.id})}}">{{icon('edit')}}</a></td>
+                        </tr>
+                        {%else%}
+                        <tr>
+                            <td colspan="13" class="warning">{{'TimeCredit.dbempty'|trans}}</td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+                <hr>
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{'Trainee.fullname'|trans}}</th>
+                            <th>{{'Trainee.username'|trans}}</th>
+                            <th>{{'Trainee.email'|trans}}</th>
+                            <th>{{'Trainee.company'|trans}}</th>
+                            <th>{{'Trainee.cef'|trans}}</th>
+                            <th class="twoBtn">{{ '_actions'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for trainee in trainees%}
+                        <tr  {%if trainee.buggy is constant('HEALTH_BUGGY', trainee)%} class="danger" {%endif%}>
+                            <td>{{trainee.fullname}}</td>
+                            <td>{{trainee.username}}</td>
+                            <td>{%if trainee.email is not empty%}<a href="mailto:{{trainee.email}}">{{trainee.email}}</a>{%else%}{{label_danger('_NA'|trans)}}{%endif%}
+                            </td>
+                            <td>{%if trainee.company is not null%}<a
+                                href="{{path('Admin__company_edit_get', {'id': trainee.company.id})}}">{{trainee.company.name}}</a>{%else%}{{label_danger('_NA'|trans)}}{%endif%}
+                            </td>
+                            <td>{%if trainee.cef is not
+                                empty%}{{trainee.cef}}{%else%}{{label_danger('_NA'|trans)}}{%endif%}</td>
+                            <td><a class="btn btn-sm btn-info" href="{{path('Admin__trainee_edit_get',{'id':trainee.id})}}">{{icon('edit')}}</a></td>
+                        </tr>
+                        {%else%}
+                        <tr>
+                            <td colspan="6" class="warning">{{'Trainee.dbempty'|trans}}</td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock pagebody_content%}

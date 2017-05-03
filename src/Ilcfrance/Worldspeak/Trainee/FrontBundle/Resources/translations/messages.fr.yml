@@ -1,0 +1,152 @@
+Traineelogotext: Espace Stagiaire
+
+_actions.courses: Corrections/ Upload docs stagiaire
+# breadcrumbs
+breadcrumb.homepage: Accueil
+breadcrumb.profile: Mon Profile
+breadcrumb.guide: Manuel d'utilisation
+breadcrumb.guideCEF: Guide des niveaux
+breadcrumb.planning: Planning de la Semaine <b>%week%</b> de l'année <b>%year%</b>
+breadcrumb.notif.list: Mes Notifications
+breadcrumb.cours.edit: Cours du <b>%dStart%</b> de <b>%tStart%</b> à <b>%dtEnd%</b>
+breadcrumb.timeCredit.surveyBegin: Questionnaire de début de Stage
+breadcrumb.timeCredit.surveyEnd: Questionnaire de fin de Stage
+# menu
+_menu.guide: Manuel d'utilisation
+_menu.guideCEF: Guide des Niveaux
+_menu.calendar: Planning
+_menu.notifs: Notifications
+
+# defaults
+default.tab.Calendar: Vue Calendrier
+default.tab.List: Vue Liste
+default.tlabel.ClosedDays: Liste des Jours Fériés
+default.tlabel.TeacherAvailabilities: Liste des disponibilités Formateurs
+default.tlabel.Cours: Liste des Cours
+
+
+# Index
+_pagetitle_index: ILCWorldspeak - Page d'accueil
+
+
+# Planning
+_pagetitle_planning_txt: Planning de la Semaine "%week%" Année "%year%"
+_pagetitle_planning: Planning de la Semaine "<b>%week%</b>" Année "<b>%year%</b>" 
+teacherAvailability.title: Disponibilité Formateur
+
+# Guide
+
+_pagetitle_guide: Manuel d'utilisation
+
+guide.download: Télécharger le Manuel
+
+# Guide CEF
+
+_pagetitle_guideCEF: Guide des Niveaux
+
+# notifs
+_pagetitle_notifs_list: Notifications
+
+TraineeNotif.dbempty: Aucune Notification trouvée
+
+# ClosedDay
+ClosedDay.dbemptyWeek: Aucun Jour Férié trouvé pour cette Semaine
+
+# TeacherAvailability
+TeacherAvailability.dbemptyWeek: Aucune Disponibilité Formateur trouvée pour cette Semaine 
+
+#Trainee
+Trainee.sexe.choice.1: Mlle
+Trainee.sexe.choice.2: Mme
+Trainee.sexe.choice.3: Mr
+
+# TimeCredit
+
+_pagetitleTrainee__timeCredit_surveyBegin_txt: 'Questionnaire de début de Stage : "%ftype%" - "%totalHours%" Heures - "%level%"'
+_pagetitleTrainee__timeCredit_surveyBegin: 'Questionnaire de début de Stage : "<b>%ftype%</b>" - "<b>%totalHours%</b>" Heures - "<b>%level%</b>"'
+
+_pagetitleTrainee__timeCredit_surveyEnd_txt: 'Questionnaire de fin de Stage : "%ftype%" - "%totalHours%" Heures - "%level%"'
+_pagetitleTrainee__timeCredit_surveyEnd: 'Questionnaire de fin de Stage : "<b>%ftype%</b>" - "<b>%totalHours%</b>" Heures - "<b>%level%</b>"'
+
+_pagetitleTrainee__timeCredit_report_txt: Rapport de Fin de stage de "%totalHours%" Heures de "%ftype%" - Niveau "%level%" - du Stagiaire "%trainee%"
+_pagetitleTrainee__timeCredit_report: Rapport de Fin de stage de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" - Niveau "<b>%level%</b>" - du Stagiaire "<b>%trainee%</b>"
+
+
+TimeCredit.title: Crédit Horaire
+TimeCredit.tlabel.Courses: Liste des Cours
+TimeCredit.tlabel.TimeCreditDocuments: Devoirs
+
+TimeCredit.survey.choice.1: Totalement
+TimeCredit.survey.choice.2: Plutôt oui
+TimeCredit.survey.choice.3: Plutôt non
+TimeCredit.survey.choice.4: Pas du tout
+TimeCredit.survey.choice.5: Pas de réponse
+
+TimeCredit.notFound: Crédit Horaire inexistant ou supprimé
+TimeCredit.notOwner: "Sécurité : Ce n'est pas votre Stage"
+TimeCredit.successSurveyBegin: Questionnaire de début de Stage validé avec succès
+TimeCredit.successSurveyEnd: Questionnaire de fin de Stage validé avec succès
+
+# TimeCreditDocument.title
+TimeCreditDocument.title: Devoirs affectés aux Cours
+
+
+# Cours
+_pagetitleTrainee__cours_edit_txt: Cours du "%dStart%" à "%tStart%" (durée "%duration%" min)
+_pagetitleTrainee__cours_edit: Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min)
+
+
+cours.title: Cours 
+Cours.date: Date du Cours
+Cours.tab.preview: Aperçu
+Cours.tlabel.preview: Détails
+Cours.tlabel.corrections: Corrections
+Cours.tab.coursDocuments: Documents Professionnels
+Cours.tlabel.addCoursDocument: Ajouter un Document Professionnel
+Cours.tlabel.CoursDocuments: Mes Documents Professionnel pour ce Cours
+
+Cours.addErrorDtStartInvalid: Le Planning est verrouillé ou la date choisie est passée.
+Cours.addErrorTimeCreditNotfound: Le compte stagiaire n'a pas de crédit
+Cours.addErrorTimeCreditNotfree: Toutes vos heures de formation ont été programmées
+Cours.addErrorTimeCreditDeadLine: La date limite pour programmer vos cours est dépassée
+Cours.addErrorSameTime: Vous avez un autre cours au même moment à 30 minutes près.
+Cours.addErrorNoTeacherAvailabilies: Choisissez un créneau 30 minutes avant ou après cette heure
+Cours.addErrorNoTeacherFound: Choisissez un créneau 30 minutes avant ou après cette heure
+Cours.addFailureInvalid: Une erreur s'est produite lors de l'ajout du Cours
+Cours.addSuccess_txt: Nouveau Cours du "%dStart%" à "%tStart%" (durée "%duration%" min)
+Cours.editErrorNotFound: Le cours vient d'être supprimé sur le serveur
+Cours.editErrorNotOwner: Vous n'êtes pas le propriétaire de ce Cours, vous ne pouvez donc pas le modifier
+Cours.editErrorNotEditable: Le Planning est verrouillé ou la date choisie est passée.
+Cours.editErrorDtStartInvalid: Le Planning est verrouillé ou la date choisie est passée.
+Cours.editErrorTimeCreditDeadLine: La date limite pour programmer vos cours est dépassée
+Cours.editErrorSameTime: Vous avez un autre cours au même moment à 30 minutes près.
+Cours.editErrorNoTeacherAvailabilies: Choisissez un créneau 30 minutes avant ou après cette heure
+Cours.editErrorNoTeacherFound: Choisissez un créneau 30 minutes avant ou après cette heure
+Cours.editSuccess_txt: Cours du "%dStart%" à "%tStart%" (durée "%duration%" min) modifié avec succès
+Cours.editFailureInvalid: Une erreur s'est produite lors de la modification du Cours
+Cours.deleteConfirm: Confirmation de suppression du Cours
+Cours.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un Cours planifié.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+Cours.deleteErrorNotFound: Le Cours que vous tentez de supprimer n'existe pas ou plus
+Cours.deleteErrorNotOwner: Vous n'est pas le propriétaire de ce Cours, vous ne pouvez donc pas le supprimer
+Cours.deleteErrorNotDeletable: Ce Cours n'est pas supprimable
+Cours.deleteSuccess_txt: Cours du "%dStart%" à "%tStart%" (durée "%duration%" min) supprmié avec succès
+Cours.deleteFailure: Un erreur s'est produite lors de la suppression du Cours
+Cours.deleteSuccess:  Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) supprimé avec succès
+Cours.dbemptyWeek: Aucun Cours trouvé pour cette Semaine 
+# TraineeFile
+TraineeFile.file.label: "Fichier Joint :"
+
+# CoursDocument
+CoursDocument.msg.label: "Message :"
+
+CoursDocument.addSuccess: Le Document Professionnel a été ajouté avec succès
+CoursDocument.addError: Le Document Professionnel n'a pas été ajouté
+
+CoursDocument.deleteConfirm: Confirmation de suppression du Document Professionnel
+CoursDocument.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un Document Professionnel.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+CoursDocument.deleteSuccess: Le Document Professionnel a été supprimé avec succès
+CoursDocument.deleteNotfound: Le Document Professionnel que vous tentez de supprimer n'existe pas ou plus dans la base de donnée
+CoursDocument.deleteError: Une erreur s'est produite lors de la tentative de suppression du Document Professionnel
+
+
+

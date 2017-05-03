@@ -1,0 +1,47 @@
+{% extends 'IlcfranceWorldspeakTraineeFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Trainee__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li class="active"><a href="{{path('Trainee__default_notifs')}}">{{ icon('bell') }} &nbsp; {{'breadcrumb.notif.list'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="text-center">{{knp_pagination_render(notifs)}}</div>
+        <table class="table table-bordered table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>{{'TraineeNotif.type'|trans}}</th>
+              <th>{{'TeacherNotif.dtStart'|trans}}</th>
+              <th class="oneBtn">{{ '_actions'|trans }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for n in notifs%}
+            <tr>
+              <td>{{('TraineeNotif.type.'~n.type)|trans|raw}}</td>
+              <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+              <td>
+                {%if n.type is constant('TYPE_TXT_SURVEYBEGIN', n)%}
+                <a class="btn btn-sm btn-info" href="{{path('Trainee__timeCredit_surveyBegin_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a>
+                {%endif%}
+                {%if n.type is constant('TYPE_TXT_SURVEYEND', n)%}
+                <a class="btn btn-sm btn-info" href="{{path('Trainee__timeCredit_surveyEnd_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a>
+                {%endif%}
+              </td>
+            </tr>
+            {%else%}
+            <tr>
+              <td colspan="3" class="warning">{{'TraineeNotif.dbempty'|trans}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <div class="text-center">{{knp_pagination_render(notifs)}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}

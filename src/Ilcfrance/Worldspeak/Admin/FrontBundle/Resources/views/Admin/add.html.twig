@@ -1,0 +1,40 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__admin_list')}}">{{icon('tower')}} &nbsp; {{'breadcrumb.admin.list'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__admin_add_get')}}">{{icon('plus')}} &nbsp; {{'breadcrumb.admin.add'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+        <form action="{{ path('Admin__admin_search') }}" method="get"  class="form-search form-inline">
+            <div class="form-group">
+	            <label for="q">{{'_search'|trans}}</label>
+	            <input class="input-sm" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="" >
+	        </div>
+	        <div class="form-group">
+	            <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+	        </div>
+        </form>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+	      {{form_start(adminAddForm, {'method':'POST', 'action': path('Admin__admin_add_post'), 'style': 'horizontal'})}}
+	        {{form_row(adminAddForm.username, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('user') }})}}
+	        {{form_row(adminAddForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
+            {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+	        {{form_row(adminAddForm.adminRoles, {'label_col': 3, 'widget_col': 9})}}
+	        {%endif%}
+	        {{form_row(adminAddForm.sexe, {'label_col': 3, 'widget_col': 2})}}
+	        {{form_row(adminAddForm.lastName, {'label_col': 3, 'widget_col': 3})}}
+	        {{form_row(adminAddForm.firstName, {'label_col': 3, 'widget_col': 3})}}
+	        {{form_row(adminAddForm.preferedLocale, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
+	        {{form_row(adminAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+	      {{form_end(adminAddForm)}}
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}

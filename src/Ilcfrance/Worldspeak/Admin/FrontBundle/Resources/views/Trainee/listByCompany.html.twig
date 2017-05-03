@@ -1,0 +1,137 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__trainee_list')}}"><i class="fa fa-user"></i> &nbsp; {{'breadcrumb.trainee.list'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__trainee_listByCompany', {'id': company.id})}}"><i class="fa fa-users"></i> &nbsp; {{'breadcrumb.trainee.listByCompany'|trans({'%company%': company.name})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+        <form action="{{ path('Admin__trainee_search') }}" method="get"  class="form-search form-inline">
+            <div class="form-group">
+	            <label for="q">{{'_search'|trans}}</label>
+	            <input class="input-sm" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="" >
+	        </div>
+	        <div class="form-group">
+	            <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+	        </div>
+        </form>
+    </div>
+    <div class="text-right">
+      <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#newTrainee">{{'_action.btnAdd'|trans}} {{icon('plus')}}</button>
+    </div>
+    <div id="newTrainee" class="modal fade in" tabindex="-1" style="display: none;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'_pagetitleAdmin__trainee_add'|trans }}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            {{form_start(traineeAddForm, {'method':'POST', 'action': path('Admin__trainee_add_post'), 'style': 'horizontal'})}}
+              {{form_row(traineeAddForm.company, {'label_col': 3, 'widget_col': 6, 'input_group': { 'append': '<i class="fa fa-umbrella"></i>' }})}}
+              {{form_row(traineeAddForm.project, {'label_col': 3, 'widget_col': 6, 'input_group': { 'append': '<i class="fa fa-flask"></i>' }})}}
+              {{form_row(traineeAddForm.email, {'label_col': 3, 'widget_col': 6, 'input_group': { 'append': icon('envelope') }})}}
+              {{form_row(traineeAddForm.lockout, {'label_col': 3, 'widget_col': 5, 'input_group': { 'append': icon('lock') }})}}
+              {{form_row(traineeAddForm.sexe, {'label_col': 3, 'widget_col': 4})}}
+	          {{form_row(traineeAddForm.lastName, {'label_col': 3, 'widget_col': 6})}}
+	          {{form_row(traineeAddForm.firstName, {'label_col': 3, 'widget_col': 6})}}
+	          {{form_row(traineeAddForm.preferedLocale, {'label_col': 3, 'widget_col': 7, 'input_group': { 'append': icon('flag') }})}}
+              {{form_row(traineeAddForm.registerMail, {'label_col': 3, 'widget_col': 5, 'input_group': { 'append': icon('envelope') }})}}
+              {{form_row(traineeAddForm.phone, {'label_col': 3, 'widget_col': 6, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'}})}}
+              {{form_row(traineeAddForm.mobile, {'label_col': 3, 'widget_col': 6, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}})}}
+              {{form_row(traineeAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+            {{form_end(traineeAddForm)}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="text-center">{{knp_pagination_render(trainees)}}</div>
+        <table class="table table-bordered table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>{{'Trainee.fullname'|trans}}</th>
+              <th>{{'Trainee.username'|trans}}</th>
+              <th>{{'Trainee.email'|trans}}</th>
+              <th>{{'Trainee.company'|trans}}</th>
+              <th>{{'Trainee.project'|trans}}</th>
+              <th>{{'Trainee.cef'|trans}}</th>
+              <th class="{%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}threeBtn{%else%}twoBtn{%endif%}">{{ '_actions'|trans }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for trainee in trainees%}
+            <tr {%if trainee.buggy is constant('HEALTH_BUGGY', trainee)%}class="danger"{%endif%}>
+              <td>{{trainee.fullname2}}</td>
+              <td>{{trainee.username}}</td>
+              <td>
+                {%if trainee.email is not empty%}<a href="mailto:{{trainee.email}}">{{trainee.email}}</a>{%else%}{{label_danger('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {%if trainee.company is not null%}<a href="{{path('Admin__company_edit_get', {'id': trainee.company.id})}}">{{trainee.company.name}}</a>{%else%}{{label_danger('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                  {%if trainee.project is not empty%}
+                  {{trainee.project|raw}}
+                  {%else%}
+                  {{label_warning('_NA'|trans)}}
+                  {%endif%}
+              </td>
+              <td>
+                {%if trainee.cef is not empty%}{{trainee.cef}}{%else%}{{label_danger('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                <a class="btn btn-sm btn-info" href="{{path('Admin__trainee_edit_get',{'id':trainee.id})}}">{{icon('edit')}}</a>
+                {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+                <a class="btn btn-sm btn-success" href="{{path('Admin__trainee_logs_get',{'id':trainee.id})}}">{{icon('bullhorn')}}</a>
+                {%endif%}
+                <a class="btn btn-sm btn-danger deleteConfirmTrainee" href="{{path('Admin__trainee_delete', {'id': trainee.id})}}">{{icon('remove')}}</a>
+              </td>
+            </tr>
+            {%else%}
+            <tr>
+              <td colspan="7" class="warning">{{'Trainee.dbempty'|trans}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <div class="text-center">{{knp_pagination_render(trainees)}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="deleteConfirmTrainee" class="modal fade in" tabindex="-1" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="text-center">{{'Trainee.deleteConfirm'|trans|raw}}</h3>
+  </div>
+  <div class="modal-body">
+    {{'Trainee.deleteConfirm.txt'|trans|raw}}
+  </div>
+  <div class="modal-footer">
+    <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+  {
+    $('.deleteConfirmTrainee').click(function(e)
+      {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmTrainee').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmTrainee').modal('show');
+      }
+    );
+  }
+);
+{%endblock dynamic_jstxt%}

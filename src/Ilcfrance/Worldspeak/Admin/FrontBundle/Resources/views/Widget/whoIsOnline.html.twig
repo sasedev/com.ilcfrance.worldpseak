@@ -1,0 +1,12 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-users"></i> &nbsp; {{'_widget_whoIsOnline_title'|trans}}</h3>
+    </div>
+    <div class="panel-body">
+        {%for a in admins%}<a href="{{path('Admin__admin_edit_get', {'id': a.id})}}">{{icon('tower')}} {{a.fullname}}</a>{%if loop.last==false%} - {% endif%}{%endfor%}
+        {% if admins|length != 0 and (teachers|length != 0 or trainees|length != 0) %} - {%endif%}
+        {%for t in teachers%}<a href="{{path('Admin__teacher_edit_get', {'id': t.id})}}">{{icon('user')}} {{t.fullname}}</a>{%if loop.last==false%} - {% endif%}{%endfor%}
+        {% if teachers|length != 0 and trainees|length != 0 %} - {%endif%}
+        {%for t in trainees%}<a href="{{path('Admin__trainee_edit_get', {'id': t.id})}}"><i class="fa fa-user"></i> {{t.fullname}}</a>{%if loop.last==false%} - {% endif%}{%endfor%}<br>
+    </div>
+</div>

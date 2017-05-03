@@ -1,0 +1,1253 @@
+{%extends 'IlcfranceWorldspeakTeacherFrontBundle::layout.html.twig'%}
+{%set timeCredit = cours.timeCredit%}
+{%set trainee = timeCredit.trainee%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Teacher__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li><a href="{{path('Teacher__trainee_edit_get', {'id': timeCredit.trainee.id})}}">{{icon('edit')}} &nbsp;
+            {{'breadcrumb.trainee.edit'|trans({'%trainee%': timeCredit.trainee.fullname})|raw}}</b>"
+    </a></li>
+    <li><a href="{{path('Teacher__timeCredit_edit_get', {'id': timeCredit.id})}}">{{icon('time')}} &nbsp;
+            {{'breadcrumb.timeCredit.edit'|trans({'%totalHours%':timeCredit.totalHours,'%ftype%':
+            ('TimeCredit.ftype.'~timeCredit.ftype)|trans,'%level%': ('TimeCredit.level.'~timeCredit.level)|trans})|raw}}</a>
+    </li>
+    <li class="active"><a href="{{path('Teacher__cours_edit_get', {'id': cours.id})}}">{{icon('earphone')}} &nbsp;
+            {{'breadcrumb.cours.edit'|trans({'%dStart%':cours.dtStart|localizeddate('long', 'none', app.request.locale )|capitalize,
+            '%tStart%': cours.dtStart|localizeddate('none', 'medium', app.request.locale ),
+            '%dtEnd%': cours.dtEnd|localizeddate('long', 'none', app.request.locale)})|raw }}</a>
+    </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+            <li {%if tabActive==1%} class="active"{%endif%}><a href="#preview" data-toggle="tab">{{'Cours.tab.preview'|trans|raw}}</a></li>
+            {%if timeCredit.lockout is not constant('LOCKOUT_LOCKED', timeCredit)
+                and cours.teacher is not null
+                and app.user.id==cours.teacher.id%}
+            <li {%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Cours.tab.edit'|trans|raw}}</a></li>
+            {%endif%}
+            {%if cours.documents|length != 0%}
+            <li {%if tabActive==3%} class="active"{%endif%}><a href="#coursDocument" data-toggle="tab">{{'Cours.tab.CoursDocument'|trans|raw}}</a></li>
+            {%endif%}
+            <li {%if tabActive==4%} class="active"{%endif%}><a href="#timeCreditDocument" data-toggle="tab">{{'Cours.tab.TimeCreditDocument'|trans|raw}}</a></li>
+            <li {%if tabActive==5%} class="active"{%endif%}><a href="#timeCredit" data-toggle="tab">{{'Cours.tab.TimeCredit'|trans|raw}}</a></li>
+            <li {%if tabActive==6%} class="active"{%endif%}><a href="#trainee" data-toggle="tab">{{'Cours.tab.Trainee'|trans|raw}}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.preview'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.trainee'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                <a href="{{path('Teacher__trainee_edit_get', {'id': timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{timeCredit.trainee.fullname}}</a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-lg-3 text-right">{{'Cours.teacher'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.teacher is not null%}
+                                <b>{{icon('user')}} {{cours.teacher.fullname}}</b>
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-lg-3 text-right">{{'Cours.dtStart'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                            {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-lg-3 text-right">{{'Cours.dtEnd'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                            {{cours.dtEnd|localizeddate('long', 'none', app.request.locale)}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-lg-3 text-right">{{'Cours.duration'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.duration}} {{'_minutes'|trans}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-lg-3 text-right">{{'Cours.phone'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.phone is not empty%}
+                                <a href="tel:{{cours.phone}}">{{icon('earphone')}} {{cours.phone}}</a>
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.type'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.type is not null and cours.type is not constant('TYPE_UNDEFINED', cours)%}
+                                    {{('Cours.type.'~cours.type)|trans}}
+                                {%else%}
+                                    {{label_danger(('Cours.type.'~constant('TYPE_UNDEFINED', cours))|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.status'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.status is not null
+                                    and cours.status is not constant('STATUS_PLANNED_PENDING', cours)%}
+                                    {{('Cours.status.'~cours.status)|trans}}
+                                {%elseif cours.status is constant('STATUS_PLANNED_PENDING', cours)%}
+                                    {{label_danger(('Cours.status.'~cours.status)|trans)}}
+                                {%else%}
+                                    {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.dtCrea'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                            {{cours.dtCrea|localizeddate('none', 'medium', app.request.locale )}}</div>
+                        </div>
+                    </div>
+                </div>
+                {%if cours.status is constant('STATUS_DONE', cours)%}
+                <br>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiHomeworkPerformed'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.kpiHomeworkPerformed is not null%}
+                                {{('Cours.kpi.'~cours.kpiHomeworkPerformed)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiParticipation'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.kpiParticipation is not null%}
+                                {{('Cours.kpi.'~cours.kpiParticipation)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiVocabularyRetention'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.kpiVocabularyRetention is not null%}
+                                {{('Cours.kpi.'~cours.kpiVocabularyRetention)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiCorrectionConsideration'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.kpiCorrectionConsideration is not null%}
+                                {{('Cours.kpi.'~cours.kpiCorrectionConsideration)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.progress'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.progress is not empty%}
+                                {{cours.progress|raw}}
+                                {%else%}
+                                {{label_warning('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.comments'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.comments is not empty%}
+                                {{cours.comments|raw}}
+                                {%else%}
+                                {{label_warning('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionVocabulairy'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.correctionVocabulairy is not empty%}
+                                {{cours.correctionVocabulairy|raw}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionStructure'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.correctionStructure is not empty%}
+                                {{cours.correctionStructure|raw}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionPrononciation'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.correctionPrononciation is not empty%}
+                                {{cours.correctionPrononciation|raw}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endif%}
+                {%set i = 0%}
+                {%for prevcours in timeCredit.courses%}
+                {%if prevcours.dtStart < cours.dtStart%}
+                {%set i = i +1%}
+                {%if i == 1%}<br><hr><br><h3 class="legend">{{'Cours.tlabel.prevCourses'|trans}}</h3>{%endif%}
+                <div class="panel panel-success">
+                     <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                            <a href="{{path('Teacher__cours_edit_get', {'id': prevcours.id})}}">{{icon('earphone')}} &nbsp;
+                            {{'breadcrumb.cours.edit'|trans({'%dStart%':prevcours.dtStart|localizeddate('long', 'none', app.request.locale )|capitalize,
+                            '%tStart%': prevcours.dtStart|localizeddate('none', 'medium', app.request.locale ),
+                            '%dtEnd%': prevcours.dtEnd|localizeddate('long', 'none', app.request.locale)})|raw }}</a>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-lg-3 text-right">{{'Cours.teacher'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.teacher is not null%}
+                                <b>{{icon('user')}} {{prevcours.teacher.fullname}}</b>
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.duration'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{prevcours.duration}} {{'_minutes'|trans}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            <div class="col-lg-3 text-right">{{'Cours.phone'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.phone is not empty%}
+                                <a href="tel:{{prevcours.phone}}">{{icon('earphone')}} {{prevcours.phone}}</a>
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.type'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.type is not null and prevcours.type is not constant('TYPE_UNDEFINED', prevcours)%}
+                                    {{('Cours.type.'~prevcours.type)|trans}}
+                                {%else%}
+                                    {{label_danger(('Cours.type.'~constant('TYPE_UNDEFINED', prevcours))|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.status'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.status is not null
+                                    and prevcours.status is not constant('STATUS_PLANNED_PENDING', prevcours)%}
+                                    {{('Cours.status.'~prevcours.status)|trans}}
+                                {%elseif prevcours.status is constant('STATUS_PLANNED_PENDING', prevcours)%}
+                                    {{label_danger(('Cours.status.'~prevcours.status)|trans)}}
+                                {%else%}
+                                    {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        {%if prevcours.status is constant('STATUS_DONE', prevcours)%}
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiHomeworkPerformed'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.kpiHomeworkPerformed is not null%}
+                                {{('Cours.kpi.'~prevcours.kpiHomeworkPerformed)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiParticipation'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.kpiParticipation is not null%}
+                                {{('Cours.kpi.'~prevcours.kpiParticipation)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiVocabularyRetention'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.kpiVocabularyRetention is not null%}
+                                {{('Cours.kpi.'~prevcours.kpiVocabularyRetention)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiCorrectionConsideration'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.kpiCorrectionConsideration is not null%}
+                                {{('Cours.kpi.'~prevcours.kpiCorrectionConsideration)|trans}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.progress'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.progress is not empty%}
+                                {{prevcours.progress|raw}}
+                                {%else%}
+                                {{label_warning('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.comments'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.comments is not empty%}
+                                {{prevcours.comments|raw}}
+                                {%else%}
+                                {{label_warning('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionVocabulairy'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.correctionVocabulairy is not empty%}
+                                {{prevcours.correctionVocabulairy|raw}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionStructure'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.correctionStructure is not empty%}
+                                {{prevcours.correctionStructure|raw}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionPrononciation'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if prevcours.correctionPrononciation is not empty%}
+                                {{prevcours.correctionPrononciation|raw}}
+                                {%else%}
+                                {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        {%endif%}
+                        {%if prevcours.documents|length != 0%}
+                        <br>
+                        <br>
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'CoursDocument.msg'|trans}}</th>
+                                    <th>{{'CoursDocument.traineeFile'|trans}}</th>
+                                    <th>{{'CoursDocument.dtCrea'|trans}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for coursDocument in prevcours.documents%}
+                                <tr>
+                                    <td>{%if coursDocument.msg is not empty%}
+                                        {{coursDocument.msg|raw}}
+                                        {%else%}
+                                        {{label_info('_NA'|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>{%if coursDocument.traineeFile is not null%}
+                                        <a class="btn btn-sm btn-primary"
+                                        href="{{path('Teacher__coursDocument_download', {'id': coursDocument.id})}}">
+                                            {{coursDocument.traineeFile.filename}} {{icon('download')}}
+                                        </a>
+                                        {%else%}
+                                        {{label_info('_NA'|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>{{coursDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                        {{coursDocument.dtCrea|localizeddate('long', 'none', app.request.locale)}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                        {%endif%}
+                     </div>
+                </div>
+                <br>
+                {%endif%}
+                {%endfor%}
+            </div>
+            {%if timeCredit.lockout is not constant('LOCKOUT_LOCKED', timeCredit)
+                and cours.teacher is not null
+                and app.user.id==cours.teacher.id%}
+            <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditType'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                        {{form_start(coursTypeForm, {'method':'POST', 'action':
+                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                            {{form_row(coursTypeForm.type, {'label_col': 3, 'widget_col': 2})}}
+                            {{form_row(coursTypeForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_end(coursTypeForm)}}
+                    </div>
+                </div>
+                {%if cours.phone is empty%}
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditPhone'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                        {{form_start(coursPhoneForm, {'method':'POST', 'action':
+                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                            {{form_row(coursPhoneForm.phone, {'label_col': 3, 'widget_col': 3, 'input_group':
+                            { 'append': icon('earphone') }})}}
+                            {{form_row(coursPhoneForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_end(coursPhoneForm)}}
+                    </div>
+                </div>
+                {%endif%}
+                {%if cours.status is not null and cours.status is not constant('STATUS_PLANNED', cours)%}
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditStatus'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                        {{form_start(coursStatusForm, {'method':'POST', 'action':
+                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                            {{form_row(coursStatusForm.status, {'label_col': 3, 'widget_col': 2})}}
+                            {{form_row(coursStatusForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_end(coursStatusForm)}}
+                    </div>
+                </div>
+                {%endif%}
+                {%if cours.status is constant('STATUS_DONE', cours)%}
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditCorrection'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                        {{form_start(coursCorrectionForm, {'method':'POST', 'action':
+                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                            {{form_row(coursCorrectionForm.progress, {'label_col': 3, 'widget_col': 9,
+                            'attr': { 'class': 'wysiwyg' }})}}
+                            {{form_row(coursCorrectionForm.correctionVocabulairy, {'label_col': 3, 'widget_col': 9,
+                            'attr': { 'class': 'wysiwygFH' }})}}
+                            {{form_row(coursCorrectionForm.correctionStructure, {'label_col': 3, 'widget_col': 9,
+                            'attr': { 'class': 'wysiwygFH' }})}}
+                            {{form_row(coursCorrectionForm.correctionPrononciation, {'label_col': 3, 'widget_col': 9,
+                            'attr': { 'class': 'wysiwygFH' }})}}
+                            {{form_row(coursCorrectionForm.comments, {'label_col': 3, 'widget_col': 9,
+                            'attr': { 'class': 'wysiwyg' }})}}
+                            {{form_row(coursCorrectionForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_end(coursCorrectionForm)}}
+                    </div>
+                </div>
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditKpi'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                        {{form_start(coursKpiForm, {'method':'POST', 'action':
+                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                            {{form_row(coursKpiForm.kpiHomeworkPerformed, {'label_col': 3, 'widget_col': 2})}}
+                            {{form_row(coursKpiForm.kpiParticipation, {'label_col': 3, 'widget_col': 2})}}
+                            {{form_row(coursKpiForm.kpiVocabularyRetention, {'label_col': 3, 'widget_col': 2})}}
+                            {{form_row(coursKpiForm.kpiCorrectionConsideration, {'label_col': 3, 'widget_col': 2})}}
+                            {{form_row(coursKpiForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_end(coursKpiForm)}}
+                    </div>
+                </div>
+                {%endif%}
+            </div>
+            {%endif%}
+            {%if cours.documents|length != 0%}
+            <div class="tab-pane fade{%if tabActive==3%} in active{%endif%}" id="coursDocument">
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursDocument'|trans}}</h3>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'CoursDocument.msg'|trans}}</th>
+                                    <th>{{'CoursDocument.traineeFile'|trans}}</th>
+                                    <th>{{'CoursDocument.dtCrea'|trans}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for coursDocument in cours.documents%}
+                                <tr>
+                                    <td>{%if coursDocument.msg is not empty%}
+                                        {{coursDocument.msg|raw}}
+                                        {%else%}
+                                        {{label_info('_NA'|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>{%if coursDocument.traineeFile is not null%}
+                                        <a class="btn btn-sm btn-primary"
+                                        href="{{path('Teacher__coursDocument_download', {'id': coursDocument.id})}}">
+                                            {{coursDocument.traineeFile.filename}} {{icon('download')}}
+                                        </a>
+                                        {%else%}
+                                        {{label_info('_NA'|trans)}}
+                                        {%endif%}
+                                    </td>
+                                    <td>{{coursDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                        {{coursDocument.dtCrea|localizeddate('long', 'none', app.request.locale)}}</td>
+                                </tr>
+                                {%else%}
+                                <tr>
+                                    <td colspan="3" class="warning">{{'CoursDocument.dbemptyCours'|trans}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            <div class="tab-pane fade{%if tabActive==4%} in active{%endif%}" id="timeCreditDocument">
+                {%if timeCredit.lockout is not constant('LOCKOUT_LOCKED', timeCredit)%}
+
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.timeCreditDocumentAdd'|trans}}</h3>
+                <div class="panel panel-warning">
+                    <div class="panel-body">
+                    {{form_start(timeCreditDocumentAddForm, {'method':'POST', 'action': path('Teacher__timeCreditDocument_add_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditDocumentAddForm.teachingResource, {'label_col': 3, 'widget_col': 3, 'input_group': {'append': icon('file') }})}}
+                        {{form_row(timeCreditDocumentAddForm.msg, {'label_col': 3, 'widget_col': 9, 'attr' : {'class': 'wysiwyg'}})}}
+                        {{form_row(timeCreditDocumentAddForm.notifyByMail, {'label_col': 3, 'widget_col': 2, 'input_group': {'append': icon('envelope') }})}}
+                        {{form_row(timeCreditDocumentAddForm.submit, {'label_col': 3,'widget_col': 2})}}
+                    {{form_end(timeCreditDocumentAddForm)}}
+                    </div>
+                </div>
+                {%endif%}
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.timeCreditDocument'|trans}}</h3>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'TimeCreditDocument.msg'|trans}}</th>
+                                    <th>{{'TimeCreditDocument.teachingResource'|trans}}</th>
+                                    <th>{{'TimeCreditDocument.dtCrea'|trans}}</th>
+                                    <th class="threeBtn">{{ '_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for timeCreditDocument in timeCredit.documents%}
+                                <tr>
+                                    <td>{%if timeCreditDocument.msg is not empty%}
+                                        {{timeCreditDocument.msg|raw}} {%else%} {{label_info('_NA'|trans)}}
+                                        {%endif%}</td>
+                                    <td>{%if timeCreditDocument.teachingResource is not null%}
+                                        {{timeCreditDocument.teachingResource|trans}} {%else%} {{label_info('_NA'|trans)}}
+                                        {%endif%}</td>
+                                    <td>{{timeCreditDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                        {{timeCreditDocument.dtCrea|localizeddate('long', 'none', app.request.locale)}}</td>
+                                    <td>
+                                        {%if timeCreditDocument.teachingResource is not null%}
+                                        <a class="btn btn-sm btn-primary"
+                                        href="{{path('Teacher__timeCreditDocument_download', {'id': timeCreditDocument.id})}}">{{icon('download')}}</a>
+                                        {%endif%}
+                                        <a class="btn btn-sm btn-info"
+                                        href="{{path('Teacher__timeCreditDocument_edit_get',{'id':timeCreditDocument.id})}}">
+                                            {{icon('edit')}}</a>
+                                        {%if timeCredit.status is not constant('STATUS_FULL_FINISHED', timeCredit)
+                                        and timeCredit.status is not constant('STATUS_FINISHED', timeCredit)
+                                        and timeCredit.status is not constant('STATUS_DEADLINE_EXCEEDED',timeCredit)
+                                        and timeCredit.lockout is not constant('LOCKOUT_LOCKED', timeCredit)%}
+                                        <a class="btn btn-sm btn-danger deleteConfirmTimeCreditDocument"
+                                        href="{{path('Teacher__timeCreditDocument_edit', {'id': timeCreditDocument.id})}}">
+                                        {{icon('remove')}}
+                                        </a>
+                                        {%endif%}
+                                    </td>
+                                </tr>
+                                {%else%}
+                                <tr>
+                                    <td colspan="4" class="warning">{{'TimeCreditDocument.dbemptyTimeCredit'|trans}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade{%if tabActive==5%} in active{%endif%}" id="timeCredit">
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.preview'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.ftype'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if timeCredit.ftype is not null
+                                    and timeCredit.ftype is not constant('FTYPE_UNDEFINED', timeCredit)%}
+                                    {{('TimeCredit.ftype.'~timeCredit.ftype)|trans}}
+                                {%else%}
+                                    {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.level'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if timeCredit.level is not null
+                                    and timeCredit.level is not constant('LEVEL_UNDEFINED', timeCredit)%}
+                                    {{('TimeCredit.level.'~timeCredit.level)|trans}}
+                                {%else%}
+                                    {{label_danger('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.totalHours'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCredit.totalHours}} {{'_hours'|trans}}</div>
+                            <div class="col-lg-3 text-right">{{'TimeCredit.doneHours'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCredit.doneHours}} {{'_hours'|trans}}</div>
+                            <div class="col-lg-3 text-right">{{'TimeCredit.lostHours'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCredit.lostHours}} {{'_hours'|trans}}</div>
+                            <div class="col-lg-3 text-right">{{'TimeCredit.reservedHours'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCredit.reservedHours}} {{'_hours'|trans}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.deadLine'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if timeCredit.deadLine is not null%}
+                                    {%if timeCredit.deadLine|date('Y-m-d') < 'now'|date('Y-m-d')%}
+                                        {{label_warning(timeCredit.deadLine|localizeddate('full', 'none', app.request.locale )|capitalize)}}
+                                    {%else%}
+                                        {{timeCredit.deadLine|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                                    {%endif%}
+                                {%else%}
+                                    {{label_info('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.status'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{('TimeCredit.status.'~timeCredit.status)|trans}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.cefBegin'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                            {%if timeCredit.cefBegin is not empty%}
+                            {{timeCredit.cefBegin}}
+                            {%else%}
+                            {{label_danger('_NA'|trans)}}
+                            {%endif%}</div>
+                            <div class="col-lg-3 text-right">{{'TimeCredit.cefEnd'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.cefEnd is not empty%}{{timeCredit.cefEnd}} {%else%} {%if
+                                timeCredit.status is constant('STATUS_FULL_FINISHED', timeCredit)%}
+                                {{label_danger('_NA'|trans)}} {%elseif timeCredit.status is constant('STATUS_FINISHED',
+                                timeCredit)%} {{label_warning('_NA'|trans)}} {%else%} {{label_info('_NA'|trans)}}
+                                {%endif%} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.objectives'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.objectives is not empty%}
+                                {{timeCredit.objectives|raw}} {%else%} {{label_info('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.comments'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.comments is not empty%} {{timeCredit.comments|raw}}
+                                {%else%} {{label_info('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                {%if timeCredit.status is constant('STATUS_FULL_FINISHED', timeCredit)
+                or timeCredit.status is constant('STATUS_FINISHED', timeCredit)
+                or timeCredit.status is constant('STATUS_DEADLINE_EXCEEDED', timeCredit)%}
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.endReport'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress1'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress1 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress1)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress2'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress2 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress2)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress3'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress3 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress3)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress4'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress4 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress4)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress5'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress5 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress5)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress6'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress6 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress6)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.progress7'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.progress7 is not null%}
+                                {{('TimeCredit.progress.'~timeCredit.progress7)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc1'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc1 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc1)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc2'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc2 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc2)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc3'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc3 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc3)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc4'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc4 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc4)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc5'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc5 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc5)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc6'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc6 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc6)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.levelDesc7'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.levelDesc7 is not null%}
+                                {{('TimeCredit.levelDesc.'~timeCredit.levelDesc7)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement1'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement1 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement1)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement2'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement2 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement2)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement3'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement3 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement3)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement4'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement4 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement4)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.improvement5'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.improvement5 is not null%}
+                                {{('TimeCredit.improvement.'~timeCredit.improvement5)|trans}} {%else%}
+                                {{label_warning('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCredit.lastTeacherReport'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCredit.lastTeacherReport is not empty%}
+                                {{timeCredit.lastTeacherReport|raw}} {%else%} {{label_warning('_NA'|trans|raw)}}
+                                {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                {%endif%}
+                {%if timeCredit.lockout is not constant('LOCKOUT_LOCKED', timeCredit)%}
+                {%if timeCredit.status is constant('STATUS_FULL_FINISHED', timeCredit) or timeCredit.status is
+                constant('STATUS_FINISHED', timeCredit) or timeCredit.status is constant('STATUS_DEADLINE_EXCEEDED',
+                timeCredit)%}
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editCefEnd'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(timeCreditCefEndForm, {'method':'POST', 'action':
+                        path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditCefEndForm.cefEnd, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditCefEndForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        {{form_end(timeCreditCefEndForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'TimeCredit.tlabel.editEndReport'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                    {{form_start(timeCreditEndReportForm, {'method':'POST', 'action':
+                        path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditEndReportForm.progress1, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress2, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress3, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress4, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress5, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress6, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.progress7, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc1, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc2, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc3, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc4, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc5, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc6, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.levelDesc7, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement1, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement2, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement3, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement4, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.improvement5, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.lastTeacherReport, {'label_col': 3, 'widget_col': 9,
+                        'attr': { 'class': 'wysiwygFH' }})}}
+                        {{form_row(timeCreditEndReportForm.submit, {'label_col': 3,'widget_col': 2})}}
+                    {{form_end(timeCreditEndReportForm)}}
+                    </div>
+                </div>
+                {%endif%}
+                {%endif%}
+            </div>
+            <div class="tab-pane fade{%if tabActive==6%} in active{%endif%}" id="trainee">
+                {%if trainee.email is empty%}
+		        <br>
+		        <h3 class="legend">{{'Trainee.tlabel.editEmail'|trans}}</h3>
+		        <div class="panel panel-warning">
+		          <div class="panel-body">
+		            {{form_start(traineeEmailForm, {'method':'POST', 'action': path('Teacher__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
+		            {{form_row(traineeEmailForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
+		            {{form_row(traineeEmailForm.submit, {'label_col': 3,'widget_col': 2})}}
+		            {{form_end(traineeEmailForm)}}
+		          </div>
+		        </div>
+		        {%endif%}
+
+		        <br>
+		        <h3 class="legend">{{'Trainee.tlabel.editProfileAdvanced'|trans}}</h3>
+		        <div class="panel panel-warning">
+		          <div class="panel-body">
+		            {{form_start(traineeProfileAdvancedForm, {'method':'POST', 'action': path('Teacher__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
+		            {{form_row(traineeProfileAdvancedForm.job, {'label_col': 3, 'widget_col': 3})}}
+		            {{form_row(traineeProfileAdvancedForm.responsabilities, {'label_col': 3, 'widget_col': 3})}}
+		            {{form_row(traineeProfileAdvancedForm.needs, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
+		            {{form_row(traineeProfileAdvancedForm.outsideInterests, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
+		            {{form_row(traineeProfileAdvancedForm.comments, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
+		            {{form_row(traineeProfileAdvancedForm.submit, {'label_col': 3,'widget_col': 2})}}
+		            {{form_end(traineeProfileAdvancedForm)}}
+		          </div>
+		        </div>
+
+		        <br>
+		        <h3 class="legend">{{'Trainee.tlabel.editProfile'|trans}}</h3>
+		        <div class="panel panel-warning">
+		          <div class="panel-body">
+		            {{form_start(traineeProfileForm, {'method':'POST', 'action': path('Teacher__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
+		            {{form_row(traineeProfileForm.birthday, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('calendar') }})}}
+		            {{form_row(traineeProfileForm.address, {'label_col': 3, 'widget_col': 5, 'attr': {'class': 'wysiwyg'}})}}
+		            {{form_row(traineeProfileForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
+		            {{form_row(traineeProfileForm.phone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'} }) }}
+		            {{form_row(traineeProfileForm.mobile, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}}) }}
+		            {{form_row(traineeProfileForm.submit, {'label_col': 3,'widget_col': 2})}}
+		            {{form_end(traineeProfileForm)}}
+		          </div>
+		        </div>
+                <br>
+                <h3 class="legend">{{'Trainee.tlabel.preview'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Trainee.avatar'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+	                            {%if trainee.avatar is not null%}
+	                            <img src="{{path('Teacher__trainee_avatar', {'id': trainee.id})}}" alt="{{trainee.Fullname}}">
+	                            {%else%}
+	                            {{label_warning('_NA'|trans|raw)}}
+	                            {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+	                <div class="panel-body">
+		                <div class="row">
+		                    <div class="col-lg-3 text-right">{{'Trainee.username'|trans|raw}} :</div>
+		                    <div class="col-lg-9">{{trainee.username}}</div>
+		                    <div class="col-lg-3 text-right">{{'Trainee.email'|trans|raw}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.email is not empty%}
+			                <a href="mailto:{{trainee.email}}">{{trainee.email}}</a>
+			                {%else%}
+			                {{label_danger('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+			                <div class="col-lg-3 text-right">{{'Trainee.lockout'|trans|raw}} :</div>
+			                <div class="col-lg-9">{{('Trainee.lockout.'~trainee.lockout)|trans|raw}}</div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.dtCrea'|trans|raw}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.dtCrea is null%}
+			                {{label_warning('_NA'|trans)}}
+			                {%else%}
+			                {{trainee.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{trainee.dtCrea|date('H:i:s')}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.logins'|trans|raw}} :</div>
+			                <div class="col-lg-9">{{badge(trainee.logins)}}</div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.lastLogin'|trans|raw}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.lastLogin is null%}
+			                {{label_info('_NA'|trans)}}
+			                {%else%}
+			                {{trainee.lastLogin|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{trainee.lastLogin|date('H:i:s')}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.lastActivity'|trans|raw}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.lastActivity is null%}
+			                {{label_info('_NA'|trans)}}
+			                {%else%}
+			                {{trainee.lastActivity|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{trainee.lastActivity|date('H:i:s')}}
+			                {%endif%}
+			                </div>
+		                </div>
+	                </div>
+                </div>
+                <div class="panel panel-info">
+	                <div class="panel-body">
+		                <div class="row">
+			                <div class="col-lg-3 text-right">{{'Trainee.cef'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.cef is not null%}
+			                {{trainee.cef}}
+			                {%else%}
+			                {{label_danger('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+		                </div>
+	                </div>
+                </div>
+                <div class="panel panel-info">
+	                <div class="panel-body">
+		                <div class="row">
+			                <div class="col-lg-3 text-right">{{'Trainee.company'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.company is not null%}
+			                <b>{{trainee.company.name}}</b>
+			                {%else%}
+			                {{label_danger('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+		                </div>
+	                </div>
+                </div>
+                <div class="panel panel-info">
+	                <div class="panel-body">
+		                <div class="row">
+			                <div class="col-lg-3 text-right">{{'Trainee.sexe'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.sexe is not null%}
+			                {{('Trainee.sexe.'~trainee.sexe)|trans|raw}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.lastName'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.lastName is not null%}
+			                {{trainee.lastName}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.firstName'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.firstName is not null%}
+			                {{trainee.firstName}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.birthday'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.birthday is not null%}
+			                {{trainee.birthday|localizeddate('full', 'none', app.request.locale )|capitalize}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.address'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.address is not null%}
+			                {{trainee.address|raw}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.country'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.country is not null%}
+			                {{trainee.country|country}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.phone'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.phone is not empty%}
+			                <a href="tel:{{trainee.phone}}">{{icon('phone-alt')}} {{trainee.phone}}</a>
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.mobile'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.mobile is not empty%}
+			                <a href="tel:{{trainee.mobile}}">{{icon('phone')}} {{trainee.mobile}}</a>
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+		                </div>
+	                </div>
+                </div>
+                <div class="panel panel-info">
+	                <div class="panel-body">
+		                <div class="row">
+			                <div class="col-lg-3 text-right">{{'Trainee.job'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.job is not empty%}
+			                {{trainee.job|raw}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.responsabilities'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.responsabilities is not empty%}
+			                {{trainee.responsabilities|raw}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.needs'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.needs is not empty%}
+			                {{trainee.needs|raw}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.outsideInterests'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.outsideInterests is not empty%}
+			                {{trainee.outsideInterests|raw}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+
+			                <div class="col-lg-3 text-right">{{'Trainee.comments'|trans}} :</div>
+			                <div class="col-lg-9">
+			                {%if trainee.comments is not empty%}
+			                {{trainee.comments|raw}}
+			                {%else%}
+			                {{label_warning('_NA'|trans|raw)}}
+			                {%endif%}
+			                </div>
+		                </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('textarea.wysiwyg').each(function()
+	      {
+	        var options =
+	        {
+	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          theme: "modern",
+	          height : 150,
+	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+	        };
+	        $this = $(this);
+	        if($this.is('[required]'))
+	        {
+	          options.oninit = function(editor)
+	            {
+	              editor.on('change', function(e)
+	                {
+	                  editor.save();
+	                }
+	              );
+	            }
+	        }
+	        $this.tinymce(options);
+	      }
+	    );
+	    $('textarea.wysiwygFH').each(function()
+	      {
+	        var options =
+	        {
+	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          theme: "modern",
+	          height : 600,
+	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+	        };
+	        $this = $(this);
+	        if($this.is('[required]'))
+	        {
+	          options.oninit = function(editor)
+	            {
+	              editor.on('change', function(e)
+	                {
+	                  editor.save();
+	                }
+	              );
+	            }
+	        }
+	        $this.tinymce(options);
+	      }
+	    );
+    }
+);
+{%endblock dynamic_jstxt%}

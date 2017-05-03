@@ -1,0 +1,46 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li class="active"><a href="{{path('Admin__default_notifs')}}">{{ icon('bell') }} &nbsp; {{'breadcrumb.notif.list'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="text-center">{{knp_pagination_render(notifs)}}</div>
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{'AdminNotif.type'|trans}}</th>
+                            <th>{{'AdminNotif.dtStart'|trans}}</th>
+                            <th>{{'AdminNotif.status'|trans}}</th>
+                            <th class="oneBtn">{{ '_actions'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for n in notifs%}
+                        <tr>
+                            <td>{{('AdminNotif.type.'~n.type)|trans|raw}} (<a
+                                href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i
+                                    class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a>)
+                            </td>
+                            <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+                            <td>{{('AdminNotif.status.'~n.status)|trans}}</td>
+                            <td><a class="btn btn-sm btn-info"
+                                href="{{path('Admin__timeCredit_edit_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a></td>
+                        </tr>
+                        {%else%}
+                        <tr>
+                            <td colspan="4" class="warning">{{'AdminNotif.dbempty'|trans}}</td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+                <div class="text-center">{{knp_pagination_render(notifs)}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock pagebody_content%}

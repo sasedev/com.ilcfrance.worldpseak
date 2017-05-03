@@ -1,0 +1,416 @@
+{%extends 'IlcfranceWorldspeakTeacherFrontBundle::layout.html.twig'%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Teacher__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li class="active">
+    <a href="{{path('Teacher__trainee_edit_get', {'id': trainee.id})}}">{{icon('edit')}} &nbsp; {{'breadcrumb.trainee.edit'|trans({'%trainee%': trainee.fullname})|raw}}</a>
+  </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <ul class="nav nav-tabs">
+      {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+      <li{%if tabActive==1%} class="active"{%endif%}><a href="#preview" data-toggle="tab">{{'Trainee.tab.preview'|trans|raw}}</a></li>
+      <li{%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Trainee.tab.edit'|trans|raw}}</a></li>
+      <li{%if tabActive==3%} class="active"{%endif%}><a href="#timeCredit" data-toggle="tab">{{'Trainee.tab.timeCredit'|trans|raw}}</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+        <br>
+        <h3 class="legend">{{'Trainee.tlabel.preview'|trans}}</h3>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Trainee.avatar'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.avatar is not null%}
+                <img src="{{path('Teacher__trainee_avatar', {'id': trainee.id})}}" alt="{{trainee.Fullname}}">
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Trainee.username'|trans|raw}} :</div>
+              <div class="col-lg-9">{{trainee.username}}</div>
+              <div class="col-lg-3 text-right">{{'Trainee.email'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.email is not empty%}
+                <a href="mailto:{{trainee.email}}">{{trainee.email}}</a>
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+              <div class="col-lg-3 text-right">{{'Trainee.lockout'|trans|raw}} :</div>
+              <div class="col-lg-9">{{('Trainee.lockout.'~trainee.lockout)|trans|raw}}</div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.dtCrea'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.dtCrea is null%}
+                {{label_warning('_NA'|trans)}}
+                {%else%}
+                {{trainee.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{trainee.dtCrea|date('H:i:s')}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.logins'|trans|raw}} :</div>
+              <div class="col-lg-9">{{badge(trainee.logins)}}</div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.lastLogin'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.lastLogin is null%}
+                {{label_info('_NA'|trans)}}
+                {%else%}
+                {{trainee.lastLogin|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{trainee.lastLogin|date('H:i:s')}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.lastActivity'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.lastActivity is null%}
+                {{label_info('_NA'|trans)}}
+                {%else%}
+                {{trainee.lastActivity|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{trainee.lastActivity|date('H:i:s')}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Trainee.cef'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.cef is not null%}
+                {{trainee.cef}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Trainee.company'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.company is not null%}
+                <b>{{trainee.company.name}}</b>
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Trainee.sexe'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.sexe is not null%}
+                {{('Trainee.sexe.'~trainee.sexe)|trans|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.lastName'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.lastName is not null%}
+                {{trainee.lastName}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.firstName'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.firstName is not null%}
+                {{trainee.firstName}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.birthday'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.birthday is not null%}
+                {{trainee.birthday|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.address'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.address is not null%}
+                {{trainee.address|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.country'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.country is not null%}
+                {{trainee.country|country}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.phone'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.phone is not empty%}
+                <a href="tel:{{trainee.phone}}">{{icon('phone-alt')}} {{trainee.phone}}</a>
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.mobile'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.mobile is not empty%}
+                <a href="tel:{{trainee.mobile}}">{{icon('phone')}} {{trainee.mobile}}</a>
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Trainee.job'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.job is not empty%}
+                {{trainee.job|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.responsabilities'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.responsabilities is not empty%}
+                {{trainee.responsabilities|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.needs'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.needs is not empty%}
+                {{trainee.needs|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.outsideInterests'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.outsideInterests is not empty%}
+                {{trainee.outsideInterests|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Trainee.comments'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if trainee.comments is not empty%}
+                {{trainee.comments|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+
+        {%if trainee.email is empty%}
+        <br>
+        <h3 class="legend">{{'Trainee.tlabel.editEmail'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(traineeEmailForm, {'method':'POST', 'action': path('Teacher__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
+            {{form_row(traineeEmailForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
+            {{form_row(traineeEmailForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(traineeEmailForm)}}
+          </div>
+        </div>
+        {%endif%}
+
+        <br>
+        <h3 class="legend">{{'Trainee.tlabel.editProfile'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(traineeProfileForm, {'method':'POST', 'action': path('Teacher__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
+            {{form_row(traineeProfileForm.birthday, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('calendar') }})}}
+            {{form_row(traineeProfileForm.address, {'label_col': 3, 'widget_col': 5, 'attr': {'class': 'wysiwyg'}})}}
+            {{form_row(traineeProfileForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
+            {{form_row(traineeProfileForm.phone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'} }) }}
+            {{form_row(traineeProfileForm.mobile, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}}) }}
+            {{form_row(traineeProfileForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(traineeProfileForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Trainee.tlabel.editProfileAdvanced'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(traineeProfileAdvancedForm, {'method':'POST', 'action': path('Teacher__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
+            {{form_row(traineeProfileAdvancedForm.job, {'label_col': 3, 'widget_col': 3})}}
+            {{form_row(traineeProfileAdvancedForm.responsabilities, {'label_col': 3, 'widget_col': 3})}}
+            {{form_row(traineeProfileAdvancedForm.needs, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
+            {{form_row(traineeProfileAdvancedForm.outsideInterests, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
+            {{form_row(traineeProfileAdvancedForm.comments, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
+            {{form_row(traineeProfileAdvancedForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(traineeProfileAdvancedForm)}}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade{%if tabActive==3%} in active{%endif%}" id="timeCredit">
+       <br>
+        <h3 class="legend">{{'Trainee.tlabel.listTimeCredits'|trans}}</h3>
+        <div class="panel panel-primary">
+          <div class="panel-body">
+            <table class="table table-bordered table-condensed table-hover">
+                <thead>
+                <tr>
+                    <th>{{'TimeCredit.ftype'|trans}}</th>
+                    <th>{{'TimeCredit.level'|trans}}</th>
+                    <th>{{'TimeCredit.totalHours'|trans}}</th>
+                    <th>{{'TimeCredit.reservedHours'|trans}}</th>
+                    <th>{{'TimeCredit.notPlanifiedHours'|trans}}</th>
+                    <th>{{'TimeCredit.doneHours'|trans}}</th>
+                    <th>{{'TimeCredit.lostHours'|trans}}</th>
+                    <th>{{'TimeCredit.cefBegin'|trans}}</th>
+                    <th>{{'TimeCredit.cefEnd'|trans}}</th>
+                    <th>{{'TimeCredit.deadLine'|trans}}</th>
+                    <th>{{'TimeCredit.status'|trans}}</th>
+                    <th class="oneBtn">{{ '_actions'|trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%for timeCredit in timeCredits%}
+                <tr {%if timeCredit.buggy is constant('HEALTH_BUGGY', timeCredit)%}class="danger"{%endif%}>
+                    <td>
+                        {%if timeCredit.ftype is not null
+                            and timeCredit.ftype is not constant('FTYPE_UNDEFINED', timeCredit)%}
+                            {{('TimeCredit.ftype.'~timeCredit.ftype)|trans}}
+                        {%else%}
+                            {{label_danger('_NA'|trans)}}
+                        {%endif%}
+                    </td>
+                    <td>
+                        {%if timeCredit.level is not null
+                            and timeCredit.level is not constant('LEVEL_UNDEFINED', timeCredit)%}
+                            {{('TimeCredit.level.'~timeCredit.level)|trans}}
+                        {%else%}
+                            {{label_danger('_NA'|trans)}}
+                        {%endif%}
+                    </td>
+                    <td>{{timeCredit.totalHours}}</td>
+                    <td>{{timeCredit.reservedHours}}</td>
+                    <td class="warning">{{timeCredit.notPlanifiedHours}}</td>
+                    <td>{{timeCredit.doneHours}}</td>
+                    <td>{{timeCredit.lostHours}}</td>
+                    <td>{%if timeCredit.cefBegin is not empty%}{{timeCredit.cefBegin}}{%else%}{{label_danger('_NA'|trans)}}{%endif%}</td>
+                    <td>
+                        {%if timeCredit.cefEnd is not empty%}
+                            {{timeCredit.cefEnd}}
+                        {%else%}
+                            {%if timeCredit.status is constant('STATUS_FULL_FINISHED', timeCredit)%}
+                                {{label_danger('_NA'|trans)}}
+                            {%elseif timeCredit.status is constant('STATUS_FINISHED', timeCredit)%}
+                                {{label_warning('_NA'|trans)}}
+                            {%else%}
+                                {{label_info('_NA'|trans)}}
+                            {%endif%}
+                        {%endif%}
+                    </td>
+                    <td>
+                        {%if timeCredit.deadLine is not null%}
+                            {%if timeCredit.deadLine|date('Y-m-d') < 'now'|date('Y-m-d')%}
+                                {{label_warning(timeCredit.deadLine|localizeddate('full', 'none', app.request.locale )|capitalize)}}
+                            {%else%}
+                                {{timeCredit.deadLine|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                            {%endif%}
+                        {%else%}
+                            {{label_info('_NA'|trans)}}
+                        {%endif%}
+                    </td>
+                    <td>{{('TimeCredit.status.'~timeCredit.status)|trans}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-info" href="{{path('Teacher__timeCredit_edit_get',{'id':timeCredit.id})}}">{{icon('edit')}}</a>
+                    </td>
+                </tr>
+                {%else%}
+                <tr>
+                    <td colspan="12" class="warning">{{'TimeCredit.dbemptyTrainee'|trans}}</td>
+                </tr>
+                {%endfor%}
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('#TraineeProfileForm_birthday').datetimepicker(
+            {
+                weekStart: 1,
+                startView: 4,
+                minView: 2,
+                autoclose: true,
+                todayHighlight: true,
+                language: "{{app.request.locale}}",
+                format: 'yyyy-mm-dd'
+            }
+        );
+        $('textarea.wysiwyg').each(function()
+	      {
+	        var options =
+	        {
+	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          theme: "modern",
+	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+	        };
+	        $this = $(this);
+	        if($this.is('[required]'))
+	        {
+	          options.oninit = function(editor)
+	            {
+	              editor.on('change', function(e)
+	                {
+	                  editor.save();
+	                }
+	              );
+	            }
+	        }
+	        $this.tinymce(options);
+	      }
+	    );
+    }
+);
+{%endblock dynamic_jstxt%}

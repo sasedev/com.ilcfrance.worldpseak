@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+{%if menu_active is not defined%}{%set menu_active=''%}{%endif%}
+{%if smenu_active is not defined%}{%set smenu_active=''%}{%endif%}
+{%block html_head%}
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="ILCWorldSpeak">
+		<meta name="author" content="Salah Abdelkader Seif Eddine">
+		{%block dyn_meta%}
+			{%if metas is defined%}
+				{%for meta in metas%}
+		<meta name="{{meta.name}}" {{meta.content|raw}}">
+				{%endfor%}
+			{%endif%}
+		{%endblock dyn_meta%}
+
+		<link rel="shortcut icon" href="/favicon.ico">
+
+		{%block static_css%}
+		<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.css" >
+		<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/fontawesome/css/font-awesome.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap-theme.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('bundles/ilcfranceworldspeaksharedres/css/vendor/fullcalendar/fullcalendar.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('bundles/ilcfranceworldspeaksharedres/css/vendor/fullcalendar/fullcalendar.print.css')}}" media="print">
+		<link rel="stylesheet" type="text/css" href="{{asset('bundles/ilcfranceworldspeaksharedres/css/sb-admin.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('bundles/ilcfranceworldspeaksharedres/css/bootstrap-datetimepicker.min.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('bundles/ilcfranceworldspeaksharedres/css/bootstrap-modal-bs3patch.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('bundles/ilcfranceworldspeaksharedres/css/bootstrap-modal.css')}}">
+		<link rel="stylesheet" type="text/css" href="{{asset('bundles/ilcfranceworldspeaksharedres/css/worldspeak.css')}}">
+		{%endblock static_css%}
+
+		{%block dynamic_css%}
+			{%if stylesheets is defined%}
+				{%for css in stylesheets%}
+		<link rel="stylesheet" type="text/css" href="{{asset('bundles/ilcfranceworldspeaksharedres/')}}{{css|raw}}">
+				{%endfor%}
+			{%endif%}
+		{%endblock dynamic_css%}
+
+		{%block static_js%}
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+		<![endif]-->
+		<script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="{{asset('bundles/ilcfranceworldspeaksharedres/js/vendor/fullcalendar/fullcalendar.js')}}"></script>
+		<script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/ilcfranceworldspeaksharedres/js/bootstrap-datetimepicker.min.js')}}"></script>
+			{%if app.request.locale != 'en'%}
+		<script type="text/javascript" src="{{asset('bundles/ilcfranceworldspeaksharedres/js/i18n/bootstrap-datetimepicker.'~ app.request.locale ~'.js')}}"></script>
+			{% endif %}
+		<script type="text/javascript" src="{{asset('bundles/ilcfranceworldspeaksharedres/js/bootstrap-modalmanager.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/ilcfranceworldspeaksharedres/js/bootstrap-modal.js')}}"></script>
+		<script type="text/javascript" src="{{asset('bundles/ilcfranceworldspeaksharedres/js/bootstrap-filestyle.min.js')}}"></script>
+		<script type="text/javascript" src="{{asset('res/bower_components/tinymce/jquery.tinymce.min.js')}}"></script>
+		{%endblock static_js%}
+
+		{%block dynamic_js%}
+			{%if javascripts is defined%}
+				{%for js in javascripts%}
+		<script type="text/javascript" src="{{asset('bundles/ilcfranceworldspeaksharedres/')}}{{js|raw}}"></script>
+				{%endfor%}
+			{%endif%}
+		{%endblock dynamic_js%}
+
+		<script type="text/javascript">
+		<!--
+		{%block dynamic_jstxt%}
+		$(function() {
+		});
+		{%endblock dynamic_jstxt%}
+		-->
+		</script>
+		{%block head%}{%endblock head%}
+		<title>{%block title%}{%if pagetitle_txt is defined%}{{pagetitle_txt}}{%else%}ILCWorldSpeak{%endif%}{%endblock title%}</title>
+	</head>
+{%endblock html_head%}
+{%block html_body%}
+	<body>
+	{%block body_content%}
+		<!--[if lt IE 10]>
+			<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+		<![endif]-->
+
+		{%block wrapper%}
+		<div id="wrapper">
+		{%block wrapper_cnt%}
+
+			{%block navbar%}
+			<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			{%block navbar_cnt%}
+
+				{%block navbar_logo%}
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only">ILCWorldSpeak</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="{{ path('Admin__default_homepage') }}"><img alt="ILCWorldSpeak" src="{{asset('bundles/ilcfranceworldspeaksharedres/images/logo.png')}}"></a>
+				</div>
+				{%endblock navbar_logo%}
+
+				{%block navbar_menus%}
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+				{%block navbar_menus_cnt%}
+					<ul class="nav navbar-nav">
+						<li><a> {{ 'Adminlogotext'|trans|raw }}</a></li>
+					</ul>
+					{%block navbar_right%}
+					<ul class="nav navbar-nav navbar-right navbar-user">
+					{%block navbar_right_cnt%}
+
+						{%block menuappend%}{%endblock menuappend%}
+
+						{%if is_granted("ROLE_USER")%}
+						{{render(controller('IlcfranceWorldspeakAdminFrontBundle:Widget:getAdminNotifs', {'menu_active': menu_active}))}}
+						<li class="dropdown user-dropdown{%if menu_active=='account'%} active{%endif%}">
+							<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> &nbsp;{{render(controller('IlcfranceWorldspeakSharedResBundle:Widget:whoami'))}} <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="{{path("admin_security_profile")}}"><i class="fa fa-user"></i> &nbsp;{{'_menu.myProfile'|trans|raw}}</a></li>
+								<li class="divider"></li>
+								<li><a href="{{path("admin_security_logout")}}"><i class="fa fa-power-off"></i> &nbsp;{{'_menu.logout'|trans|raw}}</a></li>
+							</ul>
+						</li>
+						{%else%}
+						<li class="dropdown user-dropdown{%if menu_active=='account'%} active{%endif%}">
+							<a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i> &nbsp;{{'_menu.accounts'|trans|raw}} <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="{{path("admin_security_login")}}"> &nbsp;{{'_menu.login'|trans|raw}}</a></li>
+								<li class="divider"></li>
+								<li><a href="{{path("admin_security_lost_username")}}"> &nbsp;{{'_menu.dontRememberUsername'|trans| raw}}</a></li>
+								<li class="divider"></li>
+								<li><a href="{{path("admin_security_lost_password")}}"> &nbsp;{{'_menu.lostPassword'|trans| raw}}</a></li>
+							</ul>
+						</li>
+						{%endif%}
+					{%endblock navbar_right_cnt%}
+					</ul>
+					{%endblock navbar_right%}
+
+					{%block navbar_side%}
+					<ul class="nav navbar-nav side-nav">
+					{%block navbar_side_cnt%}
+						<li{%if menu_active=='home'%} class="active"{%endif%}><a href="{{path('Admin__default_homepage')}}">{{ icon('home') }}</span> &nbsp; {{'_menu.home'|trans}}</a></li>
+						{%block leftmenuappend%}
+{%if is_granted("ROLE_USER")%}
+<li class="dropdown{%if menu_active=='trainee'%} active{%endif%}">
+  <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> &nbsp; {{'_menu.trainee'|trans}} <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li {%if smenu_active=='trainee.list'%} class="active" {%endif%}><a href="{{path('Admin__trainee_list')}}">{{icon('list')}} {{'_menu.trainee.list'|trans}}</a></li>
+    <li {%if smenu_active=='trainee.listBuggy'%} class="active" {%endif%}><a href="{{path('Admin__trainee_listBuggy')}}"><i class="fa fa-bug"></i> {{'_menu.trainee.listBuggy'|trans}}</a></li>
+    <li {%if smenu_active=='trainee.add'%} class="active" {%endif%}><a href="{{path('Admin__trainee_add_get')}}">{{icon('plus')}} {{'_menu.trainee.add'|trans}}</a></li>
+    <li {%if smenu_active=='timeCredit.list'%} class="active" {%endif%}><a href="{{path('Admin__timeCredit_list')}}">{{icon('list')}} {{'_menu.timeCredit.list'|trans}}</a></li>
+    <li {%if smenu_active=='timeCredit.listBuggy'%} class="active" {%endif%}><a href="{{path('Admin__timeCredit_listBuggy')}}"><i class="fa fa-bug"></i> {{'_menu.timeCredit.listBuggy'|trans}}</a></li>
+    <li {%if smenu_active=='cours.list'%} class="active" {%endif%}><a href="{{path('Admin__cours_list')}}">{{icon('list')}} {{'_menu.cours.list'|trans}}</a></li>
+    <li {%if smenu_active=='cours.listBuggy'%} class="active" {%endif%}><a href="{{path('Admin__cours_listBuggy')}}"><i class="fa fa-bug"></i> {{'_menu.cours.listBuggy'|trans}}</a></li>
+
+  </ul>
+</li>
+<li class="dropdown{%if menu_active=='company'%} active{%endif%}">
+  <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-umbrella"></i> &nbsp; {{'_menu.company'|trans}} <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li {%if smenu_active=='company.list'%} class="active" {%endif%}><a href="{{path('Admin__company_list')}}">{{icon('list')}} {{'_menu.company.list'|trans}}</a></li>
+    <li {%if smenu_active=='company.add'%} class="active" {%endif%}><a href="{{path('Admin__company_add_get')}}">{{icon('plus')}} {{'_menu.company.add'|trans}}</a></li>
+  </ul>
+</li>
+<li class="dropdown{%if menu_active=='teacher'%} active{%endif%}">
+  <a class="dropdown-toggle" data-toggle="dropdown">{{icon('user')}} &nbsp; {{'_menu.teacher'|trans}} <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li {%if smenu_active=='teacher.list'%} class="active" {%endif%}><a href="{{path('Admin__teacher_list')}}">{{icon('list')}} {{'_menu.teacher.list'|trans}}</a></li>
+    <li {%if smenu_active=='teacher.listBuggy'%} class="active" {%endif%}><a href="{{path('Admin__teacher_listBuggy')}}"><i class="fa fa-bug"></i> {{'_menu.teacher.listBuggy'|trans}}</a></li>
+    <li {%if smenu_active=='teacher.availabilities'%} class="active" {%endif%}><a href="{{path('Admin__teacher_availabilities')}}">{{icon('calendar')}} {{'_menu.teacher.availabilities'|trans}}</a></li>
+    <li {%if smenu_active=='teacher.add'%} class="active" {%endif%}><a href="{{path('Admin__teacher_add_get')}}">{{icon('plus')}} {{'_menu.teacher.add'|trans}}</a></li>
+  </ul>
+</li>
+<li class="dropdown{%if menu_active=='teachingResource'%} active{%endif%}">
+  <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-files-o"></i> &nbsp; {{'_menu.teachingResource'|trans}} <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li {%if smenu_active=='teachingResource.list'%} class="active" {%endif%}><a href="{{path('Admin__teachingResource_list')}}">{{icon('list')}} {{'_menu.teachingResource.list'|trans}}</a></li>
+    <li {%if smenu_active=='teachingResource.add'%} class="active" {%endif%}><a href="{{path('Admin__teachingResource_add_get')}}">{{icon('plus')}} {{'_menu.teachingResource.add'|trans}}</a></li>
+  </ul>
+</li>
+<li{%if menu_active=='closedDay'%} class="active"{%endif%}><a href="{{path('Admin__closedDay_list')}}"><i class="fa fa-eye-slash"></i> &nbsp; {{'_menu.closedDay'|trans}}</a></li>
+<li class="dropdown{%if menu_active=='admin'%} active{%endif%}">
+  <a class="dropdown-toggle" data-toggle="dropdown">{{icon('tower')}} &nbsp; {{'_menu.admin'|trans}} <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li {%if smenu_active=='admin.list'%} class="active" {%endif%}><a href="{{path('Admin__admin_list')}}">{{icon('list')}} {{'_menu.admin.list'|trans}}</a></li>
+    <li {%if smenu_active=='admin.listBuggy'%} class="active" {%endif%}><a href="{{path('Admin__admin_listBuggy')}}"><i class="fa fa-bug"></i> {{'_menu.admin.listBuggy'|trans}}</a></li>
+    {%if is_granted('ROLE_SUPER_ADMIN')%}
+    <li {%if smenu_active=='admin.add'%} class="active" {%endif%}><a href="{{path('Admin__admin_add_get')}}">{{icon('plus')}} {{'_menu.admin.add'|trans}}</a></li>
+    {%endif%}
+  </ul>
+</li>
+<li class="dropdown{%if menu_active=='role'%} active{%endif%}">
+  <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> &nbsp; {{'_menu.role'|trans}} <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li {%if smenu_active=='role.list'%} class="active" {%endif%}><a href="{{path('Admin__role_list')}}">{{icon('list')}} {{'_menu.role.list'|trans}}</a></li>
+    {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+    <li {%if smenu_active=='role.add'%} class="active" {%endif%}><a href="{{path('Admin__role_add_get')}}">{{icon('plus')}} {{'_menu.role.add'|trans}}</a></li>
+    {%endif%}
+  </ul>
+</li>
+<li class="dropdown{%if menu_active=='locale'%} active{%endif%}">
+  <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i> &nbsp; {{'_menu.locale'|trans}} <b class="caret"></b></a>
+  <ul class="dropdown-menu">
+    <li {%if smenu_active=='locale.list'%} class="active" {%endif%}><a href="{{path('Admin__locale_list')}}">{{icon('list')}} {{'_menu.locale.list'|trans}}</a></li>
+    {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+    <li {%if smenu_active=='locale.add'%} class="active" {%endif%}><a href="{{path('Admin__locale_add_get')}}">{{icon('plus')}} {{'_menu.locale.add'|trans}}</a></li>
+    {%endif%}
+  </ul>
+</li>
+{%endif%}
+						{%endblock leftmenuappend%}
+
+
+					{%endblock navbar_side_cnt%}
+					</ul>
+					{%endblock navbar_side%}
+
+
+				{%endblock navbar_menus_cnt%}
+				</div>
+				{%endblock navbar_menus%}
+
+
+
+			{%endblock navbar_cnt%}
+			</nav>
+			{%endblock navbar%}
+
+			{%block page_wrapper%}
+			 <div id="page-wrapper">
+			{%block page_wrapper_cnt%}
+
+				{%block pagebody%}
+
+				<div class="row">
+					<div class="col-lg-12">
+						{%block pagetitle%}
+						<h3 class="legend">{%if pagetitle is defined%}{{pagetitle|raw}}{%else%}ILCWorldSpeak <small> {{ 'homepage'|trans|raw }}</small>{%endif%}</h3>
+						{%endblock pagetitle%}
+						{%block breadcrumb%}
+						<ol class="breadcrumb">
+							<li class="active"><a href="{{path('Admin__default_homepage')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+						</ol>
+						{%endblock breadcrumb%}
+						{%include 'IlcfranceWorldspeakSharedResBundle::flash.html.twig' with { 'close': true }%}
+					</div>
+				</div>
+				{%block pagebody_content%}
+				<div class="row">
+					<div class="col-lg-12">{%block body%}{% endblock body%}	</div>
+				</div>
+				{%endblock pagebody_content%}
+				{%endblock pagebody%}
+
+			{%endblock page_wrapper_cnt%}
+			</div>
+			{%endblock page_wrapper%}
+
+		{%endblock wrapper_cnt%}
+		</div>
+		{%endblock wrapper%}
+
+	{%endblock body_content%}
+	</body>
+{%endblock html_body%}
+</html>

@@ -1,0 +1,119 @@
+{%extends 'IlcfranceWorldspeakTeacherFrontBundle::layout.html.twig'%} {%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Teacher__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li>
+        <a href="{{path('Teacher__trainee_edit_get', {'id': timeCreditDocument.timeCredit.trainee.id})}}">{{icon('edit')}} &nbsp; {{'breadcrumb.trainee.edit'|trans({'%trainee%': timeCreditDocument.timeCredit.trainee.fullname})|raw}}</a>
+    </li>
+    <li><a href="{{path('Teacher__timeCredit_edit_get', {'id': timeCreditDocument.timeCredit.id})}}">{{icon('time')}} &nbsp;
+            {{'breadcrumb.timeCredit.edit'|trans({'%totalHours%':timeCreditDocument.timeCredit.totalHours,'%ftype%':
+            ('TimeCredit.ftype.'~timeCreditDocument.timeCredit.ftype)|trans,'%level%': ('TimeCredit.level.'~timeCreditDocument.timeCredit.level)|trans})|raw}}</a>
+    </li>
+    <li class="active"><a href="{{path('Teacher__timeCreditDocument_edit_get', {'id': timeCreditDocument.id})}}">{{icon('file')}} &nbsp;
+            {{'breadcrumb.timeCreditDocument.edit'|trans}}</a>
+    </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+            <li {%if tabActive==1%} class="active"{%endif%}><a href="#preview" data-toggle="tab">{{'TimeCreditDocument.tab.preview'|trans|raw}}</a></li>
+            <li {%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'TimeCreditDocument.tab.edit'|trans|raw}}</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+                <br>
+                <h3 class="legend">{{'TimeCreditDocument.tlabel.preview'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCreditDocument.dtCrea'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{timeCreditDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                {{timeCreditDocument.dtCrea|localizeddate('none', 'medium', app.request.locale )}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCreditDocument.teachingResource'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if timeCreditDocument.teachingResource is not null%}
+                                <a href="{{path('Teacher__timeCreditDocument_download', {'id': timeCreditDocument.id})}}"
+                                class="btn btn-xs btn-primary">{{ timeCreditDocument.teachingResource.filename }} {{icon('download')}}</a>
+                                {%else%}
+                                {{label_info('_NA'|trans)}}
+                                {%endif%}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCreditDocument.msg'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if timeCreditDocument.msg is not empty%} {{timeCreditDocument.msg|raw}}
+                                {%else%} {{label_info('_NA'|trans|raw)}} {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'TimeCreditDocument.notifyByMail'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if timeCreditDocument.notifyByMail is not null%}
+                                {{('TimeCreditDocument.notifyByMail.'~timeCreditDocument.notifyByMail)|trans}} {%if
+                                timeCreditDocument.notifyByMail is constant('NOTIFYBYMAIL_NOTSENT', timeCreditDocument)%} | <a
+                                    class="btn btn-xs btn-primary"
+                                    href="{{ path('Teacher__timeCreditDocument_notifyByMail', {'id':timeCreditDocument.id}) }}"
+                                >{{ '_action.btnSend'|trans|raw}} {{icon('envelope')}}</a> {%endif%} {%else%}
+                                {{label_danger('_NA'|trans|raw)}} {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+                <br>
+                <h3 class="legend">{{'TimeCreditDocument.tlabel.edit'|trans}}</h3>
+                <div class="panel panel-warning">
+                    <div class="panel-body">
+                    {{form_start(timeCreditDocumentEditForm, {'method':'POST', 'action': path('Teacher__timeCreditDocument_edit_post', {'id': timeCreditDocument.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditDocumentEditForm.teachingResource, {'label_col': 3, 'widget_col': 3, 'input_group': {'append': icon('file') }})}}
+                        {{form_row(timeCreditDocumentEditForm.msg, {'label_col': 3, 'widget_col': 9, 'attr' : {'class': 'wysiwyg'}})}}
+                        {{form_row(timeCreditDocumentEditForm.submit, {'label_col': 3,'widget_col': 2})}}
+                    {{form_end(timeCreditDocumentEditForm)}}
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('textarea.wysiwyg').each(function()
+	      {
+	        var options =
+	        {
+	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          theme: "modern",
+	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+	        };
+	        $this = $(this);
+	        if($this.is('[required]'))
+	        {
+	          options.oninit = function(editor)
+	            {
+	              editor.on('change', function(e)
+	                {
+	                  editor.save();
+	                }
+	              );
+	            }
+	        }
+	        $this.tinymce(options);
+	      }
+	    );
+    }
+);
+{%endblock dynamic_jstxt%}

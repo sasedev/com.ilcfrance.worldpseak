@@ -1,0 +1,841 @@
+Adminlogotext: Interface Admin
+
+_NO_ONE: Persone
+excel.file: "Fichier Excel"
+# widgets
+_widget_whoIsOnline_title: Qui est en ligne ?
+
+# breadcrumbs
+breadcrumb.homepage: Accueil
+
+breadcrumb.profile: Mon Profile
+
+breadcrumb.planning: Planning de la Semaine <b>%week%</b> de l'année <b>%year%</b>
+
+breadcrumb.notif.list: Liste des Notifications
+
+breadcrumb.bugs.list: Liste des Bogges
+
+breadcrumb.locale.list: Langues d'affichage
+breadcrumb.locale.add: Ajouter une nouvelle Locale
+breadcrumb.locale.edit: Locale <b>%locale%</b>
+
+breadcrumb.role.list: Privilèges Utilisateurs
+breadcrumb.role.add: Ajouter un nouveau Privilège
+breadcrumb.role.edit: Privilège <b>%role%</b>
+
+breadcrumb.admin.list: Administrateurs
+breadcrumb.admin.listBuggy: Comptes Boggés
+breadcrumb.admin.search: Rechercher "<b>%q%</b>"
+breadcrumb.admin.add: Ajouter un nouvel Administrateur
+breadcrumb.admin.edit: Compte Administrateur <b>%admin%</b>
+breadcrumb.admin.logs: Historique Actions <b>%admin%</b>
+
+breadcrumb.closedDay.list: Jours Fériés mois de <b>%month% %year%</b>
+
+breadcrumb.teachingResource.list: Resources Pédagogiques
+breadcrumb.teachingResource.search: Rechercher "<b>%q%</b>"
+breadcrumb.teachingResource.add: Ajouter une nouvelle Resource Pédagogique
+breadcrumb.teachingResource.edit: Resource Pédagogique <b>%teachingResource%</b>
+
+breadcrumb.teacher.list: Formateurs
+breadcrumb.teacher.listBuggy: Comptes Boggés
+breadcrumb.teacher.search: Rechercher "<b>%q%</b>"
+breadcrumb.teacher.availabilities: Disponibilités des Formateurs de la Semaine <b>%week%</b> de l'année <b>%year%</b>
+breadcrumb.teacher.add: Ajouter un nouveau Formateur
+breadcrumb.teacher.edit: Compte Formateur <b>%teacher%</b>
+breadcrumb.teacher.planning: Planning de la Semaine <b>%week%</b> de l'année <b>%year%</b>
+breadcrumb.teacher.logs: Historique Actions <b>%teacher%</b>
+
+breadcrumb.company.list: Entreprises
+breadcrumb.company.search: Rechercher "<b>%q%</b>"
+breadcrumb.company.add: Ajouter une nouvelle Entreprise
+breadcrumb.company.edit: Entreprise <b>%company%</b>
+
+breadcrumb.trainee.list: Stagiaires
+breadcrumb.trainee.listBuggy: Comptes Boggés
+breadcrumb.trainee.listByCompany: Stagiaires de l'Entreprise <b>%company%</b>
+breadcrumb.trainee.search: Rechercher "<b>%q%</b>"
+breadcrumb.trainee.add: Ajouter un nouveau Stagiaire
+breadcrumb.trainee.edit: Compte Stagiaire <b>%trainee%</b>
+breadcrumb.trainee.logs: Historique Actions <b>%trainee%</b>
+
+
+breadcrumb.timeCredit.list: Crédits Horaires
+breadcrumb.timeCredit.listBuggy: Crédits Boggés
+breadcrumb.timeCredit.search: Rechercher "<b>%q%</b>"
+breadcrumb.timeCredit.edit: Crédit Horaire <b>%totalHours%</b> heures de <b>%ftype%</b> - Niveau <b>%level%</b>
+
+breadcrumb.timeCreditDocument.edit: Ressource Pédagogique associée au Crédit Horaire
+
+breadcrumb.cours.list: Cours
+breadcrumb.cours.listBuggy: Cours Boggés
+breadcrumb.cours.edit: Cours du <b>%dStart%</b> de <b>%tStart%</b> à <b>%dtEnd%</b>
+# menu
+_menu.notifs: Notifications
+
+_menu.locale: Langues d'affichage
+_menu.locale.add: Ajouter Locale
+_menu.locale.list: Liste Locales
+
+_menu.role: Privilèges Utilisateurs
+_menu.role.add: Ajouter Privilège
+_menu.role.list: Liste Privilèges
+
+_menu.admin: Administrateurs
+_menu.admin.add: Ajouter Administrateur
+_menu.admin.list: Liste Administrateurs
+_menu.admin.listBuggy: Comptes Boggés
+
+_menu.closedDay: Jours Fériés
+
+_menu.teacher: Formateurs
+_menu.teacher.add: Ajouter Formateur
+_menu.teacher.list: Liste Formateurs
+_menu.teacher.listBuggy: Comptes Boggés
+_menu.teacher.availabilities: Disponibilités des Formateurs
+
+_menu.company: Entreprises
+_menu.company.add: Ajouter Entreprise
+_menu.company.list: Liste Entreprises
+
+_menu.teachingResource: Ressources Pédagogiques
+_menu.teachingResource.add: Ajouter Ressource Pédagogique
+_menu.teachingResource.list: Liste Ressources Pédagogiques
+
+_menu.trainee: Stagiaires
+_menu.trainee.add: Ajouter Stagiaire
+_menu.trainee.list: Liste Stagiaires
+_menu.trainee.listBuggy: Comptes Boggés
+
+_menu.timeCredit.list: Liste Crédits Horaires
+_menu.timeCredit.listBuggy: Crédits Horaires Boggés
+
+_menu.cours.list: Liste Cours
+_menu.cours.listBuggy: Cours Boggés
+
+# defaults
+default.tab.Calendar: Vue Calendrier
+default.tab.List: Vue Liste
+default.tlabel.ClosedDays: Liste des Jours Fériés
+default.tlabel.TeacherAvailabilities: Liste des disponibilités Formateurs
+default.tlabel.Cours: Liste des Cours
+
+# hompage
+_pagetitle_homepage: ILCWorldspeak - Page d'accueil
+
+# general planning
+_pagetitle_planning_txt: Planning Global - Semaine "%week%" Année "%year%"
+_pagetitle_planning: Planning Global - Semaine "<b>%week%</b>" Année "<b>%year%</b>" 
+
+# notifs
+_pagetitle_notifs_list: Notifications
+
+AdminNotif.dbempty: Aucune Notification trouvée
+
+# bugs
+_pagetitle_bugs_list: Bogges
+
+# Locale
+_pagetitleAdmin__locale_list: Liste des Locales
+_pagetitleAdmin__locale_add: Ajouter une nouvelle Locale
+_pagetitleAdmin__locale_edit_txt: Locale "%locale%"
+_pagetitleAdmin__locale_edit: Locale "<b>%locale%</b>"
+
+Locale.users: Nbr Utilisateurs
+Locale.prefix.label: "Préfix :"
+Locale.name.label: "Nom :"
+Locale.direction.label: "Direction :"
+Locale.direction.choice.LTR: de Gauche à Doite
+Locale.direction.choice.RTL: de Doite à Gauche
+Locale.status.label: "Etat :"
+Locale.status.choice.1: Désactivé
+Locale.status.choice.2: Activé
+
+Locale.tab.preview: Détails
+Locale.tab.edit: Editer
+Locale.tlabel.preview: Aperçu des détails de la Locale
+Locale.tlabel.edit: Modifier les détails de la Locale
+
+Locale.addSuccess: Nouvelle Locale "<b>%locale%</b>" ajoutée avec succès
+Locale.editNotfound: La Locale que vous essayer de visualiser n'existe pas ou plus
+Locale.editSuccess: La Locale "<b>%locale%</b>" a été modifiée avec succès
+Locale.editError: Une erreur s'est produite lors de la tentative de modification de la Locale "<b>%locale%</b>"
+Locale.deleteConfirm: Confirmation de suppression de Locale
+Locale.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer une Locale.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+Locale.deleteSuccess: La Locale "<b>%locale%</b>" a été supprimée avec succès
+Locale.deleteNotfound: La Locale que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+Locale.deleteError: Une erreur s'est produite lors de la tentative de suppression de la Locale
+Locale.dbempty: Aucune Locale trouvée dans la base de données
+
+# Role
+_pagetitleAdmin__role_list: Liste des Privilèges
+_pagetitleAdmin__role_add: Ajouter un nouveau Privilège
+_pagetitleAdmin__role_edit_txt: Privilège "%role%"
+_pagetitleAdmin__role_edit: Privilège "<b>%role%</b>"
+
+Role.users: Nbr Utilisateurs
+Role.name.label: "Nom :"
+Role.description.label: "Description :"
+
+Role.tab.preview: Détails
+Role.tab.edit: Editer
+Role.tlabel.preview: Aperçu des détails du Privilège
+Role.tlabel.edit: Modifier les détails du Privilège
+
+Role.addSuccess: Nouveau Privilège "<b>%role%</b>" ajouté avec succès
+Role.editNotfound: Le Privilège que vous essayer de visualiser n'existe pas ou plus
+Role.editSuccess: Le Privilège "<b>%role%</b>" a été modifiée avec succès
+Role.editError: Une erreur s'est produite lors de la tentative de modification du Privilège "<b>%role%</b>"
+Role.deleteConfirm: Confirmation de suppression du Privilège
+Role.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un Privilège.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+Role.deleteSuccess: Le Privilège "<b>%role%</b>" a été supprimé avec succès
+Role.deleteNotfound: Le Privilège que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+Role.deleteError: Une erreur s'est produite lors de la tentative de suppression du Privilège
+Role.dbempty: Aucun Privilège trouvé dans la base de données
+
+# Admin
+_pagetitleAdmin__admin_list: Liste des Administrateurs
+_pagetitleAdmin__admin_listBuggy: Liste des Comptes Administrateurs Boggés
+_pagetitleAdmin__admin_search_txt: Rechercher "%q%" dans la Liste des Administrateurs
+_pagetitleAdmin__admin_search: Rechercher "<b>%q%</b>" dans la Liste des Administrateurs
+_pagetitleAdmin__admin_add: Ajouter un nouveau compte Administrateur
+_pagetitleAdmin__admin_edit_txt: Compte Administrateur "%admin%"
+_pagetitleAdmin__admin_edit: Compte Administrateur "<b>%admin%</b>"
+_pagetitleAdmin__admin_log_txt: Historique des Actions "%admin%"
+_pagetitleAdmin__admin_log: Historique des Actions "<b>%admin%</b>"
+
+
+Admin.fullname: Nom complet
+Admin.username.label: "Identifiant :"
+Admin.email.label: "Email :"
+Admin.adminRoles.label: "Privilèges :"
+Admin.lockout.label: "Verrouillage de Compte :"
+Admin.lockout.choice.1: Compte Actif
+Admin.lockout.choice.2: Compte Verrouillé
+Admin.sexe.label: "Civilité :"
+Admin.sexe.choice.1: "Mlle"
+Admin.sexe.choice.2: "Mme"
+Admin.sexe.choice.3: "Mr"
+Admin.lastName.label: "Nom de Famille :"
+Admin.firstName.label: "Prénom :"
+Admin.birthday.label: "Date de naissance :"
+Admin.address.label: "Adresse :"
+Admin.country.label: "Pays :"
+Admin.phone.label: "Numéro de Téléphone :"
+Admin.mobile.label: "Numéro de Mobile :"
+Admin.preferedLocale.label: "Langue d'affichage préférée :"
+
+Admin.tab.preview: Détails
+Admin.tab.edit: Editer
+Admin.tlabel.preview: Aperçu des détails du compte Administrateur
+Admin.tlabel.editProfile: Modifier les détails Profile du compte Administrateur
+Admin.tlabel.editEmail: Modifier l'adresse Email du compte Administrateur
+Admin.tlabel.editPreferedLocale: Modifier la Langue d'affichage préféré du compte Administrateur
+Admin.tlabel.editLockout: Modifier le verrouillage du compte Administrateur
+Admin.tlabel.editRoles: Modifier les Privilèges du compte Administrateur
+
+Admin.addSuccess: Nouveau compte Administrateur "<b>%admin%</b>" ajouté avec succès
+Admin.editNotfound: Le compte Administrateur que vous essayer de visualiser n'existe pas ou plus
+Admin.editSuccess: Le compte Administrateur "<b>%admin%</b>" a été modifié avec succès
+Admin.editSuccessRole: Les Privilèges du compte Administrateur "<b>%admin%</b>" ont été modifiés avec succès
+Admin.editSuccessEmail: L'adresse Email du compte Administrateur "<b>%admin%</b>" a été modifiée avec succès
+Admin.editSuccessLockout: Le Verrouillage du compte Administrateur "<b>%admin%</b>" a été modifié avec succès
+Admin.editSuccessProfile: Les détails du Profile du compte Administrateur "<b>%admin%</b>" ont été modifiés avec succès
+Admin.editSuccessPreferedLocale: La Langue d'affichage préférée du compte Administrateur "<b>%admin%</b>" a été modifiée avec succès
+Admin.editError: Une erreur s'est produite lors de la tentative de modification du compte Administrateur "<b>%admin%</b>"
+Admin.editErrorRole: Une erreur s'est produite lors de la tentative de modification des Privilèges du compte Administrateur "<b>%admin%</b>"
+Admin.editErrorEmail: Une erreur s'est produite lors de la tentative de modification de l'adresse Email du compte Administrateur "<b>%admin%</b>"
+Admin.editErrorLockout: Une erreur s'est produite lors de la tentative de modification du Verrouillage du compte Administrateur "<b>%admin%</b>"
+Admin.editErrorProfile: Une erreur s'est produite lors de la tentative de modification des détails du Profile du compte Administrateur "<b>%admin%</b>"
+Admin.editErrorPreferedLocale: Une erreur s'est produite lors de la tentative de modification de la Langue d'affichage préférée du compte Administrateur "<b>%admin%</b>"
+Admin.editFailureHigherThanYou: Une erreur s'est produite lors de la tentative de modification du compte  Administrateur "<b>%admin%</b><br>Ses Privilèges sont supérieurs aux votres"
+Admin.deleteConfirm: Confirmation de suppression du compte Administrateur
+Admin.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un compte Administrateur.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+Admin.deleteSuccess: Le compte Administrateur "<b>%admin%</b>" a été supprimé avec succès
+Admin.deleteNotfound: Le compte Administrateur que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+Admin.deleteError: Une erreur s'est produite lors de la tentative de suppression du compte Administrateur
+Admin.dbempty: Aucun compte Administrateur trouvé dans la base de données
+Admin.dbemptyBuggy: Aucun compte Administrateur Boggé trouvé dans la base de données
+Admin.dbemptySearch: Aucun compte Administrateur trouvé pour la recherche <b>%q%</b>
+
+# AdminLog
+AdminLog.dbempty: Aucun Historique trouvé pour cet Administrateur
+AdminLog.deleteConfirm: Confirmation de suppression Historique Admin
+AdminLog.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un Historique Admin.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+AdminLog.deleteSuccess: Historique Admin supprimé avec succès
+AdminLog.deleteNotfound: Historique Admin non supprimé car introuvable
+AdminLog.deleteError: Une erreur s'est produite lors de la suppression de l'Historique Admin
+
+# ClosedDay
+_pagetitleAdmin__closedDay_list_txt: Liste des Jours Fériés et non Ouvrés du mois de %month% - %year%
+_pagetitleAdmin__closedDay_list: Liste des Jours Fériés et non Ouvrés du mois de <b>%month%</b> - <b>%year%</b>  
+
+ClosedDay.addSuccess: Le Jour Férié %closedDay% a été ajouté avec succès
+ClosedDay.addFailureUnique: Le Jour Férié %closedDay% n'a pas été ajouté parcequ'il existe déjà
+ClosedDay.addFailureInvalid: Format de Jour Férié invalide
+ClosedDay.deleteSuccess: Le Jour Férié %closedDay% a été supprimé avec succès
+ClosedDay.deleteFailureNotFound: Le Jour Férié %closedDay% n'a pas été supprimé avec succès parcequ'il n'existe plus
+ClosedDay.deleteFailureInvalid: Format de Jour Férié invalide
+ClosedDay.dbemptyWeek: Aucun jour férié trouvé pour cette Semaine
+
+# TeachingResource
+_pagetitleAdmin__teachingResource_list: Liste des Resources Pédagogiques Partagées
+_pagetitleAdmin__teachingResource_search_txt: Rechercher "%q%" dans les Resources Pédagogiques Partagées
+_pagetitleAdmin__teachingResource_search: Rechercher "<b>%q%</b>" dans les Resources Pédagogiques Partagées
+_pagetitleAdmin__teachingResource_add: Ajouter une nouvelle Resource Pédagogique  Partagée
+_pagetitleAdmin__teachingResource_edit_txt: Resource Pédagogique Partagée "%teachingResource%"
+_pagetitleAdmin__teachingResource_edit: Resource Pédagogique Partagée "<b>%teachingResource%</b>"
+
+
+TeachingResource.file.label: "Fichier :"
+TeachingResource.type.label: "Type :"
+TeachingResource.type.choice.101: "Vocabulaire (EN)"
+TeachingResource.type.choice.102: "Grammaire (EN)"
+TeachingResource.type.choice.103: "Vidéo (EN)"
+TeachingResource.type.choice.104: "Autre (EN)"
+TeachingResource.level.label: "Niveau :"
+TeachingResource.level.choice.11: "Bas (EN)"
+TeachingResource.level.choice.12: "Moyen (EN)"
+TeachingResource.level.choice.13: "Bon (EN)"
+
+
+TeachingResource.tab.preview: Détails
+TeachingResource.tab.edit: Editer
+TeachingResource.tlabel.preview: Aperçu des détails de la Resource Pédagogique Partagée
+TeachingResource.tlabel.edit: Modifier la Resource Pédagogique Partagée
+
+TeachingResource.addSuccess: Nouvelle Resource Pédagogique Partagée "<b>%teachingResource%</b>" ajoutée avec succès
+TeachingResource.editNotfound: La Resource Pédagogique Partagée que vous essayer de visualiser n'existe pas ou plus
+TeachingResource.editSuccess: La Resource Pédagogique Partagée "<b>%teachingResource%</b>" a été modifiée avec succès
+TeachingResource.editError: Une erreur s'est produite lors de la tentative de modification de la Resource Pédagogique Partagée "<b>%teachingResource%</b>"
+TeachingResource.deleteConfirm: Confirmation de suppression de la Resource Pédagogique Partagée
+TeachingResource.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer une Resource Pédagogique Partagée.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+TeachingResource.deleteSuccess: La Resource Pédagogique Partagée "<b>%teachingResource%</b>" a été supprimé avec succès
+TeachingResource.deleteNotfound: La Resource Pédagogique que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+TeachingResource.deleteError: Une erreur s'est produite lors de la tentative de suppression de la Resource Pédagogique
+TeachingResource.downloadNotfound: Le Fichier à télécharger n'existe pas ou plus
+TeachingResource.dbempty: Aucune Resource Pédagogique Partagée trouvée dans la base de données
+TeachingResource.dbemptySearch: Aucune Resource Pédagogique Partagée trouvée pour la recherche <b>%q%</b>
+
+# Teacher
+_pagetitleAdmin__teacher_list: Liste des Formateurs
+_pagetitleAdmin__teacher_listBuggy: Liste des Comptes Formateurs Boggés
+_pagetitleAdmin__teacher_search_txt: Rechercher "%q%" dans la Liste des Formateurs
+_pagetitleAdmin__teacher_search: Rechercher "<b>%q%</b>" dans la Liste des Formateurs
+_pagetitleAdmin__teacher_availabilities_txt: Disponibilités Formateurs - Semaine "%week%" Année "%year%"
+_pagetitleAdmin__teacher_availabilities: Disponibilités Formateurs - Semaine "<b>%week%</b>" Année "<b>%year%</b>" 
+_pagetitleAdmin__teacher_add: Ajouter un nouveau compte Formateur
+_pagetitleAdmin__teacher_edit_txt: Compte Formateur "%teacher%"
+_pagetitleAdmin__teacher_edit: Compte Formateur "<b>%teacher%</b>"
+_pagetitleAdmin__teacher_planning_txt: Planning Formateur "%teacher%" - Semaine "%week%" Année "%year%"
+_pagetitleAdmin__teacher_planning: Planning Formateur "<b>%teacher%</b>" - Semaine "<b>%week%</b>" Année "<b>%year%</b>" 
+_pagetitleAdmin__teacher_log_txt: Historique des Actions "%teacher%"
+_pagetitleAdmin__teacher_log: Historique des Actions "<b>%teacher%</b>"
+
+
+Teacher.fullname: Nom complet
+Teacher.username.label: "Identifiant :"
+Teacher.email.label: "Email :"
+Teacher.teacherRoles.label: "Privilèges :"
+Teacher.lockout.label: "Verrouillage de Compte :"
+Teacher.lockout.choice.1: Compte Actif
+Teacher.lockout.choice.2: Compte Verrouillé
+Teacher.sexe.label: "Civilité :"
+Teacher.sexe.choice.1: "Mlle"
+Teacher.sexe.choice.2: "Mme"
+Teacher.sexe.choice.3: "Mr"
+Teacher.type.label: "Type :"
+Teacher.type.choice.1: "Interne"
+Teacher.type.choice.2: "Externe"
+Teacher.ftype.label: "Type de Formation :"
+Teacher.ftype.choice.100: "Cours d'Anglais"
+Teacher.registerMail.label: "Mail Inscription :"
+Teacher.registerMail.choice.1: "Plus tard"
+Teacher.registerMail.choice.2: "Maintenant"
+Teacher.registerMail.choice.3: "Désactivé"
+Teacher.lastName.label: "Nom de Famille :"
+Teacher.firstName.label: "Prénom :"
+Teacher.birthday.label: "Date de naissance :"
+Teacher.address.label: "Adresse :"
+Teacher.country.label: "Pays :"
+Teacher.coursPhone.label: "Numéro de Téléphone des Cours :"
+Teacher.phone.label: "Numéro de Téléphone :"
+Teacher.mobile.label: "Numéro de Mobile :"
+Teacher.preferedLocale.label: "Langue d'affichage préférée :"
+
+Teacher.tab.preview: Détails
+Teacher.tab.edit: Editer
+Teacher.tab.notifs: Notifications
+Teacher.tlabel.preview: Aperçu des détails du compte Formateur
+Teacher.tlabel.editProfile: Modifier le Profile du compte Formateur
+Teacher.tlabel.editEmail: Modifier l'adresse Email du compte Formateur
+Teacher.tlabel.editPreferedLocale: Modifier la Langue d'affichage préféré du compte Formateur
+Teacher.tlabel.editLockout: Modifier le verrouillage du compte Formateur
+Teacher.tlabel.editCoursPhone: Modifier le numéro de téléphone de cours du compte Formateur
+Teacher.tlabel.editFtype: Modifier le Type de Formation de cours du compte Formateur
+Teacher.tlabel.editType: Modifier le Type du compte Formateur
+
+Teacher.addSuccess: Nouveau Compte Formateur "<b>%teacher%</b>" ajouté avec succès
+Teacher.addSuccessWithMail: Nouveau compte Formateur "<b>%teacher%</b>" ajouté avec succès, ses paramètres lui ont été envoyé par Mail
+Teacher.editNotfound: Le compte Formateur que vous essayer de visualiser n'existe pas ou plus
+Teacher.editSuccess: Le compte Formateur "<b>%teacher%</b>" a été modifié avec succès
+Teacher.editSuccessType: Le Type de compte du Formateur "<b>%teacher%</b>" a été modifié avec succès
+Teacher.editSuccessFtype: Le Type de Formation du compte Formateur "<b>%teacher%</b>" a été modifié avec succès
+Teacher.editSuccessEmail: L'adresse Email du compte Formateur "<b>%teacher%</b>" a été modifiée avec succès
+Teacher.editSuccessCoursPhone: Le numéro de téléphone des Cours du compte Formateur "<b>%teacher%</b>" a été modifiée avec succès
+Teacher.editSuccessLockout: Le Verrouillage du compte Formateur "<b>%teacher%</b>" a été modifié avec succès
+Teacher.editSuccessProfile: Les détails du Profile du compte Formateur "<b>%teacher%</b>" ont été modifiés avec succès
+Teacher.editSuccessPreferedLocale: La Langue d'affichage préférée du compte Formateur "<b>%teacher%</b>" a été modifiée avec succès
+Teacher.editError: Une erreur s'est produite lors de la tentative de modification du compte Formateur "<b>%teacher%</b>"
+Teacher.editErrorType: Une erreur s'est produite lors de la tentative de modification du Type de compte du Formateur "<b>%teacher%</b>"
+Teacher.editErrorFtype: Une erreur s'est produite lors de la tentative de modification du Type de Formation du compte Formateur "<b>%teacher%</b>"
+Teacher.editErrorCoursPhone: Une erreur s'est produite lors de la tentative de modification du numéro de téléphone de Cours du compte Formateur "<b>%teacher%</b>"
+Teacher.editErrorEmail: Une erreur s'est produite lors de la tentative de modification de l'adresse Email du compte Formateur "<b>%teacher%</b>"
+Teacher.editErrorLockout: Une erreur s'est produite lors de la tentative de modification du Verrouillage du compte Formateur "<b>%teacher%</b>"
+Teacher.editErrorProfile: Une erreur s'est produite lors de la tentative de modification des détails du Profile du compte Formateur "<b>%teacher%</b>"
+Teacher.editErrorPreferedLocale: Une erreur s'est produite lors de la tentative de modification de la Langue d'affichage préférée du compte Formateur "<b>%teacher%</b>"
+Teacher.deleteConfirm: Confirmation de suppression du compte Formateur
+Teacher.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un compte Formateur.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+Teacher.deleteSuccess: Le compte Formateur "<b>%teacher%</b>" a été supprimé avec succès
+Teacher.deleteNotfound: Le compte Formateur que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+Teacher.deleteError: Une erreur s'est produite lors de la tentative de suppression du compte Formateur
+Teacher.dbempty: Aucun compte Formateur trouvé dans la base de données
+Teacher.dbemptyBuggy: Aucun compte Formateur Boggé trouvé dans la base de données
+Teacher.dbemptySearch: Aucun compte Formateur trouvé pour la recherche <b>%q%</b>
+Teacher.mailSuccessRegister: Le Mot de passe du Compte Formateur "<b>%teacher%</b>" lui a été envoyé par Mail
+Teacher.mailErrorRegister: Le Mot de passe du Compte Formateur "<b>%teacher%</b>" n'a pas été envoyé par Mail
+Teacher.mailSuccessNewPass: Le Mot de passe du Compte Formateur "<b>%teacher%</b>" a été modifié avec succès, ses nouveaux paramètres lui ont été envoyés par Mail
+Teacher.mailErrorNewPass: Le Mot de passe du Compte Formateur "<b>%teacher%</b>" n'a pas été modifié ni envoyé par Mail
+Teacher.mailFailure: Une Erreur s'est produite lors de la tentative d'envois d'email au Formateur
+
+# TeacherLog
+TeacherLog.dbempty: Aucun Historique trouvé pour ce Formateur
+TeacherLog.deleteConfirm: Confirmation de suppression Historique Formateur
+TeacherLog.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un Historique Formateur.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+TeacherLog.deleteSuccess: Historique Formateur supprimé avec succès
+TeacherLog.deleteNotfound: Historique Formateur non supprimé car introuvable
+TeacherLog.deleteError: Une erreur s'est produite lors de la suppression de l'Historique Formateur
+
+# TeacherNotif
+TeacherNotif.dbempty: Aucun notification trouvée pour ce Formateur
+
+# TeacherAvailability
+_pagetitleAdmin__teacherAvailability_add: Ajouter une Disponibilité Formateur
+
+TeacherAvailability.teacher.label: "Formateur :"
+TeacherAvailability.dtStart.label: "Date de Début :"
+TeacherAvailability.dtEnd.label: "Date de Fin :"
+
+TeacherAvailability.addSuccess: Ajout avec succès de la Nouvelle disponibilité Formateur <b>%teacher%</b> du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.addSuccess_txt: Ajout avec succès de la Nouvelle disponibilité Formateur %teacher% du %dtStart%  au %dtEnd%
+TeacherAvailability.addFailureTeacherNotfound: Erreur lors de la tentative d'ajout de la Nouvelle disponibilité Formateur, Le Formateur n'existe pas ou plus
+TeacherAvailability.addFailureIntersection: Erreur de croisement de Disponibilites lors de la tentative d'ajout de la Nouvelle disponibilité Formateur <b>%teacher%</b> du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.addFailureIntersection_txt: Erreur de croisement de Disponibilites lors de la tentative d'ajout de la Nouvelle disponibilité Formateur %teacher% du %dtStart%  au %dtEnd%
+TeacherAvailability.addFailureInvalid: Format erroné lors de la tentative d'ajout de Nouvelle disponibilité Formateurs
+TeacherAvailability.editSuccess: Modification avec succès de la Disponibilité Formateur <b>%teacher%</b> du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.editSuccess_txt: Modification avec succès de la Disponibilité Formateur %teacher% du %dtStart%  au %dtEnd%
+TeacherAvailability.editNotfound: La Disponibilité Formateur que vous tentez de modifier n'existe pas ou plus
+TeacherAvailability.editFailureIntersection: Erreur de croisement de Disponibilites lors de la tentative de modification de Disponibilité Formateur <b>%teacher%</b> du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.editFailureIntersection_txt: Erreur de croisement de Disponibilites lors de la tentative de modification de Disponibilité Formateur %teacher% du %dtStart%  au %dtEnd%
+TeacherAvailability.editFailureInvalid: Format erroné lors de la tentative de modification de disponibilité Formateurs
+TeacherAvailability.deleteSuccess: Suppression avec succès de la disponibilité Formateur <b>%teacher%</b> du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.deleteSuccess_txt: Suppression avec succès de la disponibilité Formateur %teacher% du %dtStart%  au %dtEnd%
+TeacherAvailability.deleteNotfound: Erreur lors de la tentative de suppression de disponibilité Formateurs, La Disponibilité Formateur n'existe pas ou plus
+TeacherAvailability.deleteFailureInvalid: Format erroné lors de la tentative de suppression de disponibilité Formateurs
+TeacherAvailability.dbemptyWeek: Aucune Disponibilité Formateur trouvée pour cette Semaine
+TeacherAvailability.dbemptyTeacherWeek: Aucune Disponibilité trouvée pour Ce Formateur pour cette Semaine 
+
+# Company
+_pagetitleAdmin__company_list: Liste des Entreprises
+_pagetitleAdmin__company_search_txt: Rechercher "%q%" dans la Liste des Entreprises
+_pagetitleAdmin__company_search: Rechercher "<b>%q%</b>" dans la Liste des Entreprises
+_pagetitleAdmin__company_add: Ajouter une nouvelle Entreprise
+_pagetitleAdmin__company_edit_txt: Entreprise "%company%"
+_pagetitleAdmin__company_edit: Entreprise "<b>%company%</b>"
+
+
+Company.name.label: "Nom :"
+Company.prefix.label: "Prefix :"
+Company.service.label: "Service :"
+Company.address.label: "Adresse :"
+Company.town.label: "Ville :"
+Company.postalCode.label: "C.P. :"
+Company.country.label: "Pays :"
+
+
+Company.tab.preview: Détails
+Company.tab.edit: Editer
+Company.tlabel.preview: Aperçu des détails de l'Entreprise
+Company.tlabel.edit: Modifier les détails de l'Entreprise
+
+Company.addSuccess: Nouvelle Entreprise "<b>%company%</b>" ajoutée avec succès
+Company.editNotfound: L'Entreprise que vous essayer de visualiser n'existe pas ou plus
+Company.editSuccess: L'Entreprise "<b>%company%</b>" a été modifiée avec succès
+Company.editError: Une erreur s'est produite lors de la tentative de modification de l'Entreprise "<b>%company%</b>"
+Company.deleteConfirm: Confirmation de suppression de l'Entreprise
+Company.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer une Entreprise.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+Company.deleteSuccess: L'Entreprise "<b>%company%</b>" a été supprimé avec succès
+Company.deleteNotfound: L'Entreprise que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+Company.deleteError: Une erreur s'est produite lors de la tentative de suppression de l'Entreprise
+Company.dbempty: Aucune Entreprise trouvée dans la base de données
+Company.dbemptySearch: Aucune Entreprise trouvée pour la recherche <b>%q%</b>
+
+# Trainee
+_pagetitleAdmin__trainee_list: Liste des Stagiaires
+_pagetitleAdmin__trainee_listBuggy: Liste des Comptes Stagiaires Boggés
+_pagetitleAdmin__trainee_listByCompany: Liste des Stagiaires de l'Entreprise "<b>%company%</b>"
+_pagetitleAdmin__trainee_listByCompany_txt: Liste des Stagiaires de l'Entreprise "%company%"
+_pagetitleAdmin__trainee_search_txt: Rechercher "%q%" dans la Liste des Stagiaires
+_pagetitleAdmin__trainee_search: Rechercher "<b>%q%</b>" dans la Liste des Stagiaires
+_pagetitleAdmin__trainee_add: Ajouter un nouveau compte Stagiaire
+_pagetitleAdmin__trainee_edit_txt: Compte Stagiaire "%trainee%"
+_pagetitleAdmin__trainee_edit: Compte Stagiaire "<b>%trainee%</b>"
+_pagetitleAdmin__trainee_log_txt: Historique des Actions "%trainee%"
+_pagetitleAdmin__trainee_log: Historique des Actions "<b>%trainee%</b>"
+
+
+Trainee.company.label: "Entreprise :"
+Trainee.project.label: "Projet :"
+Trainee.fullname: Nom complet
+Trainee.username.label: "Identifiant :"
+Trainee.email.label: "Email :"
+Trainee.traineeRoles.label: "Privilèges :"
+Trainee.lockout.label: "Verrouillage de Compte :"
+Trainee.lockout.choice.1: Compte Actif
+Trainee.lockout.choice.2: Compte Verrouillé
+Trainee.sexe.label: "Civilité :"
+Trainee.sexe.choice.1: "Mlle"
+Trainee.sexe.choice.2: "Mme"
+Trainee.sexe.choice.3: "Mr"
+Trainee.cef.label: "Niveau CEF :"
+Trainee.job.label: "Poste d'emploi :"
+Trainee.responsabilities.label: "Résponsabilités :"
+Trainee.needs.label: "Besoins :"
+Trainee.outsideInterests.label: "Autres Centres d'interrets :"
+Trainee.comments.label: "Commentaires sur le Stagiaire :"
+Trainee.registerMail.label: "Mail Inscription :"
+Trainee.registerMail.choice.1: "Plus tard"
+Trainee.registerMail.choice.2: "Maintenant"
+Trainee.registerMail.choice.3: "Désactivé"
+Trainee.lastName.label: "Nom de Famille :"
+Trainee.firstName.label: "Prénom :"
+Trainee.birthday.label: "Date de naissance :"
+Trainee.address.label: "Adresse :"
+Trainee.country.label: "Pays :"
+Trainee.phone.label: "Numéro de Téléphone :"
+Trainee.mobile.label: "Numéro de Mobile :"
+Trainee.preferedLocale.label: "Langue d'affichage préférée :"
+
+Trainee.tab.preview: Détails
+Trainee.tab.edit: Editer
+Trainee.tab.timeCredit: Crédits Horaires
+Trainee.tab.notifs: Notifications
+Trainee.tlabel.preview: Aperçu des détails du compte Stagiaire
+Trainee.tlabel.editProfile: Modifier les détails Profile du compte Stagiaire
+Trainee.tlabel.editProfileAdvanced: Modifier les détails Avancés du Profile du compte Stagiaire
+Trainee.tlabel.editEmail: Modifier l'adresse Email du compte Stagiaire
+Trainee.tlabel.editPreferedLocale: Modifier la Langue d'affichage préféré du compte Stagiaire
+Trainee.tlabel.editLockout: Modifier le verrouillage du compte Stagiaire
+Trainee.tlabel.editCompany: Modifier l'Entreprise du compte Stagiaire
+Trainee.tlabel.editProject: Modifier le Projet du compte Stagiaire
+Trainee.tlabel.editCef: Modifier le Niveau CEF du compte Stagiaire
+Trainee.tlabel.addTimeCredit: Ajouter un nouveau Crédit Horaire
+Trainee.tlabel.listTimeCredits: Liste des Crédit horaires du Stagiaire
+
+
+Trainee.addSuccess: Nouveau compte Stagiaire "<b>%trainee%</b>" ajouté avec succès
+Trainee.addSuccessWithMail: Nouveau compte Stagiaire "<b>%trainee%</b>" ajouté avec succès, ses paramètres lui ont été envoyé par Mail
+Trainee.editNotfound: Le compte Stagiaire que vous essayer de visualiser n'existe pas ou plus
+Trainee.editSuccess: Le compte Stagiaire "<b>%trainee%</b>" a été modifié avec succès
+Trainee.editSuccessCef: Le Niveau CEF du compte Stagiaire "<b>%trainee%</b>" a été modifié avec succès
+Trainee.editSuccessEmail: L'adresse Email du compte Stagiaire "<b>%trainee%</b>" a été modifiée avec succès
+Trainee.editSuccessCompany: L'Entreprise du compte Stagiaire "<b>%trainee%</b>" a été modifiée avec succès
+Trainee.editSuccessProject: Le Projet du compte Stagiaire "<b>%trainee%</b>" a été modifiée avec succès
+Trainee.editSuccessLockout: Le Verrouillage du compte Stagiaire "<b>%trainee%</b>" a été modifié avec succès
+Trainee.editSuccessProfile: Les détails du Profile du compte Stagiaire "<b>%trainee%</b>" ont été modifiés avec succès
+Trainee.editSuccessProfileAdvanced: Les détails Avancés du Profile du compte Stagiaire "<b>%trainee%</b>" ont été modifiés avec succès
+Trainee.editSuccessPreferedLocale: La Langue d'affichage préférée du compte Stagiaire "<b>%trainee%</b>" a été modifiée avec succès
+Trainee.editError: Une erreur s'est produite lors de la tentative de modification du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorCef: Une erreur s'est produite lors de la tentative de modification du Niveau Cef du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorCompany: Une erreur s'est produite lors de la tentative de modification de l'Entreprise du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorProject: Une erreur s'est produite lors de la tentative de modification du Projet du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorEmail: Une erreur s'est produite lors de la tentative de modification de l'adresse Email du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorLockout: Une erreur s'est produite lors de la tentative de modification du Verrouillage du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorProfile: Une erreur s'est produite lors de la tentative de modification des détails du Profile du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorProfileAdvanced: Une erreur s'est produite lors de la tentative de modification des détails Avancés du Profile du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorPreferedLocale: Une erreur s'est produite lors de la tentative de modification de la Langue d'affichage préférée du compte Stagiaire "<b>%trainee%</b>"
+Trainee.deleteConfirm: Confirmation de suppression du compte Stagiaire
+Trainee.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un compte Stagiaire.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+Trainee.deleteSuccess: Le compte Stagiaire "<b>%trainee%</b>" a été supprimé avec succès
+Trainee.deleteNotfound: Le compte Stagiaire que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+Trainee.deleteError: Une erreur s'est produite lors de la tentative de suppression du compte Stagiaire
+Trainee.dbempty: Aucun compte Stagiaire trouvé dans la base de données
+Trainee.dbemptyBuggy: Aucun compte Stagiaire Boggé trouvé dans la base de données
+Trainee.dbemptySearch: Aucun compte Stagiaire trouvé pour la recherche <b>%q%</b>
+Trainee.mailSuccessRegister: Le Mot de pass du Compte Stagiaire "<b>%trainee%</b>" lui a été envoyé par Mail
+Trainee.mailErrorRegister: Le Mot de pass du Compte Stagiaire "<b>%trainee%</b>" n'a pas été envoyé par Mail
+Trainee.mailSuccessNewPass: Le Mot de pass du Compte Stagiaire "<b>%trainee%</b>" a été modifié avec succès, ses nouveaux paramètres lui ont été envoyés par Mail
+Trainee.mailErrorNewPass: Le Mot de pass du Compte Stagiaire "<b>%trainee%</b>" n'a pas été modifié ni envoyé par Mail
+Trainee.mailFailure: Une Erreur s'est produite lors de la tentative d'envois d'email au Stagiaire
+
+# TraineeLog
+TraineeLog.dbempty: Aucun Historique trouvé pour ce Stagiaire
+TraineeLog.deleteConfirm: Confirmation de suppression Historique Stagiaire
+TraineeLog.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un Historique Stagiaire.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+TraineeLog.deleteSuccess: Historique Stagiaire supprimé avec succès
+TraineeLog.deleteNotfound: Historique Stagiaire non supprimé car introuvable
+TraineeLog.deleteError: Une erreur s'est produite lors de la suppression de l'Historique Stagiaire
+
+# TraineeNotif
+TraineeNotif.dbempty: Aucun notification trouvée pour ce Stagiaire
+
+
+# TimeCredit
+_pagetitleAdmin__timeCredit_list: Liste des Crédits Horaires
+_pagetitleAdmin__timeCredit_listBuggy: Liste des Crédits Horaires Boggés
+_pagetitleAdmin__timeCredit_search_txt: Rechercher "%q%" dans la Liste des Stagiaires par Crédit
+_pagetitleAdmin__timeCredit_search: Rechercher "<b>%q%</b>" dans la Liste des Stagiaires par Crédit
+_pagetitleAdmin__timeCredit_add: Ajouter un nouveau Crédit Horaire
+_pagetitleAdmin__timeCredit_edit_txt: Crédit Horaire de "%totalHours%" Heures de "%ftype%" - Niveau "%level%" - du Stagiaire "%trainee%"
+_pagetitleAdmin__timeCredit_edit: Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" - Niveau "<b>%level%</b>" - du Stagiaire "<b>%trainee%</b>"
+_pagetitleAdmin__timeCredit_report_txt: Rapport de Fin de stage de "%totalHours%" Heures de "%ftype%" - Niveau "%level%" - du Stagiaire "%trainee%"
+_pagetitleAdmin__timeCredit_report: Rapport de Fin de stage de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" - Niveau "<b>%level%</b>" - du Stagiaire "<b>%trainee%</b>"
+
+TimeCredit.tab.preview: Détails
+TimeCredit.tab.edit: Editer
+TimeCredit.tab.Cours: Cours
+TimeCredit.tab.TimeCreditDocument: Resources Pédagogiques 
+TimeCredit.tab.Notifs: Notifications du Credit Horaire
+TimeCredit.tlabel.preview: Aperçu des détails du Crédit Horaire
+TimeCredit.tlabel.kpi: KPI's
+TimeCredit.tlabel.endReport: Rapport de fin de Stage
+TimeCredit.tlabel.surveyBegin: Sondage Stagiaire au début du Stage
+TimeCredit.tlabel.surveyEnd: Sondage Stagiaire à la fin du Stage
+TimeCredit.tlabel.editCefBegin: Modifier le niveau CEF de début de Stage
+TimeCredit.tlabel.editCefEnd: Modifier le niveau CEF de fin de Stage
+TimeCredit.tlabel.editDeadLine: Modifier la Date Limite de planification des Cours
+TimeCredit.tlabel.editEndReport: Modifier le Rapport de fin de Stage
+TimeCredit.tlabel.editDetails: Modifier les Objectifs et Commentaires de Crédit Horaire
+TimeCredit.tlabel.editForcedKpi: Modifier les valeurs forcées des KPI
+TimeCredit.tlabel.editFtype: Modifier le Type de Formation
+TimeCredit.tlabel.editLevel: Modifier le Niveau de Formation
+TimeCredit.tlabel.editLockout: Modifier le Verrouillage du Crédit Horaire
+TimeCredit.tlabel.editShowReport: Modifier le status de l'affichage du lien du Rapport de Final du Stage
+TimeCredit.tlabel.editTotalHours: Modifier le Nombre d'Heures Totales du Stage
+TimeCredit.tlabel.cours: Liste des cours du Crédit Horaire
+TimeCredit.tlabel.timeCreditDocumentAdd: Affecter une Ressource Pédagogique au Crédit Horaire
+TimeCredit.tlabel.timeCreditDocument: Ressources Pédagogiques Affectées au Crédit
+
+TimeCredit.status: Etat
+TimeCredit.ftype.label: "Type de Formation :"
+TimeCredit.ftype.choice.0: Inconnu
+TimeCredit.ftype.choice.100: "Cours d'Anglais"
+TimeCredit.level.label: "Niveau de Formation :"
+TimeCredit.level.choice.0: Inconnu
+TimeCredit.level.choice.11: "Bas (EN)"
+TimeCredit.level.choice.12: "Moyen (EN)"
+TimeCredit.level.choice.13: "Bon (EN)"
+TimeCredit.cefBegin.label: "Niveau CEF au début de la Formation :"
+TimeCredit.cefEnd.label: "Niveau CEF à la fin de la Formation :"
+TimeCredit.totalHours.label: "Nombre d'heures Total du Crédit Horaire :"
+TimeCredit.deadLine.label: "Date Limite de planification des Cours :"
+TimeCredit.objectives.label: "Objectifs du Stage :"
+TimeCredit.comments.label: "Commentaires généraux sur le Stage :"
+TimeCredit.notifyByMail.label: "Notifier le Stagaire de ce Credit :"
+TimeCredit.notifyByMail.choice.1: Plus Tard
+TimeCredit.notifyByMail.choice.2: Maintenant
+TimeCredit.notifyByMail.choice.3: Désactivé
+TimeCredit.progress1.label: "(Progression) Révision des structures grammaticales et de la syntaxe élémentaire :"
+TimeCredit.progress2.label: "(Progression) Acquisition de la concordance des temps :"
+TimeCredit.progress3.label: "(Progression) Développement de la syntaxe et des structures complexes :"
+TimeCredit.progress4.label: "(Progression) Enrichissement du vocabulaire général :"
+TimeCredit.progress5.label: "(Progression) Développement du lexique professionnel :"
+TimeCredit.progress6.label: "(Progression) Travail sur la prononciation :"
+TimeCredit.progress7.label: "(Progression) Amélioration de la compréhension orale :"
+TimeCredit.levelDesc1.label: "(Niveau) La précision lexicale de l'expression orale -le Vocabulaire :"
+TimeCredit.levelDesc2.label: "(Niveau) La précision grammaticale de l'expression orale - la Grammaire :"
+TimeCredit.levelDesc3.label: "(Niveau) La clareté de l'expression orale - construction et conhérence :"
+TimeCredit.levelDesc4.label: "(Niveau) La rapidité d'interaction à l'oral (temps de réponse) :"
+TimeCredit.levelDesc5.label: "(Niveau) La fluidité de l'expression orale :"
+TimeCredit.levelDesc6.label: "(Niveau) La compréhension orale :"
+TimeCredit.levelDesc7.label: "(Niveau) La prononciation :"
+TimeCredit.improvement1.label: "(Amélioration) La précision lexicale de l'expression orale- le Vocabulaire :"
+TimeCredit.improvement2.label: "(Amélioration) La précision grammaticale de l'expression orale - la Grammaire :"
+TimeCredit.improvement3.label: "(Amélioration) La fluidité de l'expression orale :"
+TimeCredit.improvement4.label: "(Amélioration) La compréhension orale :"
+TimeCredit.improvement5.label: "(Amélioration) La prononciation :"
+TimeCredit.lastTeacherReport.label: "Rapport de fin de stage du dernier Formateur :"
+TimeCredit.forcedKpiHomeworkPerformed.label: "Kpi Devoirs Maison (Valeur forcée) :"
+TimeCredit.forcedKpiParticipation.label: "Kpi Participation (Valeur forcée) :"
+TimeCredit.forcedKpiVocabularyRetention.label: "Kpi Rétention de Vocabulaire (Valeur forcée) :"
+TimeCredit.forcedKpiCorrectionConsideration.label: "Kpi Prise en Considération des Corrections (Valeur forcée) :"
+TimeCredit.lockout.label: "Modifier le Verrouillage Edition par Formateur :"
+TimeCredit.showReport.label: "Modifier Status Affichage Rapport Complet de Fin de Stage :"
+TimeCredit.endReport.choice.1: Faible
+TimeCredit.endReport.choice.3: Bien
+TimeCredit.endReport.choice.4: Excellent
+TimeCredit.improvement.choice.1: Non Nécessaire
+TimeCredit.improvement.choice.2: Nécessaire
+TimeCredit.kpi.choice.1: Faible
+TimeCredit.kpi.choice.3: Bien
+TimeCredit.kpi.choice.4: Excellent
+TimeCredit.lockout.choice.1: Déverrouillé
+TimeCredit.lockout.choice.2: Verrouillé
+TimeCredit.showReport.choice.1: Cacher
+TimeCredit.showReport.choice.2: Afficher
+
+TimeCredit.addSuccess: Ajout d'un nouveau Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") au Stagiaire "<b>%trainee%</b>"
+TimeCredit.addSuccessWithMail: Ajout d'un nouveau Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") au Stagiaire "<b>%trainee%</b>" et notification par mail du Stagaire
+TimeCredit.mailSuccess: Envoie d'email de notification avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.mailNotfound: Le Crédit Horaire pour lequel vous tentez d'envoyer une notification par mail n'existe pas ou plus dans la base de donnée
+TimeCredit.mailErrorNotValid: Envoie d'email de notification Impossible pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" parceque son adresse Email est invalide
+TimeCredit.mailErrorUnknown: Une erreur inconnue s'est produite lors de la tentative d'envoie  d'email de notification pour le Crédit Horaire
+TimeCredit.editNotfound: Le Crédit Horaire que voue tentez de voir/modifier n'existe pas ou plus 
+TimeCredit.editSuccessCefBegin: Le Niveau CEF de début du stage à été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorCefBegin: Une erreur s'est produite lors de la tentative de modification du Niveau CEF de début du stage pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessCefEnd: Le Niveau CEF de fin de stage à été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorCefEnd: Une erreur s'est produite lors de la tentative de modification du Niveau CEF de fin de stage pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessDeadLine: La Date Limite de Planification des Cours à été modifiée avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorDeadLine: Une erreur s'est produite lors de la tentative de modification de la Date Limite de Planification des Cours pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessDetails: Les Objectifs et Commentaires Généraux du stage ont été modifiés avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorDetails: Une erreur s'est produite lors de la tentative de modification des Objectifs et Commentaires Généraux du stage pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessEndReport: Le Rapport de fin de stage a été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorEndReport: Une erreur s'est produite lors de la tentative de modification du Rapport de fin de stage pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessForcedKpi: Les KPI forcés ont été modifiés avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorForcedKpi: Une erreur s'est produite lors de la tentative de modification des KPI forcés pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessFtype: Le Type de Formation  a été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorFtype: Une erreur s'est produite lors de la tentative de modification du Type de Formation pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessLevel: Le Niveau de Formation  a été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorLevel: Une erreur s'est produite lors de la tentative de modification du Niveau de Formation pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessLockout: Le Status Verrouillage Edition par Formateur  a été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorLockout: Une erreur s'est produite lors de la tentative de modification du Status Verrouillage Edition par Formateur pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessShowReport: Le Status Affichage Rapport Complet  a été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorShowReport: Une erreur s'est produite lors de la tentative de modification du Status Affichage Rapport Complet pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessTotalHours: Le Nombre d'Heures Totales  a été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorTotalHours: Une erreur s'est produite lors de la tentative de modification du Nombre d'Heures Totales pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.deleteConfirm: Confirmation de suppression du Crédit Horaire 
+TimeCredit.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un Crédit Horaire.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+TimeCredit.deleteSuccess: Le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" a été supprimé avec succès
+TimeCredit.deleteNotfound: Le Crédit Horaire que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+TimeCredit.deleteError: Une erreur s'est produite lors de la tentative de suppression du Crédit Horaire
+
+TimeCredit.dbempty: Aucun Crédit Horaire trouvé dans la base de données
+TimeCredit.dbemptyTrainee: Aucun Crédit Horaire trouvé dans la base de données pour ce Stagiaire
+TimeCredit.dbemptyBuggy: Aucun Crédit Horaire Boggué trouvé dans la base de données
+TimeCredit.dbemptySearch: Aucun Crédit Horaire trouvé dans la base de données pour cette Recherche
+
+# TimeCreditDocument
+_pagetitleAdmin__timeCreditDocument_edit_txt: Ressource Pédagogique du Crédit Horaire de "%totalHours%" Heures de "%ftype%" - Niveau "%level%" - du Stagiaire "%trainee%"
+_pagetitleAdmin__timeCreditDocument_edit: Ressource Pédagogique du Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" - Niveau "<b>%level%</b>" - du Stagiaire "<b>%trainee%</b>"
+
+TimeCreditDocument.tab.preview: Détails
+TimeCreditDocument.tab.edit: Editer
+TimeCreditDocument.tlabel.preview: Aperçu des détails de la Ressource Pédagogique affectée au Crédit Horaire 
+TimeCreditDocument.tlabel.edit: Modifier la Ressource Pédagogique affectée au Crédit Horaire
+
+TimeCreditDocument.teachingResource.label: "Resource Pédagogique :"
+TimeCreditDocument.msg.label: "Message :"
+TimeCreditDocument.notifyByMail.label: "Notifier le Stagiaire de cette Ressource Pédagogique :"
+TimeCreditDocument.notifyByMail.choice.1: Plus Tard
+TimeCreditDocument.notifyByMail.choice.2: Maintenant
+TimeCreditDocument.notifyByMail.choice.3: Désactivé
+
+TimeCreditDocument.addSuccess: Une Resource Pédagogique a été ajouté avec succès au Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCreditDocument.addSuccessWithMail: Une Resource Pédagogique a été ajouté avec succès au Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" et un email de notification a été envoyé au Stagiaire
+TimeCreditDocument.addErrorInvalid: Une erreur s'est produite lors de la tentative d'affectation de la Ressource Pédagogique au Crédit Horaire
+TimeCreditDocument.addErrorUnknown: Une erreur inconnue s'est produite lors de la tentative d'affectation de la Ressource Pédagogique au Crédit Horaire
+TimeCreditDocument.mailSuccess: Envoie d'email de notification avec succès pour la Resource Pédagogique du Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCreditDocument.mailNotfound: La Resource Pédagogique du Crédit Horaire pour laquel vous tentez d'envoyer une notification par mail n'existe pas ou plus dans la base de donnée
+TimeCreditDocument.mailErrorNotValid: Envoie d'email de notification Impossible pour la Resource Pédagogique du Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" parceque son adresse Email est invalide
+TimeCreditDocument.mailErrorUnknown: Une erreur inconnue s'est produite lors de la tentative d'envoie  d'email de notification pour la Resource Pédagogique du Crédit Horaire
+TimeCreditDocument.editNotFound: La Ressource Pédagogique que vous tentez d'editer n'existe pas ou plus
+TimeCreditDocument.editError: Une Erreur s'est produite lors de la tentatice d'edition de la Ressource Pédagogique affectée au Crédit Horaire
+TimeCreditDocument.editSuccess: La Ressource Pédagogique affectée au Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" a été modifiée avec succès
+TimeCreditDocument.deleteConfirm: Confirmation de suppression de Ressource Pédagogique affectée au Crédit Horaire
+TimeCreditDocument.deleteConfirm.txt:  <p>Vous êtes sur le point de supprimer une Ressource Pédagogique affectée au Crédit Horaire.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+TimeCreditDocument.deleteSuccess: La Resource Pédagogique du Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" a été supprimée avec succès
+TimeCreditDocument.deleteNotfound: La Resource Pédagogique du Crédit Horaire que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+TimeCreditDocument.deleteError: Une erreur s'est produite lors de la tentative de suppression de la Resource Pédagogique du Crédit Horaire
+TimeCreditDocument.downloadNotFile: La Ressource Pédagogique que vous tentez de télécherger ne contient pas de Fichier
+TimeCreditDocument.downloadNotfound: La Ressource Pédagogique que vous tentez de télécherger n'existe pas ou plus
+TimeCreditDocument.downloadError: Une Erreur s'est produite lors de la tentative de téléchargement de la Ressource Pédagogique
+TimeCreditDocument.dbemptyTimeCredit: Aucune Ressource Pédagogique n'est affectée à ce Crédit Horaire
+
+# Cours
+_pagetitleAdmin__cours_list: Liste des Cours
+_pagetitleAdmin__cours_listBuggy: Liste des Cours Boggés
+
+_pagetitleAdmin__cours_edit_txt: Cours du "%dStart%" à "%tStart%" (durée "%duration%" min)  du Stagiaire "%trainee%" 
+_pagetitleAdmin__cours_edit: Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+
+
+Cours.tab.preview: Détails
+Cours.tab.edit: Editer
+Cours.tab.CoursDocument: Documents Stagiaire
+Cours.tab.Notifs: Notifications du Cours
+Cours.tlabel.preview: Aperçu des détails du Cours
+Cours.tlabel.edit: Modifier les détails du Cours
+Cours.tlabel.coursEditTeacher: Modifier Le Formateur du Cours
+Cours.tlabel.coursEditPhone: Modifier Le Numéro de Téléphone du Cours
+Cours.tlabel.coursEditType: Modifier le Type du Cours
+Cours.tlabel.coursEditStatus: Modifier l'Etat du Cours
+Cours.tlabel.coursEditCorrection: Modifier la Correction du Cours
+Cours.tlabel.coursEditKpi: Modifier les KPI du Cours
+Cours.tlabel.coursDocument: Documents ajoutés par le Stagiaire
+
+Cours.teacher.label: "Formateur du Cours :"
+Cours.type.label: "Type de Cours :"
+Cours.type.choice.101: Vocabulaire (EN)
+Cours.type.choice.102: Grammaire (EN)
+Cours.type.choice.103: Vidéo (EN)
+Cours.type.choice.104: Correction DM (EN)
+Cours.type.choice.105: Autre (EN)
+Cours.phone.label: "Numéro de Téléphone à appeler pour le Cours :"
+Cours.status.label: "Etat du Cours :"
+Cours.status.choice.1: Planifié
+Cours.status.choice.3: Effectué 
+Cours.status.choice.4: Absence 
+Cours.progress.label: "Progression du Stagiaire :"
+Cours.correctionVocabulairy.label: "Correction du Vocabulaire :"
+Cours.correctionStructure.label: "Correction de la Structure :"
+Cours.correctionPrononciation.label: "Correction de la Prononciation :"
+Cours.comments.label: "Commentaires du Cours :"
+Cours.kpiHomeworkPerformed.label: "KPI Devoirs à la Maison :"
+Cours.kpiParticipation.label: "KPI Participation :"
+Cours.kpiVocabularyRetention.label: "KPI Rétention de vocabulaire :"
+Cours.kpiCorrectionConsideration.label: "KPI Prise en considération des Corrections :"
+
+Cours.kpi.choice.1: Faible
+Cours.kpi.choice.3: Bien
+Cours.kpi.choice.4: Excellent
+
+Cours.editNotfound: Le Cours que vous tentez d'editer n'existe pas ou plus
+Cours.editSuccessCorrection: La Correction du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>" a été modifiée avec succès
+Cours.editSuccessKpi: Les KPI du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>" ont été modifiés avec succès
+Cours.editSuccessPhone: Le Téléphone du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>" a été modifié avec succès
+Cours.editSuccessStatus: Le Status du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>" a été modifié avec succès
+Cours.editSuccessTeacher: Le Formateur du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>" a été modifié avec succès
+Cours.editSuccessType: Le Type du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>" a été modifié avec succès
+Cours.editErrorCorrection: Une erreur s'est produite lors de la tentative de modification de la Correction du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+Cours.editErrorKpi: Une erreur s'est produite lors de la tentative de modification des KPI du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+Cours.editErrorPhone: Une erreur s'est produite lors de la tentative de modification du Téléphone du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+Cours.editErrorStatus: Une erreur s'est produite lors de la tentative de modification du Status du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+Cours.editErrorTeacher: Une erreur s'est produite lors de la tentative de modification du Formateur du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+Cours.editErrorType: Une erreur s'est produite lors de la tentative de modification du Correction du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+Cours.editErrorUnknown: Une erreur inconnue s'est produite lors de la tentative de modification du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+Cours.deleteConfirm: Confirmation de suppression de Cours
+Cours.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un Cours.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+Cours.deleteSuccess: Le Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>" a été supprimé avec succès
+Cours.deleteNotfound: Le Cours que vous tentez de supprimer n'existe pas ou plus
+Cours.deleteError: Une erreur s'est produite lors de la tentative de suppression du Cours
+Cours.dbemptyTimeCredit: Aucun Cours trouvé pour ce Crédit Horaire
+Cours.dbemptyWeek: Aucun Cours trouvé pour cette cette Semaine
+Cours.dbemptyTeacherWeek: Aucun Cours trouvé pour ce Formateur pour cette Semaine
+Cours.dbempty: Aucun Cours trouvé dans la base de données
+Cours.dbemptyBuggy: Aucun Cours Boggé trouvé dans la base de données
+# CoursDocument
+CoursDocument.downloadNotFile: Le Document Utilisateur que vous tentez de télécherger ne contient pas de Fichier
+CoursDocument.downloadNotfound: Le Document Utilisateur que vous tentez de télécherger n'existe pas ou plus
+CoursDocument.downloadError: Une Erreur s'est produite lors de la tentative de téléchargement du Document Utilisateur
+CoursDocument.dbemptyCours: Aucun Document Utilisateur trouvé pour ce Cours

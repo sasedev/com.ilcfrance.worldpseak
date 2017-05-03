@@ -1,0 +1,7 @@
+parameters:
+    schemes: http
+    domain: worldspeak.ilcfrance.predator.loc
+    mail_from:          donotreply@ILCFrance.com
+    mail_from_name:          ILCWorldSpeak
+    sitename:                  "WorldSpeak.ILCFrance.predator.loc"
+    mailer_transport: sendmail

@@ -1,0 +1,52 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__role_list')}}"><i class="fa fa-cogs"></i> &nbsp; {{'breadcrumb.role.list'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__role_add_get')}}">{{icon('plus')}} &nbsp; {{'breadcrumb.role.add'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-body">
+	      {{form_start(roleAddForm, {'method':'POST', 'action': path('Admin__role_add_post'), 'style': 'horizontal'})}}
+	        {{form_row(roleAddForm.name, {'label_col': 3, 'widget_col': 2})}}
+	        {{form_row(roleAddForm.description, {'label_col': 3, 'widget_col': 9, 'attr': {'class':'wysiwyg'}})}}
+	        {{form_row(roleAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+	      {{form_end(roleAddForm)}}
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+  {
+    $('textarea.wysiwyg').each(function()
+      {
+        var options =
+        {
+          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+          theme: "modern",
+          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+        };
+        $this = $(this);
+        if($this.is('[required]'))
+        {
+          options.oninit = function(editor)
+            {
+              editor.on('change', function(e)
+                {
+                  editor.save();
+                }
+              );
+            }
+        }
+        $this.tinymce(options);
+      }
+    );
+  }
+);
+{%endblock dynamic_jstxt%}

@@ -1,0 +1,133 @@
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   "%database_driver%"
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  "%database_charset%"
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        entity_managers:
+            default:
+                connection: default
+                auto_mapping: true
+                mappings:
+                    IlcfranceWorldspeakSharedDataBundle:
+                         type: annotation
+                         dir: "%kernel.root_dir%/../src/Ilcfrance/Worldspeak/Shared/DataBundle/Entity"
+                         prefix: Ilcfrance\Worldspeak\Shared\DataBundle\Entity
+                         alias: IlcfranceWorldspeakSharedDataBundle
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                metadata_cache_driver:
+                    type: service
+                    id: doctrine.cache.predis
+                query_cache_driver:
+                    type: service
+                    id: doctrine.cache.predis
+                result_cache_driver:
+                    type: service
+                    id: doctrine.cache.predis
+                second_level_cache:
+                    enabled: true
+                    log_enabled: true
+                    region_cache_driver:
+                        type: service
+                        id: doctrine.cache.predis
+                    region_lock_lifetime: 20
+                    region_lifetime: 30
+                    regions:
+                        region_admin:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_adminlog:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_adminnotif:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_closedday:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_company:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_cours:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_coursdocument:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_locale:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_role:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_teacher:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_teacheravailability:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_teacherlog:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_teachernotif:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_timecredit:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_timecreditdocument:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_trainee:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_traineelog:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+                        region_traineenotif:
+                            lifetime: 300
+                            cache_driver:
+                                type: service
+                                id: doctrine.cache.predis
+

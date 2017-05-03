@@ -1,0 +1,106 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__role_list')}}"><i class="fa fa-cogs"></i> &nbsp; {{'breadcrumb.role.list'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+    <div class="text-right">
+      <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#newRole">{{'_action.btnAdd'|trans}} {{icon('plus')}}</button>
+    </div>
+    <div id="newRole" class="modal fade in" tabindex="-1" style="display: none;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'_pagetitleAdmin__role_add'|trans }}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            {{form_start(roleAddForm, {'method':'POST', 'action': path('Admin__role_add_post'), 'style': 'horizontal'})}}
+              {{form_row(roleAddForm.name, {'label_col': 3, 'widget_col': 6})}}
+              {{form_row(roleAddForm.description, {'label_col': 3, 'widget_col': 9, 'attr': {'class':'wysiwyg'}})}}
+              {{form_row(roleAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+            {{form_end(roleAddForm)}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    {%endif%}
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="text-center">{{knp_pagination_render(roles)}}</div>
+        <table class="table table-bordered table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>{{'Role.name'|trans}}</th>
+              <th>{{'Role.description'|trans}}</th>
+              <th>{{'Role.users'|trans}}</th>
+              <th class="twoBtn">{{ '_actions'|trans }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for r in roles%}
+            <tr>
+              <td>{{r.name}}</td>
+              <td>{%if r.description is not null%}{{r.description|raw}}{%else%}{{label('_NA'|trans)}}{%endif%}</td>
+              <td>
+                {%if r.admins|length!=0%}{{badge(r.admins|length)}} {{'Role.admins'|trans}}<br>{%endif%}
+                {%if r.teachers|length!=0%}{{badge(r.teachers|length)}} {{'Role.teachers'|trans}}<br>{%endif%}
+                {%if r.trainees|length!=0%}{{badge(r.trainees|length)}} {{'Role.trainees'|trans}}<br>{%endif%}
+              </td>
+              <td>
+                <a class="btn btn-sm btn-info" href="{{path('Admin__role_edit_get',{'id':r.id})}}">{{icon('edit')}}</a>
+                {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+                <a class="btn btn-sm btn-danger deleteConfirmRole" href="{{path('Admin__role_delete', {'id': r.id})}}">{{icon('remove')}}</a>
+                {%endif%}
+              </td>
+            </tr>
+            {%else%}
+            <tr>
+              <td colspan="4" class="warning">{{'Role.dbempty'|trans}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <div class="text-center">{{knp_pagination_render(roles)}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+<div id="deleteConfirmRole" class="modal fade in" tabindex="-1" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="text-center">{{'Role.deleteConfirm'|trans|raw}}</h3>
+  </div>
+  <div class="modal-body">
+    {{'Role.deleteConfirm.txt'|trans|raw}}
+  </div>
+  <div class="modal-footer">
+    <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+  </div>
+</div>
+{%endif%}
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+  {
+{%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+    $('.deleteConfirmRole').click(function(e)
+      {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmRole').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmRole').modal('show');
+      }
+    );
+{%endif%}
+  }
+);
+{%endblock dynamic_jstxt%}

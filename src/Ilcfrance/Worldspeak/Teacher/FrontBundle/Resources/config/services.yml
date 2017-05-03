@@ -1,0 +1,7 @@
+parameters:
+#    com_ilcfrance_worldspeak_teacher_front.example.class: Ilcfrance\Worldspeak\Teacher\FrontBundle\Example
+
+services:
+#    com_ilcfrance_worldspeak_teacher_front.example:
+#        class: %com_ilcfrance_worldspeak_teacher_front.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

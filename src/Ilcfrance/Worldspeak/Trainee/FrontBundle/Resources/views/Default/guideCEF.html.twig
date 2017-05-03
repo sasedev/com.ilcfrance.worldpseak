@@ -1,0 +1,96 @@
+{%extends 'IlcfranceWorldspeakTraineeFrontBundle::layout.html.twig'%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+ <li><a href="{{path('Trainee__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+ <li class="active"><a href="{{path('Trainee__default_guide_cef')}}"><i class="fa fa-book"></i> &nbsp; {{'breadcrumb.guideCEF'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+ <div class="col-lg-12">
+  <div class="panel panel-warning">
+   <div class="panel-body">
+    <h4 class="legend">{{ 'guide.comparison.grid'|trans|raw }}</h4>
+    <table class="table table-bordered table-condensed table-hover">
+     <thead>
+      <tr>
+       <th>{{'lvlList.levelMinALTE'|trans|raw}}</th>
+       <th>{{'lvlList.levelMaxALTE'|trans|raw}}</th>
+       <th>{{'lvlList.level'|trans|raw}}</th>
+       <th>{{'lvlList.cef'|trans|raw}}</th>
+       <th>{{'lvlList.desc'|trans|raw}}</th>
+       <th>{{'lvlList.toic_bulats'|trans|raw}}</th>
+       <th>{{'lvlList.cambridge'|trans|raw}}</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td>{{'lvlList.levelMinALTE.1'|trans|raw}}</td>
+       <td>{{'lvlList.levelMaxALTE.1'|trans|raw}}</td>
+       <td>{{'lvlList.level.1'|trans|raw}}</td>
+       <td>{{'lvlList.cef.1'|trans|raw}}</td>
+       <td>{{'lvlList.desc.1'|trans|raw}}</td>
+       <td>{{'lvlList.toic_bulats.1'|trans|raw}}</td>
+       <td>{{'lvlList.cambridge.1'|trans|raw}}</td>
+      </tr>
+      <tr>
+       <td>{{'lvlList.levelMinALTE.2'|trans|raw}}</td>
+       <td>{{'lvlList.levelMaxALTE.2'|trans|raw}}</td>
+       <td>{{'lvlList.level.2'|trans|raw}}</td>
+       <td>{{'lvlList.cef.2'|trans|raw}}</td>
+       <td>{{'lvlList.desc.2'|trans|raw}}</td>
+       <td>{{'lvlList.toic_bulats.2'|trans|raw}}</td>
+       <td>{{'lvlList.cambridge.2'|trans|raw}}</td>
+      </tr>
+      <tr>
+       <td>{{'lvlList.levelMinALTE.3'|trans|raw}}</td>
+       <td>{{'lvlList.levelMaxALTE.3'|trans|raw}}</td>
+       <td>{{'lvlList.level.3'|trans|raw}}</td>
+       <td>{{'lvlList.cef.3'|trans|raw}}</td>
+       <td>{{'lvlList.desc.3'|trans|raw}}</td>
+       <td>{{'lvlList.toic_bulats.3'|trans|raw}}</td>
+       <td>{{'lvlList.cambridge.3'|trans|raw}}</td>
+      </tr>
+      <tr>
+       <td>{{'lvlList.levelMinALTE.4'|trans|raw}}</td>
+       <td>{{'lvlList.levelMaxALTE.4'|trans|raw}}</td>
+       <td>{{'lvlList.level.4'|trans|raw}}</td>
+       <td>{{'lvlList.cef.4'|trans|raw}}</td>
+       <td>{{'lvlList.desc.4'|trans|raw}}</td>
+       <td>{{'lvlList.toic_bulats.4'|trans|raw}}</td>
+       <td>{{'lvlList.cambridge.4'|trans|raw}}</td>
+      </tr>
+      <tr>
+       <td>{{'lvlList.levelMinALTE.5'|trans|raw}}</td>
+       <td>{{'lvlList.levelMaxALTE.5'|trans|raw}}</td>
+       <td>{{'lvlList.level.5'|trans|raw}}</td>
+       <td>{{'lvlList.cef.5'|trans|raw}}</td>
+       <td>{{'lvlList.desc.5'|trans|raw}}</td>
+       <td>{{'lvlList.toic_bulats.5'|trans|raw}}</td>
+       <td>{{'lvlList.cambridge.5'|trans|raw}}</td>
+      </tr>
+      <tr>
+       <td>{{'lvlList.levelMinALTE.6'|trans|raw}}</td>
+       <td>{{'lvlList.levelMaxALTE.6'|trans|raw}}</td>
+       <td>{{'lvlList.level.6'|trans|raw}}</td>
+       <td>{{'lvlList.cef.6'|trans|raw}}</td>
+       <td>{{'lvlList.desc.6'|trans|raw}}</td>
+       <td>{{'lvlList.toic_bulats.6'|trans|raw}}</td>
+       <td>{{'lvlList.cambridge.6'|trans|raw}}</td>
+      </tr>
+      <tr>
+       <td>{{'lvlList.levelMinALTE.7'|trans|raw}}</td>
+       <td>{{'lvlList.levelMaxALTE.7'|trans|raw}}</td>
+       <td>{{'lvlList.level.7'|trans|raw}}</td>
+       <td>{{'lvlList.cef.7'|trans|raw}}</td>
+       <td>{{'lvlList.desc.7'|trans|raw}}</td>
+       <td>{{'lvlList.toic_bulats.7'|trans|raw}}</td>
+       <td>{{'lvlList.cambridge.7'|trans|raw}}</td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </div>
+</div>
+{%endblock pagebody_content%}

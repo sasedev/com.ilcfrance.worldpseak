@@ -1,0 +1,382 @@
+{%extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig'%} {%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li><a href="{{path('Admin__trainee_list')}}"><i class="fa fa-user"></i> &nbsp; {{'breadcrumb.trainee.list'|trans}}</a></li>
+    <li><a href="{{path('Admin__trainee_edit_get', {'id': cours.timeCredit.trainee.id})}}">{{icon('edit')}} &nbsp;
+            {{'breadcrumb.trainee.edit'|trans({'%trainee%': cours.timeCredit.trainee.fullname})|raw}}</b>"
+    </a></li>
+    <li><a href="{{path('Admin__timeCredit_edit_get', {'id': cours.timeCredit.id})}}">{{icon('time')}} &nbsp;
+            {{'breadcrumb.timeCredit.edit'|trans({'%totalHours%':cours.timeCredit.totalHours,'%ftype%':
+            ('TimeCredit.ftype.'~cours.timeCredit.ftype)|trans,'%level%':
+            ('TimeCredit.level.'~cours.timeCredit.level)|trans})|raw}}</a></li>
+    <li class="active"><a href="{{path('Admin__cours_edit_get', {'id': cours.id})}}">{{icon('earphone')}} &nbsp;
+            {{'breadcrumb.cours.edit'|trans({'%dStart%':cours.dtStart|localizeddate('long', 'none', app.request.locale )|capitalize, '%tStart%':
+            cours.dtStart|localizeddate('none', 'medium', app.request.locale ), '%dtEnd%': cours.dtEnd|localizeddate('none', 'long', app.request.locale )})|raw }}</a></li>
+</ol>
+{%endblock breadcrumb%} {%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs">
+            {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+            <li  {%if tabActive==1%} class="active" {%endif%}><a href="#preview" data-toggle="tab">{{'Cours.tab.preview'|trans|raw}}</a></li>
+            <li  {%if tabActive==2%} class="active" {%endif%}><a href="#edit" data-toggle="tab">{{'Cours.tab.edit'|trans|raw}}</a></li>
+            <li  {%if tabActive==3%} class="active" {%endif%}><a href="#coursDocument" data-toggle="tab">{{'Cours.tab.CoursDocument'|trans|raw}}</a></li>
+            {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+            <li {%if tabActive==4%} class="active"{%endif%}><a href="#notifs" data-toggle="tab">{{'Cours.tab.Notifs'|trans|raw}}</a></li>
+            {%endif%}
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.preview'|trans}}</h3>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            {%if cours.codeMA is not empty%}
+                            <div class="col-lg-3 text-right">{{'Cours.codeMA'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.codeMA}}</div>
+                            {%endif%}
+                            <div class="col-lg-3 text-right">{{'Cours.dtStart'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                {{cours.dtStart|localizeddate('none', 'long', app.request.locale )}}</div>
+                            <div class="col-lg-3 text-right">{{'Cours.dtEnd'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                {{cours.dtEnd|localizeddate('none', 'long', app.request.locale )}}</div>
+                            <div class="col-lg-3 text-right">{{'Cours.duration'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.duration}} {{'_minutes'|trans}}</div>
+                            <div class="col-lg-3 text-right">{{'Cours.trainee'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                <a href="{{path('Admin__trainee_edit_get', {'id': cours.timeCredit.trainee.id})}}"><i
+                                    class="fa fa-user"></i> {{cours.timeCredit.trainee.fullname}}</a>
+                            </div>
+                            <div class="col-lg-3 text-right">{{'Cours.teacher'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.teacher is not null%} <a
+                                    href="{{path('Admin__teacher_edit_get', {'id': cours.teacher.id})}}">{{icon('user')}}
+                                    {{cours.teacher.fullname}}</a> {%else%} {{label_danger('_NA'|trans)}} {%endif%}
+                            </div>
+                            <div class="col-lg-3 text-right">{{'Cours.phone'|trans|raw}} :</div>
+                            <div class="col-lg-9">
+                                {%if cours.phone is not empty%} <a href="tel:{{cours.phone}}">{{icon('earphone')}}
+                                    {{cours.phone}}</a> {%else%} {{label_danger('_NA'|trans)}} {%endif%}
+                            </div>
+                            <div class="col-lg-3 text-right">{{'Cours.type'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.type is not null and cours.type is not
+                                constant('TYPE_UNDEFINED', cours)%} {{('Cours.type.'~cours.type)|trans}} {%else%}
+                                {{label_danger(('Cours.type.'~constant('TYPE_UNDEFINED', cours))|trans)}} {%endif%}</div>
+                            <div class="col-lg-3 text-right">{{'Cours.status'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.status is not null and cours.status is not
+                                constant('STATUS_PLANNED_PENDING', cours)%} {{('Cours.status.'~cours.status)|trans}}
+                                {%elseif cours.status is constant('STATUS_PLANNED_PENDING', cours)%}
+                                {{label_danger(('Cours.status.'~cours.status)|trans)}} {%else%}
+                                {{label_danger('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.dtCrea'|trans|raw}} :</div>
+                            <div class="col-lg-9">{{cours.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                {{cours.dtCrea|localizeddate('none', 'medium', app.request.locale )}}</div>
+                        </div>
+                        {%if cours.status is constant('STATUS_DONE', cours)%}
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.download'|trans|raw}} :</div>
+                            <div class="col-lg-9"><a class="btn btn-lg btn-primary" href="{{path('Admin__cours_download', {'id': cours.id})}}">{{icon('download-alt')}}</a></div>
+                        </div>
+                        {%endif%}
+                    </div>
+                </div>
+                {%if cours.status is constant('STATUS_DONE', cours)%} <br>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiHomeworkPerformed'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.kpiHomeworkPerformed is not null%}
+                                {{('Cours.kpi.'~cours.kpiHomeworkPerformed)|trans}} {%else%}
+                                {{label_danger('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiParticipation'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.kpiParticipation is not null%}
+                                {{('Cours.kpi.'~cours.kpiParticipation)|trans}} {%else%} {{label_danger('_NA'|trans)}}
+                                {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiVocabularyRetention'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.kpiVocabularyRetention is not null%}
+                                {{('Cours.kpi.'~cours.kpiVocabularyRetention)|trans}} {%else%}
+                                {{label_danger('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.kpiCorrectionConsideration'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.kpiCorrectionConsideration is not null%}
+                                {{('Cours.kpi.'~cours.kpiCorrectionConsideration)|trans}} {%else%}
+                                {{label_danger('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.progress'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.progress is not empty%} {{cours.progress|raw}} {%else%}
+                                {{label_warning('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.comments'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.comments is not empty%} {{cours.comments|raw}} {%else%}
+                                {{label_warning('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionVocabulairy'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.correctionVocabulairy is not empty%}
+                                {{cours.correctionVocabulairy|raw}} {%else%} {{label_danger('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionStructure'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.correctionStructure is not empty%}
+                                {{cours.correctionStructure|raw}} {%else%} {{label_danger('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-3 text-right">{{'Cours.correctionPrononciation'|trans|raw}} :</div>
+                            <div class="col-lg-9">{%if cours.correctionPrononciation is not empty%}
+                                {{cours.correctionPrononciation|raw}} {%else%} {{label_danger('_NA'|trans)}} {%endif%}</div>
+                        </div>
+                    </div>
+                </div>
+                {%endif%}
+            </div>
+            <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditTeacher'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(coursTeacherForm, {'method':'POST', 'action':
+                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursTeacherForm.teacher, {'label_col': 3, 'widget_col': 3, 'input_group': {
+                        'append': icon('user') }})}} {{form_row(coursTeacherForm.submit, {'label_col':3,'widget_col':
+                        2})}} {{form_end(coursTeacherForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditPhone'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(coursPhoneForm, {'method':'POST', 'action':
+                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursPhoneForm.phone, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append':
+                        icon('phone-alt') }})}} {{form_row(coursPhoneForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_end(coursPhoneForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditType'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(coursTypeForm, {'method':'POST', 'action':
+                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursTypeForm.type, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(coursTypeForm.submit, {'label_col':3,'widget_col': 2})}} {{form_end(coursTypeForm)}}
+                    </div>
+                </div>
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditStatus'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(coursStatusForm, {'method':'POST', 'action':
+                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursStatusForm.status, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(coursStatusForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_end(coursStatusForm)}}</div>
+                </div>
+                {%if cours.status is constant('STATUS_DONE', cours)%} <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditCorrection'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(coursCorrectionForm, {'method':'POST', 'action':
+                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursCorrectionForm.progress, {'label_col': 3, 'widget_col': 9, 'attr': { 'class':
+                        'wysiwyg' }})}} {{form_row(coursCorrectionForm.correctionVocabulairy, {'label_col': 3,
+                        'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}}
+                        {{form_row(coursCorrectionForm.correctionStructure, {'label_col': 3, 'widget_col': 9, 'attr': {
+                        'class': 'wysiwyg' }})}} {{form_row(coursCorrectionForm.correctionPrononciation, {'label_col':
+                        3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} {{form_row(coursCorrectionForm.comments,
+                        {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}}
+                        {{form_row(coursCorrectionForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_end(coursCorrectionForm)}}</div>
+                </div>
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursEditKpi'|trans}}</h3>
+                <div class="panel panel-danger">
+                    <div class="panel-body">{{form_start(coursKpiForm, {'method':'POST', 'action':
+                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursKpiForm.kpiHomeworkPerformed, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(coursKpiForm.kpiParticipation, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(coursKpiForm.kpiVocabularyRetention, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(coursKpiForm.kpiCorrectionConsideration, {'label_col': 3, 'widget_col': 2})}}
+                        {{form_row(coursKpiForm.submit, {'label_col':3,'widget_col': 2})}} {{form_end(coursKpiForm)}}</div>
+                </div>
+                {%endif%}
+            </div>
+            <div class="tab-pane fade{%if tabActive==3%} in active{%endif%}" id="coursDocument">
+                <br>
+                <h3 class="legend">{{'Cours.tlabel.coursDocument'|trans}}</h3>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'CoursDocument.msg'|trans}}</th>
+                                    <th>{{'CoursDocument.traineeFile'|trans}}</th>
+                                    <th>{{'CoursDocument.dtCrea'|trans}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for coursDocument in cours.documents%}
+                                <tr>
+                                    <td>{%if coursDocument.msg is not empty%} {{coursDocument.msg|raw}} {%else%}
+                                        {{label_info('_NA'|trans)}} {%endif%}</td>
+                                    <td>{%if coursDocument.traineeFile is not null%} <a class="btn btn-sm btn-primary"
+                                        href="{{path('Admin__coursDocument_download', {'id': coursDocument.id})}}">
+                                            {{coursDocument.traineeFile.filename}} {{icon('download')}} </a> {%else%}
+                                        {{label_info('_NA'|trans)}} {%endif%}
+                                    </td>
+                                    <td>{{coursDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
+                                        {{coursDocument.dtCrea|localizeddate('none', 'long', app.request.locale )}}</td>
+                                </tr>
+                                {%else%}
+                                <tr>
+                                    <td colspan="3" class="warning">{{'CoursDocument.dbemptyCours'|trans}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+            <div class="tab-pane fade{%if tabActive==4%} in active{%endif%}" id="notifs">
+                <div class="panel panel-primary">
+                      <div class="panel-body">
+                          <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'TeacherNotif.type'|trans}}</th>
+                                    <th>{{'TeacherNotif.dtStart'|trans}}</th>
+                                    <th>{{'TeacherNotif.status'|trans}}</th>
+                                    <th class="oneBtn">{{ '_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {%for n in cours.teacherNotifs%}
+                                <tr>
+                                    <td>
+                                        {{('TeacherNotif.type.'~n.type)|trans|raw}}
+                                        {%if n.type is constant('TYPE_TXT_COURS_EDIT', n) or n.type is constant('TYPE_EMAIL_COURS_EDIT', n)%}
+                                            (<a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a> -
+                                             {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('none', 'long', app.request.locale )}})
+                                        {%endif%}
+                                        {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n) or n.type is constant('TYPE_EMAIL_TIMECREDIT_EDIT', n)%}
+                                            ({{ 'TimeCredit'|trans }} : <a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}">{{ n.timeCredit.trainee.fullname }}</a>)
+                                        {%endif%}
+                                    </td>
+                                    <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+                                    <td>{{('TeacherNotif.status.'~n.status)|trans}}</td>
+                                    <td>
+                                        {%if n.type is constant('TYPE_TXT_COURS_EDIT', n) or n.type is constant('TYPE_EMAIL_COURS_EDIT', n)%}
+                                            <a class="btn btn-sm btn-info" href="{{path('Admin__cours_edit_get',{'id':n.cours.id})}}">{{icon('edit')}}</a>
+                                        {%endif%}
+                                        {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n) or n.type is constant('TYPE_EMAIL_TIMECREDIT_EDIT', n) %}
+                                            <a class="btn btn-sm btn-info" href="{{path('Admin__timeCredit_edit_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a>
+                                        {%endif%}
+                                    </td>
+                                </tr>
+                            {%else%}
+                                <tr>
+                                    <td colspan="4" class="warning">{{'TeacherNotif.dbempty'|trans}}</td>
+                                </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <hr>
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <table class="table table-bordered table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{'TraineeNotif.type'|trans}}</th>
+                                    <th>{{'TraineeNotif.dtStart'|trans}}</th>
+                                    <th>{{'TraineeNotif.status'|trans}}</th>
+                                    <th class="oneBtn">{{ '_actions'|trans }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {%for n in cours.traineeNotifs%}
+                                <tr>
+                                    <td>{{('TraineeNotif.type.'~n.type)|trans|raw}}
+                                    {%if n.type is constant('TYPE_EMAIL_24H_BEFORE_COURS', n)%}
+                                            (<a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a> -
+                                             {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('none', 'long', app.request.locale )}})
+                                    {%endif%}
+                                    </td>
+                                    <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+                                    <td>{{('TraineeNotif.status.'~n.status)|trans}}</td>
+                                    <td>
+                                        {%if n.type is constant('TYPE_TXT_SURVEYBEGIN', n) or n.type is constant('TYPE_EMAIL_SURVEYBEGIN', n)
+                                         or n.type is constant('TYPE_TXT_SURVEYEND', n) or n.type is constant('TYPE_EMAIL_SURVEYEND', n)
+                                         or n.type is constant('TYPE_EMAIL_15D_AFTER_COURS', n) or n.type is constant('TYPE_EMAIL_30D_AFTER_COURS', n)%}
+                                            <a class="btn btn-sm btn-info" href="{{path('Admin__timeCredit_edit_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a>
+                                        {%endif%}
+                                        {%if n.type is constant('TYPE_EMAIL_24H_BEFORE_COURS', n)%}
+                                            <a class="btn btn-sm btn-info" href="{{path('Admin__cours_edit_get',{'id':n.cours.id})}}">{{icon('edit')}}</a>
+                                        {%endif%}
+                                    </td>
+                                </tr>
+                            {%else%}
+                                <tr>
+                                    <td colspan="4" class="warning">{{'TraineeNotif.dbempty'|trans}}</td>
+                                </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+        </div>
+    </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('textarea.wysiwyg').each(function()
+          {
+            var options =
+            {
+              script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+              theme: "modern",
+              plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+              toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+            };
+            $this = $(this);
+            if($this.is('[required]'))
+            {
+              options.oninit = function(editor)
+                {
+                  editor.on('change', function(e)
+                    {
+                      editor.save();
+                    }
+                  );
+                }
+            }
+            $this.tinymce(options);
+          }
+        );
+    }
+);
+{%endblock dynamic_jstxt%}

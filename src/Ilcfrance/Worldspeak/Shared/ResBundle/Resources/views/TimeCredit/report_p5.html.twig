@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ILCWorldSpeak">
+<meta name="author" content="Salah Abdelkader Seif Eddine">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/redmond/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/fontawesome/css/font-awesome.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap-theme.min.css')}}">
+<title>{%if pagetitle_txt is defined%}{{pagetitle_txt}}{%else%}ILCWorldSpeak{%endif%}</title>
+</head>
+<body>
+    <h4 style="text-decoration: underline;">{{ 'guide.comparison.grid'|trans|raw }}</h4>
+    <table style="width: 100%; border: 1px solid black; border-style: outset; border-spacing: 2px; border-collapse: separate; background-color: lightgray;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid gray; padding: 8px; font-weight: bold;">{{'lvlList.levelMinALTE'|trans|raw}}</th>
+                <th style="border: 1px solid gray; padding: 8px; font-weight: bold;">{{'lvlList.levelMaxALTE'|trans|raw}}</th>
+                <th style="border: 1px solid gray; padding: 8px; font-weight: bold;">{{'lvlList.level'|trans|raw}}</th>
+                <th style="border: 1px solid gray; padding: 8px; font-weight: bold;">{{'lvlList.cef'|trans|raw}}</th>
+                <th style="border: 1px solid gray; padding: 8px; font-weight: bold;">{{'lvlList.desc'|trans|raw}}</th>
+                <th style="border: 1px solid gray; padding: 8px; font-weight: bold;">{{'lvlList.toic_bulats'|trans|raw}}</th>
+                <th style="border: 1px solid gray; padding: 8px; font-weight: bold;">{{'lvlList.cambridge'|trans|raw}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMinALTE.1'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMaxALTE.1'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.level.1'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cef.1'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.desc.1'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.toic_bulats.1'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cambridge.1'|trans|raw}}</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMinALTE.2'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMaxALTE.2'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.level.2'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cef.2'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.desc.2'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.toic_bulats.2'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cambridge.2'|trans|raw}}</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMinALTE.3'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMaxALTE.3'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.level.3'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cef.3'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.desc.3'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.toic_bulats.3'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cambridge.3'|trans|raw}}</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMinALTE.4'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMaxALTE.4'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.level.4'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cef.4'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.desc.4'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.toic_bulats.4'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cambridge.4'|trans|raw}}</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMinALTE.5'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMaxALTE.5'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.level.5'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cef.5'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.desc.5'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.toic_bulats.5'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cambridge.5'|trans|raw}}</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMinALTE.6'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMaxALTE.6'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.level.6'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cef.6'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.desc.6'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.toic_bulats.6'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cambridge.6'|trans|raw}}</td>
+            </tr>
+            <tr>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMinALTE.7'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.levelMaxALTE.7'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.level.7'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cef.7'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.desc.7'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.toic_bulats.7'|trans|raw}}</td>
+                <td style="border: 1px solid gray; padding: 8px;">{{'lvlList.cambridge.7'|trans|raw}}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

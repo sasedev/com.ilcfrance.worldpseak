@@ -1,0 +1,3 @@
+user.newPassword.repeat.notequal: The New password and the Repeated do not match
+user.oldPassword.incorrect: Your old Password is incorrect
+

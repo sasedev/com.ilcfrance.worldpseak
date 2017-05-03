@@ -1,0 +1,487 @@
+# AdminAvatar
+AdminAvatar: Avatar Administrateur
+AdminAvatar.id: Id
+AdminAvatar.file: Fichier
+AdminAvatar.filename: Nom du fichier
+AdminAvatar.mimeType: Type
+AdminAvatar.length: Taille
+AdminAvatar.chunkSize: ChunkSize
+AdminAvatar.md5: Md5
+AdminAvatar.dtCrea: Date d'ajout
+
+#TeacherAvatar
+TeacherAvatar: Avatar Formateur
+TeacherAvatar.id: Id
+TeacherAvatar.file: Fichier
+TeacherAvatar.filename: Nom du fichier
+TeacherAvatar.mimeType: Type
+TeacherAvatar.length: Taille
+TeacherAvatar.chunkSize: ChunkSize
+TeacherAvatar.md5: Md5
+TeacherAvatar.dtCrea: Date d'ajout
+
+#TeachingResource
+TeachingResource: Ressource Pédagogique Partagée
+TeachingResource.id: Id
+TeachingResource.file: Fichier
+TeachingResource.filename: Nom du fichier
+TeachingResource.mimeType: Type
+TeachingResource.length: Taille
+TeachingResource.chunkSize: ChunkSize
+TeachingResource.md5: Md5
+TeachingResource.dtCrea: Date d'ajout
+TeachingResource.level: Niveau
+TeachingResource.level.11: Bas (Anglais)
+TeachingResource.level.12: Moyen (Anglais)
+TeachingResource.level.13: Bon (Anglais)
+TeachingResource.type: Type
+TeachingResource.type.101: Vocabulaire
+TeachingResource.type.102: Grammaire
+TeachingResource.type.103: Vidéo
+TeachingResource.type.104: Autre
+
+#TraineeAvatar
+TraineeAvatar: Avatar Stagiaire
+TraineeAvatar.id: Id
+TraineeAvatar.file: Fichier
+TraineeAvatar.filename: Nom du fichier
+TraineeAvatar.mimeType: Type
+TraineeAvatar.length: Taille
+TraineeAvatar.chunkSize: ChunkSize
+TraineeAvatar.md5: Md5
+TraineeAvatar.dtCrea: Date d'ajout
+
+#TraineeFile
+TraineeFile: Fichier Stagiaire
+TraineeFile.id: Id
+TraineeFile.file: Fichier
+TraineeFile.filename: Nom du fichier
+TraineeFile.mimeType: Type
+TraineeFile.length: Taille
+TraineeFile.chunkSize: ChunkSize
+TraineeFile.md5: Md5
+TraineeFile.dtCrea: Date d'ajout
+
+#Admin
+Admin: Administrateur
+Admin.id: Id
+Admin.username: Identifiant
+Admin.email: Email
+Admin.clearPassword: Mot de passe (En Claire)
+Admin.password: Mot de passe
+Admin.salt: Grain de sel
+Admin.recoveryCode: Code de récupération de mot de passe
+Admin.recoveryExpiration: Date d'éxpiration du Code de récupération
+Admin.lockout: Status Verrouillage de Compte
+Admin.lockout.1: Compte Actif
+Admin.lockout.2: Compte Verrouillé
+Admin.dtCrea: Date d'ajout
+Admin.logins: Nombre de connexion
+Admin.lastLogin: Date de dernère connexion
+Admin.lastActivity: Date de dernière activité
+Admin.lastName: Nom de Famille
+Admin.firstName: Prénom
+Admin.sexe: Civilité
+Admin.sexe.1: Mlle
+Admin.sexe.2: Mme
+Admin.sexe.3: Mr
+Admin.birthday: Date de naissance
+Admin.address: Adresse
+Admin.country: Pays
+Admin.phone: Téléphone
+Admin.mobile: Mobile
+Admin.preferedLocale: Paramètre Linguistique préféré d'affichage
+Admin.avatar: Avatar
+Admin.adminRoles: Privilèges
+
+# AdminNotif
+AdminNotif.type: Type
+AdminNotif.dtStart: Date de début de notification
+AdminNotif.type.10: "Plus de 40 jours depuis dernière planification de Cours"
+AdminNotif.type.11: "Rapport de fin de stage manquant"
+AdminNotif.status: Etat
+AdminNotif.status.1: En attente
+AdminNotif.status.2: Effectué
+AdminNotif.status.3: Une Erreur est survenue
+
+# AdminLog
+AdminLog: Historique Administrateur
+AdminLog.dtCrea: Date d'ajout
+AdminLog.admin: Administrateur
+AdminLog.msg: Message
+
+#ClosedDay
+ClosedDay: Jour Férié
+ClosedDay.id: Id
+ClosedDay.day: Jour Férié
+ClosedDay.dtCrea: Date d'ajout
+
+#Company
+Company: Entreprise
+Company.id: Id
+Company.codeMA: Code ManageAll
+Company.prefix: Préfix
+Company.name: Nom
+Company.dtCrea: Date d'ajout
+Company.service: Service
+Company.address: Adresse
+Company.postalCode: Code Postal
+Company.town: Ville
+Company.country: Pays
+Company.autoinc: Incrémental (pour la génération d'Identifiants Stagiaires)
+Company.trainees: Stagiaires de L'Entreprise
+
+#Cours
+Cours: Cours
+Cours.trainee: Stagiaire
+Cours.id: Id
+Cours.codeMA: Code ManageAll
+Cours.timeCredit: Crédit Horaire
+Cours.teacher: Formateur
+Cours.dtCrea: Date d'ajout
+Cours.type: Type
+Cours.type.0: Non Défini
+Cours.type.101: Vocabulaire (Anglais)
+Cours.type.102: Grammaire (Anglais)
+Cours.type.103: Vidéo (Anglais)
+Cours.type.104: Correction Devoir Maison (Anglais)
+Cours.type.105: Autre (Anglais)
+Cours.status: Etat 
+Cours.status.1: Planifié
+Cours.status.2: Planifié (Attente Validation)
+Cours.status.3: Effectué 
+Cours.status.4: Absence 
+Cours.dtStart: Date de Début
+Cours.duration: Durée (en minute) 
+Cours.phone: N° de Téléphone du Cours
+Cours.kpiHomeworkPerformed: Kpi Devoirs Maison
+Cours.kpiParticipation: Kpi Participation
+Cours.kpiVocabularyRetention: Kpi Rétention de Vocabulaire
+Cours.kpiCorrectionConsideration: Kpi Prise en Considération des Corrections
+Cours.kpi.1: Faible
+Cours.kpi.3: Bien
+Cours.kpi.4: Excellent
+Cours.correctionVocabulairy: Correction de Vocabulaire
+Cours.correctionStructure: Correction de Structure
+Cours.correctionPrononciation: Correction de Prononciation
+Cours.progress: Progression
+Cours.comments: Commentaires de Cours
+Cours.documents: Ressources Pédagogiques Affectés au Cours
+Cours.dtEnd: Date de Fin
+
+#CoursDocument
+CoursDocument: Document Ajouté au cours par le stagiaire (généralement Rendu de Devoir Maison)
+CoursDocument.id: Id
+CoursDocument.dtCrea: Date d'ajout
+CoursDocument.cours: Cours
+CoursDocument.traineeFile: Fichier
+CoursDocument.msg: Message
+
+#Locale
+Locale: Paramètre Linguistique d'affichage
+Locale.id: Id
+Locale.prefix: Préfix
+Locale.name: Nom
+Locale.direction: Direction d'écriture
+Locale.direction.LTR: Gauche à Droite
+Locale.direction.RTL: Droite à Gauche
+Locale.status: Etat
+Locale.status.1: Locale Désactivé
+Locale.status.2: Locale Activé
+Locale.admins: Administrateurs
+Locale.teachers: Formateurs
+Locale.trainees: Stagiaires
+
+#Role
+Role: Privilège
+Role.id: Id
+Role.name: Nom
+Role.description: Description
+Role.admins: Administrateurs
+Role.teachers: Formateurs
+Role.trainees: Stagiaires
+
+#Teacher
+Teacher: Formateur
+Teacher.id: Id
+Teacher.codeMA: Code ManageAll
+Teacher.username: Identifiant
+Teacher.email: Email
+Teacher.clearPassword: Mot de passe (En Claire)
+Teacher.password: Mot de passe
+Teacher.salt: Grain de sel
+Teacher.recoveryCode: Code de récupération de mot de passe
+Teacher.recoveryExpiration: Date d'éxpiration du Code de récupération
+Teacher.lockout: Status Verrouillage de Compte
+Teacher.lockout.1: Compte Actif
+Teacher.lockout.2: Compte Verrouillé
+Teacher.dtCrea: Date d'ajout
+Teacher.logins: Nombre de connexion
+Teacher.lastLogin: Date de dernère connexion
+Teacher.lastActivity: Date de dernière activité
+Teacher.lastName: Nom de Famille
+Teacher.firstName: Prénom
+Teacher.sexe: Civilité
+Teacher.sexe.1: Mlle
+Teacher.sexe.2: Mme
+Teacher.sexe.3: Mr
+Teacher.birthday: Date de naissance
+Teacher.address: Adresse
+Teacher.country: Pays
+Teacher.phone: Téléphone
+Teacher.mobile: Mobile
+Teacher.coursPhone: N° de Téléphone du Cours (valeur par défaut)
+Teacher.preferedLocale: Paramètre Linguistique préféré d'affichage
+Teacher.avatar: Avatar
+Teacher.teacherRoles: Privilèges
+Teacher.registerMail: Le Formateur a reçu ces paramètres de Connexion par mail ?
+Teacher.registerMail.1: Non
+Teacher.registerMail.2: Oui
+Teacher.registerMail.3: Désactivé
+Teacher.type: Type
+Teacher.type.1: Formateur Interne (ILCFrance)
+Teacher.type.2: Formateur Externe
+Teacher.ftype: Type de Formation
+Teacher.ftype.100: Langue Anglaise
+Teacher.availabilities: Disponibilités
+Teacher.courses: Cours
+Teacher.notifications: Notifications
+
+#TeacherAvailability
+TeacherAvailability: Disponibilité Formateur
+TeacherAvailability.id: Id
+TeacherAvailability.teacher: Formateur
+TeacherAvailability.dtStart: Date de début
+TeacherAvailability.dtEnd: Date de fin
+TeacherAvailability.dtCrea: Date d'ajout
+
+#TeacherNotif
+TeacherNotif: Notifications Formateur
+TeacherNotif.id: Id
+TeacherNotif.teacher: Formateur
+TeacherNotif.dtCrea: Date d'ajout
+TeacherNotif.dtStart: Date de début de notification
+TeacherNotif.type: Type
+TeacherNotif.type.10: Un Cours doit être modifié
+TeacherNotif.type.11: Un Crédit horaire doit être modifié
+TeacherNotif.type.20: Un Cours doit être modifié (Nofication par Mail)
+TeacherNotif.type.21: Un Crédit horaire doit être modifié (Nofication par Mail)
+TeacherNotif.typeId: Reférence
+TeacherNotif.status: Etat
+TeacherNotif.status.1: En attente
+TeacherNotif.status.2: Effectué
+TeacherNotif.status.3: Une Erreur est survenue
+
+# TeacherLog
+TeacherLog: Historique Formateur
+TeacherLog.dtCrea: Date d'ajout
+TeacherLog.admin: Formateur
+TeacherLog.msg: Message
+
+#TimeCredit
+TimeCredit: Crédit Horaire
+TimeCredit.id: Id
+TimeCredit.trainee: Stagiaire
+TimeCredit.dtCrea: Date d'ajout
+TimeCredit.ftype: Type de Formation
+TimeCredit.ftype.0: Non Défini
+TimeCredit.ftype.100: Stage d'Anglais
+TimeCredit.totalHours: Heures Totales
+TimeCredit.reservedHours: Heures Planifiées
+TimeCredit.doneHours: Heures Effectuées
+TimeCredit.lostHours: Heures Marquées Absent
+TimeCredit.notPlanifiedHours: Heures NON Planifiées
+TimeCredit.deadLine: Date limite de Planification
+TimeCredit.level: Niveau de Formation
+TimeCredit.level.0: Non Défini
+TimeCredit.level.11: "Bas (Anglais)"
+TimeCredit.level.12: "Moyen (Anglais)" 
+TimeCredit.level.13: "Bon (Anglais)" 
+TimeCredit.cefBegin: CEF au début du Stage
+TimeCredit.cefEnd: CEF à la fin du Stage
+TimeCredit.objectives: Objectifs du Stage
+TimeCredit.comments: Commentaires généraux sur le Stage
+TimeCredit.notifyByMail: Le Stagiaire a été notifié de ce Crédit par mail ?
+TimeCredit.notifyByMail.1: Non
+TimeCredit.notifyByMail.2: Oui
+TimeCredit.notifyByMail.3: Désactivé
+TimeCredit.forcedKpiHomeworkPerformed: Kpi Devoirs Maison (Valeur forcé au niveau du Crédit)
+TimeCredit.forcedKpiParticipation: Kpi Participation (Valeur forcé au niveau du Crédit)
+TimeCredit.forcedKpiVocabularyRetention: Kpi Rétention de Vocabulaire (Valeur forcé au niveau du Crédit)
+TimeCredit.forcedKpiCorrectionConsideration: Kpi Prise en Considération des Corrections (Valeur forcé au niveau du Crédit)
+TimeCredit.globalKpiHomeworkPerformed: Kpi Devoirs Maison
+TimeCredit.globalKpiParticipation: Kpi Participation
+TimeCredit.globalKpiVocabularyRetention: Kpi Rétention de Vocabulaire
+TimeCredit.globalKpiCorrectionConsideration: Kpi Prise en Considération des Corrections
+TimeCredit.calculatedKpiHomeworkPerformed: Kpi Devoirs Maison (Valeur qui apparait le plus dans les Cours)
+TimeCredit.calculatedKpiParticipation: Kpi Participation (Valeur qui apparait le plus dans les Cours)
+TimeCredit.calculatedKpiVocabularyRetention: Kpi Rétention de Vocabulaire (Valeur qui apparait le plus dans les Cours)
+TimeCredit.calculatedKpiCorrectionConsideration: Kpi Prise en Considération des Corrections (Valeur qui apparait le plus dans les Cours)
+TimeCredit.kpi.1: Faible
+TimeCredit.kpi.3: Bien
+TimeCredit.kpi.4: Excellent
+TimeCredit.progress1: "Progression : Révision des structures grammaticales et de la syntaxe élémentaire"
+TimeCredit.progress2: "Progression : Acquisition de la concordance des temps"
+TimeCredit.progress3: "Progression : Développement de la syntaxe et des structures complexes" 
+TimeCredit.progress4: "Progression : Enrichissement du vocabulaire général"
+TimeCredit.progress5: "Progression : Développement du lexique professionnel"
+TimeCredit.progress6: "Progression : Travail sur la prononciation"
+TimeCredit.progress7: "Progression : Amélioration de la compréhension orale"
+TimeCredit.levelDesc1: "Niveau: La précision lexicale de l'expression orale-le vocabulaire"
+TimeCredit.levelDesc2: "Niveau: La précision grammaticale de l'expression orale -la grammaire"
+TimeCredit.levelDesc3: "Niveau: La clareté de l'expression orale (construction et conhérence)"
+TimeCredit.levelDesc4: "Niveau: La rapidité d'interaction à l'oral (temps de réponse) "
+TimeCredit.levelDesc5: "Niveau: La fluidité de l'expression orale"
+TimeCredit.levelDesc6: "Niveau: La compréhension orale"
+TimeCredit.levelDesc7: "Niveau: La prononciation"
+TimeCredit.progress.1: Faible
+TimeCredit.progress.3: Bien
+TimeCredit.progress.4: Excellent
+TimeCredit.levelDesc.1: Faible
+TimeCredit.levelDesc.3: Bien
+TimeCredit.levelDesc.4: Excellent
+TimeCredit.endReport.1: Faible
+TimeCredit.endReport.3: Bien
+TimeCredit.endReport.4: Excellent
+TimeCredit.improvement1: "Amélioration : La précision lexicale de l'expression orale-le vocabulaire"
+TimeCredit.improvement2: "Amélioration : La précision grammaticale de l'expression orale -la grammaire"
+TimeCredit.improvement3: "Amélioration : La fluidité de l'expression orale"
+TimeCredit.improvement4: "Amélioration : La compréhension orale"
+TimeCredit.improvement5: "Amélioration : La prononciation"
+TimeCredit.improvement.1: Non Nécessaire
+TimeCredit.improvement.2: Nécessaire
+TimeCredit.lastTeacherReport: Rapport de fin de stage du dernier Formateur
+TimeCredit.lockout: Status Verrouillage Edition par Formateur
+TimeCredit.lockout.1: Déverrouillé
+TimeCredit.lockout.2: Verrouillé
+TimeCredit.showReport: Status Affichage Rapport Complet de Fin de stage (pour le stagiaire)
+TimeCredit.showReport.1: Caché
+TimeCredit.showReport.2: Affiché
+TimeCredit.status: Etat
+TimeCredit.status.1: Nouveau
+TimeCredit.status.2: En Cours
+TimeCredit.status.3: Entièrement Planifié
+TimeCredit.status.4: Fini
+TimeCredit.status.5: Entièrement Fini
+TimeCredit.status.6: Délai Dépassé
+TimeCredit.survey.1: Totalement
+TimeCredit.survey.2: Plutôt oui
+TimeCredit.survey.3: Plutôt non
+TimeCredit.survey.4: Pas du tout
+TimeCredit.survey.5: Pas de réponse
+TimeCredit.surveyBeginQ01: Vos premières heures de formation sont-elles satisfaisantes?
+TimeCredit.surveyBeginQ02: Les objectifs de ce stage sont-ils clairs pour vous?
+TimeCredit.surveyBeginQ03: L'organisation générale de la formation est-elle satisfaisante? (planification)
+TimeCredit.surveyBeginQ04: Le programme de formation est-il satisfaisant?
+TimeCredit.surveyBeginQ05: Les formateurs sont-ils satisfaisants (compétences techniques, animation du groupe, rythme du cours)
+TimeCredit.surveyBeginQ06: Les supports pédagogiques sont-ils adaptés à vos besoins?
+TimeCredit.surveyBeginQ07: Avez-vous des commentaires, suggestions ou demandes spécifiques?
+TimeCredit.surveyBeginQ08: La réussite de votre formation dépend également de votre implication et participation. De quelle(s) manière(s) pensez-vous pouvoir optimiser votre stage actuel?
+TimeCredit.surveyBegin: Questionnaire de Début de Stage
+TimeCredit.surveyEndQ01: Le stage de formation vous a-t-il semblé utile?
+TimeCredit.surveyEndQ02: Le stage de formation a-t-il répondu à vos besoins?
+TimeCredit.surveyEndQ03: Le contenu pédagogique du stage était-il adapté à vos besoins?
+TimeCredit.surveyEndQ04: Les compétences techniques des formateurs étaient-elles satisfaisantes?
+TimeCredit.surveyEndQ05: Votre temps de parole dans les cours était-il suffisant et équilibré?
+TimeCredit.surveyEndQ06: Le rythme et la durée du stage étaient-ils satisfaisants?
+TimeCredit.surveyEndQ07: Les recommandations sur le travail personnel étaient-elles satisfaisantes?( suivi des devoirs, conseils pour le maintien du niveau en dehors des cours)
+TimeCredit.surveyEndQ08: Pensez-vous avoir acquis de nouvelles connaissances et progresser de manière générale?
+TimeCredit.surveyEndQ09: L'organisation générale de la formation était-elle satisfaisante (planification, convocation)?
+TimeCredit.surveyEndQ10: "Vos commentaires et/ou suggestions pour améliorer la formation:"
+TimeCredit.surveyEnd: Questionnaire de Fin de Stage
+TimeCredit.surveyFill.1: Questionnaire Non Rempli
+TimeCredit.surveyFill.2: Questionnaire Rempli
+TimeCredit.courses: Cours du Credit Horaire
+TimeCredit.documents: Resources Pédagogiques affectées au Credit Horaire
+TimeCredit.report: Rapport de Fin de Stage
+TimeCredit.dtStart: Date de Début du Stage
+TimeCredit.dtEnd: Date de Fin du Stage
+TimeCredit.percentHours: Assiduitée
+
+#TimeCreditDocument
+TimeCreditDocument: Resources Pédagogiques affectées aux Credits Horaires
+TimeCreditDocument.id: Id
+TimeCreditDocument.dtCrea: Date d'ajout
+TimeCreditDocument.timeCredit: Crédit Horaire
+TimeCreditDocument.teachingResource: Fichier Ressource Pédagogique Partagée
+TimeCreditDocument.msg: Message
+TimeCreditDocument.notifyByMail: Le Stagiaire a-il été notifié de cette Ressource par mail ?
+TimeCreditDocument.notifyByMail.1: Non
+TimeCreditDocument.notifyByMail.2: Oui
+TimeCreditDocument.notifyByMail.3: Désactivé
+
+
+#Trainee
+Trainee: Stagiaire
+Trainee.id: Id
+Trainee.codeMA: Code ManageAll
+Trainee.company: Entreprise
+Trainee.project: Projet
+Trainee.username: Identifiant
+Trainee.email: Email
+Trainee.clearPassword: Mot de passe (En Claire)
+Trainee.password: Mot de passe
+Trainee.salt: Grain de sel
+Trainee.recoveryCode: Code de récupération de mot de passe
+Trainee.recoveryExpiration: Date d'éxpiration du Code de récupération
+Trainee.lockout: Status Verrouillage de Compte
+Trainee.lockout.1: Compte Actif
+Trainee.lockout.2: Compte Verrouillé
+Trainee.dtCrea: Date d'ajout
+Trainee.logins: Nombre de connexion
+Trainee.lastLogin: Date de dernère connexion
+Trainee.lastActivity: Date de dernière activité
+Trainee.lastName: Nom de Famille
+Trainee.firstName: Prénom
+Trainee.sexe: Civilité
+Trainee.sexe.1: Mlle
+Trainee.sexe.2: Mme
+Trainee.sexe.3: Mr
+Trainee.birthday: Date de naissance
+Trainee.address: Adresse
+Trainee.country: Pays
+Trainee.phone: Téléphone
+Trainee.mobile: Mobile
+Trainee.preferedLocale: Paramètre Linguistique préféré d'affichage
+Trainee.avatar: Avatar
+Trainee.traineeRoles: Privilèges
+Trainee.registerMail: Le Stagiaire a reçu ces paramètres de Connexion par mail ?
+Trainee.registerMail.1: Non
+Trainee.registerMail.2: Oui
+Trainee.registerMail.3: Désactivé
+Trainee.cef: CEF
+Trainee.job: Emploi
+Trainee.responsabilities: Responsabilité
+Trainee.needs: Besoins
+Trainee.outsideInterests: Autres intérêts
+Trainee.comments: Commentaires sur le Stagiaire
+Trainee.credits: Crédits Horaires
+Trainee.notifications: Notifications Stagiaire
+
+#TraineeNotif
+TraineeNotif: Notifications Stagiaire
+TraineeNotif.id: Id
+TraineeNotif.trainee: Stagiaire
+TraineeNotif.dtCrea: Date d'ajout
+TraineeNotif.dtStart: Date de début de notification
+TraineeNotif.type: Type
+TraineeNotif.type.10: Questionnaire de Début de Stage à remplir
+TraineeNotif.type.11: Questionnaire de Fin de Stage à Remplir
+TraineeNotif.type.20: Rappel 24h avant Cours (Nofication par Mail)
+TraineeNotif.type.21: Rappel 15j après dernier Cours s'il reste des heures non planifiés (Nofication par Mail)
+TraineeNotif.type.22: Rappel 30j après dernier Cours s'il reste des heures non planifiés (Nofication par Mail)
+TraineeNotif.type.23: Mail Questionnaire de Début de Stage à remplir
+TraineeNotif.type.24: Mail Questionnaire de Fin de Stage à Remplir
+TraineeNotif.typeId: Reférence
+TraineeNotif.status: Etat
+TraineeNotif.status.1: En attente
+TraineeNotif.status.2: Effectué
+TraineeNotif.status.3: Une Erreur est survenue
+
+
+# TraineeLog
+TraineeLog: Historique Stagiaire
+TraineeLog.dtCrea: Date d'ajout
+TraineeLog.admin: Stagiaire
+TraineeLog.msg: Message
+

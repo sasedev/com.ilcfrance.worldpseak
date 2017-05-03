@@ -1,0 +1,147 @@
+{%extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig'%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__teachingResource_list')}}"><i class="fa fa-files-o"></i> &nbsp; {{'breadcrumb.teachingResource.list'|trans}}</a></li>
+  <li class="active">
+    <a href="{{path('Admin__teachingResource_edit_get', {'id': teachingResource.id})}}">{{icon('edit')}} &nbsp; {{'breadcrumb.teachingResource.edit'|trans({'%teachingResource%': teachingResource.filename})|raw}}</a>
+  </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+        <form action="{{ path('Admin__teachingResource_search') }}" method="get"  class="form-search form-inline">
+            <div class="form-group">
+	            <label for="q">{{'_search'|trans}}</label>
+	            <input class="input-sm" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="" >
+	        </div>
+	        <div class="form-group">
+	            <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+	        </div>
+        </form>
+    </div>
+    <ul class="nav nav-tabs">
+      {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+      <li{%if tabActive==1%} class="active"{%endif%}><a href="#preview" data-toggle="tab">{{'TeachingResource.tab.preview'|trans|raw}}</a></li>
+      <li{%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'TeachingResource.tab.edit'|trans|raw}}</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+        <br>
+        <h3 class="legend">{{'TeachingResource.tlabel.preview'|trans}}</h3>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'TeachingResource.level'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teachingResource.level is not empty%}
+                {{('TeachingResource.level.'~teachingResource.level)|trans}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'TeachingResource.type'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teachingResource.type is not empty%}
+                {{('TeachingResource.type.'~teachingResource.type)|trans}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'TeachingResource.filename'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teachingResource.filename is not null%}
+                {{teachingResource.filename}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'TeachingResource.mimeType'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teachingResource.mimeType is not null%}
+                {{teachingResource.mimeType}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'TeachingResource.length'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teachingResource.length is not null%}
+                    {%if teachingResource.length<1024%}
+                        {{teachingResource.length}} o
+                    {%elseif teachingResource.length<(1024*1024)%}
+                        {{'%.2f'|format(teachingResource.length/1024)}} Ko
+                    {%elseif teachingResource.length<(1024*1024*1024)%}
+                        {{'%.2f'|format(teachingResource.length/1024/1024)}} Mo
+                    {%else%}
+                        {{'%.2f'|format(teachingResource.length/1024/1024/1024)}} Go
+                    {% endif %}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'TeachingResource.chunkSize'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teachingResource.chunkSize is not null%}
+                {{teachingResource.chunkSize}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'TeachingResource.md5'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teachingResource.md5 is not null%}
+                {{teachingResource.md5}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'TeachingResource.dtCrea'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teachingResource.dtCrea is not null%}
+                {{teachingResource.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{teachingResource.dtCrea|localizeddate('none', 'medium', app.request.locale )}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+              <div class="col-lg-3 text-right"></div>
+              <div class="col-lg-9"><br></div>
+              <div class="col-lg-3 text-right"></div>
+              <div class="col-lg-9"><a class="btn btn-sm btn-primary" href="{{path('Admin__teachingResource_download',{'id':teachingResource.id})}}">{{'_action.btnDownload'|trans}} {{icon('download')}}</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+        <br>
+        <h3 class="legend">{{'TeachingResource.tlabel.edit'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(teachingResourceEditForm, {'method':'POST', 'action': path('Admin__teachingResource_edit_post', {'id': teachingResource.id}), 'style': 'horizontal'})}}
+	          {{form_row(teachingResourceEditForm.level, {'label_col': 3, 'widget_col': 3})}}
+	          {{form_row(teachingResourceEditForm.type, {'label_col': 3, 'widget_col': 3})}}
+	          {{form_row(teachingResourceEditForm.submit, {'label_col': 3,'widget_col': 2}) }}
+	        {{form_end(teachingResourceEditForm)}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+
+    }
+);
+{%endblock dynamic_jstxt%}

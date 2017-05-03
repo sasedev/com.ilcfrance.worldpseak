@@ -1,0 +1,6 @@
+<html>
+<body>
+{{'_mail.new_timeCreditDocument_body'|trans({'%fullname%':timeCreditDocument.timeCredit.trainee.fullname,'%totalHours%':timeCreditDocument.timeCredit.totalHours,'%ftype%': ('TimeCredit.ftype.'~timeCreditDocument.timeCredit.ftype)|trans}, "messages", userPreferedLocale)|raw}}
+{{'_mail.trainee.signature'|trans({}, "messages", userPreferedLocale)|raw}}
+</body>
+</html>

@@ -1,0 +1,98 @@
+Trainee__default_homepage:
+    path:  /
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Default:index" }
+
+
+Trainee__default_planning:
+    path:  /{year}/{week}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Default:planning", week: null, year: null }
+    requirements:
+        week:  \d+
+        year:  \d+
+
+Trainee__default_notifs:
+    path:  /notifs/{page}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Default:notifs", page: 1 }
+    requirements:
+        page:  \d+
+
+Trainee__default_guide:
+    path:  /guide
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Default:guide" }
+
+Trainee__default_guide_cef:
+    path:  /guideCEF
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Default:guideCEF" }
+
+# TimeCredit
+Trainee__timeCredit_report:
+    path: /timeCredit/report/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:TimeCredit:report"}
+
+Trainee__timeCredit_surveyBegin_get:
+    path: /timeCredit/surveyBegin/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:TimeCredit:surveyBegin"}
+    methods: [GET]
+
+Trainee__timeCredit_surveyBegin_post:
+    path: /timeCredit/surveyBegin/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:TimeCredit:surveyBeginPost"}
+    methods: [POST]
+
+Trainee__timeCredit_surveyEnd_get:
+    path: /timeCredit/surveyEnd/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:TimeCredit:surveyEnd"}
+    methods: [GET]
+
+Trainee__timeCredit_surveyEnd_post:
+    path: /timeCredit/surveyEnd/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:TimeCredit:surveyEndPost"}
+    methods: [POST]
+
+# TimeCreditDocument
+Trainee__timeCreditDocument_download:
+    path:  /timeCreditDocument/download/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:TimeCreditDocument:download" }
+
+# Cours
+Trainee__cours_ajaxAdd:
+    path: /cours/ajaxAdd
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Cours:ajaxAdd"}
+    methods: [POST]
+
+Trainee__cours_ajaxEdit:
+    path: /cours/ajaxEdit
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Cours:ajaxEdit"}
+    methods: [POST]
+
+Trainee__cours_ajaxDelete:
+    path: /cours/ajaxDelete
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Cours:ajaxDelete"}
+    methods: [POST]
+    
+Trainee__cours_delete:
+    path: /cours/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Cours:delete"}
+
+Trainee__cours_download:
+    path: /cours/download/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Cours:download"}
+
+Trainee__cours_edit_get:
+    path: /cours/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:Cours:edit"}
+    methods: [GET]
+
+# CoursDocument
+Trainee__coursDocument_add_post:
+    path:  /coursDocument/add/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:CoursDocument:addPost" }
+    methods: [POST]
+
+Trainee__coursDocument_download:
+    path:  /coursDocument/download/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:CoursDocument:download" }
+
+Trainee__coursDocument_delete:
+    path:  /coursDocument/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeFrontBundle:CoursDocument:delete" }

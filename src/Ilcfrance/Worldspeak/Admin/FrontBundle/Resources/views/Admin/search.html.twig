@@ -1,0 +1,138 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %}
+{% set currentPath = path(app.request.attributes.get('_route')) %}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__admin_list')}}">{{icon('tower')}} &nbsp; {{'breadcrumb.admin.list'|trans}}</a></li>
+  <li class="active"><a href="{{app.request.uri}}">{{icon('search')}} &nbsp; {{'breadcrumb.admin.search'|trans({'%q%':q})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+        <form action="{{ path('Admin__admin_search') }}" method="get"  class="form-search form-inline">
+            <div class="form-group">
+	            <label for="q">{{'_search'|trans}}</label>
+	            <input class="input-sm" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="{{ q }}" >
+	        </div>
+	        <div class="form-group">
+	            <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+	        </div>
+        </form>
+        <br>
+        {{badge(countQ)}} <b>{{'_search_result'|trans}}</b>
+    </div>
+    {%if is_granted('ROLE_SUPER_ADMIN')%}
+    <div class="text-right">
+      <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#newAdmin">{{'_action.btnAdd'|trans}} {{icon('plus')}}</button>
+    </div>
+    <div id="newAdmin" class="modal fade in" tabindex="-1" style="display: none;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'_pagetitleAdmin__admin_add'|trans }}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            {{form_start(adminAddForm, {'method':'POST', 'action': path('Admin__admin_add_post'), 'style': 'horizontal'})}}
+              {{form_row(adminAddForm.username, {'label_col': 3, 'widget_col': 6, 'input_group': { 'append': icon('user') }})}}
+              {{form_row(adminAddForm.email, {'label_col': 3, 'widget_col': 6, 'input_group': { 'append': icon('envelope') }})}}
+              {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+              {{form_row(adminAddForm.adminRoles, {'label_col': 3, 'widget_col': 9})}}
+              {%endif%}
+              {{form_row(adminAddForm.sexe, {'label_col': 3, 'widget_col': 4})}}
+	            {{form_row(adminAddForm.lastName, {'label_col': 3, 'widget_col': 6})}}
+	            {{form_row(adminAddForm.firstName, {'label_col': 3, 'widget_col': 6})}}
+	            {{form_row(adminAddForm.preferedLocale, {'label_col': 3, 'widget_col': 7, 'input_group': { 'append': icon('flag') }})}}
+              {{form_row(adminAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+            {{form_end(adminAddForm)}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    {%endif%}
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="text-center">{{knp_pagination_render(admins)}}</div>
+        <table class="table table-bordered table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>{{'Admin.fullname'|trans}}</th>
+              <th>{{'Admin.username'|trans}}</th>
+              <th>{{'Admin.email'|trans}}</th>
+              <th>{{'Admin.adminRoles'|trans}}</th>
+              <th class="twoBtn">{{ '_actions'|trans }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for a in admins%}
+            <tr>
+              <td>{{a.fullname}}</td>
+              <td>{{a.username}}</td>
+              <td>
+                {%if a.email is not null%}<a href="mailto:{{a.email}}">{{a.email}}</a>{%else%}{{label_danger('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {%set canDelete = true%}
+                {%if a.id == currentUser.id%}{%set canDelete = false%}{%endif%}
+                {%if a.adminRoles|length!=0%}
+                  {%for r in a.adminRoles%}
+                    {%if not is_granted('ROLE_SUPER_SUPER_ADMIN') and (r.name == 'ROLE_SUPER_SUPER_ADMIN' or r.name == 'ROLE_SUPER_ADMIN')%}{%set canDelete = false%}{%endif%}
+                <a href="{{path('Admin__role_edit_get',{id: r.id})}}">{{r.description|trans|raw}}</a><br>
+                  {%endfor%}
+                {%else%}{{label_danger('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                <a class="btn btn-sm btn-info" href="{%if a.id == currentUser.id%}{{path('admin_security_profile')}}{%else%}{{path('Admin__admin_edit_get',{'id':a.id})}}{%endif%}">{{icon('edit')}}</a>
+                {%if is_granted('ROLE_SUPER_ADMIN') and canDelete == true%}
+                <a class="btn btn-sm btn-danger deleteConfirmAdmin" href="{{path('Admin__admin_delete', {'id': a.id})}}">{{icon('remove')}}</a>
+                {%endif%}
+              </td>
+            </tr>
+            {%else%}
+            <tr>
+              <td colspan="5" class="warning">{{'Admin.dbemptySearch'|trans({'%q%':q})|raw}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <div class="text-center">{{knp_pagination_render(admins)}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{%if is_granted('ROLE_SUPER_ADMIN')%}
+<div id="deleteConfirmAdmin" class="modal fade in" tabindex="-1" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="text-center">{{'Admin.deleteConfirm'|trans|raw}}</h3>
+  </div>
+  <div class="modal-body">
+    {{'Admin.deleteConfirm.txt'|trans|raw}}
+  </div>
+  <div class="modal-footer">
+    <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+  </div>
+</div>
+{%endif%}
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+  {
+{%if is_granted('ROLE_SUPER_ADMIN')%}
+    $('.deleteConfirmAdmin').click(function(e)
+      {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmAdmin').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmAdmin').modal('show');
+      }
+    );
+{%endif%}
+  }
+);
+{%endblock dynamic_jstxt%}

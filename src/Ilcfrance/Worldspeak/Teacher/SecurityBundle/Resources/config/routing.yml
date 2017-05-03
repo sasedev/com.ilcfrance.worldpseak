@@ -1,0 +1,31 @@
+teacher_security_logout:
+    path:  /logout
+
+teacher_security_login:
+    path:  /login
+    defaults: { _controller: "IlcfranceWorldspeakTeacherSecurityBundle:Security:login" }
+
+teacher_security_check:
+    path:  /login_check
+    methods: [POST]
+
+teacher_security_lost_username:
+    path:  /dontRememberUsername
+    defaults: { _controller: "IlcfranceWorldspeakTeacherSecurityBundle:Security:dontRememberUsername" }
+
+teacher_security_lost_password:
+    path:  /lostPassword
+    defaults: { _controller: "IlcfranceWorldspeakTeacherSecurityBundle:Security:lostPassword" }
+
+teacher_security_lost_genpassword:
+    path:  /genNewPassword/{id}/{code}
+    defaults: { _controller: "IlcfranceWorldspeakTeacherSecurityBundle:Security:genNewPassword" }
+
+teacher_security_profile:
+    path:  /myProfile
+    defaults: { _controller: "IlcfranceWorldspeakTeacherSecurityBundle:Security:myProfile" }
+
+
+teacher_security_profile_avatar:
+    path:  /myAvatar
+    defaults: { _controller: "IlcfranceWorldspeakTeacherSecurityBundle:Security:myAvatar" }

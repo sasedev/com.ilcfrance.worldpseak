@@ -1,0 +1,21 @@
+parameters:
+    ilc_france_worldspeak_shared_res.CallPhp.class: Ilcfrance\Worldspeak\Shared\ResBundle\Extension\PhpExtension
+    ilc_france_worldspeak_shared_res.country.class: Ilcfrance\Worldspeak\Shared\ResBundle\Extension\CountryExtension
+
+services:
+#    ilc_france_worldspeak_shared_res.example:
+#        class: Ilcfrance\Worldspeak\Shared\ResBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    ilc_france_worldspeak_shared_res.CallPhp:
+        class: "%ilc_france_worldspeak_shared_res.CallPhp.class%"
+        tags:
+            - { name: twig.extension }
+
+    ilc_france_worldspeak_shared_res.country:
+        class: "%ilc_france_worldspeak_shared_res.country.class%"
+        tags:
+            - { name: twig.extension }
+
+    ilc_france_worldspeak_shared_res.date_formatter:
+        class: Ilcfrance\Worldspeak\Shared\ResBundle\Util\DateFormatter

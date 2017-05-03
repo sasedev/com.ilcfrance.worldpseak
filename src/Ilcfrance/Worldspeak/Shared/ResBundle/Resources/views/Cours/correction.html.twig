@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ILCWorldSpeak">
+<meta name="author" content="Salah Abdelkader Seif Eddine">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/fontawesome/css/font-awesome.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('res/bower_components/bootstrap3/dist/css/bootstrap-theme.css')}}">
+<title>{%if pagetitle_txt is defined%}{{pagetitle_txt}}{%else%}ILCWorldSpeak{%endif%}</title>
+</head>
+<body>
+<br>
+<img alt="ILCWorldSpeak" src="{{asset('bundles/ilcfranceworldspeaksharedres/images/logo.png')}}">
+<br>
+<h2 style="text-align: center;">{%if pagetitle is defined%}{{pagetitle|raw}}{%else%}ILCWorldSpeak{%endif%}</h2>
+<br>
+<br>
+<table style="width: 160%;">
+    <tbody>
+        <tr>
+            <td style="width: 20%">&nbsp;</td>
+            <td style="width: 4%">&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>{{'Cours.timeCredit.pdf'|trans}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{('TimeCredit.ftype.'~cours.timeCredit.ftype~'.pdf')|trans}} {{cours.timeCredit.totalHours}} {{'_hours'|trans}}</b></th>
+        </tr>
+        <tr>
+            <td>{{'Cours.dtStart.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}</b></th>
+        </tr>
+        <tr>
+            <td>{{'Cours.dtEnd.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th><b>{{cours.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{cours.dtEnd|localizeddate('long', 'none', app.request.locale)}}</b></th>
+        </tr>
+        {%if cours.status is constant('STATUS_PLANNED', cours)%}
+        <tr>
+            <td>{{'Cours.phone.pdf'|trans|raw}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if cours.phone is not empty%}<b>{{cours.phone}}</b>{%else%}<span style="color:red;">{{'_NA'|trans}}</span>{%endif%}</th>
+        </tr>
+        {% endif %}
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>&nbsp;</th>
+        </tr>
+        <tr>
+            <td>{{'Cours.type.pdf'|trans}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if cours.type is not null and cours.type is not constant('TYPE_UNDEFINED', cours)%}<b>{{('Cours.type.'~cours.type)|trans}}</b>{%else%}<span style="color:red;">{{'_NA'|trans}}</span>{%endif%}</th>
+        </tr>
+        <tr>
+            <td>{{'Cours.status.pdf'|trans}} :</td>
+            <td>&nbsp;</td>
+            <th>{%if cours.status is not null and cours.status is not constant('STATUS_PLANNED_PENDING', cours)%}<b>{{('Cours.status.'~cours.status)|trans}}</b>{%elseif cours.status is constant('STATUS_PLANNED_PENDING', cours)%}<span style="color:red;">{{('Cours.status.'~cours.status)|trans}}</span>{%else%}<span style="color:red;">{{'_NA'|trans}}</span>{%endif%}</th>
+        </tr>
+    </tbody>
+</table>
+{%if cours.status is constant('STATUS_DONE', cours)%}
+<br>
+<br>
+<h4>{{'Cours.correctionVocabulairy.pdf'|trans|raw|upper}} :</h4>
+{%if cours.correctionVocabulairy is not empty%}{{cours.correctionVocabulairy|raw}}{%else%}<span style="color:red;">{{'_NA'|trans}}</span> {%endif%}
+<br>
+<br>
+<h4>{{'Cours.correctionStructure.pdf'|trans|raw|upper}} :</h4>
+{%if cours.correctionStructure is not empty%}{{cours.correctionStructure|raw}}{%else%}<span style="color:red;">{{'_NA'|trans}}</span> {%endif%}
+<br>
+<br>
+<h4>{{'Cours.correctionPrononciation.pdf'|trans|raw|upper}} :</h4>
+{%if cours.correctionPrononciation is not empty%}{{cours.correctionPrononciation|raw}}{%else%}<span style="color:red;">{{'_NA'|trans}}</span> {%endif%}
+{% endif %}
+</body>
+</html>

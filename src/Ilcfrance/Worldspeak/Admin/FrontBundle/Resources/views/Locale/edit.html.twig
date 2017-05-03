@@ -1,0 +1,60 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__locale_list')}}"><i class="fa fa-flag"></i> &nbsp; {{'breadcrumb.locale.list'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__locale_edit_get', {'id': locale.id})}}">{{icon('edit')}} &nbsp; {{'breadcrumb.locale.edit'|trans({'%locale%': locale.name})|raw}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <br>
+    <ul class="nav nav-tabs">
+      {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+      <li {%if tabActive==1%} class="active" {%endif%}><a href="#preview" data-toggle="tab">{{'Locale.tab.preview'|trans|raw}}</a></li>
+      {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}<li {%if tabActive==2%} class="active" {%endif%}><a href="#edit" data-toggle="tab">{{'Locale.tab.edit'|trans|raw}}</a></li>{%endif%}
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+        <br>
+        <h3 class="legend">{{'Locale.tlabel.preview'|trans}}</h3>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Locale.prefix'|trans|raw}} :</div>
+              <div class="col-lg-9">{{locale.prefix}}</div>
+              <div class="col-lg-3 text-right">{{'Locale.name'|trans|raw}} :</div>
+              <div class="col-lg-9">{{locale.name}}</div>
+              <div class="col-lg-3 text-right">{{'Locale.direction'|trans|raw}} :</div>
+              <div class="col-lg-9">{{('Locale.direction.'~locale.direction)|trans|raw}}</div>
+              <div class="col-lg-3 text-right">{{'Locale.status'|trans|raw}} :</div>
+              <div class="col-lg-9">{{('Locale.status.'~locale.status)|trans|raw}}</div>
+              <div class="col-lg-3 text-right">{{'Locale.users'|trans|raw}} :</div>
+              <div class="col-lg-9">{{badge(locale.admins|length)}} {{'Locale.admins'|trans}}<br>
+                {{badge(locale.teachers|length)}} {{'Locale.teachers'|trans}}<br>
+                {{badge(locale.trainees|length)}} {{'Locale.trainees'|trans}}<br></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+      <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+        <br>
+        <h3 class="legend">{{'Locale.tlabel.edit'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(localeEditForm, {'method':'POST', 'action': path('Admin__locale_edit_post', {'id': locale.id}), 'style': 'horizontal'})}}
+	            {{form_row(localeEditForm.prefix, {'label_col': 3, 'widget_col': 1})}}
+	            {{form_row(localeEditForm.name, {'label_col': 3, 'widget_col': 2})}}
+	            {{form_row(localeEditForm.direction, {'label_col': 3, 'widget_col': 6})}}
+	            {{form_row(localeEditForm.status, {'label_col': 3, 'widget_col': 6})}}
+	            {{form_row(localeEditForm.submit, {'label_col': 3,'widget_col': 2}) }}
+            {{form_end(localeEditForm)}}
+          </div>
+        </div>
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}

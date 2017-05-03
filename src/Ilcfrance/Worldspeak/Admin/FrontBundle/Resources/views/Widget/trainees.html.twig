@@ -1,0 +1,11 @@
+<div class="panel panel-info">
+    <div class="panel-heading text-center">
+        <span class="fa-2x">
+            {{render(controller('IlcfranceWorldspeakAdminFrontBundle:Widget:countTraineesBuggy'))}} <i class="fa fa-bug"></i>
+            /
+            {{render(controller('IlcfranceWorldspeakAdminFrontBundle:Widget:countTrainees'))}} <i class="fa fa-user"></i>
+        </span>
+    </div>
+    <a href="{{path('Admin__trainee_list')}}"><div class="panel-footer"><i class="fa fa-user"></i> &nbsp; &nbsp; {{'_menu.trainee.list'|trans}}</div></a>
+    <a href="{{path('Admin__trainee_listBuggy')}}"><div class="panel-footer"> <i class="fa fa-bug"></i> &nbsp; &nbsp; {{'_menu.trainee.listBuggy'|trans}}</div></a>
+</div>

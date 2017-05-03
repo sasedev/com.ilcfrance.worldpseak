@@ -1,0 +1,304 @@
+Teacherlogotext: Teacher Interface
+
+_NO_ONE: No Body
+
+# breadcrumbs
+breadcrumb.homepage: Home
+
+breadcrumb.notif.list: My Notifications
+
+breadcrumb.profile: My Profile
+
+breadcrumb.planning: Planning Week <b>%week%</b> of year <b>%year%</b>
+
+breadcrumb.trainee.edit: Trainee Account <b>%trainee%</b>
+
+breadcrumb.timeCredit.edit: Time Credit <b>%totalHours%</b> hours of <b>%ftype%</b> - Level <b>%level%</b>
+
+breadcrumb.timeCreditDocument.edit: Ressource Pédagogique associée au Crédit Horaire
+
+breadcrumb.cours.edit: Cours of <b>%dStart%</b> from <b>%tStart%</b> to <b>%dtEnd%</b>
+
+# menu
+_menu.notifs: Notifications
+
+# defaults
+default.tab.Calendar: Calendar View
+default.tab.List: List View
+default.tlabel.ClosedDays: Holidays List
+default.tlabel.TeacherAvailabilities: List of Teacher Availabilities
+default.tlabel.Cours: Liste of Courses
+
+# hompage
+_pagetitle_homepage: ILCWorldspeak - HomePage
+
+# general
+_pagetitle_planning_txt: Planning Week "%week%" Year "%year%"
+_pagetitle_planning: Planning Week "<b>%week%</b>" Year "<b>%year%</b>" 
+
+# notifs
+_pagetitle_notifs_list: Notifications
+
+TeacherNotif.dbempty: No Notification Found
+
+# Teacher
+Teacher.sexe.choice.1: "Miss"
+Teacher.sexe.choice.2: "Mrs"
+Teacher.sexe.choice.3: "Mr"
+
+# ClosedDay
+ClosedDay.dbemptyWeek: There is no holydays in this week
+
+# TeacherAvailability
+TeacherAvailability.addSuccess: Ajout avec succès de la Nouvelle disponibilité Formateur du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.addSuccess_txt: Ajout avec succès de la Nouvelle disponibilité Formateur du %dtStart%  au %dtEnd%
+TeacherAvailability.addFailureTeacherNotfound: Erreur lors de la tentative d'ajout de la Nouvelle disponibilité Formateur, Le Formateur n'existe pas ou plus
+TeacherAvailability.addFailureIntersection: Erreur de croisement de Disponibilites lors de la tentative d'ajout de la Nouvelle disponibilité Formateur du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.addFailureIntersection_txt: Erreur de croisement de Disponibilites lors de la tentative d'ajout de la Nouvelle disponibilité Formateur du %dtStart%  au %dtEnd%
+TeacherAvailability.addFailureInvalid: Format erroné lors de la tentative d'ajout de Nouvelle disponibilité Formateurs
+TeacherAvailability.editSuccess: Modification avec succès de la Disponibilité Formateur du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.editSuccess_txt: Modification avec succès de la Disponibilité Formateur du %dtStart%  au %dtEnd%
+TeacherAvailability.editNotfound: La Disponibilité Formateur que vous tentez de modifier n'existe pas ou plus
+TeacherAvailability.editForbidden: La Disponibilité Formateur que vous tentez de modifier ne vous appartient pas
+TeacherAvailability.editFailureIntersection: Erreur de croisement de Disponibilites lors de la tentative de modification de Disponibilité Formateur du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.editFailureIntersection_txt: Erreur de croisement de Disponibilites lors de la tentative de modification de Disponibilité Formateur du %dtStart%  au %dtEnd%
+TeacherAvailability.editFailureInvalid: Format erroné lors de la tentative de modification de disponibilité Formateurs
+TeacherAvailability.deleteSuccess: Suppression avec succès de la disponibilité Formateur du <b>%dtStart%</b>  au <b>%dtEnd%</b>
+TeacherAvailability.deleteSuccess_txt: Suppression avec succès de la disponibilité Formateur du %dtStart%  au %dtEnd%
+TeacherAvailability.deleteForbidden: Erreur lors de la tentative de suppression de disponibilité Formateurs, La Disponibilité Formateur que vous tentez de supprimer ne vous appartient pas
+TeacherAvailability.deleteNotfound: Erreur lors de la tentative de suppression de disponibilité Formateurs, La Disponibilité Formateur n'existe pas ou plus
+TeacherAvailability.deleteFailureInvalid: Format erroné lors de la tentative de suppression de disponibilité Formateurs
+TeacherAvailability.dbemptyWeek: Vous n'avez aucune Disponibilité cette Semaine
+
+# Trainee
+_pagetitleTeacher__trainee_edit_txt: Compte Stagiaire "%trainee%"
+_pagetitleTeacher__trainee_edit: Compte Stagiaire "<b>%trainee%</b>"
+
+Trainee.email.label: "Email :"
+Trainee.sexe.label: "Marital status :"
+Trainee.sexe.choice.1: "Ms"
+Trainee.sexe.choice.2: "Mrs"
+Trainee.sexe.choice.3: "Mr"
+Trainee.cef.label: "CEF Level :"
+Trainee.job.label: "Job:"
+Trainee.responsabilities.label: "Job description :"
+Trainee.needs.label: "Needs :"
+Trainee.outsideInterests.label: "Other interests :"
+Trainee.comments.label: "Comments :"
+Trainee.lastName.label: "Surname :"
+Trainee.firstName.label: "First Name :"
+Trainee.birthday.label: "Date of birth :"
+Trainee.address.label: "Address :"
+Trainee.country.label: "Country :"
+Trainee.phone.label: "Phone number :"
+Trainee.mobile.label: "mobile number :"
+
+Trainee.tab.preview: Details
+Trainee.tab.edit: Edit
+Trainee.tab.timeCredit: Time credit
+Trainee.tlabel.preview: View Learner Profile Details
+Trainee.tlabel.editProfile: Edit Learner Profile Details
+Trainee.tlabel.editProfileAdvanced: Edit leaner Advanced Profile Details
+Trainee.tlabel.editEmail: Edit Email address
+Trainee.tlabel.editCef: Edit End CEF Level
+Trainee.tlabel.listTimeCredits: List of Courses
+
+Trainee.editNotfound: Le compte Stagiaire que vous essayer de visualiser n'existe pas ou plus
+Trainee.editSuccess: Le compte Stagiaire "<b>%trainee%</b>" a été modifié avec succès
+Trainee.editSuccessCef: Le Niveau CEF du compte Stagiaire "<b>%trainee%</b>" a été modifié avec succès
+Trainee.editSuccessEmail: L'adresse Email du compte Stagiaire "<b>%trainee%</b>" a été modifiée avec succès
+Trainee.editSuccessProfile: Les détails du Profile du compte Stagiaire "<b>%trainee%</b>" ont été modifiés avec succès
+Trainee.editSuccessProfileAdvanced: Les détails Avancés du Profile du compte Stagiaire "<b>%trainee%</b>" ont été modifiés avec succès
+Trainee.editSuccessPreferedLocale: La Langue d'affichage préférée du compte Stagiaire "<b>%trainee%</b>" a été modifiée avec succès
+Trainee.editError: Une erreur s'est produite lors de la tentative de modification du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorCef: Une erreur s'est produite lors de la tentative de modification du Niveau Cef du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorEmail: Une erreur s'est produite lors de la tentative de modification de l'adresse Email du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorProfile: Une erreur s'est produite lors de la tentative de modification des détails du Profile du compte Stagiaire "<b>%trainee%</b>"
+Trainee.editErrorProfileAdvanced: Une erreur s'est produite lors de la tentative de modification des détails Avancés du Profile du compte Stagiaire "<b>%trainee%</b>"
+Trainee.mailSuccessRegister: Le Mot de pass du Compte Stagiaire "<b>%trainee%</b>" lui a été envoyé par Mail
+Trainee.mailSuccessNewPass: Le Mot de pass du Compte Stagiaire "<b>%trainee%</b>" a été modifié avec succès, ses nouveaux paramètres lui ont été envoyés par Mail
+Trainee.mailFailure: Une Erreur s'est produite lors de la tentative d'envois d'email au Stagiaire
+
+# TimeCredit
+_pagetitleTeacher__timeCredit_edit_txt: Crédit Horaire de "%totalHours%" Heures de "%ftype%" - Niveau "%level%" - du Stagiaire "%trainee%"
+_pagetitleTeacher__timeCredit_edit: Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" - Niveau "<b>%level%</b>" - du Stagiaire "<b>%trainee%</b>"
+
+TimeCredit.tab.preview: Details
+TimeCredit.tab.edit: Edit
+TimeCredit.tab.Cours: Lessons
+TimeCredit.tab.TimeCreditDocument: Homework
+TimeCredit.tlabel.preview: View Time Credit Details
+TimeCredit.tlabel.kpi: KPI's
+TimeCredit.tlabel.endReport: End of Course Report
+TimeCredit.tlabel.editCefBegin: Edit CEF Start Level
+TimeCredit.tlabel.editCefEnd: Edit CEF End Level
+TimeCredit.tlabel.editEndReport: Edit End of Course Report
+TimeCredit.tlabel.editDetails: Edit Time Credit Objectives and Comments
+TimeCredit.tlabel.editFtype: Edit Training Type
+TimeCredit.tlabel.editLevel: Edit Training Level
+TimeCredit.tlabel.cours: List of Lessons
+TimeCredit.tlabel.timeCreditDocumentAdd: Allocate Homework
+TimeCredit.tlabel.timeCreditDocument: Homework
+
+TimeCredit.status: Status
+TimeCredit.ftype.label: "Training Type :"
+TimeCredit.ftype.choice.0: Inconnu
+TimeCredit.ftype.choice.100: "English Training"
+TimeCredit.level.label: "Training Level :"
+TimeCredit.level.choice.0: Inconnu
+TimeCredit.level.choice.11: "Elementary (EN)"
+TimeCredit.level.choice.12: "Intermediate (EN)"
+TimeCredit.level.choice.13: "Upper Advanced(EN)"
+TimeCredit.cefBegin.label: "CEF Start Level :"
+TimeCredit.cefEnd.label: "CEF End Level :"
+TimeCredit.objectives.label: "Course Objectives :"
+TimeCredit.comments.label: "General Comments on the training :"
+TimeCredit.progress1.label: "(Progress) Revision of basic tenses :"
+TimeCredit.progress2.label: "(Progress) Work on tenses :"
+TimeCredit.progress3.label: "(Progress) Work on more complex grammar :"
+TimeCredit.progress4.label: "(Progress) Work on general vocabulary :"
+TimeCredit.progress5.label: "(Progress) Work on business vocabulary :"
+TimeCredit.progress6.label: "(Progress) Work on pronunciation :"
+TimeCredit.progress7.label: "(Progress) Progress with listening comprehension :"
+TimeCredit.levelDesc1.label: "(Level) Speaking level: vocabulary :"
+TimeCredit.levelDesc2.label: "(Level) Speaking level: accuracy :"
+TimeCredit.levelDesc3.label: "(Level) Speaking level: coherence and structure :"
+TimeCredit.levelDesc4.label: "(Level) Level of interaction:"
+TimeCredit.levelDesc5.label: "(Level) Speaking level: fluency :"
+TimeCredit.levelDesc6.label: "(Level) listening comprehension :"
+TimeCredit.levelDesc7.label: "(Level) Pronunciation :"
+TimeCredit.improvement1.label: "(In need of improvement) Vocabulary:"
+TimeCredit.improvement2.label: "(In need of improvement) Accuracy :"
+TimeCredit.improvement3.label: "(In need of improvement) fluency :"
+TimeCredit.improvement4.label: "(In need of improvement) Listening comprehension:"
+TimeCredit.improvement5.label: "(In need of improvement) Pronunciation:"
+TimeCredit.lastTeacherReport.label: "Teacher's Comments :"
+TimeCredit.endReport.choice.1: Weak
+TimeCredit.endReport.choice.3: Good
+TimeCredit.endReport.choice.4: Excellent
+TimeCredit.improvement.choice.1: Not Needed
+TimeCredit.improvement.choice.2: Needed
+
+TimeCredit.editNotfound: Le Crédit Horaire que voue tentez de voir/modifier n'existe pas ou plus 
+TimeCredit.editSuccessCefBegin: Le Niveau CEF de début du stage à été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorCefBegin: Une erreur s'est produite lors de la tentative de modification du Niveau CEF de début du stage pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessCefEnd: Le Niveau CEF de fin de stage à été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorCefEnd: Une erreur s'est produite lors de la tentative de modification du Niveau CEF de fin de stage pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessDetails: Les Objectifs et Commentaires Généraux du stage ont été modifiés avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorDetails: Une erreur s'est produite lors de la tentative de modification des Objectifs et Commentaires Généraux du stage pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessFtype: Le Type de Formation  a été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorFtype: Une erreur s'est produite lors de la tentative de modification du Type de Formation pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editSuccessLevel: Le Niveau de Formation  a été modifié avec succès pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.editErrorLevel: Une erreur s'est produite lors de la tentative de modification du Niveau de Formation pour le Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCredit.dbemptyTrainee: Aucune Crédit Horaire trouvé dans la base de données pour ce Stagiaire
+
+# TimeCreditDocument
+_pagetitleTeacher__timeCreditDocument_edit_txt: Ressource Pédagogique du Crédit Horaire de "%totalHours%" Heures de "%ftype%" - Niveau "%level%" - du Stagiaire "%trainee%"
+_pagetitleTeacher__timeCreditDocument_edit: Ressource Pédagogique du Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" - Niveau "<b>%level%</b>" - du Stagiaire "<b>%trainee%</b>"
+
+TimeCreditDocument.tab.preview: Details
+TimeCreditDocument.tab.edit: Edit
+TimeCreditDocument.tlabel.preview: Preview Homework 
+TimeCreditDocument.tlabel.edit: Edit homework
+
+TimeCreditDocument.teachingResource.label: "File :"
+TimeCreditDocument.msg.label: "Message :"
+TimeCreditDocument.notifyByMail.label: "Notify Learner :"
+TimeCreditDocument.notifyByMail.choice.1: Later
+TimeCreditDocument.notifyByMail.choice.2: Now
+TimeCreditDocument.notifyByMail.choice.3: Disabled
+
+TimeCreditDocument.addSuccess: Une Resource Pédagogique a été ajouté avec succès au Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCreditDocument.addSuccessWithMail: Une Resource Pédagogique a été ajouté avec succès au Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" et un email de notification a été envoyé au Stagiaire
+TimeCreditDocument.addErrorInvalid: Une erreur s'est produite lors de la tentative d'affectation de la Ressource Pédagogique au Crédit Horaire
+TimeCreditDocument.addErrorUnknown: Une erreur inconnue s'est produite lors de la tentative d'affectation de la Ressource Pédagogique au Crédit Horaire
+TimeCreditDocument.mailSuccess: Envoie d'email de notification avec succès pour la Resource Pédagogique du Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>"
+TimeCreditDocument.mailNotfound: La Resource Pédagogique du Crédit Horaire pour laquel vous tentez d'envoyer une notification par mail n'existe pas ou plus dans la base de donnée
+TimeCreditDocument.mailErrorNotValid: Envoie d'email de notification Impossible pour la Resource Pédagogique du Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" parceque son adresse Email est invalide
+TimeCreditDocument.mailErrorUnknown: Une erreur inconnue s'est produite lors de la tentative d'envoie  d'email de notification pour la Resource Pédagogique du Crédit Horaire
+TimeCreditDocument.editNotFound: La Ressource Pédagogique que vous tentez d'editer n'existe pas ou plus
+TimeCreditDocument.editError: Une Erreur s'est produite lors de la tentatice d'edition de la Ressource Pédagogique affectée au Crédit Horaire
+TimeCreditDocument.editSuccess: La Ressource Pédagogique affectée au Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" a été modifiée avec succès
+TimeCreditDocument.deleteConfirm: Confirmation de suppression de Ressource Pédagogique affectée au Crédit Horaire
+TimeCreditDocument.deleteConfirm.txt:  <p>Vous êtes sur le point de supprimer une Ressource Pédagogique affectée au Crédit Horaire.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+TimeCreditDocument.deleteSuccess: La Resource Pédagogique du Crédit Horaire de "<b>%totalHours%</b>" Heures de "<b>%ftype%</b>" (Niveau "<b>%level%</b>") du Stagiaire "<b>%trainee%</b>" a été supprimée avec succès
+TimeCreditDocument.deleteNotfound: La Resource Pédagogique du Crédit Horaire que vous tentez de supprimer n'existe pas ou déjà plus dans la base de données
+TimeCreditDocument.deleteError: Une erreur s'est produite lors de la tentative de suppression de la Resource Pédagogique du Crédit Horaire
+TimeCreditDocument.downloadNotFile: La Ressource Pédagogique que vous tentez de télécherger ne contient pas de Fichier
+TimeCreditDocument.downloadNotfound: La Ressource Pédagogique que vous tentez de télécherger n'existe pas ou plus
+TimeCreditDocument.downloadError: Une Erreur s'est produite lors de la tentative de téléchargement de la Ressource Pédagogique
+TimeCreditDocument.dbemptyTimeCredit: Aucune Ressource Pédagogique n'est affectée à ce Crédit Horaire
+
+# Cours
+_pagetitleTeacher__cours_edit_txt: Lesson "%dStart%" at  "%tStart%" (durée "%duration%" min)  Learner "%trainee%" 
+_pagetitleTeacher__cours_edit: Lesson "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>"
+
+Cours.tab.preview: Previous Lessons
+Cours.tab.edit: Today's Lesson
+Cours.tab.CoursDocument: Learner's document
+Cours.tab.TimeCreditDocument: Homework
+Cours.tab.TimeCredit: Time Credit
+Cours.tab.Trainee: Learner Profile
+Cours.tlabel.preview: View Today's Lesson
+Cours.tlabel.edit: Edit Today's Lesson
+Cours.tlabel.coursEditPhone: Edit Lesson Phone Number
+Cours.tlabel.coursEditType: Edit Lesson Type
+Cours.tlabel.coursEditStatus: Edit Lesson Status 
+Cours.tlabel.coursEditCorrection: Edit Lesson Corrections
+Cours.tlabel.coursEditKpi: Edit KPIs
+Cours.tlabel.coursDocument: Learner's Document
+Cours.tlabel.prevCourses: "Previous Lessons :"
+
+Cours.type.label: "Lesson Type :"
+Cours.type.choice.101: Vocabulary (EN)
+Cours.type.choice.102: Grammar (EN)
+Cours.type.choice.103: Video (EN)
+Cours.type.choice.104: Learner's doc correction DM (EN)
+Cours.type.choice.105: Other (EN)
+Cours.phone.label: "Lesson Phone Number :"
+Cours.status.label: "Lesson status :"
+Cours.status.choice.1: Scheduled
+Cours.status.choice.3: Done 
+Cours.status.choice.4: Absent 
+Cours.progress.label: "Learner's performance: what he does well/what he needs to improve :"
+Cours.correctionVocabulairy.label: "Vocabulary correction :"
+Cours.correctionStructure.label: "Structure correction :"
+Cours.correctionPrononciation.label: "Pronunciation correction :"
+Cours.comments.label: "Comments on today's lesson :"
+Cours.kpiHomeworkPerformed.label: "KPI Homework preparation :"
+Cours.kpiParticipation.label: "KPI Participation :"
+Cours.kpiVocabularyRetention.label: "KPI Vocabulary retention :"
+Cours.kpiCorrectionConsideration.label: "KPI Self-correction :"
+
+Cours.kpi.choice.1: Weak
+Cours.kpi.choice.3: Good
+Cours.kpi.choice.4: Excellent
+
+Cours.editNotfound: The lesson you are trying to edit no longer exists
+Cours.editSuccessCorrection: Lesson corrections "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>" have successfully been edited
+Cours.editSuccessKpi: Lesson KPIs "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>" have successfully been edited
+Cours.editSuccessPhone: The lesson phone number "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>" has successfully been edited.
+Cours.editSuccessStatus: Lesson status "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>" has successfully been edited
+Cours.editSuccessTeacher: Trainer "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>" has successfully been edited
+Cours.editSuccessType: Lesson Type "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>" has successfully been edited
+Cours.editErrorCorrection: An error has occured for corrections edit"<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>"
+Cours.editErrorKpi: An error has occured for KPIs edit "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>"
+Cours.editErrorPhone: An error has occurred for telephone number edit "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>"
+Cours.editErrorStatus: An error has occured for status edit "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>"
+Cours.editErrorTeacher: An error has occurred for trainer edit "<b>%dStart%</b>" at "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) Learner "<b>%trainee%</b>"
+Cours.editErrorType: Une erreur s'est produite lors de la tentative de modification du Correction du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+Cours.editErrorUnknown: Une erreur inconnue s'est produite lors de la tentative de modification du Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>"
+Cours.deleteConfirm: Confirmation de suppression de Cours
+Cours.deleteConfirm.txt: <p>Vous êtes sur le point de supprimer un Cours.<br> Cette opération est irréversible<br>Etes-vous sûre de vouloir continuer ?</p>
+Cours.deleteSuccess: Le Cours du "<b>%dStart%</b>" à "<b>%tStart%</b>" (durée "<b>%duration%</b>" min) du Stagiaire "<b>%trainee%</b>" a été supprimé avec succès
+Cours.deleteNotfound: Le Cours que vous tentez de supprimer n'existe pas ou plus
+Cours.deleteError: Une erreur s'est produite lors de la tentative de suppression du Cours
+Cours.dbemptyTimeCredit: Aucun Cours trouvé pour ce Crédit Horaire
+Cours.dbemptyWeek: Aucun Cours trouvé pour cette cette Semaine
+Cours.dbempty: Aucun Cours trouvé dans la base de données
+
+# CoursDocument
+CoursDocument.downloadNotFile: Le Document Utilisateur que vous tentez de télécherger ne contient pas de Fichier
+CoursDocument.downloadNotfound: Le Document Utilisateur que vous tentez de télécherger n'existe pas ou plus
+CoursDocument.downloadError: Une Erreur s'est produite lors de la tentative de téléchargement du Document Utilisateur
+CoursDocument.dbemptyCours: Aucun Document Utilisateur trouvé pour ce Cours

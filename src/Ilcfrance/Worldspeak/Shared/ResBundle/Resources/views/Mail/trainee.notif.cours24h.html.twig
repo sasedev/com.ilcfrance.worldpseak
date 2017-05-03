@@ -1,0 +1,10 @@
+<html>
+<body>
+{{'_mail.trainee.notif.cours24h.body'|trans({
+    '%fullname%':notif.trainee.fullname,
+    '%cours.dtStart%': notif.cours.dtStart|localizeddate('full', 'long', app.request.locale )|capitalize,
+    '%cours.duration%': notif.cours.duration}, "messages", userPreferedLocale)|raw}}
+{%if notif.cours.phone is not empty%}{{'_mail.trainee.notif.cours24h.body2'|trans({'%phone%':notif.cours.phone}, "messages", userPreferedLocale)|raw}}{%endif%}
+{{'_mail.trainee.signature'|trans({}, "messages", userPreferedLocale)|raw}}
+</body>
+</html>

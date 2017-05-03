@@ -1,0 +1,142 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__company_list')}}"><i class="fa fa-umbrella"></i> &nbsp; {{'breadcrumb.company.list'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+        <form action="{{ path('Admin__company_search') }}" method="get"  class="form-search form-inline">
+            <div class="form-group">
+	            <label for="q">{{'_search'|trans}}</label>
+	            <input class="input-sm" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="" >
+	        </div>
+	        <div class="form-group">
+	            <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+	        </div>
+        </form>
+    </div>
+    <div class="text-right">
+      <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#newCompany">{{'_action.btnAdd'|trans}} {{icon('plus')}}</button>
+    </div>
+    <div id="newCompany" class="modal fade in" tabindex="-1" style="display: none;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'_pagetitleAdmin__company_add'|trans }}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            {{form_start(companyAddForm, {'method':'POST', 'action': path('Admin__company_add_post'), 'style': 'horizontal'})}}
+              {{form_row(companyAddForm.name, {'label_col': 3, 'widget_col': 6})}}
+              {{form_row(companyAddForm.prefix, {'label_col': 3, 'widget_col': 6})}}
+              {{form_row(companyAddForm.service, {'label_col': 3, 'widget_col': 5})}}
+              {{form_row(companyAddForm.address, {'label_col': 3, 'widget_col': 7})}}
+              {{form_row(companyAddForm.town, {'label_col': 3, 'widget_col': 5})}}
+              {{form_row(companyAddForm.postalCode, {'label_col': 3, 'widget_col': 6})}}
+              {{form_row(companyAddForm.country, {'label_col': 3, 'widget_col': 7, 'input_group': { 'append': icon('flag') }})}}
+              {{form_row(companyAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+            {{form_end(companyAddForm)}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="text-center">{{knp_pagination_render(companies)}}</div>
+        <table class="table table-bordered table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>{{'Company.codeMA'|trans}}</th>
+              <th>{{'Company.name'|trans}}</th>
+              <th>{{'Company.prefix'|trans}}</th>
+              <th>{{'Company.service'|trans}}</th>
+              <th>{{'Company.address'|trans}}</th>
+              <th>{{'Company.town'|trans}}</th>
+              <th>{{'Company.postalCode'|trans}}</th>
+              <th>{{'Company.country'|trans}}</th>
+              <th>{{'Company.trainees'|trans}}</th>
+              <th class="threeBtn">{{ '_actions'|trans }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for c in companies%}
+            <tr>
+              <td>
+                {%if c.codeMA is not empty%}{{c.codeMA}}{%else%}{{label('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {%if c.name is not empty%}{{c.name}}{%else%}{{label_danger('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {%if c.prefix is not empty%}{{c.prefix}}{%else%}{{label_danger('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {%if c.service is not empty%}{{c.service}}{%else%}{{label_primary('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {%if c.address is not empty%}{{c.address|raw}}{%else%}{{label_primary('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {%if c.town is not empty%}{{c.town}}{%else%}{{label_primary('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {%if c.postalCode is not empty%}{{c.postalCode}}{%else%}{{label_primary('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {%if c.country is not null%}{{c.country|country}}{%else%}{{label_primary('_NA'|trans)}}{%endif%}
+              </td>
+              <td>
+                {{badge(c.trainees|length)}}
+              </td>
+              <td>
+                <a class="btn btn-sm btn-primary" href="{{path('Admin__trainee_listByCompany',{'id':c.id})}}"><i class="fa fa-users"></i></a>
+                <a class="btn btn-sm btn-info" href="{{path('Admin__company_edit_get',{'id':c.id})}}">{{icon('edit')}}</a>
+                <a class="btn btn-sm btn-danger deleteConfirmCompany" href="{{path('Admin__company_delete', {'id': c.id})}}">{{icon('remove')}}</a>
+              </td>
+            </tr>
+            {%else%}
+            <tr>
+              <td colspan="10" class="warning">{{'Company.dbempty'|trans}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <div class="text-center">{{knp_pagination_render(companies)}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="deleteConfirmCompany" class="modal fade in" tabindex="-1" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="text-center">{{'Company.deleteConfirm'|trans|raw}}</h3>
+  </div>
+  <div class="modal-body">
+    {{'Company.deleteConfirm.txt'|trans|raw}}
+  </div>
+  <div class="modal-footer">
+    <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+  {
+    $('.deleteConfirmCompany').click(function(e)
+      {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmCompany').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmCompany').modal('show');
+      }
+    );
+  }
+);
+{%endblock dynamic_jstxt%}

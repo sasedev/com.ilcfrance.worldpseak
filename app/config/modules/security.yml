@@ -1,0 +1,177 @@
+security:
+    hide_user_not_found:  true
+
+    role_hierarchy:
+        ROLE_USER:              ROLE_USER
+        ROLE_TRAINEE:       [ROLE_USER]
+        ROLE_TEACHER:       [ROLE_USER]
+        ROLE_EXTERNAL_TEACHER:       [ROLE_TEACHER]
+        ROLE_INTERNAL_TEACHER:       [ROLE_EXTERNAL_TEACHER]
+        ROLE_ADMIN:             [ROLE_USER]
+        ROLE_SUPER_ADMIN:        [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SUPER_SUPER_ADMIN:        [ROLE_SUPER_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    
+
+    encoders:
+        Ilcfrance\Worldspeak\Shared\DataBundle\Entity\Admin:
+            algorithm:            pbkdf2
+            hash_algorithm:       sha512
+            encode_as_base64:     true
+            iterations:           1000
+        Ilcfrance\Worldspeak\Shared\DataBundle\Entity\Teacher:
+            algorithm:            pbkdf2
+            hash_algorithm:       sha512
+            encode_as_base64:     true
+            iterations:           1000
+        Ilcfrance\Worldspeak\Shared\DataBundle\Entity\Trainee:
+            algorithm:            pbkdf2
+            hash_algorithm:       sha512
+            encode_as_base64:     true
+            iterations:           1000
+    providers:
+        admin_provider:
+            entity:
+                class: "IlcfranceWorldspeakSharedDataBundle:Admin"
+#                property: username
+#                manager_name:       ~
+        teacher_provider:
+            entity:
+                class: "IlcfranceWorldspeakSharedDataBundle:Teacher"
+        trainee_provider:
+            entity:
+                class: "IlcfranceWorldspeakSharedDataBundle:Trainee"
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt))/
+            security: false
+            anonymous:  true
+        resources:
+            pattern:  ^/(css|js|images|img|imgs|fonts|webfonts|assets|bundles|res)/
+            security: false
+            anonymous:  true
+        secoff:
+            pattern:  ^/(login|login_check|logout|register|lostid|lostpass|resetpass)/
+            security: false
+            anonymous:  true
+        admin:
+            pattern:      .*
+            host: "admin.%domain%"
+            provider: admin_provider
+            form_login:
+                login_path:     admin_security_login
+                check_path:     admin_security_check
+                post_only:      true
+                username_parameter:     "LoginForm[username]"
+                password_parameter:     "LoginForm[password]"
+#                target_path_parameter:  "LoginForm[target_path]"
+#                default_target_path: /
+                use_referer:    true
+                use_forward:    false
+#                intention: authentication
+                require_previous_session: true
+                remember_me:    true
+#                success_handler: login.listener
+            logout:
+                path:   admin_security_logout
+#                target: '%schemes%://%domain%/'
+#                success_handler: logout_listener
+            remember_me:
+                secret: "%secret%"
+                name: ILCFranceWorldspeakAdminSec
+                lifetime: 2592000 # optional, it is set to 30 days here
+                path: ^/
+                domain: "admin.%domain%"
+                always_remember_me: false
+                remember_me_parameter: "LoginForm[remember_me]"
+            security: true
+            anonymous:    true
+        teacher:
+            pattern:      .*
+            host: "teacher.%domain%"
+            provider: teacher_provider
+            form_login:
+                login_path:     teacher_security_login
+                check_path:     teacher_security_check
+                post_only:      true
+                username_parameter:     "LoginForm[username]"
+                password_parameter:     "LoginForm[password]"
+#                target_path_parameter:  "LoginForm[target_path]"
+#                default_target_path: /
+                use_referer:    true
+                use_forward:    false
+#                intention: authentication
+                require_previous_session: true
+                remember_me:    true
+#                success_handler: login.listener
+            logout:
+                path:   teacher_security_logout
+#                target: '%schemes%://%domain%/'
+#                success_handler: logout_listener
+            remember_me:
+                secret: "%secret%"
+                name: ILCFranceWorldspeakTeacherSec
+                lifetime: 2592000 # optional, it is set to 30 days here
+                path: ^/
+                domain: "teacher.%domain%"
+                always_remember_me: false
+                remember_me_parameter: "LoginForm[remember_me]"
+            security: true
+            anonymous:    true
+        trainee:
+            pattern:      .*
+            host: "%domain%"
+            provider: trainee_provider
+            form_login:
+                login_path:     trainee_security_login
+                check_path:     trainee_security_check
+                post_only:      true
+                username_parameter:     "LoginForm[username]"
+                password_parameter:     "LoginForm[password]"
+#                target_path_parameter:  "LoginForm[target_path]"
+#                default_target_path: /
+                use_referer:    true
+                use_forward:    false
+#                intention: authentication
+                require_previous_session: true
+                remember_me:    true
+#                success_handler: login.listener
+            logout:
+                path:   trainee_security_logout
+#                target: '%schemes%://%domain%/'
+#                success_handler: logout_listener
+            remember_me:
+                secret: "%secret%"
+                name: ILCFranceWorldspeakTeacherSec
+                lifetime: 2592000 # optional, it is set to 30 days here
+                path: ^/
+                domain: "%domain%"
+                always_remember_me: false
+                remember_me_parameter: "LoginForm[remember_me]"
+            security: true
+            anonymous:    true
+    access_control:
+        # Liste des pages accessibles à tous les utilisateurs (ne pas toucher)
+        - { path: ^/_wdt/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_profiler/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/css/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/js/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/images/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/img/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/imgs/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/fonts/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/webfonts/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/assets/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/bundles/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/res/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login_check, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/dontRememberUsername, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/lostPassword, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/genNewPassword.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_gcb.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/.*, host: teacher.%domain%, roles: ROLE_TEACHER }
+        - { path: ^/.*, host: admin.%domain%, roles: ROLE_ADMIN }
+        - { path: ^/*, host: "%domain%", roles: ROLE_TRAINEE }
+    access_denied_url: /

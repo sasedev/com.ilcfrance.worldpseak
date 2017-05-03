@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{{ title }}</title>
+</head>
+<body>
+<h1>{{ pagetitle|raw }}</h1>
+<hr>
+<a href="..">..</a><br>
+{% for filepath, filename in fs %}
+<a href="{{ path('vfs_files', {'file': '/'}) }}{{ filepath }}">{{ filename }}</a><br>
+{% endfor %}
+<br>
+<hr>
+</body>
+</html>

@@ -1,0 +1,560 @@
+Admin__default_homepage:
+    path:  /
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:index" }
+
+Admin__default_excel:
+    path:  /excel
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:excel" }
+    methods: [POST]
+
+Admin__default_detectBuggy:
+    path:  /detectBuggy
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:detectBuggy" }
+
+Admin__default_resetTeachers:
+    path:  /resetTeachers
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:resetTeachers" }
+
+Admin__default_mailTeachers:
+    path:  /mailTeachers
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:mailTeachers" }
+
+Admin__default_resetTrainees:
+    path:  /resetTrainees
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:resetTrainees" }
+
+Admin__default_mailTrainees:
+    path:  /mailTrainees
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:mailTrainees" }
+
+Admin__default_bugs:
+    path:  /bugs
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:bugs" }
+
+Admin__default_notifs:
+    path:  /notifs/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:notifs", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__default_planning:
+    path:  /{year}/{week}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Default:planning", year: null, week: null }
+    requirements:
+        year:  \d+
+        week:  \d+
+
+# Locale
+Admin__locale_list:
+    path:  /locales/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Locale:list", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__locale_add_get:
+    path:  /locale/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Locale:add" }
+    methods: [GET]
+
+Admin__locale_add_post:
+    path:  /locale/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Locale:addPost" }
+    methods: [POST]
+
+Admin__locale_edit_get:
+    path:  /locale/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Locale:edit" }
+    methods: [GET]
+
+Admin__locale_edit_post:
+    path:  /locale/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Locale:editPost" }
+    methods: [POST]
+
+Admin__locale_delete:
+    path:  /locale/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Locale:delete" }
+
+
+# Role
+Admin__role_list:
+    path:  /roles/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Role:list", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__role_add_get:
+    path:  /role/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Role:add" }
+    methods: [GET]
+
+Admin__role_add_post:
+    path:  /role/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Role:addPost" }
+    methods: [POST]
+
+Admin__role_edit_get:
+    path:  /role/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Role:edit" }
+    methods: [GET]
+
+Admin__role_edit_post:
+    path:  /role/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Role:editPost" }
+    methods: [POST]
+
+Admin__role_delete:
+    path:  /role/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Role:delete" }
+
+
+# ClosedDay
+
+Admin__closedDay_list:
+    path:  /closedDays/{year}/{month}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:ClosedDay:list", year: null, month: null  }
+    requirements:
+        year:  \d+
+        month:  \d+
+
+Admin__closedDay_ajaxAdd:
+    path:  /closedDay/ajaxAdd
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:ClosedDay:ajaxAdd" }
+    methods: [POST]
+
+Admin__closedDay_ajaxDelete:
+    path:  /closedDay/ajaxDelete
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:ClosedDay:ajaxDelete" }
+    methods: [POST]
+
+# Admin
+Admin__admin_list:
+    path:  /admins/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:list", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__admin_listBuggy:
+    path:  /admins/buggy/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:listBuggy", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__admin_search:
+    path:  /admins/search/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:search", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__admin_add_get:
+    path:  /admin/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:add" }
+    methods: [GET]
+
+Admin__admin_add_post:
+    path:  /admin/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:addPost" }
+    methods: [POST]
+
+Admin__admin_avatar:
+    path:  /admin/avatar/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:avatar" }
+    methods: [GET]
+
+Admin__admin_logdelete:
+    path:  /admin/log/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:logDelete" }
+
+Admin__admin_logs_get:
+    path:  /admin/logs/{id}/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:logs", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__admin_edit_get:
+    path:  /admin/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:edit" }
+    methods: [GET]
+
+Admin__admin_edit_post:
+    path:  /admin/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:editPost" }
+    methods: [POST]
+
+Admin__admin_delete:
+    path:  /admin/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Admin:delete" }
+
+# Teacher
+Admin__teacher_list:
+    path:  /teachers/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:list", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__teacher_listBuggy:
+    path:  /teachers/buggy/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:listBuggy", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__teacher_search:
+    path:  /teachers/search/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:search", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__teacher_availabilities:
+    path:  /teachers/availabilites/{year}/{week}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:availabilities", year: null, week: null  }
+    requirements:
+        year:  \d+
+        week:  \d+
+
+Admin__teacher_add_get:
+    path:  /teacher/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:add" }
+    methods: [GET]
+
+Admin__teacher_add_post:
+    path:  /teacher/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:addPost" }
+    methods: [POST]
+
+Admin__teacher_avatar:
+    path:  /teacher/avatar/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:avatar" }
+    methods: [GET]
+
+Admin__teacher_logdelete:
+    path:  /teacher/log/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:logDelete" }
+
+Admin__teacher_logs_get:
+    path:  /teacher/logs/{id}/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:logs", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__teacher_registerMail:
+    path:  /teacher/registerMail/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:registerMail" }
+
+Admin__teacher_newPassMail:
+    path:  /teacher/newPassMail/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:newPassMail" }
+
+Admin__teacher_planning:
+    path:  /teacher/planning/{id}/{year}/{week}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:planning", year: null, week: null  }
+    requirements:
+        year:  \d+
+        week:  \d+
+
+Admin__teacher_edit_get:
+    path:  /teacher/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:edit" }
+    methods: [GET]
+
+Admin__teacher_edit_post:
+    path:  /teacher/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:editPost" }
+    methods: [POST]
+
+Admin__teacher_delete:
+    path:  /teacher/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Teacher:delete" }
+
+# TeacherAvailability
+Admin__teacherAvailability_list:
+    path: /teacherAvailabilities/{year}/{week}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeacherAvailability:list", year: null, week: null  }
+    requirements:
+        year:  \d+
+        week:  \d+
+
+Admin__teacherAvailability_modalAdd:
+    path: /teacherAvailability/modalAdd
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeacherAvailability:modalAdd"}
+    methods: [POST]
+
+Admin__teacherAvailability_ajaxAdd:
+    path: /teacherAvailability/ajaxAdd
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeacherAvailability:ajaxAdd"}
+    methods: [POST]
+
+Admin__teacherAvailability_ajaxEdit:
+    path: /teacherAvailability/ajaxEdit
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeacherAvailability:ajaxEdit"}
+    methods: [POST]
+
+Admin__teacherAvailability_ajaxDelete:
+    path: /teacherAvailability/ajaxDelete
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeacherAvailability:ajaxDelete"}
+    methods: [POST]
+
+Admin__teacherAvailability_delete:
+    path: /teacherAvailability/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeacherAvailability:delete"}
+
+# Company
+Admin__company_list:
+    path:  /companies/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Company:list", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__company_search:
+    path:  /companies/search/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Company:search", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__company_add_get:
+    path:  /company/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Company:add" }
+    methods: [GET]
+
+Admin__company_add_post:
+    path:  /company/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Company:addPost" }
+    methods: [POST]
+
+Admin__company_edit_get:
+    path:  /company/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Company:edit" }
+    methods: [GET]
+
+Admin__company_edit_post:
+    path:  /company/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Company:editPost" }
+    methods: [POST]
+
+Admin__company_delete:
+    path:  /company/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Company:delete" }
+
+# TeachingResource
+Admin__teachingResource_list:
+    path:  /teachingResources/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeachingResource:list", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__teachingResource_search:
+    path:  /teachingResources/search/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeachingResource:search", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__teachingResource_add_get:
+    path:  /teachingResource/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeachingResource:add" }
+    methods: [GET]
+
+Admin__teachingResource_add_post:
+    path:  /teachingResource/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeachingResource:addPost" }
+    methods: [POST]
+
+Admin__teachingResource_download:
+    path:  /teachingResource/download/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeachingResource:download" }
+
+Admin__teachingResource_edit_get:
+    path:  /teachingResource/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeachingResource:edit" }
+    methods: [GET]
+
+Admin__teachingResource_edit_post:
+    path:  /teachingResource/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeachingResource:editPost" }
+    methods: [POST]
+
+Admin__teachingResource_delete:
+    path:  /teachingResource/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TeachingResource:delete" }
+
+# Trainee
+Admin__trainee_list:
+    path:  /trainees/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:list", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__trainee_listBuggy:
+    path:  /trainees/buggy/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:listBuggy", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__trainee_search:
+    path:  /trainees/search/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:search", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__trainee_listByCompany:
+    path:  /trainees/byCompany/{id}/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:listByCompany", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__trainee_add_get:
+    path:  /trainee/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:add" }
+    methods: [GET]
+
+Admin__trainee_add_post:
+    path:  /trainee/add
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:addPost" }
+    methods: [POST]
+
+Admin__trainee_avatar:
+    path:  /trainee/avatar/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:avatar" }
+    methods: [GET]
+
+Admin__trainee_logdelete:
+    path:  /trainee/log/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:logDelete" }
+
+Admin__trainee_logs_get:
+    path:  /trainee/logs/{id}/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:logs", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__trainee_registerMail:
+    path:  /trainee/registerMail/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:registerMail" }
+
+Admin__trainee_newPassMail:
+    path:  /trainee/newPassMail/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:newPassMail" }
+
+Admin__trainee_edit_get:
+    path:  /trainee/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:edit" }
+    methods: [GET]
+
+Admin__trainee_edit_post:
+    path:  /trainee/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:editPost" }
+    methods: [POST]
+
+Admin__trainee_delete:
+    path:  /trainee/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Trainee:delete" }
+
+# TimeCredit
+Admin__timeCredit_list:
+    path:  /timeCredits/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCredit:list", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__timeCredit_listBuggy:
+    path:  /timeCredits/buggy/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCredit:listBuggy", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__timeCredit_search:
+    path:  /timeCredits/search/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCredit:search", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__timeCredit_add_post:
+    path:  /timeCredit/add/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCredit:addPost" }
+    methods: [POST]
+
+Admin__timeCredit_notifyByMail:
+    path:  /timeCredit/notifyByMail/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCredit:notifyByMail" }
+
+Admin__timeCredit_edit_get:
+    path:  /timeCredit/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCredit:edit" }
+    methods: [GET]
+
+Admin__timeCredit_edit_post:
+    path:  /timeCredit/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCredit:editPost" }
+    methods: [POST]
+
+Admin__timeCredit_report:
+    path:  /timeCredit/report/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCredit:report" }
+    methods: [GET]
+
+Admin__timeCredit_delete:
+    path:  /timeCredit/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCredit:delete" }
+
+# TimeCreditDocument
+Admin__timeCreditDocument_add_post:
+    path:  /timeCreditDocument/add/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCreditDocument:addPost" }
+    methods: [POST]
+
+Admin__timeCreditDocument_download:
+    path:  /timeCreditDocument/download/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCreditDocument:download" }
+
+Admin__timeCreditDocument_notifyByMail:
+    path:  /timeCreditDocument/notifyByMail/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCreditDocument:notifyByMail" }
+
+Admin__timeCreditDocument_edit_get:
+    path:  /timeCreditDocument/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCreditDocument:edit" }
+    methods: [GET]
+
+Admin__timeCreditDocument_edit_post:
+    path:  /timeCreditDocument/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCreditDocument:editPost" }
+    methods: [POST]
+
+Admin__timeCreditDocument_delete:
+    path:  /timeCreditDocument/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:TimeCreditDocument:delete" }
+
+# Cours
+Admin__cours_list:
+    path:  /cours/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Cours:list", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__cours_listBuggy:
+    path:  /cours/buggy/{page}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Cours:listBuggy", page: 1 }
+    requirements:
+        page:  \d+
+
+Admin__cours_download:
+    path: /cours/download/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Cours:download"}
+
+Admin__cours_edit_get:
+    path:  /cours/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Cours:edit" }
+    methods: [GET]
+
+Admin__cours_edit_post:
+    path:  /cours/edit/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Cours:editPost" }
+    methods: [POST]
+
+Admin__cours_delete:
+    path:  /cours/delete/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:Cours:delete" }
+
+# CoursDocument
+Admin__coursDocument_download:
+    path:  /coursDocument/download/{id}
+    defaults: { _controller: "IlcfranceWorldspeakAdminFrontBundle:CoursDocument:download" }
+

@@ -1,0 +1,56 @@
+{% extends 'IlcfranceWorldspeakTeacherFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Teacher__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li class="active"><a href="{{path('Teacher__default_notifs')}}">{{ icon('bell') }} &nbsp; {{'breadcrumb.notif.list'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="text-center">{{knp_pagination_render(notifs)}}</div>
+        <table class="table table-bordered table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>{{'TeacherNotif.type'|trans}}</th>
+              <th>{{'TeacherNotif.dtStart'|trans}}</th>
+              <th class="oneBtn">{{ '_actions'|trans }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for n in notifs%}
+            <tr>
+              <td>
+                  {{('TeacherNotif.type.'~n.type)|trans|raw}}
+                  {%if n.type is constant('TYPE_TXT_COURS_EDIT', n)%}
+                  (<a href="{{path('Teacher__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a> -
+                  {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('long', 'none', app.request.locale)}})
+                  {%endif%}
+                  {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n)%}
+                  ({{ 'TimeCredit'|trans }} : <a href="{{path('Teacher__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}">{{ n.timeCredit.trainee.fullname }}</a>)
+                  {%endif%}
+              </td>
+              <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+              <td>
+                {%if n.type is constant('TYPE_TXT_COURS_EDIT', n)%}
+                <a class="btn btn-sm btn-info" href="{{path('Teacher__cours_edit_get',{'id':n.cours.id})}}">{{icon('edit')}}</a>
+                {%endif%}
+                {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n)%}
+                <a class="btn btn-sm btn-info" href="{{path('Teacher__timeCredit_edit_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a>
+                {%endif%}
+              </td>
+            </tr>
+            {%else%}
+            <tr>
+              <td colspan="3" class="warning">{{'TeacherNotif.dbempty'|trans}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <div class="text-center">{{knp_pagination_render(notifs)}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}

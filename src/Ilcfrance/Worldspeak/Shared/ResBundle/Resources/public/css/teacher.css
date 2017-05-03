@@ -1,0 +1,204 @@
+html,body {
+  height: 100%;
+}
+
+body:after {
+  content: "";
+  background-repeat: repeat;
+  background-position: center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+#wrapper {
+  padding-left: 0;
+  height: auto;
+  min-height: 100%;
+  margin: 0 auto -40px;
+  padding: 50px 0 40px;
+}
+
+#footer {
+  background-color: #F5F5F5;
+  height: 40px;
+}
+
+#page-wrapper {
+  width: 100%;
+  padding: 6px 15px;
+}
+
+#footer>.container {
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Nav Messages */
+.messages-dropdown .dropdown-menu .message-preview .avatar,.messages-dropdown .dropdown-menu .message-preview .name,.messages-dropdown .dropdown-menu .message-preview .message,.messages-dropdown .dropdown-menu .message-preview .time
+  {
+  display: block;
+}
+
+.messages-dropdown .dropdown-menu .message-preview .avatar {
+  float: left;
+  margin-right: 15px;
+}
+
+.messages-dropdown .dropdown-menu .message-preview .name {
+  font-weight: bold;
+}
+
+.messages-dropdown .dropdown-menu .message-preview .message {
+  font-size: 12px;
+}
+
+.messages-dropdown .dropdown-menu .message-preview .time {
+  font-size: 12px;
+}
+
+/* Nav Announcements */
+.announcement-heading {
+  font-size: 50px;
+  margin: 0;
+}
+
+.announcement-text {
+  margin: 0;
+}
+
+/* Table Headers */
+table.tablesorter thead {
+  cursor: pointer;
+}
+
+table.tablesorter thead tr th:hover {
+  background-color: #f5f5f5;
+}
+
+/* Edit Below to Customize Widths > 768px */
+@media ( min-width :768px) {
+  /* Wrappers */
+  #page-wrapper {
+    padding: 15px 25px;
+  }
+
+  /* Side Nav */
+  .side-nav {
+    margin-left: -225px;
+    left: 225px;
+    width: 225px;
+    position: fixed;
+    top: 50px;
+    height: 100%;
+    border-radius: 0;
+    border: none;
+    background-color: #222222;
+    overflow-y: auto;
+  }
+  .navbar-user {
+    margin-right: 10px !important;
+  }
+
+  /* Bootstrap Default Overrides - Customized Dropdowns for the Side Nav */
+  .navbar-inverse .navbar-nav>li>a:hover,.navbar-inverse .navbar-nav>li>a:focus {
+    background-color: #080808;
+  }
+
+  /* Nav Messages */
+  .messages-dropdown .dropdown-menu {
+    min-width: 300px;
+  }
+  .messages-dropdown .dropdown-menu li a {
+    white-space: normal;
+  }
+}
+
+.navbar-brand {
+  padding-top: 4px;
+  padding-bottom: 0px;
+  padding-left: 2px;
+  font-size: 24px;
+}
+
+.legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  color: #333;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+a.dropdown-toggle {
+  cursor: pointer;
+}
+
+/* ul tree */
+ul.tree,ul.tree ul {
+  list-style-type: none;
+}
+
+ul.tree,ul.tree ul {
+  list-style-type: none;
+  background: url("../images/vline.png") repeat-y;
+  margin: 0;
+  padding: 0;
+}
+
+ul.tree ul {
+  margin-left: 10px;
+}
+
+ul.tree li {
+  margin: 0;
+  padding: 0 12px;
+  line-height: 20px;
+  background: url("../images/node.png") no-repeat;
+}
+
+ul.tree li.last {
+  background: #fff url("../images/lastnode.png") no-repeat;
+}
+
+.oneBtn {
+  width: 40px;
+}
+
+.twoBtn {
+  width: 85px;
+}
+
+.threeBtn {
+  width: 130px;
+}
+
+.fourBtn {
+  width: 175px;
+}
+
+
+
+.fc-grid th {
+  color: black;
+}
+
+.fc-agenda-days th {
+  color: black;
+}
+
+.fc-agenda-slots th {
+  color: black;
+}

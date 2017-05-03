@@ -1,0 +1,182 @@
+{%extends 'IlcfranceWorldspeakTraineeFrontBundle::layout.html.twig'%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Trainee__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li class="active">
+        <a href="{{path('trainee_security_profile')}}">{{'breadcrumb.profile'|trans|raw}}</a>
+    </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+	<div class="col-lg-12">
+		<br>
+		<ul class="nav nav-tabs">
+			<li{%if tab_active==1%} class="active"{%endif%}><a href="#preview" data-toggle="tab">{{'profile.tab.preview'|trans|raw}}</a></li>
+			<li{%if tab_active==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'profile.tab.edit'|trans|raw}}</a></li>
+		</ul>
+		<div class="tab-content">
+			<div class="tab-pane fade{%if tab_active==1%} in active{%endif%}" id="preview">
+				<br>
+				<h3 class="legend">{{'profile.tlabel.preview'|trans}}</h3>
+				<div class="panel panel-primary">
+					<div class="panel-body">
+						<div class="row">
+								<div class="col-lg-3 text-right">{{'user.avatar'|trans}}</div><div class="col-lg-9">{%if user.avatar is not null%}<img alt="{{user.fullname}}" src="{{path('trainee_security_profile_avatar')}}">{%else%}{{label('_NA'|trans|raw)}}{%endif%}</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-body">
+						<div class="row">
+						  <div class="col-lg-3 text-right">{{'user.username'|trans }}</div><div class="col-lg-9">{{user.username}}</div>
+						  <div class="col-lg-3 text-right">{{'user.email'|trans}}</div><div class="col-lg-9"><a href="mailto:{{user.email}}">{{user.email}}</a></div>
+						  <div class="col-lg-3 text-right">{{'user.dtCrea'|trans}}</div><div class="col-lg-9">{{user.dtCrea|localizeddate('full', 'medium', app.request.locale )}}</div>
+						  <div class="col-lg-3 text-right">{{'user.logins'|trans}}</div><div class="col-lg-9">{{user.logins}}</div>
+						  <div class="col-lg-3 text-right">{{'user.lastLogin'|trans}}</div><div class="col-lg-9">{%if user.lastLogin is not null%}{{user.lastLogin|localizeddate('full', 'medium', app.request.locale )}}{%else%}{{label_warning('_NA'|trans|raw)}}{%endif%}</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-body">
+						<div class="row">
+						  <div class="col-lg-3 text-right">{{'user.preferedLocale'|trans}}</div><div class="col-lg-9">{%if user.preferedLocale is not null%}{{user.preferedLocale.name}}{%else%}{{label_info('_default'|trans|raw)}}{%endif%}</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-3 text-right">{{'user.sexe'|trans}}</div><div class="col-lg-9">{%if user.sexe is not null%}{{('user.sexe.'~user.sexe)|trans|raw}}{%else%}{{label_warning('_NA'|trans|raw)}}{%endif%}</div>
+							<div class="col-lg-3 text-right">{{'user.lastName'|trans}}</div><div class="col-lg-9">{%if user.lastName is not null%}{{user.lastName}}{%else%}{{label_warning('_NA'|trans|raw)}}{%endif%}</div>
+							<div class="col-lg-3 text-right">{{'user.firstName'|trans}}</div><div class="col-lg-9">{%if user.firstName is not null%}{{user.firstName}}{%else%}{{label_warning('_NA'|trans|raw)}}{%endif%}</div>
+							<div class="col-lg-3 text-right">{{'user.birthday'|trans}}</div><div class="col-lg-9">{%if user.birthday is not null%}{{user.birthday|localizeddate('full', 'none', app.request.locale )}}{%else%}{{label_warning('_NA'|trans|raw)}}{%endif%}</div>
+							<div class="col-lg-3 text-right">{{'user.address'|trans}}</div><div class="col-lg-9">{%if user.address is not null%}{{user.address|raw}}{%else%}{{label_warning('_NA'|trans|raw)}}{%endif%}</div>
+							<div class="col-lg-3 text-right">{{'user.country'|trans}}</div><div class="col-lg-9">{%if user.country is not null%}{{user.country|country}}{%else%}{{label_warning('_NA'|trans|raw)}}{%endif%}</div>
+							<div class="col-lg-3 text-right">{{'user.phone'|trans}}</div><div class="col-lg-9">{%if user.phone is not null%}<a href="tel:{{user.phone}}">{{icon('phone-alt')}} {{user.phone}}</a>{%else%}{{label_warning('_NA'|trans|raw)}}{%endif%}</div>
+							<div class="col-lg-3 text-right">{{'user.mobile'|trans}}</div><div class="col-lg-9">{%if user.mobile is not null%}<a href="tel:{{user.mobile}}">{{icon('phone')}} {{user.mobile}}</a>{%else%}{{label_warning('_NA'|trans|raw)}}{%endif%}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade{%if tab_active==2%} in active{%endif%}" id="edit">
+				<br>
+				<h3 class="legend">{{'profile.edit.avatarUpload'|trans|raw}}</h3>
+				{{ form_start(userAvatarForm, {'method':'POST','action': path('trainee_security_profile') ,'style': 'horizontal', 'attr': {'id':'avatar_upload'} }) }}
+					{{ form_row(userAvatarForm.avatar, { 'label_col': 3, 'widget_col': 2}) }}
+					{{ form_row(userAvatarForm.submit, { 'label_col': 3, 'widget_col': 1}) }}
+				{{ form_end(userAvatarForm) }}
+				<div id="avatar_sel"></div>
+				<div id="dialog" title="{{ 'profile.avatar.upload.dialog'|trans }}">
+					<div class="progress">
+						<div class="bar"></div >
+						<div class="percent">0%</div >
+					</div>
+					<div id="status"></div>
+				</div>
+				<br>
+				<h3 class="legend">{{'profile.edit.personnaldata'|trans|raw}}</h3>
+				{{ form_start(userEditProfileForm, {'method':'POST','action': path('trainee_security_profile') ,'style': 'horizontal' }) }}
+					{{ form_row(userEditProfileForm.sexe, { 'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('user') }}) }}
+					{{ form_row(userEditProfileForm.lastName, { 'label_col': 3, 'widget_col': 2}) }}
+					{{ form_row(userEditProfileForm.firstName, { 'label_col': 3, 'widget_col': 2}) }}
+					{{ form_row(userEditProfileForm.birthday, { 'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('calendar') }}) }}
+					{{ form_row(userEditProfileForm.address, { 'label_col': 3, 'widget_col': 6, 'attr': { 'class': 'wysiwyg'}}) }}
+					{{ form_row(userEditProfileForm.country, { 'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }}) }}
+					{{ form_row(userEditProfileForm.phone, { 'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'} }) }}
+					{{ form_row(userEditProfileForm.mobile, { 'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}}) }}
+					{{ form_row(userEditProfileForm.submit, { 'label_col': 3, 'widget_col': 1}) }}
+				{{ form_end(userEditProfileForm) }}
+				<br>
+				<h3 class="legend">{{'profile.edit.password'|trans|raw}}</h3>
+				{{ form_start(userEditPasswordForm, {'method':'POST','action': path('trainee_security_profile') ,'style': 'horizontal' }) }}
+					{{ form_row(userEditPasswordForm.oldPassword, { 'label_col': 3, 'widget_col': 2}) }}
+					{{ form_row(userEditPasswordForm.clearPassword, { 'label_col': 3, 'widget_col': 2}) }}
+					{{ form_row(userEditPasswordForm.submit, { 'label_col': 3, 'widget_col': 1}) }}
+				{{ form_end(userEditPasswordForm) }}
+				<br>
+				<h3 class="legend">{{'profile.edit.email'|trans|raw}}</h3>
+				{{ form_start(userEditEmailForm, {'method':'POST','action': path('trainee_security_profile') ,'style': 'horizontal' }) }}
+					{{ form_row(userEditEmailForm.email, { 'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('envelope') }}) }}
+					{{ form_row(userEditEmailForm.submit, { 'label_col': 3, 'widget_col': 1}) }}
+				{{ form_end(userEditEmailForm) }}
+				<br>
+				<h3 class="legend">{{'profile.edit.preferedLocale'|trans|raw}}</h3>
+				{{ form_start(userEditPreferedLocaleForm, {'method':'POST','action': path('trainee_security_profile') ,'style': 'horizontal' }) }}
+					{{ form_row(userEditPreferedLocaleForm.preferedLocale, { 'label_col': 3, 'widget_col': 2}) }}
+					{{ form_row(userEditPreferedLocaleForm.submit, { 'label_col': 3, 'widget_col': 1}) }}
+				{{ form_end(userEditPreferedLocaleForm) }}
+				<br>
+			</div>
+		</div>
+	</div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function() {
+			$('#UserEditProfileForm_birthday').datetimepicker({
+					weekStart: 1,
+					startView: 4,
+					minView: 2,
+					autoclose: true,
+					todayHighlight: true,
+					language: "{{app.request.locale}}",
+					format: 'yyyy-mm-dd'
+				});
+			var bar = $('.bar');
+			var percent = $('.percent');
+			var status = $('#status');
+			var avatar_sel = $('#avatar_sel');
+			$("#dialog").dialog({
+					autoOpen: false,
+					maxWidth: 500,
+					maxHeight: 500,
+					modal: true
+				});
+			$('#avatar_upload').ajaxForm({
+					beforeSend: function()
+					{
+						$("#dialog").dialog("open");
+						status.empty();
+						avatar_sel.empty();
+						var percentVal = '0%';
+						bar.width(percentVal);
+						percent.html(percentVal);
+					},
+					uploadProgress: function(event, position, total, percentComplete)
+					{
+						var percentVal = percentComplete + '%';
+						bar.width(percentVal);
+						percent.html(percentVal);
+					},
+					complete: function(xhr) {
+						$("#dialog").dialog("close");
+						avatar_sel.html(xhr.responseText);
+					}
+				});
+        $('textarea.wysiwyg').each(function()
+	      {
+	        var options =
+	        {
+	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          theme: "modern",
+	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+	        };
+	        $this = $(this);
+	        if($this.is('[required]'))
+	        {
+	          options.oninit = function(editor)
+	            {
+	              editor.on('change', function(e)
+	                {
+	                  editor.save();
+	                }
+	              );
+	            }
+	        }
+	        $this.tinymce(options);
+	      }
+	    );
+});
+{%endblock dynamic_jstxt%}

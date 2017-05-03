@@ -1,0 +1,11 @@
+vfs_tmp_files:
+    path:  /tmpVfs{file}
+    defaults: { _controller: "IlcfranceWorldspeakSharedResBundle:Vfs:tempfile", file: null }
+    requirements:
+        file:  ".*"
+
+vfs_files:
+    path:  /Vfs{file}
+    defaults: { _controller: "IlcfranceWorldspeakSharedResBundle:Vfs:file", file: null }
+    requirements:
+        file:  ".*"

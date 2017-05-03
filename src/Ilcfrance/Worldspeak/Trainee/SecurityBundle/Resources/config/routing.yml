@@ -1,0 +1,31 @@
+trainee_security_logout:
+    path:  /logout
+
+trainee_security_login:
+    path:  /login
+    defaults: { _controller: "IlcfranceWorldspeakTraineeSecurityBundle:Security:login" }
+
+trainee_security_check:
+    path:  /login_check
+    methods: [POST]
+
+trainee_security_lost_username:
+    path:  /dontRememberUsername
+    defaults: { _controller: "IlcfranceWorldspeakTraineeSecurityBundle:Security:dontRememberUsername" }
+
+trainee_security_lost_password:
+    path:  /lostPassword
+    defaults: { _controller: "IlcfranceWorldspeakTraineeSecurityBundle:Security:lostPassword" }
+
+trainee_security_lost_genpassword:
+    path:  /genNewPassword/{id}/{code}
+    defaults: { _controller: "IlcfranceWorldspeakTraineeSecurityBundle:Security:genNewPassword" }
+
+trainee_security_profile:
+    path:  /myProfile
+    defaults: { _controller: "IlcfranceWorldspeakTraineeSecurityBundle:Security:myProfile" }
+
+
+trainee_security_profile_avatar:
+    path:  /myAvatar
+    defaults: { _controller: "IlcfranceWorldspeakTraineeSecurityBundle:Security:myAvatar" }

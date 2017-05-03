@@ -1,0 +1,41 @@
+ilcfrance_worldspeak_admin_security:
+    resource: "@IlcfranceWorldspeakAdminSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: 'admin.%domain%'
+    schemes:  ["%schemes%"]
+
+ilcfrance_worldspeak_admin_front:
+    resource: "@IlcfranceWorldspeakAdminFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: 'admin.%domain%'
+    schemes:  ["%schemes%"]
+
+ilcfrance_worldspeak_teacher_security:
+    resource: "@IlcfranceWorldspeakTeacherSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: 'teacher.%domain%'
+    schemes:  ["%schemes%"]
+
+ilcfrance_worldspeak_teacher_front:
+    resource: "@IlcfranceWorldspeakTeacherFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: 'teacher.%domain%'
+    schemes:  ["%schemes%"]
+
+ilcfrance_worldspeak_trainee_security:
+    resource: "@IlcfranceWorldspeakTraineeSecurityBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: '%domain%'
+    schemes:  ["%schemes%"]
+
+ilcfrance_worldspeak_trainee_front:
+    resource: "@IlcfranceWorldspeakTraineeFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+    host: '%domain%'
+    schemes:  ["%schemes%"]
+
+ilcfrance_worldspeak_shared_red:
+    resource: "@IlcfranceWorldspeakSharedResBundle/Resources/config/routing.yml"
+    prefix:   /
+    schemes:  ["%schemes%"]
+

@@ -1,0 +1,58 @@
+{% extends 'IlcfranceWorldspeakTraineeFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+    <li><a href="{{path('Trainee__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+    <li class="active"><a href="{{path('Trainee__timeCredit_surveyEnd_get', {'id': timeCredit.id})}}">{{ icon('thumbs-up') }} &nbsp; {{'breadcrumb.timeCredit.surveyEnd'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%} {%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-warning">
+            <div class="panel-body">
+                {{form_start(surveyEndForm, {'method':'POST', 'action': path('Trainee__timeCredit_surveyEnd_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                    {{form_row(surveyEndForm.surveyEndQ01, {'label_col': 3, 'widget_col': 3})}}
+                    {{form_row(surveyEndForm.surveyEndQ02, {'label_col': 3, 'widget_col': 3})}}
+                    {{form_row(surveyEndForm.surveyEndQ03, {'label_col': 3, 'widget_col': 3})}}
+                    {{form_row(surveyEndForm.surveyEndQ04, {'label_col': 3, 'widget_col': 3})}}
+                    {{form_row(surveyEndForm.surveyEndQ05, {'label_col': 3, 'widget_col': 3})}}
+                    {{form_row(surveyEndForm.surveyEndQ06, {'label_col': 3, 'widget_col': 3})}}
+                    {{form_row(surveyEndForm.surveyEndQ07, {'label_col': 3, 'widget_col': 3})}}
+                    {{form_row(surveyEndForm.surveyEndQ08, {'label_col': 3, 'widget_col': 3})}}
+                    {{form_row(surveyEndForm.surveyEndQ09, {'label_col': 3, 'widget_col': 3})}}
+                    {{form_row(surveyEndForm.surveyEndQ10, {'label_col': 3, 'widget_col': 7, 'attr': {'class': 'wysiwyg'} })}}
+                    {{form_row(surveyEndForm.submit, {'label_col': 3,'widget_col': 2}) }}
+                {{form_end(surveyEndForm)}}
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('textarea.wysiwyg').each(function()
+	      {
+	        var options =
+	        {
+	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          theme: "modern",
+	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+	        };
+	        $this = $(this);
+	        if($this.is('[required]'))
+	        {
+	          options.oninit = function(editor)
+	            {
+	              editor.on('change', function(e)
+	                {
+	                  editor.save();
+	                }
+	              );
+	            }
+	        }
+	        $this.tinymce(options);
+	      }
+	    );
+    }
+);
+{%endblock dynamic_jstxt%}

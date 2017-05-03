@@ -1,0 +1,435 @@
+{%extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig'%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__teacher_list')}}">{{icon('user')}} &nbsp; {{'breadcrumb.teacher.list'|trans}}</a></li>
+  <li class="active">
+    <a href="{{path('Admin__teacher_edit_get', {'id': teacher.id})}}">{{icon('edit')}} &nbsp; {{'breadcrumb.teacher.edit'|trans({'%teacher%': teacher.fullname})|raw}}</a>
+  </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+      <form action="{{ path('Admin__teacher_search') }}" method="get"  class="form-search form-inline">
+        <div class="form-group">
+          <label for="q">{{'_search'|trans}}</label>
+          <input class="input-sm search-query" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="" >
+        </div>
+        <div class="form-group">
+          <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+        </div>
+      </form>
+      <br>
+      <a href="{{path('Admin__teacher_logs_get', {'id': teacher.id})}}" class="btn btn-sn btn-success">{{'TeacherLog'|trans}} {{icon('bullhorn')}}</a>
+      <a href="{{path('Admin__teacher_planning', {'id': teacher.id})}}" class="btn btn-sn btn-primary">{{'_action.btnPlanning'|trans}} {{icon('calendar')}}</a>
+    </div>
+    <ul class="nav nav-tabs">
+      {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+      <li{%if tabActive==1%} class="active"{%endif%}><a href="#preview" data-toggle="tab">{{'Teacher.tab.preview'|trans|raw}}</a></li>
+      <li{%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Teacher.tab.edit'|trans|raw}}</a></li>
+      <li{%if tabActive==3%} class="active"{%endif%}><a href="#teacherNotifs" data-toggle="tab">{{'Teacher.tab.notifs'|trans|raw}}</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+        <br>
+        <h3 class="legend">{{'Teacher.tlabel.preview'|trans}}</h3>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Teacher.avatar'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.avatar is not null%}
+                <img src="{{path('Admin__teacher_avatar', {'id': teacher.id})}}" alt="{{teacher.Fullname}}">
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              {%if teacher.codeMA is not empty%}
+              <div class="col-lg-3 text-right">{{'Teacher.codeMA'|trans|raw}} :</div>
+              <div class="col-lg-9">{{teacher.codeMA}}</div>
+              {%endif%}
+              <div class="col-lg-3 text-right">{{'Teacher.username'|trans|raw}} :</div>
+              <div class="col-lg-9">{{teacher.username}}</div>
+              <div class="col-lg-3 text-right">{{'Teacher.email'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.email is not null%}
+                <a href="mailto:{{teacher.email}}">{{teacher.email}}</a>
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+              <div class="col-lg-3 text-right">{{'Teacher.lockout'|trans|raw}} :</div>
+              <div class="col-lg-9">{{('Teacher.lockout.'~teacher.lockout)|trans|raw}}</div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.dtCrea'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.dtCrea is null%}
+                {{label_warning('_NA'|trans)}}
+                {%else%}
+                {{teacher.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{teacher.dtCrea|date('H:i:s')}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.logins'|trans|raw}} :</div>
+              <div class="col-lg-9">{{badge(teacher.logins)}}</div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.lastLogin'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.lastLogin is null%}
+                {{label_info('_NA'|trans)}}
+                {%else%}
+                {{teacher.lastLogin|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{teacher.lastLogin|date('H:i:s')}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.lastActivity'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.lastActivity is null%}
+                {{label_info('_NA'|trans)}}
+                {%else%}
+                {{teacher.lastActivity|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{teacher.lastActivity|date('H:i:s')}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Teacher.registerMail'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.registerMail is not null%}
+                {{('Teacher.registerMail.'~teacher.registerMail)|trans}}
+                {%if teacher.registerMail is constant('REGISTERMAIL_NOTSENT', teacher)%}
+                 | <a class="btn btn-xs btn-primary" href="{{ path('Admin__teacher_registerMail', {'id':teacher.id}) }}">{{ '_action.btnSend'|trans|raw}} {{icon('envelope')}}</a>
+                {%endif%}
+                {%if teacher.registerMail is constant('REGISTERMAIL_SENT', teacher)%}
+                 | <a class="btn btn-xs btn-primary" href="{{ path('Admin__teacher_newPassMail', {'id':teacher.id}) }}">{{ '_action.btnNewPass'|trans|raw}} {{icon('envelope')}}</a>
+                {%endif%}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Teacher.ftype'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.ftype is not null%}
+                {{('Teacher.ftype.'~teacher.ftype)|trans}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Teacher.coursPhone'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.coursPhone is not empty%}
+                <a href="tel:{{teacher.coursPhone}}">{{icon('earphone')}} {{teacher.coursPhone}}</a>
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Teacher.teacherRoles'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%for r in teacher.teacherRoles%}
+                <a href="{{path('Admin__role_edit_get',{id: r.id})}}">{{r.name|trans|raw}}</a>
+                {%else%}
+                {{label_danger('_NA'|trans)}}
+                {%endfor%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Teacher.sexe'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.sexe is not null%}
+                {{('Teacher.sexe.'~teacher.sexe)|trans|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.lastName'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.lastName is not null%}
+                {{teacher.lastName}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.firstName'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.firstName is not null%}
+                {{teacher.firstName}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.birthday'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.birthday is not null%}
+                {{teacher.birthday|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.address'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.address is not null%}
+                {{teacher.address|raw}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.country'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.country is not null%}
+                {{teacher.country|country}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.phone'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.phone is not empty%}
+                <a href="tel:{{teacher.phone}}">{{icon('phone-alt')}} {{teacher.phone}}</a>
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Teacher.mobile'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.mobile is not empty%}
+                <a href="tel:{{teacher.mobile}}">{{icon('phone')}} {{teacher.mobile}}</a>
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Teacher.preferedLocale'|trans}} :</div>
+              <div class="col-lg-9">
+                {%if teacher.preferedLocale is not null%}
+                {{teacher.preferedLocale.name}}
+                {%else%}
+                {{label_warning('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+        <br>
+        <h3 class="legend">{{'Teacher.tlabel.editProfile'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(teacherProfileForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
+            {{form_row(teacherProfileForm.sexe, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('user') }})}}
+            {{form_row(teacherProfileForm.lastName, {'label_col': 3, 'widget_col': 3})}}
+            {{form_row(teacherProfileForm.firstName, {'label_col': 3, 'widget_col': 3})}}
+            {{form_row(teacherProfileForm.birthday, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('calendar') }})}}
+            {{form_row(teacherProfileForm.address, {'label_col': 3, 'widget_col': 6, 'attr': { 'class': 'wysiwyg'}}) }}
+            {{form_row(teacherProfileForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
+            {{form_row(teacherProfileForm.phone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'} }) }}
+            {{form_row(teacherProfileForm.mobile, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}}) }}
+            {{form_row(teacherProfileForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(teacherProfileForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Teacher.tlabel.editPreferedLocale'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(teacherPreferedLocaleForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
+            {{form_row(teacherPreferedLocaleForm.preferedLocale, {'label_col': 3, 'widget_col': 4, 'input_group': { 'append': icon('flag') }})}}
+            {{form_row(teacherPreferedLocaleForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(teacherPreferedLocaleForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Teacher.tlabel.editCoursPhone'|trans}}</h3>
+        <div class="panel panel-danger">
+          <div class="panel-body">
+            {{form_start(teacherCoursPhoneForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
+            {{form_row(teacherCoursPhoneForm.coursPhone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('earphone') }, 'attr':{'placeholder':'_phone.format'} }) }}
+            {{form_row(teacherCoursPhoneForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(teacherCoursPhoneForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Teacher.tlabel.editEmail'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(teacherEmailForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
+            {{form_row(teacherEmailForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
+            {{form_row(teacherEmailForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(teacherEmailForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Teacher.tlabel.editLockout'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(teacherLockoutForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
+            {{form_row(teacherLockoutForm.lockout, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('lock') }})}}
+            {{form_row(teacherLockoutForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(teacherLockoutForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Teacher.tlabel.editFtype'|trans}}</h3>
+        <div class="panel panel-danger">
+          <div class="panel-body">
+            {{form_start(teacherFtypeForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
+            {{form_row(teacherFtypeForm.ftype, {'label_col': 3, 'widget_col': 2})}}
+            {{form_row(teacherFtypeForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(teacherFtypeForm)}}
+          </div>
+        </div>
+
+        <br>
+        <h3 class="legend">{{'Teacher.tlabel.editType'|trans}}</h3>
+        <div class="panel panel-danger">
+          <div class="panel-body">
+            {{form_start(teacherTypeForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
+            {{form_row(teacherTypeForm.type, {'label_col': 3, 'widget_col': 2})}}
+            {{form_row(teacherTypeForm.submit, {'label_col': 3,'widget_col': 2})}}
+            {{form_end(teacherTypeForm)}}
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade{%if tabActive==3%} in active{%endif%}" id="teacherNotifs">
+          <br>
+          <h3 class="legend">{{'TeacherNotif'|trans}}</h3>
+          <div class="panel panel-primary">
+              <div class="panel-body">
+                  <table class="table table-bordered table-condensed table-hover">
+                      <thead>
+                          <tr>
+                              <th>{{'TeacherNotif.type'|trans}}</th>
+                              <th>{{'TeacherNotif.dtStart'|trans}}</th>
+                              <th>{{'TeacherNotif.status'|trans}}</th>
+                              <th class="oneBtn">{{ '_actions'|trans }}</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                      {%for n in notifs%}
+                          <tr>
+                              <td>
+                                  {{('TeacherNotif.type.'~n.type)|trans|raw}}
+                                  {%if n.type is constant('TYPE_TXT_COURS_EDIT', n) or n.type is constant('TYPE_EMAIL_COURS_EDIT', n)%}
+                                      (<a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a> -
+                                       {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('long', 'none', app.request.locale)}})
+                                  {%endif%}
+                                  {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n) or n.type is constant('TYPE_EMAIL_TIMECREDIT_EDIT', n)%}
+                                      ({{ 'TimeCredit'|trans }} : <a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}">{{ n.timeCredit.trainee.fullname }}</a>)
+                                  {%endif%}
+                              </td>
+                              <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+                              <td>{{('TeacherNotif.status.'~n.status)|trans}}</td>
+                              <td>
+                                  {%if n.type is constant('TYPE_TXT_COURS_EDIT', n) or n.type is constant('TYPE_EMAIL_COURS_EDIT', n)%}
+                                      <a class="btn btn-sm btn-info" href="{{path('Admin__cours_edit_get',{'id':n.cours.id})}}">{{icon('edit')}}</a>
+                                  {%endif%}
+                                  {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n) or n.type is constant('TYPE_EMAIL_TIMECREDIT_EDIT', n) %}
+                                      <a class="btn btn-sm btn-info" href="{{path('Admin__timeCredit_edit_get',{'id':n.timeCredit.id})}}">{{icon('edit')}}</a>
+                                  {%endif%}
+                              </td>
+                          </tr>
+                      {%else%}
+                          <tr>
+                              <td colspan="4" class="warning">{{'TeacherNotif.dbempty'|trans}}</td>
+                          </tr>
+                      {%endfor%}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('#TeacherProfileForm_birthday').datetimepicker(
+            {
+                weekStart: 1,
+                startView: 4,
+                minView: 2,
+                autoclose: true,
+                todayHighlight: true,
+                language: "{{app.request.locale}}",
+                format: 'yyyy-mm-dd'
+            }
+        );
+        $('textarea.wysiwyg').each(function()
+	      {
+	        var options =
+	        {
+	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          theme: "modern",
+	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
+	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"
+	        };
+	        $this = $(this);
+	        if($this.is('[required]'))
+	        {
+	          options.oninit = function(editor)
+	            {
+	              editor.on('change', function(e)
+	                {
+	                  editor.save();
+	                }
+	              );
+	            }
+	        }
+	        $this.tinymce(options);
+	      }
+	    );
+    }
+);
+{%endblock dynamic_jstxt%}

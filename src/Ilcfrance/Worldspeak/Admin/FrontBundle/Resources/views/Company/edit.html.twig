@@ -1,0 +1,155 @@
+{%extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig'%}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__company_list')}}"><i class="fa fa-umbrella"></i> &nbsp; {{'breadcrumb.company.list'|trans}}</a></li>
+  <li class="active">
+    <a href="{{path('Admin__company_edit_get', {'id': company.id})}}">{{icon('edit')}} &nbsp; {{'breadcrumb.company.edit'|trans({'%company%': company.name})|raw}}</a>
+  </li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="well text-right">
+        <form action="{{ path('Admin__company_search') }}" method="get"  class="form-search form-inline">
+            <div class="form-group">
+	            <label for="q">{{'_search'|trans}}</label>
+	            <input class="input-sm" type="text" id="q" name="q" placeholder="{{'_keywords'|trans}}" value="" >
+	        </div>
+	        <div class="form-group">
+	            <button class="btn btn-sm btn-primary" type="submit">{{icon('search')}}</button>
+	        </div>
+        </form>
+    </div>
+    <ul class="nav nav-tabs">
+      {%if tabActive is not defined%}{%set tabActive=1%}{%endif%}
+      <li{%if tabActive==1%} class="active"{%endif%}><a href="#preview" data-toggle="tab">{{'Company.tab.preview'|trans|raw}}</a></li>
+      <li{%if tabActive==2%} class="active"{%endif%}><a href="#edit" data-toggle="tab">{{'Company.tab.edit'|trans|raw}}</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane fade{%if tabActive==1%} in active{%endif%}" id="preview">
+        <br>
+        <h3 class="legend">{{'Company.tlabel.preview'|trans}}</h3>
+        <div class="panel panel-info">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-lg-3 text-right">{{'Company.codeMA'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if company.codeMA is not empty%}
+                {{company.codeMA}}
+                {%else%}
+                {{label_primary('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Company.autoinc'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if company.autoinc is not null%}
+                {{company.autoinc}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Company.name'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if company.name is not empty%}
+                {{company.name}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Company.prefix'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if company.prefix is not empty%}
+                {{company.prefix}}
+                {%else%}
+                {{label_danger('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Company.service'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if company.service is not empty%}
+                {{company.service}}
+                {%else%}
+                {{label_primary('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Company.address'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if company.address is not empty%}
+                {{company.address|raw}}
+                {%else%}
+                {{label_primary('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Company.town'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if company.town is not empty%}
+                {{company.town}}
+                {%else%}
+                {{label_primary('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Company.postalCode'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if company.postalCode is not empty%}
+                {{company.postalCode}}
+                {%else%}
+                {{label_primary('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Company.country'|trans|raw}} :</div>
+              <div class="col-lg-9">
+                {%if company.country is not empty%}
+                {{company.country|country}}
+                {%else%}
+                {{label_primary('_NA'|trans|raw)}}
+                {%endif%}
+              </div>
+
+              <div class="col-lg-3 text-right">{{'Company.trainees'|trans}} :</div>
+              <div class="col-lg-9">
+                {{badge(company.trainees|length)}} | <a class="btn btn-xs btn-primary" href="{{path('Admin__trainee_listByCompany',{'id':company.id})}}">{{'_action.btnShow'|trans}} <i class="fa fa-users"></i></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade{%if tabActive==2%} in active{%endif%}" id="edit">
+        <br>
+        <h3 class="legend">{{'Company.tlabel.edit'|trans}}</h3>
+        <div class="panel panel-warning">
+          <div class="panel-body">
+            {{form_start(companyEditForm, {'method':'POST', 'action': path('Admin__company_edit_post', {'id': company.id}), 'style': 'horizontal'})}}
+	          {{form_row(companyEditForm.name, {'label_col': 3, 'widget_col': 3})}}
+	          {{form_row(companyEditForm.prefix, {'label_col': 3, 'widget_col': 2})}}
+	          {{form_row(companyEditForm.service, {'label_col': 3, 'widget_col': 3})}}
+	          {{form_row(companyEditForm.address, {'label_col': 3, 'widget_col': 5})}}
+	          {{form_row(companyEditForm.town, {'label_col': 3, 'widget_col': 3})}}
+	          {{form_row(companyEditForm.postalCode, {'label_col': 3, 'widget_col': 3})}}
+	          {{form_row(companyEditForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
+	          {{form_row(companyEditForm.submit, {'label_col': 3,'widget_col': 2}) }}
+	        {{form_end(companyEditForm)}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+
+    }
+);
+{%endblock dynamic_jstxt%}

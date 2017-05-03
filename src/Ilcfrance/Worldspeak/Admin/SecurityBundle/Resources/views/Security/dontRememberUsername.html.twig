@@ -1,0 +1,18 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %}
+{%block breadcrumb%}{%endblock breadcrumb%}
+{%block pagetitle%}{%endblock pagetitle%}
+{%block pagebody_content%}
+<div class="row">
+	<div class="col-lg-12">
+		<br>
+		{{ form_start(securityDontRememberUsernameForm, {'method':'POST','action': path('admin_security_lost_username') ,'style': 'horizontal', 'attr':{'class':'form-signin'} }) }}
+			<h3 class="form-signin-heading">{{ '_sec.dontRememberUsername'|trans|raw }}</h3>
+			<br>
+			{%include 'IlcfranceWorldspeakSharedResBundle::flash.html.twig' with { 'close': true }%}
+			{{ form_row(securityDontRememberUsernameForm.email, { 'label_col': 3, 'widget_col': 9, 'attr':{'placeholder':'_sec.email.placeholder'} }) }}
+			{{ form_row(securityDontRememberUsernameForm.submit, { 'label_col': 1, 'widget_col': 10, 'attr':{'class':'btn btn-primary btn-block'}}) }}
+		{{ form_end(securityDontRememberUsernameForm) }}
+		<br>
+	</div>
+</div>
+{%endblock pagebody_content%}

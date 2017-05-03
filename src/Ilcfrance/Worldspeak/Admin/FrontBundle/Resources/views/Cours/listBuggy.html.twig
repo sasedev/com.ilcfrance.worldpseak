@@ -1,0 +1,125 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %}
+{%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li><a href="{{path('Admin__trainee_list')}}"><i class="fa fa-user"></i> &nbsp; {{'breadcrumb.trainee.list'|trans}}</a></li>
+  <li><a href="{{path('Admin__timeCredit_list')}}">{{icon('time')}} &nbsp; {{'breadcrumb.timeCredit.list'|trans}}</a></li>
+  <li><a href="{{path('Admin__cours_list')}}">{{icon('earphone')}} &nbsp; {{'breadcrumb.cours.list'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__cours_listBuggy')}}"><i class="fa fa-bug"></i> &nbsp; {{'breadcrumb.cours.listBuggy'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="text-center">{{knp_pagination_render(courses)}}</div>
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th>{{'Cours.trainee'|trans}}</th>
+                        <th>{{'Cours.dtStart'|trans}}</th>
+                        <th>{{'Cours.duration'|trans}}</th>
+                        <th>{{'Cours.type'|trans}}</th>
+                        <th>{{'Cours.phone'|trans}}</th>
+                        <th>{{'Cours.teacher'|trans}}</th>
+                        <th>{{'Cours.status'|trans}}</th>
+                        <th class="twoBtn">{{ '_actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {%for cours in courses%}
+                    <tr>
+                        <td>
+                            <a href="{{path('Admin__trainee_edit_get', {'id': cours.timeCredit.trainee.id})}}">
+                                <i class="fa fa-user"></i> {{cours.timeCredit.trainee.fullname}}
+                            </a>
+                        </td>
+                        <td>
+                            {{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}}
+                            {{'_at'|trans}}
+                            {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}
+                        </td>
+                        <td>{{cours.duration}} {{'_minutes'|trans}}</td>
+                        <td>
+                            {%if cours.type is not null and cours.type is not constant('TYPE_UNDEFINED', cours)%}
+                            {{('Cours.type.'~cours.type)|trans}}
+                            {%else%}
+                            {{label_danger(('Cours.type.'~constant('TYPE_UNDEFINED', cours))|trans)}}
+                            {%endif%}
+                        </td>
+                        <td>
+                            {%if cours.phone is not empty%}
+                            <a href="tel:{{cours.phone}}">{{icon('earphone')}} {{cours.phone}}</a>
+                            {%else%}
+                            {{label_danger('_NA'|trans)}}
+                            {%endif%}
+                        </td>
+                        <td>
+                            {%if cours.teacher is not null%}
+                            <a href="{{path('Admin__teacher_edit_get', {'id': cours.teacher.id})}}">
+                                {{icon('user')}} {{cours.teacher.fullname}}
+                            </a>
+                            {%else%}{{label_danger('_NA'|trans)}}{%endif%}
+                        </td>
+                        <td>
+                            {%if cours.status is not null
+                            and cours.status is not constant('STATUS_PLANNED_PENDING', cours)%}
+                            {{('Cours.status.'~cours.status)|trans}}
+                            {%elseif cours.status is constant('STATUS_PLANNED_PENDING', cours)%}
+                            {{label_danger(('Cours.status.'~cours.status)|trans)}}
+                            {%else%}
+                            {{label_danger('_NA'|trans)}}
+                            {%endif%}
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-info" href="{{path('Admin__cours_edit_get',{'id':cours.id})}}">{{icon('edit')}}</a>
+                                        {%if cours.status is null
+                                        or cours.status is constant('STATUS_PLANNED', cours)
+                                        or cours.status is constant('STATUS_PLANNED_PENDING', cours)
+                                        or cours.status is constant('STATUS_ABSENT', cours)%}
+                                        <a class="btn btn-sm btn-danger deleteConfirmCours"
+                                        href="{{path('Admin__cours_delete', {'id': cours.id})}}">
+                                        {{icon('remove')}}</a>
+                                        {%endif%}
+                        </td>
+                    </tr>
+                    {%else%}
+                    <tr>
+                        <td colspan="8" class="warning">{{'Cours.dbempty'|trans}}</td>
+                    </tr>
+                    {%endfor%}
+                    </tbody>
+                </table>
+                <div class="text-center">{{knp_pagination_render(courses)}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="deleteConfirmCours" class="modal fade in" tabindex="-1" style="display: none;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'Cours.deleteConfirm'|trans|raw}}</h3>
+    </div>
+    <div class="modal-body">{{'Cours.deleteConfirm.txt'|trans|raw}}</div>
+    <div class="modal-footer">
+        <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+        <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+    </div>
+</div>
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+    {
+        $('.deleteConfirmCours').click(function(e)
+            {
+                e.preventDefault();
+                var lnk = $(this).attr('href');
+                modalDeleteBtn = $('#deleteConfirmCours').find('.danger');
+                modalDeleteBtn.attr('href', lnk);
+                $('#deleteConfirmCours').modal('show');
+            }
+        );
+    }
+);
+{%endblock dynamic_jstxt%}

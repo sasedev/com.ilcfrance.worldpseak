@@ -1,0 +1,112 @@
+{% extends 'IlcfranceWorldspeakAdminFrontBundle::layout.html.twig' %} {%block breadcrumb%}
+<ol class="breadcrumb">
+  <li><a href="{{path('Admin__default_homepage')}}">{{icon('home')}} &nbsp; {{'breadcrumb.homepage'|trans}}</a></li>
+  <li class="active"><a href="{{path('Admin__locale_list')}}"><i class="fa fa-flag"></i> &nbsp; {{'breadcrumb.locale.list'|trans}}</a></li>
+</ol>
+{%endblock breadcrumb%}
+{%block pagebody_content%}
+<div class="row">
+  <div class="col-lg-12">
+    {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+    <div class="text-right">
+      <button class="btn btn-xs btn-primary" data-toggle="modal" data-target="#newLocale">{{'_action.btnAdd'|trans}} {{icon('plus')}}</button>
+    </div>
+    <div id="newLocale" class="modal fade in" tabindex="-1" style="display: none;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 class="text-center">{{'_pagetitleAdmin__locale_add'|trans }}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12">
+            {{form_start(localeAddForm, {'method':'POST', 'action': path('Admin__locale_add_post'), 'style': 'horizontal'})}}
+              {{form_row(localeAddForm.prefix, {'label_col': 3, 'widget_col': 4})}}
+              {{form_row(localeAddForm.name, {'label_col': 3, 'widget_col': 6})}}
+              {{form_row(localeAddForm.direction, {'label_col': 3, 'widget_col': 6})}}
+              {{form_row(localeAddForm.status, {'label_col': 3, 'widget_col': 6})}}
+              {{form_row(localeAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+            {{form_end(localeAddForm)}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    {%endif%}
+    <div class="panel panel-primary">
+      <div class="panel-body">
+        <div class="text-center">{{knp_pagination_render(locales)}}</div>
+        <table class="table table-bordered table-condensed table-hover">
+          <thead>
+            <tr>
+              <th>{{'Locale.prefix'|trans}}</th>
+              <th>{{'Locale.name'|trans}}</th>
+              <th>{{'Locale.status'|trans}}</th>
+              <th>{{'Locale.direction'|trans}}</th>
+              <th>{{'Locale.users'|trans}}</th>
+              <th class="twoBtn">{{ '_actions'|trans }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%for l in locales%}
+            <tr>
+              <td>{{l.prefix}}</td>
+              <td>{{l.name}}</td>
+              <td>{{('Locale.status.'~l.status)|trans}}</td>
+              <td>{{('Locale.direction.'~l.direction)|trans}}</td>
+              <td>
+                {{badge(l.admins|length)}} {{'Locale.admins'|trans}}<br>
+                {{badge(l.teachers|length)}} {{'Locale.teachers'|trans}}<br>
+                {{badge(l.trainees|length)}} {{'Locale.trainees'|trans}}<br></td>
+              <td>
+                <a class="btn btn-sm btn-info" href="{{path('Admin__locale_edit_get',{'id':l.id})}}">{{icon('edit')}}</a>
+                {%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+                <a class="btn btn-sm btn-danger deleteConfirmLocale" href="{{path('Admin__locale_delete', {'id': l.id})}}">{{icon('remove')}}</a>
+                {%endif%}
+              </td>
+            </tr>
+            {%else%}
+            <tr>
+              <td colspan="6" class="warning">{{'Locale.dbempty'|trans}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
+        <div class="text-center">{{knp_pagination_render(locales)}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+<div id="deleteConfirmLocale" class="modal fade in" tabindex="-1" style="display: none;">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 class="text-center">{{'Locale.deleteConfirm'|trans|raw}}</h3>
+  </div>
+  <div class="modal-body">
+    {{'Locale.deleteConfirm.txt'|trans|raw}}
+  </div>
+  <div class="modal-footer">
+    <a href="" class="btn btn-xs btn-danger danger">{{'_yes'|trans|raw}}</a>
+    <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">{{'_no'|trans|raw}}</button>
+  </div>
+</div>
+{%endif%}
+{%endblock pagebody_content%}
+{%block dynamic_jstxt%}
+$(function()
+  {
+{%if is_granted('ROLE_SUPER_SUPER_ADMIN')%}
+    $('.deleteConfirmLocale').click(function(e)
+      {
+        e.preventDefault();
+        var lnk = $(this).attr('href');
+        modalDeleteBtn = $('#deleteConfirmLocale').find('.danger');
+        modalDeleteBtn.attr('href', lnk);
+        $('#deleteConfirmLocale').modal('show');
+      }
+    );
+{%endif%}
+  }
+);
+
+{%endblock dynamic_jstxt%}
