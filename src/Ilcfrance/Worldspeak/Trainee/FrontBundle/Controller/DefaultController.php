@@ -117,11 +117,11 @@ class DefaultController extends BaseController
 
 		$weekDays = $this->daysInWeek($currentWeek, $currentYear);
 
-		$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6]);
+		$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6], false);
 
-		$availabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek);
+		$availabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek, false);
 
-		$allCours = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeek($currentYear, $currentWeek);
+		$allCours = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeek($currentYear, $currentWeek, false);
 
 		$avIntersectionsBegin = array();
 
@@ -227,7 +227,7 @@ class DefaultController extends BaseController
 		 * //
 		 */
 
-		$myCourses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeekTrainee($currentYear, $currentWeek, $currentUser);
+		$myCourses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeekTrainee($currentYear, $currentWeek, $currentUser, false);
 
 		// $locale = null;
 		// if (null != $currentUser->getPreferedLocale()) {

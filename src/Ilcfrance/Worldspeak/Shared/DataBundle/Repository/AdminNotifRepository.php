@@ -39,7 +39,7 @@ class AdminNotifRepository extends EntityRepository
 		$query = $qb->getQuery();
 
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;
@@ -76,9 +76,17 @@ class AdminNotifRepository extends EntityRepository
 	 *
 	 * @return \Doctrine\ORM\Query
 	 */
-	public function getAllOldPendingQuery()
+	public function getAllOldPendingQuery($cache = true)
 	{
-		return $this->createQueryBuilder('an')->where('an.dtStart <= :dt')->andWhere('an.status = :status')->setParameter('dt', new \DateTime('now'))->setParameter('status', AdminNotif::PENDING)->orderBy('an.dtStart', 'DESC')->getQuery();
+		$qb = $this->createQueryBuilder('an')->where('an.dtStart <= :dt')->andWhere('an.status = :status')->setParameter('dt', new \DateTime('now'))->setParameter('status', AdminNotif::PENDING)->orderBy('an.dtStart', 'DESC');
+
+		$query = $qb->getQuery();
+
+		if ($cache) {
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
+		}
+
+		return $query;
 	}
 
 	/**
@@ -87,8 +95,8 @@ class AdminNotifRepository extends EntityRepository
 	 * @return Ambigous <\Doctrine\ORM\mixed, multitype:, mixed, \Doctrine\DBAL\Driver\Statement,
 	 *         \Doctrine\Common\Cache\mixed>
 	 */
-	public function getAllOldPending()
+	public function getAllOldPending($cache = true)
 	{
-		return $this->getAllOldPendingQuery()->execute();
+		return $this->getAllOldPendingQuery($cache)->execute();
 	}
 }

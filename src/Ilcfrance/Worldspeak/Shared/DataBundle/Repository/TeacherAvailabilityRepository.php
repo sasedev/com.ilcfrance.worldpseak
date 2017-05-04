@@ -31,7 +31,7 @@ class TeacherAvailabilityRepository extends EntityRepository
 
 		$query = $this->getEntityManager()->createQuery($dql)->setParameter('teacher', $teacher)->setParameter('dtStart', $dtStart)->setParameter('dtEnd', $dtEnd);
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;
@@ -93,7 +93,7 @@ class TeacherAvailabilityRepository extends EntityRepository
 		$query = $this->getEntityManager()->createQuery($dql)->setParameter('teacher', $teacher)->setParameter('dtStart', $dtStart)->setParameter('dtEnd', $dtEnd);
 
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;
@@ -153,7 +153,7 @@ class TeacherAvailabilityRepository extends EntityRepository
 		$query = $this->getEntityManager()->createQuery($dql)->setParameter('dtStart', $dtStart)->setParameter('dtEnd', $dtEnd);
 
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;
@@ -193,7 +193,7 @@ class TeacherAvailabilityRepository extends EntityRepository
 		$query = $qb->getQuery();
 
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;

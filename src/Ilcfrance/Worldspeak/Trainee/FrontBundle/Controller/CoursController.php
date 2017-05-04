@@ -310,7 +310,7 @@ class CoursController extends BaseController
 
 				// verifier s'il n'a pas de Cours en meme temps
 				$coursInTheSameTime = false;
-				$myCourses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByTrainee($currentUser);
+				$myCourses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByTrainee($currentUser, false);
 
 				foreach ($myCourses as $cCours) {
 					$dtStart1 = new \DateTime('now');
@@ -343,7 +343,7 @@ class CoursController extends BaseController
 				}
 
 				// detecter les présences de formateurs au moment supposé du cours
-				$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByDate($dtStart);
+				$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByDate($dtStart, false);
 
 				if (count($teacherAvailabilities) == 0) {
 					$traineeLog = new TraineeLog();
@@ -571,7 +571,7 @@ class CoursController extends BaseController
 
 				// verifier s'il n'a pas de Cours en meme temps
 				$coursInTheSameTime = false;
-				$myCourses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByTrainee($currentUser);
+				$myCourses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByTrainee($currentUser, false);
 
 				foreach ($myCourses as $cCours) {
 					$dtStart1 = new \DateTime('now');
@@ -605,7 +605,7 @@ class CoursController extends BaseController
 				}
 
 				// detecter les présences de formateurs au moment supposé du cours
-				$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByDate($dtStart);
+				$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByDate($dtStart, false);
 
 				if (count($teacherAvailabilities) == 0) {
 					$traineeLog = new TraineeLog();

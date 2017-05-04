@@ -201,9 +201,9 @@ class TeacherController extends BaseController
 		$countPrevYearWeeks = $this->getIsoWeeksInYear($prevYear);
 
 		$em = $this->getEntityManager();
-		$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6]);
+		$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6], false);
 
-		$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek);
+		$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek, false);
 
 		$teacherAvailability = new TeacherAvailability();
 		$teacherAvailabilityAddForm = $this->createForm(TeacherAvailabilityAddTForm::class, $teacherAvailability);
@@ -589,11 +589,11 @@ class TeacherController extends BaseController
 			if (null == $teacher) {
 				$this->addFlash('warning', 'Teacher.editNotfound');
 			} else {
-				$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6]);
+				$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6], false);
 
-				$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeekTeacher($currentYear, $currentWeek, $teacher);
+				$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeekTeacher($currentYear, $currentWeek, $teacher, false);
 
-				$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeekTeacher($currentYear, $currentWeek, $teacher);
+				$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeekTeacher($currentYear, $currentWeek, $teacher, false);
 
 				$this->addTwigVar('nextYear', $nextYear);
 				$this->addTwigVar('nextWeek', $nextWeek);

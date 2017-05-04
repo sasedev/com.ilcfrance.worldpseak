@@ -41,92 +41,92 @@ doctrine:
                     region_lifetime: 30
                     regions:
                         region_admin:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_adminlog:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_adminnotif:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_closedday:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_company:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_cours:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_coursdocument:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_locale:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_role:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_teacher:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_teacheravailability:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_teacherlog:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_teachernotif:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_timecredit:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_timecreditdocument:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_trainee:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_traineelog:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis
                         region_traineenotif:
-                            lifetime: 300
+                            lifetime: 30
                             cache_driver:
                                 type: service
                                 id: doctrine.cache.predis

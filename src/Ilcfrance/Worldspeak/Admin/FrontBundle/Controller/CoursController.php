@@ -39,7 +39,7 @@ class CoursController extends BaseController
 	public function listAction($page = 1, Request $request)
 	{
 		$em = $this->getEntityManager();
-		$query = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllQuery();
+		$query = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllQuery(false);
 
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate($query, $page, 10);
@@ -63,7 +63,7 @@ class CoursController extends BaseController
 	public function listBuggyAction($page = 1, Request $request)
 	{
 		$em = $this->getEntityManager();
-		$query = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllBuggyQuery();
+		$query = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllBuggyQuery(false);
 
 		$paginator = $this->get('knp_paginator');
 		$pagination = $paginator->paginate($query, $page, 10);

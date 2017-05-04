@@ -37,7 +37,7 @@ class AdminRepository extends EntityRepository implements UserProviderInterface,
 		$query = $qb->getQuery();
 
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		try {
@@ -109,7 +109,7 @@ class AdminRepository extends EntityRepository implements UserProviderInterface,
 
 		$query = $qb->getQuery();
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;
@@ -142,7 +142,7 @@ class AdminRepository extends EntityRepository implements UserProviderInterface,
 
 		$query = $qb->getQuery();
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;
@@ -172,7 +172,7 @@ class AdminRepository extends EntityRepository implements UserProviderInterface,
 
 		$query = $qb->getQuery();
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;
@@ -222,7 +222,7 @@ class AdminRepository extends EntityRepository implements UserProviderInterface,
 
 		$query = $qb->getQuery();
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;
@@ -269,7 +269,7 @@ class AdminRepository extends EntityRepository implements UserProviderInterface,
 
 		$query = $qb->getQuery();
 		if ($cache) {
-			$query->setCacheable('true')->useQueryCache(true)->setLifetime(60)->useResultCache(true, 60);
+			$query->setCacheable('true')->useQueryCache(true)->setLifetime(20)->useResultCache(true, 20);
 		}
 
 		return $query;

@@ -61,7 +61,7 @@ class TeacherAvailabilityController extends BaseController
 			if ($teacherAvailabilityAddForm->isValid()) {
 
 				$em = $this->getEntityManager();
-				$availabilitycheck = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllArroundForTeacher($teacher, $dtStart, $dtEnd);
+				$availabilitycheck = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllArroundForTeacher($teacher, $dtStart, $dtEnd, false);
 
 				if (count($availabilitycheck) != 0) {
 					$this->addFlash('error', $this->translate('TeacherAvailability.addFailureIntersection', array(
@@ -119,7 +119,7 @@ class TeacherAvailabilityController extends BaseController
 
 					return $response;
 				} else {
-					$availabilitycheck = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllArroundForTeacher($teacher, $dtStart, $dtEnd);
+					$availabilitycheck = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllArroundForTeacher($teacher, $dtStart, $dtEnd, false);
 
 					if (count($availabilitycheck) != 0) {
 						$response->setStatusCode(409);
@@ -200,7 +200,7 @@ class TeacherAvailabilityController extends BaseController
 					return $response;
 				} else {
 					$teacher = $teacherAvailability->getTeacher();
-					$teacherAvailabilityIntersectionCheck = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllArroundForTeacher($teacherAvailability->getTeacher(), $dtStart, $dtEnd);
+					$teacherAvailabilityIntersectionCheck = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllArroundForTeacher($teacherAvailability->getTeacher(), $dtStart, $dtEnd, false);
 
 					$taNotFound = false;
 					if (count($teacherAvailabilityIntersectionCheck != 0)) {

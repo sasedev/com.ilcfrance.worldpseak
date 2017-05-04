@@ -105,7 +105,7 @@ class ClosedDayController extends BaseController
 
 		$em = $this->getEntityManager();
 
-		$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($firstWeek[0], $lastWeek[6]);
+		$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($firstWeek[0], $lastWeek[6], false);
 
 		$this->addTwigVar('currentYear', $currentYear);
 		$this->addTwigVar('currentMonth', $currentMonth);

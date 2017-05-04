@@ -37,7 +37,7 @@ class TeacherAvailabilityController extends BaseController
 			$em = $this->getEntityManager();
 			$response = new Response();
 			try {
-				$availabilitycheck = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllArroundForTeacher($currentUser, $dtStart, $dtEnd);
+				$availabilitycheck = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllArroundForTeacher($currentUser, $dtStart, $dtEnd, false);
 
 				if (count($availabilitycheck) != 0) {
 					$response->setStatusCode(409);

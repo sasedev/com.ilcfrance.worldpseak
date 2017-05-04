@@ -112,11 +112,11 @@ class DefaultController extends BaseController
 			$currentUser = $this->getSecurityTokenStorage()->getToken()->getUser();
 
 			$em = $this->getEntityManager();
-			$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6]);
+			$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6], false);
 
-			$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeekTeacher($currentYear, $currentWeek, $currentUser);
+			$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeekTeacher($currentYear, $currentWeek, $currentUser, false);
 
-			$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeekTeacher($currentYear, $currentWeek, $currentUser);
+			$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeekTeacher($currentYear, $currentWeek, $currentUser, false);
 
 			$this->addTwigVar('currentUser', $currentUser);
 

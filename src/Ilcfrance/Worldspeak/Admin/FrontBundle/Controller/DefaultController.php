@@ -67,11 +67,11 @@ class DefaultController extends BaseController
 		$countPrevYearWeeks = $this->getIsoWeeksInYear($prevYear);
 
 		$em = $this->getEntityManager();
-		$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6]);
+		$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6], false);
 
-		$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek);
+		$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek, false);
 
-		$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeek($currentYear, $currentWeek);
+		$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeek($currentYear, $currentWeek, false);
 
 		$excelImportForm = $this->createForm(ExcelImportTForm::class);
 
@@ -194,11 +194,11 @@ class DefaultController extends BaseController
 			$countCurrentYearWeeks = $this->getIsoWeeksInYear($currentYear);
 			$countPrevYearWeeks = $this->getIsoWeeksInYear($prevYear);
 
-			$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6]);
+			$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6], false);
 
-			$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek);
+			$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek, false);
 
-			$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeek($currentYear, $currentWeek);
+			$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeek($currentYear, $currentWeek, false);
 
 			$this->addTwigVar('excelImportForm', $excelImportForm->createView());
 
@@ -584,11 +584,11 @@ class DefaultController extends BaseController
 			$countPrevYearWeeks = $this->getIsoWeeksInYear($prevYear);
 
 			$em = $this->getEntityManager();
-			$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6]);
+			$closedDays = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:ClosedDay')->getAllBetween($weekDays[0], $weekDays[6], false);
 
-			$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek);
+			$teacherAvailabilities = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherAvailability')->getAllByYearWeek($currentYear, $currentWeek, false);
 
-			$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeek($currentYear, $currentWeek);
+			$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->getAllByYearWeek($currentYear, $currentWeek, false);
 
 			$this->addTwigVar('nextYear', $nextYear);
 			$this->addTwigVar('nextWeek', $nextWeek);
