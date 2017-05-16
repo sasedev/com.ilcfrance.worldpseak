@@ -36,9 +36,9 @@ class MailNotifCommand extends ContainerAwareCommand
 		$trans = $container->get('translator.default');
 		$mailer = $container->get('mailer');
 		$logger = $container->get('logger');
-		$transport = $container->get('swiftmailer.transport.real');
+		// $transport = $container->get('swiftmailer.transport.real');
 		$templating = $container->get('templating');
-		$spool = $mailer->getTransport()->getSpool();
+		// $spool = $mailer->getTransport()->getSpool();
 
 		$from = $container->getParameter('mail_from');
 		$fromName = $container->getParameter('mail_from_name');
@@ -47,7 +47,7 @@ class MailNotifCommand extends ContainerAwareCommand
 		$logger->addNotice('Début Envoie email notifications');
 		$logger->addNotice('---------------------------------------------------------------------------------');
 
-		$teacherNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherNotif')->getAllOldPendingEmail();
+		$teacherNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherNotif')->getAllOldPendingEmail(false);
 
 		$teacherMailSent = 0;
 		$teacherMailNotSent = 0;
@@ -75,7 +75,7 @@ class MailNotifCommand extends ContainerAwareCommand
 						$em->persist($notif);
 						$em->flush();
 						$mailer->send($message);
-						$spool->flushQueue($transport);
+						// $spool->flushQueue($transport);
 						$teacherMailSent++;
 
 						echo "Mail Notif Cours Edit Formateur " . $teacher->getFullname() . " (" . $teacher->getEmail() . ") pour le Cours de " . $notif->getCours()->getDtStart()->format('Y-m-d H:i') . " du stagiaire " . $notif->getTimeCredit()->getTrainee()->getFullname() . "\n";
@@ -114,7 +114,7 @@ class MailNotifCommand extends ContainerAwareCommand
 						$em->persist($notif);
 						$em->flush();
 						$mailer->send($message);
-						$spool->flushQueue($transport);
+						// $spool->flushQueue($transport);
 						$teacherMailSent++;
 
 						echo "Mail Notif TimeCredit Edit Formateur " . $teacher->getFullname() . " (" . $teacher->getEmail() . ") pour le Credit de " . $notif->getTimeCredit()->getTotalHours() . " Heures du stagiaire " . $notif->getTimeCredit()->getTrainee()->getFullname() . "\n";
@@ -137,7 +137,7 @@ class MailNotifCommand extends ContainerAwareCommand
 		}
 		$em->flush();
 
-		$traineeNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TraineeNotif')->getAllOldPendingEmail();
+		$traineeNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TraineeNotif')->getAllOldPendingEmail(false);
 
 		$traineeMailSent = 0;
 		$traineeMailNotSent = 0;
@@ -166,7 +166,7 @@ class MailNotifCommand extends ContainerAwareCommand
 						$em->persist($notif);
 						$em->flush();
 						$mailer->send($message);
-						$spool->flushQueue($transport);
+						// $spool->flushQueue($transport);
 						$traineeMailSent++;
 
 						echo "Mail Notif Cours 24H Stagiaire " . $trainee->getFullname() . " (" . $trainee->getEmail() . ") pour le Cours de " . $notif->getCours()->getDtStart()->format('Y-m-d H:i') . "\n";
@@ -204,7 +204,7 @@ class MailNotifCommand extends ContainerAwareCommand
 						$em->persist($notif);
 						$em->flush();
 						$mailer->send($message);
-						$spool->flushQueue($transport);
+						// $spool->flushQueue($transport);
 						$traineeMailSent++;
 
 						echo "Mail Notif TimeCredit 15D Stagiaire " . $trainee->getFullname() . " (" . $trainee->getEmail() . ") pour le Credit de " . $notif->getTimeCredit()->getTotalHours() . " Heures " . "\n";
@@ -242,7 +242,7 @@ class MailNotifCommand extends ContainerAwareCommand
 						$em->persist($notif);
 						$em->flush();
 						$mailer->send($message);
-						$spool->flushQueue($transport);
+						// $spool->flushQueue($transport);
 						$traineeMailSent++;
 
 						echo "Mail Notif TimeCredit 30D Stagiaire " . $trainee->getFullname() . " (" . $trainee->getEmail() . ") pour le Credit de " . $notif->getTimeCredit()->getTotalHours() . " Heures " . "\n";
@@ -280,7 +280,7 @@ class MailNotifCommand extends ContainerAwareCommand
 						$em->persist($notif);
 						$em->flush();
 						$mailer->send($message);
-						$spool->flushQueue($transport);
+						// $spool->flushQueue($transport);
 						$traineeMailSent++;
 
 						echo "Mail Notif TimeCredit SB Stagiaire " . $trainee->getFullname() . " (" . $trainee->getEmail() . ") pour le Credit de " . $notif->getTimeCredit()->getTotalHours() . " Heures " . "\n";
@@ -318,7 +318,7 @@ class MailNotifCommand extends ContainerAwareCommand
 						$em->persist($notif);
 						$em->flush();
 						$mailer->send($message);
-						$spool->flushQueue($transport);
+						// $spool->flushQueue($transport);
 						$traineeMailSent++;
 
 						echo "Mail Notif TimeCredit SE Stagiaire " . $trainee->getFullname() . " (" . $trainee->getEmail() . ") pour le Credit de " . $notif->getTimeCredit()->getTotalHours() . " Heures " . "\n";
@@ -341,7 +341,7 @@ class MailNotifCommand extends ContainerAwareCommand
 
 		$em->flush();
 
-		$adminNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:AdminNotif')->getAll();
+		$adminNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:AdminNotif')->getAll(false);
 		foreach ($adminNotifs as $notif) {
 			if ($notif->getStatus() == AdminNotif::PENDING) {
 				$em->remove($notif);
@@ -349,7 +349,7 @@ class MailNotifCommand extends ContainerAwareCommand
 		}
 		$em->flush();
 
-		$teacherNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherNotif')->getAll();
+		$teacherNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherNotif')->getAll(false);
 		foreach ($teacherNotifs as $notif) {
 			if ($notif->getStatus() == TeacherNotif::PENDING) {
 				$em->remove($notif);
@@ -357,7 +357,7 @@ class MailNotifCommand extends ContainerAwareCommand
 		}
 		$em->flush();
 
-		$traineeNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TraineeNotif')->getAll();
+		$traineeNotifs = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TraineeNotif')->getAll(false);
 		foreach ($traineeNotifs as $notif) {
 			if ($notif->getStatus() == TraineeNotif::PENDING) {
 				$em->remove($notif);
@@ -365,12 +365,12 @@ class MailNotifCommand extends ContainerAwareCommand
 		}
 		$em->flush();
 
-		$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->findAll();
+		$courses = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:Cours')->findAll(false);
 		foreach ($courses as $cours) {
 			$em->refresh($cours);
 		}
 
-		$timeCredits = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TimeCredit')->findAll();
+		$timeCredits = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TimeCredit')->findAll(false);
 		foreach ($timeCredits as $timeCredit) {
 			$em->refresh($timeCredit);
 		}

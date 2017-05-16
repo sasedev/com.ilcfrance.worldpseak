@@ -434,7 +434,7 @@ class TraineeController extends BaseController
 					$mvars['userPreferedLocale'] = $locale;
 					$from = $this->getParameter('mail_from');
 					$fromName = $this->getParameter('mail_from_name');
-					$subject = $this->translate('_mail.newpassAdmin__trainee_subject', array(), null, $locale);
+					$subject = $this->translate('_mail.newpass_trainee_subject', array(), null, $locale);
 
 					$message = \Swift_Message::newInstance()->setFrom($from, $fromName)->setTo($trainee->getEmail(), $trainee->getFullname())->setSubject($subject)->setBody($this->renderView('IlcfranceWorldspeakSharedResBundle:Mail:trainee.newpass.html.twig', $mvars), 'text/html');
 

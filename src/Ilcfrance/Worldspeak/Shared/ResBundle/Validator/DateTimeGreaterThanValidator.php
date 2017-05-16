@@ -17,6 +17,9 @@ class DateTimeGreaterThanValidator extends AbstractComparisonValidator
 	 */
 	protected function compareValues($value1, $value2)
 	{
+		if ($value2 instanceof \DateTime) {
+			return $value1 > $value2;
+		}
 		return $value1 > new \DateTime($value2);
 	}
 }

@@ -3,6 +3,8 @@ parameters:
     domain: worldspeak.ilcfrance.com
     mail_from:          donotreply@ILCFrance.com
     mail_from_name:          ILCWorldSpeak
+    mailer_encryption: null
+    mailer_port: 25
     sitename:                  "WorldSpeak.ILCFrance.com"
     mailer_transport: smtp
     siteversion: 1.0.2

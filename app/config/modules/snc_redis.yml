@@ -33,19 +33,19 @@ snc_redis:
             client: cache
             entity_manager: "default"          # the name of your entity_manager connection
             document_manager: "default"        # the name of your document_manager connection
-            namespace: "%kernel.root_dir%"
+            namespace: ""
         result_cache:
             client: cache
             entity_manager: "default"          # the name of your entity_manager connection
             document_manager: "default"        # the name of your document_manager connection
-            namespace: "%kernel.root_dir%"
+            namespace: ""
         query_cache:
             client: cache
             entity_manager: "default"          # the name of your entity_manager connection
             document_manager: "default"        # the name of your document_manager connection
-            namespace: "%kernel.root_dir%"
+            namespace: ""
         second_level_cache:
             client: cache
             entity_manager: "default"          # the name of your entity_manager connection
             document_manager: "default"        # the name of your document_manager connection
-            namespace: "%kernel.root_dir%"
+            namespace: ""

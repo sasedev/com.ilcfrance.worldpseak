@@ -81,7 +81,7 @@ class DefaultController extends BaseController
 			$currentYear = $year;
 			$currentWeek = 1;
 
-			return $this->redirect($this->generateUrl('_planning_index', array(
+			return $this->redirect($this->generateUrl('Trainee__default_planning', array(
 				'year' => $currentYear,
 				'week' => $currentWeek
 			)));

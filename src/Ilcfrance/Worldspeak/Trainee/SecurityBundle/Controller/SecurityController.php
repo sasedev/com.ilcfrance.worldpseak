@@ -25,6 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Security;
 use Ilcfrance\Worldspeak\Trainee\SecurityBundle\Form\LoginTForm;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Security Controller
@@ -172,7 +173,7 @@ class SecurityController extends BaseController
 							$locale = $user->getPreferedLocale()->getPrefix();
 						}
 						$user->setRecoveryExpiration($nexthour);
-						$user->setRecoveryCode(Trainee::generateRandomChar(20));
+						$user->setRecoveryCode(Trainee::generateRandomChar(20, 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'));
 						$em->persist($user);
 						$em->flush();
 
@@ -182,7 +183,7 @@ class SecurityController extends BaseController
 						$mvars['url'] = $this->generateUrl('trainee_security_lost_genpassword', array(
 							'id' => $user->getId(),
 							'code' => $user->getRecoveryCode()
-						), true);
+						), UrlGeneratorInterface::ABSOLUTE_URL);
 
 						$from = $this->getParameter('mail_from');
 						$fromName = $this->getParameter('mail_from_name');

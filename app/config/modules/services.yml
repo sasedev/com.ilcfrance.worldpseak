@@ -30,5 +30,5 @@ services:
         class: '%snc_redis.doctrine_cache_predis.class%'
         arguments: [ '@snc_redis.cache' ]
         calls:
-            - ["setNamespace", ["DoctrineSecondLevelCache"]] #Optional
+            - ["setNamespace", [""]] #Optional
 

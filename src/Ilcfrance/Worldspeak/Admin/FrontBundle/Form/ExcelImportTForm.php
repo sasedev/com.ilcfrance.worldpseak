@@ -17,7 +17,7 @@ class ExcelImportTForm extends AbstractType
 
 	/**
 	 *
-	 * @param FormBuilder $builder
+	 * @param FormBuilderInterface $builder
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
