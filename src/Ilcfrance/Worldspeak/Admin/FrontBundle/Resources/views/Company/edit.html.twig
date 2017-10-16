@@ -137,7 +137,7 @@
 	          {{form_row(companyEditForm.town, {'label_col': 3, 'widget_col': 3})}}
 	          {{form_row(companyEditForm.postalCode, {'label_col': 3, 'widget_col': 3})}}
 	          {{form_row(companyEditForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
-	          {{form_row(companyEditForm.submit, {'label_col': 3,'widget_col': 2}) }}
+	          <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
 	        {{form_end(companyEditForm)}}
           </div>
         </div>

@@ -52,15 +52,11 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
-                    {{form_start(teacherAvailabilityAddForm, {'method':'POST', 'action':
-                        path('Admin__teacherAvailability_modalAdd'), 'style': 'horizontal'})}}
-                        {{form_row(teacherAvailabilityAddForm.teacher, {'label_col': 4, 'widget_col': 6, 'input_group':
-                        {'append': icon('user') }})}}
-                        {{form_row(teacherAvailabilityAddForm.dtStart, {'label_col': 4, 'widget_col': 6, 'input_group':
-                        {'append': icon('time') }})}}
-                        {{form_row(teacherAvailabilityAddForm.dtEnd, {'label_col': 4, 'widget_col': 6, 'input_group':
-                        {'append': icon('time') }})}}
-                        {{form_row(teacherAvailabilityAddForm.submit, {'label_col':4,'widget_col': 2}) }}
+                    {{form_start(teacherAvailabilityAddForm, {'method':'POST', 'action': path('Admin__teacherAvailability_modalAdd'), 'style': 'horizontal'})}}
+                        {{form_row(teacherAvailabilityAddForm.teacher, {'label_col': 4, 'widget_col': 6, 'input_group': {'append': icon('user') }})}}
+                        {{form_row(teacherAvailabilityAddForm.dtStart, {'label_col': 4, 'widget_col': 6, 'input_group': {'append': icon('time') }})}}
+                        {{form_row(teacherAvailabilityAddForm.dtEnd, {'label_col': 4, 'widget_col': 6, 'input_group': {'append': icon('time') }})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnAdd'|trans|raw}}</button></div></div>
                     {{form_end(teacherAvailabilityAddForm)}}</div>
                 </div>
             </div>

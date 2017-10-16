@@ -3,9 +3,9 @@ namespace Ilcfrance\Worldspeak\Admin\FrontBundle\Form;
 
 use Ilcfrance\Worldspeak\Shared\DataBundle\Document\TeachingResource;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Add new TeachingResource Form
@@ -15,45 +15,61 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class TeachingResourceEditTForm extends AbstractType
 {
 
-	/**
-	 * Form builder
-	 *
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder->add('level', ChoiceType::class, array(
-			'label' => 'TeachingResource.level.label',
-			'choices' => TeachingResource::choiceLevel()
-		));
+    /**
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'TeachingResourceEditForm';
+    }
 
-		$builder->add('type', ChoiceType::class, array(
-			'label' => 'TeachingResource.type.label',
-			'choices' => TeachingResource::choiceType()
-		));
+    /**
+     * get the default options
+     *
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return array();
+    }
 
-		$builder->add('submit', SubmitType::class, array(
-			'label' => '_action.btnEdit'
-		));
-	}
+    /**
+     * Form builder
+     *
+     * {@inheritdoc}
+     * @see AbstractType::buildForm()
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('level', ChoiceType::class, array(
+            'label' => 'TeachingResource.level.label',
+            'choices' => TeachingResource::choiceLevel()
+        ));
 
-	/**
-	 * (non-PHPdoc) @see \Symfony\Component\Form\FormTypeInterface::getName()
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'TeachingResourceEditForm';
-	}
+        $builder->add('type', ChoiceType::class, array(
+            'label' => 'TeachingResource.type.label',
+            'choices' => TeachingResource::choiceType()
+        ));
+    }
 
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::getBlockPrefix()
-	 */
-	public function getBlockPrefix()
-	{
-		return $this->getName();
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return $this->getName();
+    }
+
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults($this->getDefaultOptions());
+    }
 }

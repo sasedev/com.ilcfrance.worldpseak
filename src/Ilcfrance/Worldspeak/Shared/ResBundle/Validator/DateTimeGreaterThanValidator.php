@@ -1,6 +1,7 @@
 <?php
 namespace Ilcfrance\Worldspeak\Shared\ResBundle\Validator;
 
+use DateTime;
 use Symfony\Component\Validator\Constraints\AbstractComparisonValidator;
 
 /**
@@ -12,14 +13,16 @@ use Symfony\Component\Validator\Constraints\AbstractComparisonValidator;
 class DateTimeGreaterThanValidator extends AbstractComparisonValidator
 {
 
-	/**
-	 * @inheritDoc
-	 */
-	protected function compareValues($value1, $value2)
-	{
-		if ($value2 instanceof \DateTime) {
-			return $value1 > $value2;
-		}
-		return $value1 > new \DateTime($value2);
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractComparisonValidator::compareValues()
+     */
+    protected function compareValues($value1, $value2)
+    {
+        if ($value2 instanceof DateTime) {
+            return $value1 > $value2;
+        }
+        return $value1 > new DateTime($value2);
+    }
 }

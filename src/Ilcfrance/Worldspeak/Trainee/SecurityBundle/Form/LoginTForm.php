@@ -7,7 +7,6 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -18,74 +17,76 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class LoginTForm extends AbstractType
 {
 
-	/**
-	 * Form builder
-	 *
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder->add('username', TextType::class, array(
-			'label' => '_sec.username.label',
-			'constraints' => array(
-				new NotBlank()
-			)
-		));
+    /**
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return "LoginForm";
+    }
 
-		$builder->add('password', PasswordType::class, array(
-			'label' => '_sec.password.label',
-			'constraints' => array(
-				new NotBlank()
-			)
-		));
+    /**
+     * get the default options
+     *
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return array(
+            'csrf_protection' => false
+        );
+    }
 
-		$builder->add('remember_me', CheckboxType::class, array(
-			'label' => '_sec.rememberme',
-			'required' => false
-		));
+    /**
+     * Form builder
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('username', TextType::class, array(
+            'label' => '_sec.username.label',
+            'constraints' => array(
+                new NotBlank()
+            )
+        ));
 
-		$builder->add('target_path', HiddenType::class, array(
-			'required' => false
-		));
-	}
+        $builder->add('password', PasswordType::class, array(
+            'label' => '_sec.password.label',
+            'constraints' => array(
+                new NotBlank()
+            )
+        ));
 
-	/**
-	 *
-	 * {@inheritdoc} @see FormTypeInterface::getName()
-	 */
-	public function getName()
-	{
-		return "LoginForm";
-	}
+        $builder->add('remember_me', CheckboxType::class, array(
+            'label' => '_sec.rememberme',
+            'required' => false
+        ));
 
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::getBlockPrefix()
-	 */
-	public function getBlockPrefix()
-	{
-		return $this->getName();
-	}
+        $builder->add('target_path', HiddenType::class, array(
+            'required' => false
+        ));
+    }
 
-	/**
-	 * get the default options
-	 *
-	 * @return multitype:string multitype:string
-	 */
-	public function getDefaultOptions()
-	{
-		return array(
-			'csrf_protection' => false
-		);
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return $this->getName();
+    }
 
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults($this->getDefaultOptions());
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults($this->getDefaultOptions());
+    }
 }

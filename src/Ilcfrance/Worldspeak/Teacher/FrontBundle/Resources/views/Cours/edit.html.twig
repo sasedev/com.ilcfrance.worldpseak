@@ -456,10 +456,9 @@
                 <h3 class="legend">{{'Cours.tlabel.coursEditType'|trans}}</h3>
                 <div class="panel panel-danger">
                     <div class="panel-body">
-                        {{form_start(coursTypeForm, {'method':'POST', 'action':
-                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_start(coursTypeForm, {'method':'POST', 'action': path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
                             {{form_row(coursTypeForm.type, {'label_col': 3, 'widget_col': 2})}}
-                            {{form_row(coursTypeForm.submit, {'label_col':3,'widget_col': 2})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(coursTypeForm)}}
                     </div>
                 </div>
@@ -468,11 +467,9 @@
                 <h3 class="legend">{{'Cours.tlabel.coursEditPhone'|trans}}</h3>
                 <div class="panel panel-danger">
                     <div class="panel-body">
-                        {{form_start(coursPhoneForm, {'method':'POST', 'action':
-                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
-                            {{form_row(coursPhoneForm.phone, {'label_col': 3, 'widget_col': 3, 'input_group':
-                            { 'append': icon('earphone') }})}}
-                            {{form_row(coursPhoneForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_start(coursPhoneForm, {'method':'POST', 'action': path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                            {{form_row(coursPhoneForm.phone, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('earphone') }})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(coursPhoneForm)}}
                     </div>
                 </div>
@@ -482,10 +479,9 @@
                 <h3 class="legend">{{'Cours.tlabel.coursEditStatus'|trans}}</h3>
                 <div class="panel panel-danger">
                     <div class="panel-body">
-                        {{form_start(coursStatusForm, {'method':'POST', 'action':
-                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_start(coursStatusForm, {'method':'POST', 'action': path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
                             {{form_row(coursStatusForm.status, {'label_col': 3, 'widget_col': 2})}}
-                            {{form_row(coursStatusForm.submit, {'label_col':3,'widget_col': 2})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(coursStatusForm)}}
                     </div>
                 </div>
@@ -495,19 +491,13 @@
                 <h3 class="legend">{{'Cours.tlabel.coursEditCorrection'|trans}}</h3>
                 <div class="panel panel-danger">
                     <div class="panel-body">
-                        {{form_start(coursCorrectionForm, {'method':'POST', 'action':
-                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
-                            {{form_row(coursCorrectionForm.progress, {'label_col': 3, 'widget_col': 9,
-                            'attr': { 'class': 'wysiwyg' }})}}
-                            {{form_row(coursCorrectionForm.correctionVocabulairy, {'label_col': 3, 'widget_col': 9,
-                            'attr': { 'class': 'wysiwygFH' }})}}
-                            {{form_row(coursCorrectionForm.correctionStructure, {'label_col': 3, 'widget_col': 9,
-                            'attr': { 'class': 'wysiwygFH' }})}}
-                            {{form_row(coursCorrectionForm.correctionPrononciation, {'label_col': 3, 'widget_col': 9,
-                            'attr': { 'class': 'wysiwygFH' }})}}
-                            {{form_row(coursCorrectionForm.comments, {'label_col': 3, 'widget_col': 9,
-                            'attr': { 'class': 'wysiwyg' }})}}
-                            {{form_row(coursCorrectionForm.submit, {'label_col':3,'widget_col': 2})}}
+                        {{form_start(coursCorrectionForm, {'method':'POST', 'action': path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                            {{form_row(coursCorrectionForm.progress, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}}
+                            {{form_row(coursCorrectionForm.correctionVocabulairy, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwygFH' }})}}
+                            {{form_row(coursCorrectionForm.correctionStructure, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwygFH' }})}}
+                            {{form_row(coursCorrectionForm.correctionPrononciation, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwygFH' }})}}
+                            {{form_row(coursCorrectionForm.comments, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(coursCorrectionForm)}}
                     </div>
                 </div>
@@ -515,13 +505,12 @@
                 <h3 class="legend">{{'Cours.tlabel.coursEditKpi'|trans}}</h3>
                 <div class="panel panel-danger">
                     <div class="panel-body">
-                        {{form_start(coursKpiForm, {'method':'POST', 'action':
-                        path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_start(coursKpiForm, {'method':'POST', 'action': path('Teacher__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
                             {{form_row(coursKpiForm.kpiHomeworkPerformed, {'label_col': 3, 'widget_col': 2})}}
                             {{form_row(coursKpiForm.kpiParticipation, {'label_col': 3, 'widget_col': 2})}}
                             {{form_row(coursKpiForm.kpiVocabularyRetention, {'label_col': 3, 'widget_col': 2})}}
                             {{form_row(coursKpiForm.kpiCorrectionConsideration, {'label_col': 3, 'widget_col': 2})}}
-                            {{form_row(coursKpiForm.submit, {'label_col':3,'widget_col': 2})}}
+                            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(coursKpiForm)}}
                     </div>
                 </div>
@@ -585,7 +574,7 @@
                         {{form_row(timeCreditDocumentAddForm.teachingResource, {'label_col': 3, 'widget_col': 3, 'input_group': {'append': icon('file') }})}}
                         {{form_row(timeCreditDocumentAddForm.msg, {'label_col': 3, 'widget_col': 9, 'attr' : {'class': 'wysiwyg'}})}}
                         {{form_row(timeCreditDocumentAddForm.notifyByMail, {'label_col': 3, 'widget_col': 2, 'input_group': {'append': icon('envelope') }})}}
-                        {{form_row(timeCreditDocumentAddForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnAdd'|trans|raw}}</button></div></div>
                     {{form_end(timeCreditDocumentAddForm)}}
                     </div>
                 </div>
@@ -888,18 +877,16 @@
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editCefEnd'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditCefEndForm, {'method':'POST', 'action':
-                        path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                    <div class="panel-body">{{form_start(timeCreditCefEndForm, {'method':'POST', 'action': path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditCefEndForm.cefEnd, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditCefEndForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(timeCreditCefEndForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editEndReport'|trans}}</h3>
                 <div class="panel panel-danger">
                     <div class="panel-body">
-                    {{form_start(timeCreditEndReportForm, {'method':'POST', 'action':
-                        path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                    {{form_start(timeCreditEndReportForm, {'method':'POST', 'action': path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditEndReportForm.progress1, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.progress2, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.progress3, {'label_col': 3, 'widget_col': 2})}}
@@ -919,9 +906,8 @@
                         {{form_row(timeCreditEndReportForm.improvement3, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.improvement4, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.improvement5, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditEndReportForm.lastTeacherReport, {'label_col': 3, 'widget_col': 9,
-                        'attr': { 'class': 'wysiwygFH' }})}}
-                        {{form_row(timeCreditEndReportForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        {{form_row(timeCreditEndReportForm.lastTeacherReport, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwygFH' }})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                     {{form_end(timeCreditEndReportForm)}}
                     </div>
                 </div>
@@ -936,7 +922,7 @@
 		          <div class="panel-body">
 		            {{form_start(traineeEmailForm, {'method':'POST', 'action': path('Teacher__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
 		            {{form_row(traineeEmailForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
-		            {{form_row(traineeEmailForm.submit, {'label_col': 3,'widget_col': 2})}}
+		            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
 		            {{form_end(traineeEmailForm)}}
 		          </div>
 		        </div>
@@ -952,7 +938,7 @@
 		            {{form_row(traineeProfileAdvancedForm.needs, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
 		            {{form_row(traineeProfileAdvancedForm.outsideInterests, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
 		            {{form_row(traineeProfileAdvancedForm.comments, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
-		            {{form_row(traineeProfileAdvancedForm.submit, {'label_col': 3,'widget_col': 2})}}
+		            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
 		            {{form_end(traineeProfileAdvancedForm)}}
 		          </div>
 		        </div>
@@ -967,7 +953,7 @@
 		            {{form_row(traineeProfileForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
 		            {{form_row(traineeProfileForm.phone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'} }) }}
 		            {{form_row(traineeProfileForm.mobile, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}}) }}
-		            {{form_row(traineeProfileForm.submit, {'label_col': 3,'widget_col': 2})}}
+		            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
 		            {{form_end(traineeProfileForm)}}
 		          </div>
 		        </div>
@@ -1202,7 +1188,7 @@ $(function()
 	      {
 	        var options =
 	        {
-	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          script_url : '{{asset('/res/bower_components/tinymce/tinymce.min.js')}}',
 	          theme: "modern",
 	          height : 150,
 	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
@@ -1227,7 +1213,7 @@ $(function()
 	      {
 	        var options =
 	        {
-	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          script_url : '{{asset('/res/bower_components/tinymce/tinymce.min.js')}}',
 	          theme: "modern",
 	          height : 600,
 	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],

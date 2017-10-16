@@ -12,20 +12,25 @@ use Symfony\Component\HttpFoundation\Response;
 class WidgetController extends BaseController
 {
 
-	/**
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
-	 */
-	public function getTeacherNotifsAction($menu_active, Request $request)
-	{
-		$teacher = $this->getSecurityTokenStorage()->getToken()->getUser();
+    /**
+     *
+     * @param Request $request
+     * @param string $menu_active
+     *
+     * @return Response
+     */
+    public function getTeacherNotifsAction(Request $request, $menu_active)
+    {
+        $teacher = $this->getSecurityTokenStorage()
+            ->getToken()
+            ->getUser();
 
-		$em = $this->getEntityManager();
-		$count = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherNotif')->countOldPendingTxtByTeacher($teacher);
-		$this->addTwigVar('count', $count);
+        $em = $this->getEntityManager();
+        $count = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TeacherNotif')->countOldPendingTxtByTeacher($teacher);
+        $this->addTwigVar('count', $count);
 
-		$this->addTwigVar('menu_active', $menu_active);
+        $this->addTwigVar('menu_active', $menu_active);
 
-		return $this->render('IlcfranceWorldspeakTeacherFrontBundle:Widget:notifs.html.twig', $this->getTwigVars());
-	}
+        return $this->render('IlcfranceWorldspeakTeacherFrontBundle:Widget:notifs.html.twig', $this->getTwigVars());
+    }
 }

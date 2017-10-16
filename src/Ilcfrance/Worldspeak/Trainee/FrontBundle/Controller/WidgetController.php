@@ -12,20 +12,25 @@ use Symfony\Component\HttpFoundation\Response;
 class WidgetController extends BaseController
 {
 
-	/**
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
-	 */
-	public function getTraineeNotifsAction($menu_active, Request $request)
-	{
-		$trainee = $this->getSecurityTokenStorage()->getToken()->getUser();
+    /**
+     *
+     * @param Request $request
+     * @param string $menu_active
+     *
+     * @return Response
+     */
+    public function getTraineeNotifsAction(Request $request, $menu_active)
+    {
+        $trainee = $this->getSecurityTokenStorage()
+            ->getToken()
+            ->getUser();
 
-		$em = $this->getEntityManager();
-		$count = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TraineeNotif')->countOldPendingTxtByTrainee($trainee);
-		$this->addTwigVar('count', $count);
+        $em = $this->getEntityManager();
+        $count = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TraineeNotif')->countOldPendingTxtByTrainee($trainee);
+        $this->addTwigVar('count', $count);
 
-		$this->addTwigVar('menu_active', $menu_active);
+        $this->addTwigVar('menu_active', $menu_active);
 
-		return $this->render('IlcfranceWorldspeakTraineeFrontBundle:Widget:notifs.html.twig', $this->getTwigVars());
-	}
+        return $this->render('IlcfranceWorldspeakTraineeFrontBundle:Widget:notifs.html.twig', $this->getTwigVars());
+    }
 }

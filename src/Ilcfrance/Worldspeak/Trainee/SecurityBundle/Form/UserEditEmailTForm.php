@@ -2,9 +2,9 @@
 namespace Ilcfrance\Worldspeak\Trainee\SecurityBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Form Class used to change user email
@@ -14,39 +14,55 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class UserEditEmailTForm extends AbstractType
 {
 
-	/**
-	 * BuildForm
-	 * (non-PHPdoc) @see \Symfony\Component\Form\AbstractType::buildForm()
-	 *
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder->add('email', EmailType::class, array(
-			'label' => '_sec.email.label'
-		));
-		$builder->add('submit', SubmitType::class, array(
-			'label' => '_action.btnEdit'
-		));
-	}
+    /**
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'UserEditEmailForm';
+    }
 
-	/**
-	 * (non-PHPdoc) @see \Symfony\Component\Form\FormTypeInterface::getName()
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'UserEditEmailForm';
-	}
+    /**
+     * get the default options
+     *
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return array();
+    }
 
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::getBlockPrefix()
-	 */
-	public function getBlockPrefix()
-	{
-		return $this->getName();
-	}
+    /**
+     * Form builder
+     *
+     * {@inheritdoc}
+     * @see AbstractType::buildForm()
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('email', EmailType::class, array(
+            'label' => '_sec.email.label'
+        ));
+    }
+
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return $this->getName();
+    }
+
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults($this->getDefaultOptions());
+    }
 }

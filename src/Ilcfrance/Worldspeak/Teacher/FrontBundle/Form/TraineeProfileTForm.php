@@ -1,15 +1,13 @@
 <?php
 namespace Ilcfrance\Worldspeak\Teacher\FrontBundle\Form;
 
-use Ilcfrance\Worldspeak\Shared\DataBundle\Entity\Trainee;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Edit Trainee Profile Form
@@ -19,86 +17,83 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class TraineeProfileTForm extends AbstractType
 {
 
-	/**
-	 * Form builder
-	 *
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder->add('birthday', DateType::class, array(
-			'label' => 'Trainee.birthday.label',
-			'widget' => 'single_text',
-			'format' => 'yyyy-MM-dd',
-			'required' => false
-		));
+    /**
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'TraineeProfileForm';
+    }
 
-		$builder->add('address', TextareaType::class, array(
-			'label' => 'Trainee.address.label',
-			'required' => false
-		));
+    /**
+     * get the default options
+     *
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return array(
+            'validation_groups' => array(
+                'profile',
+                'Default'
+            )
+        );
+    }
 
-		$builder->add('country', CountryType::class, array(
-			'label' => 'Trainee.country.label',
-			'required' => false
-		));
+    /**
+     * Form builder
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('birthday', DateType::class, array(
+            'label' => 'Trainee.birthday.label',
+            'widget' => 'single_text',
+            'format' => 'yyyy-MM-dd',
+            'required' => false
+        ));
 
-		$builder->add('phone', TextType::class, array(
-			'label' => 'Trainee.phone.label',
-			'required' => false
-		));
+        $builder->add('address', TextareaType::class, array(
+            'label' => 'Trainee.address.label',
+            'required' => false
+        ));
 
-		$builder->add('mobile', TextType::class, array(
-			'label' => 'Trainee.mobile.label',
-			'required' => false
-		));
+        $builder->add('country', CountryType::class, array(
+            'label' => 'Trainee.country.label',
+            'required' => false
+        ));
 
-		$builder->add('submit', SubmitType::class, array(
-			'label' => '_action.btnEdit'
-		));
-	}
+        $builder->add('phone', TextType::class, array(
+            'label' => 'Trainee.phone.label',
+            'required' => false
+        ));
 
-	/**
-	 * (non-PHPdoc) @see \Symfony\Component\Form\FormTypeInterface::getName()
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'TraineeProfileForm';
-	}
+        $builder->add('mobile', TextType::class, array(
+            'label' => 'Trainee.mobile.label',
+            'required' => false
+        ));
+    }
 
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::getBlockPrefix()
-	 */
-	public function getBlockPrefix()
-	{
-		return $this->getName();
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return $this->getName();
+    }
 
-	/**
-	 * get the default options
-	 *
-	 * @return multitype:string multitype:string
-	 */
-	public function getDefaultOptions()
-	{
-		return array(
-			'validation_groups' => array(
-				'profile',
-				'Default'
-			)
-		);
-	}
-
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults($this->getDefaultOptions());
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults($this->getDefaultOptions());
+    }
 }

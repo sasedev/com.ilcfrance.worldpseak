@@ -269,7 +269,7 @@
             {{form_row(teacherProfileForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
             {{form_row(teacherProfileForm.phone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'} }) }}
             {{form_row(teacherProfileForm.mobile, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}}) }}
-            {{form_row(teacherProfileForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(teacherProfileForm)}}
           </div>
         </div>
@@ -280,7 +280,7 @@
           <div class="panel-body">
             {{form_start(teacherPreferedLocaleForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
             {{form_row(teacherPreferedLocaleForm.preferedLocale, {'label_col': 3, 'widget_col': 4, 'input_group': { 'append': icon('flag') }})}}
-            {{form_row(teacherPreferedLocaleForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(teacherPreferedLocaleForm)}}
           </div>
         </div>
@@ -291,7 +291,7 @@
           <div class="panel-body">
             {{form_start(teacherCoursPhoneForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
             {{form_row(teacherCoursPhoneForm.coursPhone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('earphone') }, 'attr':{'placeholder':'_phone.format'} }) }}
-            {{form_row(teacherCoursPhoneForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(teacherCoursPhoneForm)}}
           </div>
         </div>
@@ -302,7 +302,7 @@
           <div class="panel-body">
             {{form_start(teacherEmailForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
             {{form_row(teacherEmailForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
-            {{form_row(teacherEmailForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(teacherEmailForm)}}
           </div>
         </div>
@@ -313,7 +313,7 @@
           <div class="panel-body">
             {{form_start(teacherLockoutForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
             {{form_row(teacherLockoutForm.lockout, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('lock') }})}}
-            {{form_row(teacherLockoutForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(teacherLockoutForm)}}
           </div>
         </div>
@@ -324,7 +324,7 @@
           <div class="panel-body">
             {{form_start(teacherFtypeForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
             {{form_row(teacherFtypeForm.ftype, {'label_col': 3, 'widget_col': 2})}}
-            {{form_row(teacherFtypeForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(teacherFtypeForm)}}
           </div>
         </div>
@@ -335,7 +335,7 @@
           <div class="panel-body">
             {{form_start(teacherTypeForm, {'method':'POST', 'action': path('Admin__teacher_edit_post', {'id': teacher.id}), 'style': 'horizontal'})}}
             {{form_row(teacherTypeForm.type, {'label_col': 3, 'widget_col': 2})}}
-            {{form_row(teacherTypeForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(teacherTypeForm)}}
           </div>
         </div>
@@ -410,7 +410,7 @@ $(function()
 	      {
 	        var options =
 	        {
-	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          script_url : '{{asset('/res/bower_components/tinymce/tinymce.min.js')}}',
 	          theme: "modern",
 	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
 	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"

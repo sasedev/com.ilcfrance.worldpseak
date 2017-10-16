@@ -77,7 +77,7 @@
                     {{form_start(timeCreditDocumentEditForm, {'method':'POST', 'action': path('Teacher__timeCreditDocument_edit_post', {'id': timeCreditDocument.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditDocumentEditForm.teachingResource, {'label_col': 3, 'widget_col': 3, 'input_group': {'append': icon('file') }})}}
                         {{form_row(timeCreditDocumentEditForm.msg, {'label_col': 3, 'widget_col': 9, 'attr' : {'class': 'wysiwyg'}})}}
-                        {{form_row(timeCreditDocumentEditForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                     {{form_end(timeCreditDocumentEditForm)}}
                     </div>
                 </div>
@@ -94,7 +94,7 @@ $(function()
 	      {
 	        var options =
 	        {
-	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          script_url : '{{asset('/res/bower_components/tinymce/tinymce.min.js')}}',
 	          theme: "modern",
 	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
 	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"

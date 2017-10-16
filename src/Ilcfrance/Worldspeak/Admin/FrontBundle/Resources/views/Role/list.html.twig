@@ -22,7 +22,7 @@
             {{form_start(roleAddForm, {'method':'POST', 'action': path('Admin__role_add_post'), 'style': 'horizontal'})}}
               {{form_row(roleAddForm.name, {'label_col': 3, 'widget_col': 6})}}
               {{form_row(roleAddForm.description, {'label_col': 3, 'widget_col': 9, 'attr': {'class':'wysiwyg'}})}}
-              {{form_row(roleAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+              <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnAdd'|trans|raw}}</button></div></div>
             {{form_end(roleAddForm)}}
           </div>
         </div>

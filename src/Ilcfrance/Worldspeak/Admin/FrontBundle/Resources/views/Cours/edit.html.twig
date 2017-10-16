@@ -158,64 +158,58 @@
                 <br>
                 <h3 class="legend">{{'Cours.tlabel.coursEditTeacher'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(coursTeacherForm, {'method':'POST', 'action':
-                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
-                        {{form_row(coursTeacherForm.teacher, {'label_col': 3, 'widget_col': 3, 'input_group': {
-                        'append': icon('user') }})}} {{form_row(coursTeacherForm.submit, {'label_col':3,'widget_col':
-                        2})}} {{form_end(coursTeacherForm)}}</div>
+                    <div class="panel-body">{{form_start(coursTeacherForm, {'method':'POST', 'action': path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursTeacherForm.teacher, {'label_col': 3, 'widget_col': 3, 'input_group': {'append': icon('user') }})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div> 
+                        {{form_end(coursTeacherForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'Cours.tlabel.coursEditPhone'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(coursPhoneForm, {'method':'POST', 'action':
-                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
-                        {{form_row(coursPhoneForm.phone, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append':
-                        icon('phone-alt') }})}} {{form_row(coursPhoneForm.submit, {'label_col':3,'widget_col': 2})}}
+                    <div class="panel-body">{{form_start(coursPhoneForm, {'method':'POST', 'action': path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursPhoneForm.phone, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append':icon('phone-alt') }})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(coursPhoneForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'Cours.tlabel.coursEditType'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(coursTypeForm, {'method':'POST', 'action':
-                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
-                        {{form_row(coursTypeForm.type, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(coursTypeForm.submit, {'label_col':3,'widget_col': 2})}} {{form_end(coursTypeForm)}}
+                    <div class="panel-body">{{form_start(coursTypeForm, {'method':'POST', 'action': path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                    {{form_row(coursTypeForm.type, {'label_col': 3, 'widget_col': 2})}}
+                    <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div> 
+                    {{form_end(coursTypeForm)}}
                     </div>
                 </div>
                 <br>
                 <h3 class="legend">{{'Cours.tlabel.coursEditStatus'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(coursStatusForm, {'method':'POST', 'action':
-                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                    <div class="panel-body">{{form_start(coursStatusForm, {'method':'POST', 'action': path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
                         {{form_row(coursStatusForm.status, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(coursStatusForm.submit, {'label_col':3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(coursStatusForm)}}</div>
                 </div>
                 {%if cours.status is constant('STATUS_DONE', cours)%} <br>
                 <h3 class="legend">{{'Cours.tlabel.coursEditCorrection'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(coursCorrectionForm, {'method':'POST', 'action':
-                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
-                        {{form_row(coursCorrectionForm.progress, {'label_col': 3, 'widget_col': 9, 'attr': { 'class':
-                        'wysiwyg' }})}} {{form_row(coursCorrectionForm.correctionVocabulairy, {'label_col': 3,
-                        'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}}
-                        {{form_row(coursCorrectionForm.correctionStructure, {'label_col': 3, 'widget_col': 9, 'attr': {
-                        'class': 'wysiwyg' }})}} {{form_row(coursCorrectionForm.correctionPrononciation, {'label_col':
-                        3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} {{form_row(coursCorrectionForm.comments,
-                        {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}}
-                        {{form_row(coursCorrectionForm.submit, {'label_col':3,'widget_col': 2})}}
+                    <div class="panel-body">{{form_start(coursCorrectionForm, {'method':'POST', 'action': path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                        {{form_row(coursCorrectionForm.progress, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} 
+                        {{form_row(coursCorrectionForm.correctionVocabulairy, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}}
+                        {{form_row(coursCorrectionForm.correctionStructure, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} 
+                        {{form_row(coursCorrectionForm.correctionPrononciation, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} 
+                        {{form_row(coursCorrectionForm.comments, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(coursCorrectionForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'Cours.tlabel.coursEditKpi'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(coursKpiForm, {'method':'POST', 'action':
-                        path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
+                    <div class="panel-body">{{form_start(coursKpiForm, {'method':'POST', 'action': path('Admin__cours_edit_post', {'id': cours.id}), 'style': 'horizontal'})}}
                         {{form_row(coursKpiForm.kpiHomeworkPerformed, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(coursKpiForm.kpiParticipation, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(coursKpiForm.kpiVocabularyRetention, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(coursKpiForm.kpiCorrectionConsideration, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(coursKpiForm.submit, {'label_col':3,'widget_col': 2})}} {{form_end(coursKpiForm)}}</div>
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
+                        {{form_end(coursKpiForm)}}</div>
                 </div>
                 {%endif%}
             </div>
@@ -357,7 +351,7 @@ $(function()
           {
             var options =
             {
-              script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+              script_url : '{{asset('/res/bower_components/tinymce/tinymce.min.js')}}',
               theme: "modern",
               plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"

@@ -559,7 +559,7 @@
                     <div class="panel-body">{{form_start(timeCreditFtypeForm, {'method':'POST', 'action':
                         path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditFtypeForm.ftype, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditFtypeForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(timeCreditFtypeForm)}}</div>
                 </div>
                 <br>
@@ -568,36 +568,33 @@
                     <div class="panel-body">{{form_start(timeCreditLevelForm, {'method':'POST', 'action':
                         path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditLevelForm.level, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditLevelForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(timeCreditLevelForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editTotalHours'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditTotalHoursForm, {'method':'POST', 'action':
-                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
-                        {{form_row(timeCreditTotalHoursForm.totalHours, {'label_col': 3, 'widget_col': 2, 'input_group':
-                        { 'append': icon('time') }})}} {{form_row(timeCreditTotalHoursForm.submit, {'label_col':
-                        3,'widget_col': 2})}} {{form_end(timeCreditTotalHoursForm)}}</div>
+                    <div class="panel-body">{{form_start(timeCreditTotalHoursForm, {'method':'POST', 'action': path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditTotalHoursForm.totalHours, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('time') }})}} 
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div> 
+                        {{form_end(timeCreditTotalHoursForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editDeadLine'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditDeadLineForm, {'method':'POST', 'action':
-                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
-                        {{form_row(timeCreditDeadLineForm.deadLine, {'label_col': 3, 'widget_col': 2, 'input_group': {
-                        'append': icon('calendar') }})}} {{form_row(timeCreditDeadLineForm.submit, {'label_col':
-                        3,'widget_col': 2})}} {{form_end(timeCreditDeadLineForm)}}</div>
+                    <div class="panel-body">{{form_start(timeCreditDeadLineForm, {'method':'POST', 'action': path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditDeadLineForm.deadLine, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('calendar') }})}} 
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div> 
+                        {{form_end(timeCreditDeadLineForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editDetails'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditDetailsForm, {'method':'POST', 'action':
-                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
-                        {{form_row(timeCreditDetailsForm.objectives, {'label_col': 3, 'widget_col': 9, 'attr': {
-                        'class': 'wysiwyg' }})}} {{form_row(timeCreditDetailsForm.comments, {'label_col': 3,
-                        'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} {{form_row(timeCreditDetailsForm.submit,
-                        {'label_col': 3,'widget_col': 2})}} {{form_end(timeCreditDetailsForm)}}</div>
+                    <div class="panel-body">{{form_start(timeCreditDetailsForm, {'method':'POST', 'action': path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditDetailsForm.objectives, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} 
+                        {{form_row(timeCreditDetailsForm.comments, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} 
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div> 
+                        {{form_end(timeCreditDetailsForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editCefBegin'|trans}}</h3>
@@ -605,7 +602,7 @@
                     <div class="panel-body">{{form_start(timeCreditCefBeginForm, {'method':'POST', 'action':
                         path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditCefBeginForm.cefBegin, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditCefBeginForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(timeCreditCefBeginForm)}}</div>
                 </div>
                 {%if timeCredit.status is constant('STATUS_FULL_FINISHED', timeCredit) or timeCredit.status is
@@ -617,35 +614,32 @@
                     <div class="panel-body">{{form_start(timeCreditCefEndForm, {'method':'POST', 'action':
                         path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditCefEndForm.cefEnd, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditCefEndForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(timeCreditCefEndForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editForcedKpi'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditForcedKpiForm, {'method':'POST', 'action':
-                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
-                        {{form_row(timeCreditForcedKpiForm.forcedKpiHomeworkPerformed, {'label_col': 3, 'widget_col':
-                        2})}} {{form_row(timeCreditForcedKpiForm.forcedKpiParticipation, {'label_col': 3, 'widget_col':
-                        2})}} {{form_row(timeCreditForcedKpiForm.forcedKpiVocabularyRetention, {'label_col': 3,
-                        'widget_col': 2})}} {{form_row(timeCreditForcedKpiForm.forcedKpiCorrectionConsideration,
-                        {'label_col': 3, 'widget_col': 2})}} {{form_row(timeCreditForcedKpiForm.submit, {'label_col':
-                        3,'widget_col': 2})}} {{form_end(timeCreditForcedKpiForm)}}</div>
+                    <div class="panel-body">{{form_start(timeCreditForcedKpiForm, {'method':'POST', 'action': path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                        {{form_row(timeCreditForcedKpiForm.forcedKpiHomeworkPerformed, {'label_col': 3, 'widget_col': 2})}} 
+                        {{form_row(timeCreditForcedKpiForm.forcedKpiParticipation, {'label_col': 3, 'widget_col': 2})}} 
+                        {{form_row(timeCreditForcedKpiForm.forcedKpiVocabularyRetention, {'label_col': 3, 'widget_col': 2})}} 
+                        {{form_row(timeCreditForcedKpiForm.forcedKpiCorrectionConsideration, {'label_col': 3, 'widget_col': 2})}} 
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div> 
+                        {{form_end(timeCreditForcedKpiForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editLockout'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditLockoutForm, {'method':'POST', 'action':
-                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                    <div class="panel-body">{{form_start(timeCreditLockoutForm, {'method':'POST', 'action': path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditLockoutForm.lockout, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditLockoutForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(timeCreditLockoutForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editEndReport'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditEndReportForm, {'method':'POST', 'action':
-                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                    <div class="panel-body">{{form_start(timeCreditEndReportForm, {'method':'POST', 'action': path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditEndReportForm.progress1, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.progress2, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.progress3, {'label_col': 3, 'widget_col': 2})}}
@@ -665,17 +659,16 @@
                         {{form_row(timeCreditEndReportForm.improvement3, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.improvement4, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.improvement5, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditEndReportForm.lastTeacherReport, {'label_col': 3, 'widget_col': 9, 'attr':
-                        { 'class': 'wysiwyg' }})}} {{form_row(timeCreditEndReportForm.submit, {'label_col':
-                        3,'widget_col': 2})}} {{form_end(timeCreditEndReportForm)}}</div>
+                        {{form_row(timeCreditEndReportForm.lastTeacherReport, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} 
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div> 
+                        {{form_end(timeCreditEndReportForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editShowReport'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditShowReportForm, {'method':'POST', 'action':
-                        path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                    <div class="panel-body">{{form_start(timeCreditShowReportForm, {'method':'POST', 'action': path('Admin__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditShowReportForm.showReport, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditShowReportForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(timeCreditShowReportForm)}}</div>
                 </div>
                 {%endif%}
@@ -776,7 +769,7 @@
                         {{form_row(timeCreditDocumentAddForm.teachingResource, {'label_col': 3, 'widget_col': 3, 'input_group': {'append': icon('file') }})}}
                         {{form_row(timeCreditDocumentAddForm.msg, {'label_col': 3, 'widget_col': 9, 'attr' : {'class': 'wysiwyg'}})}}
                         {{form_row(timeCreditDocumentAddForm.notifyByMail, {'label_col': 3, 'widget_col': 2, 'input_group': {'append': icon('envelope') }})}}
-                        {{form_row(timeCreditDocumentAddForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnAdd'|trans|raw}}</button></div></div>
                     {{form_end(timeCreditDocumentAddForm)}}
                     </div>
                 </div>
@@ -1015,7 +1008,7 @@ $(function()
           {
             var options =
             {
-              script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+              script_url : '{{asset('/res/bower_components/tinymce/tinymce.min.js')}}',
               theme: "modern",
               plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
               toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"

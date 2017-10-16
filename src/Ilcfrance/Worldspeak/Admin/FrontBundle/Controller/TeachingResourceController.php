@@ -17,365 +17,449 @@ use Symfony\Component\HttpFoundation\Response;
 class TeachingResourceController extends BaseController
 {
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->addTwigVar('menu_active', 'teachingResource');
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->addTwigVar('menu_active', 'teachingResource');
+    }
 
-	/**
-	 * Get TeachingResource with pagination 10/page
-	 *
-	 * @param integer $page
-	 *
-	 * @return Response
-	 */
-	public function listAction($page = 1, Request $request)
-	{
-		$dm = $this->getMongoManager();
-		$query = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->getAllQuery();
+    /**
+     * Get TeachingResource with pagination 10/page
+     *
+     * @param Request $request
+     * @param integer $page
+     *
+     * @return Response
+     */
+    public function listAction(Request $request, $page = 1)
+    {
+        $dm = $this->getMongoManager();
+        $query = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->getAllQuery();
 
-		$paginator = $this->get('knp_paginator');
-		$pagination = $paginator->paginate($query, $page, 10);
-		$pagination->setPageRange(10);
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $page, 10);
+        $pagination->setPageRange(10);
 
-		$teachingResource = new TeachingResource();
-		$teachingResourceAddForm = $this->createForm(TeachingResourceAddTForm::class, $teachingResource);
-		$this->addTwigVar('teachingResourceAddForm', $teachingResourceAddForm->createView());
+        $teachingResource = new TeachingResource();
+        $teachingResourceAddForm = $this->createForm(TeachingResourceAddTForm::class, $teachingResource);
+        $this->addTwigVar('teachingResourceAddForm', $teachingResourceAddForm->createView());
 
-		$this->addTwigVar('teachingResources', $pagination);
-		$this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_list'));
-		$this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_list'));
-		$this->addTwigVar('smenu_active', 'teachingResource.list');
+        $this->addTwigVar('teachingResources', $pagination);
+        $this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_list'));
+        $this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_list'));
+        $this->addTwigVar('smenu_active', 'teachingResource.list');
 
-		return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:list.html.twig', $this->getTwigVars());
-	}
+        return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:list.html.twig', $this->getTwigVars());
+    }
 
-	/**
-	 * Search TeachingResource with pagination 10/page
-	 *
-	 * @param integer $page
-	 *
-	 * @return Response
-	 */
-	public function searchAction($page = 1, Request $request)
-	{
-		;
-		$q = $request->get('q');
-		if (null == $q || trim($q) == "") {
-			return $this->redirect($this->generateUrl("Admin__teachingResource_list"));
-		}
-		$q = trim($q);
-		$dm = $this->getMongoManager();
-		$count = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->countSearch($q);
-		$query = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->searchQuery($q);
+    /*
+     * public function repaireAction(Request $request)
+     * {
+     * ini_set('memory_limit', '-1');
+     * ini_set('max_execution_time', '0');
+     * $kernel_root = $this->get('kernel')->getRootDir();
+     * $dm = $this->getMongoManager();
+     * $file_array = array();
+     * $file_names = $kernel_root . '/../nosql/worldspeak/teaching_resources.files.json';
+     * $file_names_handle = \fopen($file_names, "r");
+     * if ($file_names_handle) {
+     * while (($line = \fgets($file_names_handle)) !== false) {
+     * $json_data = \json_decode($line, true);
+     * // \print_r($json_data);
+     * $file_array[$json_data['_id']] = array(
+     * 'filename' => $json_data['filename'],
+     * 'content' => '',
+     * 'dtCrea' => new DateTime($json_data['dtCrea']['$date'])
+     * );
+     * }
+     * \fclose($file_names_handle);
+     * } else {
+     * // error opening the file.
+     * $this->addFlash('error', "error opening the file " . $file_names);
+     * }
+     * // \print_r($file_array);
+     * $file_contents = $kernel_root . '/../nosql/worldspeak/teaching_resources.chunks.json';
+     * $file_contents_handle = \fopen($file_contents, "r");
+     * if ($file_contents_handle) {
+     * while (($line = \fgets($file_contents_handle)) !== false) {
+     * $json_data = \json_decode($line, true);
+     * // \print_r($json_data);
+     * $file_array[$json_data['files_id']]['content'] .= \base64_decode($json_data['data']['$binary']);
+     * }
+     * \fclose($file_contents_handle);
+     * } else {
+     * // error opening the file.
+     * $this->addFlash('error', "error opening the file " . $file_contents);
+     * }
+     * // \print_r($file_array);
+     * foreach ($file_array as $key => $file) {
+     * if (! \file_exists($kernel_root . "/../nosql/worldspeak/output/" . $key)) {
+     * \mkdir($kernel_root . "/../nosql/worldspeak/output/" . $key);
+     * }
+     * $filename = $kernel_root . "/../nosql/worldspeak/output/" . $key . "/" . $file['filename'];
+     * $dtCrea = $file['dtCrea'];
+     * $handle = \fopen($filename, "w+");
+     * echo $filename . "\n";
+     * if ($handle) {
+     * \fwrite($handle, $file['content']);
+     * \fclose($handle);
+     * \touch($filename, $dtCrea->getTimestamp());
+     * $teachingResource = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->find($key);
+     * if (null == $teachingResource) {
+     * $this->addFlash('error', "unknown teaching resource " . $key);
+     * } else {
+     * $teachingResource->setFile($filename);
+     * $teachingResource->setFilename($file['filename']);
+     * $dm->persist($teachingResource);
+     * $dm->flush();
+     * $this->addFlash('success', $this->translate('TeachingResource.addSuccess', array(
+     * '%teachingResource%' => $teachingResource->getFilename()
+     * )));
+     * }
+     * } else {
+     * $this->addFlash('error', "error opening the file " . $filename);
+     * }
+     * }
+     * $urlFrom = $this->generateUrl('Admin__teachingResource_list');
+     * return $this->redirect($urlFrom);
+     * } //
+     */
 
-		$paginator = $this->get('knp_paginator');
-		$pagination = $paginator->paginate($query, $page, 10);
-		$pagination->setPageRange(10);
+    /**
+     * Search TeachingResource with pagination 10/page
+     *
+     * @param Request $request
+     * @param integer $page
+     *
+     * @return RedirectResponse|Response
+     */
+    public function searchAction(Request $request, $page = 1)
+    {
+        ;
+        $q = $request->get('q');
+        if (null == $q || trim($q) == "") {
+            return $this->redirect($this->generateUrl("Admin__teachingResource_list"));
+        }
+        $q = trim($q);
+        $dm = $this->getMongoManager();
+        $count = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->countSearch($q);
+        $query = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->searchQuery($q);
 
-		$teachingResource = new TeachingResource();
-		$teachingResourceAddForm = $this->createForm(TeachingResourceAddTForm::class, $teachingResource);
-		$this->addTwigVar('teachingResourceAddForm', $teachingResourceAddForm->createView());
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate($query, $page, 10);
+        $pagination->setPageRange(10);
 
-		$this->addTwigVar('teachingResources', $pagination);
-		$this->addTwigVar('countQ', $count);
-		$this->addTwigVar('q', $q);
-		$this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_search_txt', array(
-			'%q%' => $q
-		)));
+        $teachingResource = new TeachingResource();
+        $teachingResourceAddForm = $this->createForm(TeachingResourceAddTForm::class, $teachingResource);
+        $this->addTwigVar('teachingResourceAddForm', $teachingResourceAddForm->createView());
 
-		$this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_search', array(
-			'%q%' => $q
-		)));
+        $this->addTwigVar('teachingResources', $pagination);
+        $this->addTwigVar('countQ', $count);
+        $this->addTwigVar('q', $q);
+        $this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_search_txt', array(
+            '%q%' => $q
+        )));
 
-		$this->addTwigVar('smenu_active', 'teachingResource.list');
+        $this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_search', array(
+            '%q%' => $q
+        )));
 
-		return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:search.html.twig', $this->getTwigVars());
-	}
+        $this->addTwigVar('smenu_active', 'teachingResource.list');
 
-	/**
-	 * Add new TeachingResource (method GET)
-	 *
-	 * @return Response
-	 */
-	public function addAction(Request $request)
-	{
-		$teachingResourceAddForm = $this->createForm(TeachingResourceAddTForm::class);
+        return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:search.html.twig', $this->getTwigVars());
+    }
 
-		$this->addTwigVar('teachingResourceAddForm', $teachingResourceAddForm->createView());
-		$this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_add'));
-		$this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_add'));
-		$this->addTwigVar('smenu_active', 'teachingResource.add');
+    /**
+     * Add new TeachingResource (method GET)
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function addAction(Request $request)
+    {
+        $teachingResourceAddForm = $this->createForm(TeachingResourceAddTForm::class);
 
-		return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:add.html.twig', $this->getTwigVars());
-	}
+        $this->addTwigVar('teachingResourceAddForm', $teachingResourceAddForm->createView());
+        $this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_add'));
+        $this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_add'));
+        $this->addTwigVar('smenu_active', 'teachingResource.add');
 
-	/**
-	 * Add new TeachingResource (method POST)
-	 *
-	 * @return RedirectResponse Response
-	 */
-	public function addPostAction(Request $request)
-	{
-		$urlFrom = $this->getReferer($request);
-		if (null == $urlFrom || trim($urlFrom) == '') {
-			return $this->redirect($this->generateUrl('Admin__teachingResource_add_get'));
-		}
+        return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:add.html.twig', $this->getTwigVars());
+    }
 
-		$teachingResourceAddForm = $this->createForm(TeachingResourceAddTForm::class);
+    /**
+     * Add new TeachingResource (method POST)
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
+     */
+    public function addPostAction(Request $request)
+    {
+        $urlFrom = $this->getReferer($request);
+        if (null == $urlFrom || trim($urlFrom) == '') {
+            return $this->redirect($this->generateUrl('Admin__teachingResource_add_get'));
+        }
 
-		;
-		$data = $request->request->all();
-		if (isset($data['TeachingResourceAddForm'])) {
-			$teachingResourceAddForm->handleRequest($request);
+        $teachingResourceAddForm = $this->createForm(TeachingResourceAddTForm::class);
 
-			if ($teachingResourceAddForm->isValid()) {
-				$formData = $teachingResourceAddForm->getData();
-				$upload = $formData['file'];
+        ;
+        $data = $request->request->all();
+        if (isset($data['TeachingResourceAddForm'])) {
+            $teachingResourceAddForm->handleRequest($request);
 
-				$teachingResource = new TeachingResource();
+            if ($teachingResourceAddForm->isValid()) {
+                $formData = $teachingResourceAddForm->getData();
+                $upload = $formData['file'];
 
-				$teachingResource->setFile($upload->getPathname());
-				$teachingResource->setFilename($upload->getClientOriginalName());
-				$teachingResource->setMimeType($upload->getClientMimeType());
-				$teachingResource->setLevel($formData['level']);
-				$teachingResource->setType($formData['type']);
+                $teachingResource = new TeachingResource();
 
-				$dm = $this->getMongoManager();
+                $teachingResource->setFile($upload->getPathname());
+                $teachingResource->setFilename($upload->getClientOriginalName());
+                $teachingResource->setMimeType($upload->getClientMimeType());
+                $teachingResource->setLevel($formData['level']);
+                $teachingResource->setType($formData['type']);
 
-				$dm->persist($teachingResource);
-				$dm->flush();
-				$this->addFlash('success', $this->translate('TeachingResource.addSuccess', array(
-					'%teachingResource%' => $teachingResource->getFilename()
-				)));
+                $dm = $this->getMongoManager();
 
-				return $this->redirect($this->generateUrl('Admin__teachingResource_edit_get', array(
-					'id' => $teachingResource->getId()
-				)));
-			} else {
-				$this->addTwigVar('teachingResourceAddForm', $teachingResourceAddForm->createView());
-				$this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_add'));
-				$this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_add'));
-				$this->addTwigVar('smenu_active', 'teachingResource.add');
+                $dm->persist($teachingResource);
+                $dm->flush();
+                $this->addFlash('success', $this->translate('TeachingResource.addSuccess', array(
+                    '%teachingResource%' => $teachingResource->getFilename()
+                )));
 
-				return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:add.html.twig', $this->getTwigVars());
-			}
-		} else {
-			return $this->redirect($urlFrom);
-		}
-	}
+                return $this->redirect($this->generateUrl('Admin__teachingResource_edit_get', array(
+                    'id' => $teachingResource->getId()
+                )));
+            } else {
+                $this->addTwigVar('teachingResourceAddForm', $teachingResourceAddForm->createView());
+                $this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_add'));
+                $this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_add'));
+                $this->addTwigVar('smenu_active', 'teachingResource.add');
 
-	/**
-	 * Download TeachingResource
-	 *
-	 * @param guid $id
-	 *
-	 * @return RedirectResponse Response
-	 */
-	public function downloadAction($id, Request $request)
-	{
-		$urlFrom = $this->getReferer($request);
-		if (null == $urlFrom || trim($urlFrom) == '') {
-			$urlFrom = $this->generateUrl('Admin__teachingResource_list');
-		}
-		$dm = $this->getMongoManager();
-		try {
-			$teachingResource = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->findOneBy(array(
-				'id' => $id
-			));
+                return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:add.html.twig', $this->getTwigVars());
+            }
+        } else {
+            return $this->redirect($urlFrom);
+        }
+    }
 
-			if (null == $teachingResource) {
-				$this->addFlash('warning', 'TeachingResource.downloadNotfound');
+    /**
+     * Download TeachingResource
+     *
+     * @param Request $request
+     * @param string $id
+     *
+     * @return RedirectResponse|Response
+     */
+    public function downloadAction(Request $request, $id)
+    {
+        $urlFrom = $this->getReferer($request);
+        if (null == $urlFrom || trim($urlFrom) == '') {
+            $urlFrom = $this->generateUrl('Admin__teachingResource_list');
+        }
+        $dm = $this->getMongoManager();
+        try {
+            $teachingResource = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->findOneBy(array(
+                'id' => $id
+            ));
 
-				return $this->redirect($urlFrom);
-			}
+            if (null == $teachingResource) {
+                $this->addFlash('warning', 'TeachingResource.downloadNotfound');
 
-			$response = new Response();
-			$response->headers->set('Cache-Control', 'private');
-			$response->headers->set('Content-type', $teachingResource->getMimeType());
-			$response->headers->set('Content-Disposition', 'attachment; filename="' . $teachingResource->getFilename() . '"');
+                return $this->redirect($urlFrom);
+            }
 
-			$response->headers->set('Content-length', $teachingResource->getLength());
-			// Send headers before outputting anything
-			$response->sendHeaders();
+            $response = new Response();
+            $response->headers->set('Cache-Control', 'private');
+            $response->headers->set('Content-type', $teachingResource->getMimeType());
+            $response->headers->set('Content-Disposition', 'attachment; filename="' . $teachingResource->getFilename() . '"');
 
-			$response->setContent($teachingResource->getFile()->getBytes());
+            $response->headers->set('Content-length', $teachingResource->getLength());
+            // Send headers before outputting anything
+            $response->sendHeaders();
 
-			return $response;
-		} catch (\Exception $e) {
-			$logger = $this->getLogger();
-			$logger->addError($e->getLine() . ' ' . $e->getMessage());
+            $response->setContent($teachingResource->getFile()
+                ->getBytes());
 
-			$this->addFlash('warning', 'TeachingResource.downloadNotfound');
+            return $response;
+        } catch (\Exception $e) {
+            $logger = $this->getLogger();
+            $logger->addError($e->getLine() . ' ' . $e->getMessage());
 
-			return $this->redirect($urlFrom);
-		}
-	}
+            $this->addFlash('warning', 'TeachingResource.downloadNotfound');
 
-	/**
-	 * Edit TeachingResource (method GET)
-	 *
-	 * @param guid $id
-	 *
-	 * @return RedirectResponse Response
-	 */
-	public function editAction($id, Request $request)
-	{
-		$urlFrom = $this->getReferer($request);
-		if (null == $urlFrom || trim($urlFrom) == '') {
-			$urlFrom = $this->generateUrl('Admin__teachingResource_list');
-		}
-		$dm = $this->getMongoManager();
-		try {
-			$teachingResource = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->findOneBy(array(
-				'id' => $id
-			));
+            return $this->redirect($urlFrom);
+        }
+    }
 
-			if (null == $teachingResource) {
-				$this->addFlash('warning', 'TeachingResource.editNotfound');
+    /**
+     * Edit TeachingResource (method GET)
+     *
+     * @param Request $request
+     * @param string $id
+     *
+     * @return RedirectResponse|Response
+     */
+    public function editAction(Request $request, $id)
+    {
+        $urlFrom = $this->getReferer($request);
+        if (null == $urlFrom || trim($urlFrom) == '') {
+            $urlFrom = $this->generateUrl('Admin__teachingResource_list');
+        }
+        $dm = $this->getMongoManager();
+        try {
+            $teachingResource = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->findOneBy(array(
+                'id' => $id
+            ));
 
-				return $this->redirect($urlFrom);
-			}
+            if (null == $teachingResource) {
+                $this->addFlash('warning', 'TeachingResource.editNotfound');
 
-			$teachingResourceEditForm = $this->createForm(TeachingResourceEditTForm::class, $teachingResource);
-			$this->addTwigVar('teachingResourceEditForm', $teachingResourceEditForm->createView());
+                return $this->redirect($urlFrom);
+            }
 
-			$this->addTwigVar('teachingResource', $teachingResource);
-			$this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_edit_txt', array(
-				'%teachingResource%' => $teachingResource->getFilename()
-			)));
+            $teachingResourceEditForm = $this->createForm(TeachingResourceEditTForm::class, $teachingResource);
+            $this->addTwigVar('teachingResourceEditForm', $teachingResourceEditForm->createView());
 
-			$this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_edit', array(
-				'%teachingResource%' => $teachingResource->getFilename()
-			)));
+            $this->addTwigVar('teachingResource', $teachingResource);
+            $this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_edit_txt', array(
+                '%teachingResource%' => $teachingResource->getFilename()
+            )));
 
-			return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:edit.html.twig', $this->getTwigVars());
-		} catch (\Exception $e) {
-			$logger = $this->getLogger();
-			$logger->addError($e->getLine() . ' ' . $e->getMessage());
-		}
+            $this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_edit', array(
+                '%teachingResource%' => $teachingResource->getFilename()
+            )));
 
-		return $this->redirect($urlFrom);
-	}
+            return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:edit.html.twig', $this->getTwigVars());
+        } catch (\Exception $e) {
+            $logger = $this->getLogger();
+            $logger->addError($e->getLine() . ' ' . $e->getMessage());
+        }
 
-	/**
-	 * Edit TeachingResource (method POST)
-	 *
-	 * @param guid $id
-	 *
-	 * @return RedirectResponse Response
-	 */
-	public function editPostAction($id, Request $request)
-	{
-		$urlFrom = $this->getReferer($request);
-		if (null == $urlFrom || trim($urlFrom) == '') {
-			$urlFrom = $this->generateUrl('Admin__teachingResource_list');
-		}
-		$dm = $this->getMongoManager();
-		try {
-			$teachingResource = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->findOneBy(array(
-				'id' => $id
-			));
+        return $this->redirect($urlFrom);
+    }
 
-			if (null == $teachingResource) {
-				$this->addFlash('warning', 'TeachingResource.editNotfound');
+    /**
+     * Edit TeachingResource (method POST)
+     *
+     * @param Request $request
+     * @param string $id
+     *
+     * @return RedirectResponse|Response
+     */
+    public function editPostAction(Request $request, $id)
+    {
+        $urlFrom = $this->getReferer($request);
+        if (null == $urlFrom || trim($urlFrom) == '') {
+            $urlFrom = $this->generateUrl('Admin__teachingResource_list');
+        }
+        $dm = $this->getMongoManager();
+        try {
+            $teachingResource = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->findOneBy(array(
+                'id' => $id
+            ));
 
-				return $this->redirect($urlFrom);
-			}
+            if (null == $teachingResource) {
+                $this->addFlash('warning', 'TeachingResource.editNotfound');
 
-			$teachingResourceEditForm = $this->createForm(TeachingResourceEditTForm::class, $teachingResource);
+                return $this->redirect($urlFrom);
+            }
 
-			;
-			$data = $request->request->all();
-			if (isset($data['TeachingResourceEditForm'])) {
-				$teachingResourceEditForm->handleRequest($request);
-				if ($teachingResourceEditForm->isValid()) {
-					$dm->persist($teachingResource);
-					$dm->flush();
+            $teachingResourceEditForm = $this->createForm(TeachingResourceEditTForm::class, $teachingResource);
 
-					$this->addFlash('success', $this->translate('TeachingResource.editSuccess', array(
-						'%teachingResource%' => $teachingResource->getFilename()
-					)));
+            ;
+            $data = $request->request->all();
+            if (isset($data['TeachingResourceEditForm'])) {
+                $teachingResourceEditForm->handleRequest($request);
+                if ($teachingResourceEditForm->isValid()) {
+                    $dm->persist($teachingResource);
+                    $dm->flush();
 
-					return $this->redirect($urlFrom);
-				} else {
-					$dm->refresh($teachingResource);
+                    $this->addFlash('success', $this->translate('TeachingResource.editSuccess', array(
+                        '%teachingResource%' => $teachingResource->getFilename()
+                    )));
 
-					$this->addFlash('error', $this->translate('TeachingResource.editError', array(
-						'%teachingResource%' => $teachingResource->getFilename()
-					)));
-				}
-			}
+                    return $this->redirect($urlFrom);
+                } else {
+                    $dm->refresh($teachingResource);
 
-			$this->addTwigVar('teachingResourceEditForm', $teachingResourceEditForm->createView());
+                    $this->addFlash('error', $this->translate('TeachingResource.editError', array(
+                        '%teachingResource%' => $teachingResource->getFilename()
+                    )));
+                }
+            }
 
-			$this->addTwigVar('tabActive', 2);
-			$this->addTwigVar('teachingResource', $teachingResource);
-			$this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_edit_txt', array(
-				'%teachingResource%' => $teachingResource->getFilename()
-			)));
+            $this->addTwigVar('teachingResourceEditForm', $teachingResourceEditForm->createView());
 
-			$this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_edit', array(
-				'%teachingResource%' => $teachingResource->getFilename()
-			)));
+            $this->addTwigVar('tabActive', 2);
+            $this->addTwigVar('teachingResource', $teachingResource);
+            $this->addTwigVar('pagetitle_txt', $this->translate('_pagetitleAdmin__teachingResource_edit_txt', array(
+                '%teachingResource%' => $teachingResource->getFilename()
+            )));
 
-			return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:edit.html.twig', $this->getTwigVars());
-		} catch (\Exception $e) {
-			$logger = $this->getLogger();
-			$logger->addError($e->getLine() . ' ' . $e->getMessage());
-		}
+            $this->addTwigVar('pagetitle', $this->translate('_pagetitleAdmin__teachingResource_edit', array(
+                '%teachingResource%' => $teachingResource->getFilename()
+            )));
 
-		return $this->redirect($urlFrom);
-	}
+            return $this->render('IlcfranceWorldspeakAdminFrontBundle:TeachingResource:edit.html.twig', $this->getTwigVars());
+        } catch (\Exception $e) {
+            $logger = $this->getLogger();
+            $logger->addError($e->getLine() . ' ' . $e->getMessage());
+        }
 
-	/**
-	 * Delete TeachingResource
-	 *
-	 * @param guid $id
-	 *
-	 * @return RedirectResponse
-	 */
-	public function deleteAction($id, Request $request)
-	{
-		$urlFrom = $this->getReferer($request);
-		if (null == $urlFrom || trim($urlFrom) == '') {
-			return $this->redirect($this->generateUrl('Admin__teachingResource_list'));
-		}
-		$dm = $this->getMongoManager();
+        return $this->redirect($urlFrom);
+    }
 
-		try {
-			$teachingResource = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->findOneBy(array(
-				'id' => $id
-			));
+    /**
+     * Delete TeachingResource
+     *
+     * @param Request $request
+     * @param string $id
+     *
+     * @return RedirectResponse
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $urlFrom = $this->getReferer($request);
+        if (null == $urlFrom || trim($urlFrom) == '') {
+            return $this->redirect($this->generateUrl('Admin__teachingResource_list'));
+        }
+        $dm = $this->getMongoManager();
 
-			if (null != $teachingResource) {
-				$em = $this->getEntityManager();
-				$tcds = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TimeCreditDocument')->findBy(array(
-					'teachingResource' => $teachingResource
-				));
+        try {
+            $teachingResource = $dm->getRepository('IlcfranceWorldspeakSharedDataBundle:TeachingResource')->findOneBy(array(
+                'id' => $id
+            ));
 
-				foreach ($tcds as $tcd) {
-					$em->remove($tcd);
-				}
-				$em->flush();
-				$dm->remove($teachingResource);
-				$dm->flush();
+            if (null != $teachingResource) {
+                $em = $this->getEntityManager();
+                $tcds = $em->getRepository('IlcfranceWorldspeakSharedDataBundle:TimeCreditDocument')->findBy(array(
+                    'teachingResource' => $teachingResource
+                ));
 
-				$this->addFlash('success', $this->translate('TeachingResource.deleteSuccess', array(
-					'%teachingResource%' => $teachingResource->getFilename()
-				)));
-			} else {
-				$this->addFlash('warning', 'TeachingResource.deleteNotfound');
-			}
-		} catch (\Exception $e) {
-			$logger = $this->getLogger();
-			$logger->addError($e->getLine() . ' ' . $e->getMessage());
-			$this->addFlash('error', 'TeachingResource.deleteError');
-		}
+                foreach ($tcds as $tcd) {
+                    $em->remove($tcd);
+                }
+                $em->flush();
+                $dm->remove($teachingResource);
+                $dm->flush();
 
-		return $this->redirect($urlFrom);
-	}
+                $this->addFlash('success', $this->translate('TeachingResource.deleteSuccess', array(
+                    '%teachingResource%' => $teachingResource->getFilename()
+                )));
+            } else {
+                $this->addFlash('warning', 'TeachingResource.deleteNotfound');
+            }
+        } catch (\Exception $e) {
+            $logger = $this->getLogger();
+            $logger->addError($e->getLine() . ' ' . $e->getMessage());
+            $this->addFlash('error', 'TeachingResource.deleteError');
+        }
+
+        return $this->redirect($urlFrom);
+    }
 }

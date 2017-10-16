@@ -21,6 +21,7 @@
     "bootstrap3" : "bootstrap#~3.3",
     "bootswatch3" : "bootswatch#~3.3",
     "fontawesome" : "fontawesome#~4.7",
-    "tinymce" : "tinymce#~4.5"
+    "tinymce" : "tinymce#~4.5",
+    "Jcrop" : ">=2.0"
   }
 }

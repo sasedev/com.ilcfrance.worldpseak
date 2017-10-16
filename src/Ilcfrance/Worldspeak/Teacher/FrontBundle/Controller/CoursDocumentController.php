@@ -17,11 +17,11 @@ class CoursDocumentController extends BaseController
 	/**
 	 * Download TraineeFile From CoursDocument by id
 	 *
-	 * @param guid $id
+	 * @param string $id
 	 *
-	 * @return \Symfony\Component\HttpFoundation\Response|\Symfony\Component\HttpFoundation\RedirectResponse
+	 * @return RedirectResponse|Response
 	 */
-	public function downloadAction($id, Request $request)
+	public function downloadAction(Request $request, $id)
 	{
 		$urlFrom = $this->getReferer($request);
 		if (null == $urlFrom || trim($urlFrom) == '') {

@@ -3,6 +3,7 @@ namespace Ilcfrance\Worldspeak\Shared\ResBundle\Validator;
 
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
 
 /**
  * PhoneValidator ConstraintValidator
@@ -12,63 +13,60 @@ use Symfony\Component\Validator\Constraint;
 class PhoneValidator extends ConstraintValidator
 {
 
-	/**
-	 * Check if a Phonenumber is valid
-	 *
-	 * @param string $value
-	 * @param Constraint $constraint
-	 *
-	 * @return bool
-	 *
-	 */
-	public function isValid($value, Constraint $constraint)
-	{
-		if (empty($value)) {
-			return true;
-		}
+    /**
+     * Check if a Phonenumber is valid
+     *
+     * @param string $value
+     * @param Constraint $constraint
+     *
+     * @return bool
+     *
+     */
+    public function isValid($value, Constraint $constraint)
+    {
+        if (empty($value)) {
+            return true;
+        }
 
-		$ret = $this->validateNumber($value, $constraint->format);
+        $ret = $this->validateNumber($value, $constraint->format);
 
-		if (!$ret) {
-			$this->setMessage($constraint->message);
-		}
+        if (! $ret) {
+            $this->setMessage($constraint->message);
+        }
 
-		return $ret;
-	}
+        return $ret;
+    }
 
-	/**
-	 * Validate Phonenumber
-	 *
-	 * @param string $value
-	 * @param string $format
-	 *
-	 * @return bool
-	 *
-	 */
-	protected function validateNumber($value, $format)
-	{
-		$ret = preg_match($format, trim($value));
+    /**
+     * Validate Phonenumber
+     *
+     * @param string $value
+     * @param string $format
+     *
+     * @return bool
+     *
+     */
+    protected function validateNumber($value, $format)
+    {
+        $ret = preg_match($format, trim($value));
 
-		return ($ret !== false && $ret >= 1);
-	}
+        return ($ret !== false && $ret >= 1);
+    }
 
-	/**
-	 * (non-PHPdoc)
-	 *
-	 * @param string $value
-	 * @param Constraint $constraint
-	 *
-	 * @see \Symfony\Component\Validator\ConstraintValidatorInterface::validate()
-	 */
-	public function validate($value, Constraint $constraint)
-	{
-		if (!empty($value)) {
-			$matches = array();
-			if (!preg_match($constraint->format, $value, $matches)) {
-				$this->context->addViolation($constraint->message, array(
-					'%string%' => $value
-				));
-			}
-		}
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see ConstraintValidatorInterface::validate()
+     */
+    public function validate($value, Constraint $constraint)
+    {
+        if (! empty($value)) {
+            $matches = array();
+            if (! preg_match($constraint->format, $value, $matches)) {
+                $this->context->addViolation($constraint->message, array(
+                    '%string%' => $value
+                ));
+            }
+        }
+    }
 }

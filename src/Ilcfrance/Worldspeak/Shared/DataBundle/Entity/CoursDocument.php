@@ -1,9 +1,11 @@
 <?php
 namespace Ilcfrance\Worldspeak\Shared\DataBundle\Entity;
 
-use Ilcfrance\Worldspeak\Shared\DataBundle\Document\TraineeFile;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Ilcfrance\Worldspeak\Shared\DataBundle\Document\TraineeFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * CoursDocument Entity
@@ -12,172 +14,173 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         @ORM\Table(name="coursdocuments")
  *         @ORM\Entity(repositoryClass="Ilcfrance\Worldspeak\Shared\DataBundle\Repository\CoursDocumentRepository")
  *         @ORM\HasLifecycleCallbacks
- *         @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="region_coursdocument")
+ *         @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="region_CoursDocument")
  *         @Assert\Callback(callback="checkValidContent")
  */
 class CoursDocument
 {
 
-	/**
-	 *
-	 * @var guid @ORM\Column(name="id", type="guid", nullable=false)
-	 *      @ORM\Id
-	 *      @ORM\GeneratedValue(strategy="UUID")
-	 */
-	protected $id;
+    /**
+     *
+     * @var string @ORM\Column(name="id", type="guid", nullable=false)
+     *      @ORM\Id
+     *      @ORM\GeneratedValue(strategy="UUID")
+     */
+    protected $id;
 
-	/**
-	 *
-	 * @var \DateTime @ORM\Column(name="dtcrea", type="datetimetz",
-	 *      nullable=true)
-	 */
-	protected $dtCrea;
+    /**
+     *
+     * @var DateTime @ORM\Column(name="dtcrea", type="datetimetz",
+     *      nullable=true)
+     */
+    protected $dtCrea;
 
-	/**
-	 *
-	 * @var Cours @ORM\ManyToOne(targetEntity="Cours", inversedBy="documents")
-	 *      @ORM\JoinColumns({
-	 *      @ORM\JoinColumn(name="cours", referencedColumnName="id")
-	 *      })
-	 */
-	protected $cours;
+    /**
+     *
+     * @var Cours @ORM\ManyToOne(targetEntity="Cours", inversedBy="documents")
+     *      @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="cours", referencedColumnName="id")
+     *      })
+     *      @ORM\Cache(usage="NONSTRICT_READ_WRITE", region="region_CoursDocument_cours")
+     */
+    protected $cours;
 
-	/**
-	 *
-	 * @var TraineeFile @ORM\Column(name="traineefile", type="TraineeFile", nullable=false)
-	 */
-	protected $traineeFile;
+    /**
+     *
+     * @var TraineeFile @ORM\Column(name="traineefile", type="TraineeFile", nullable=false)
+     */
+    protected $traineeFile;
 
-	/**
-	 *
-	 * @var string @ORM\Column(name="msg", type="text", nullable=true)
-	 */
-	protected $msg;
+    /**
+     *
+     * @var string @ORM\Column(name="msg", type="text", nullable=true)
+     */
+    protected $msg;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->dtCrea = new \DateTime('now');
-	}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->dtCrea = new DateTime('now');
+    }
 
-	/**
-	 * Get id
-	 *
-	 * @return guid
-	 */
-	public function getId()
-	{
-		return $this->id;
-	}
+    /**
+     * Get id
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * Set dtcrea
-	 *
-	 * @param \DateTime $dtcrea
-	 *
-	 * @return TimeCreditDocument
-	 */
-	public function setDtCrea($dtcrea)
-	{
-		$this->dtCrea = $dtcrea;
+    /**
+     * Set dtcrea
+     *
+     * @param DateTime $dtcrea
+     *
+     * @return TimeCreditDocument
+     */
+    public function setDtCrea($dtcrea)
+    {
+        $this->dtCrea = $dtcrea;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get dtcrea
-	 *
-	 * @return \DateTime
-	 */
-	public function getDtCrea()
-	{
-		return $this->dtCrea;
-	}
+    /**
+     * Get dtcrea
+     *
+     * @return DateTime
+     */
+    public function getDtCrea()
+    {
+        return $this->dtCrea;
+    }
 
-	/**
-	 * Set cours
-	 *
-	 * @param Cours $cours
-	 *
-	 * @return CoursDocument
-	 */
-	public function setCours($cours)
-	{
-		$this->cours = $cours;
+    /**
+     * Set cours
+     *
+     * @param Cours $cours
+     *
+     * @return CoursDocument
+     */
+    public function setCours($cours)
+    {
+        $this->cours = $cours;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get cours
-	 *
-	 * @return Cours
-	 */
-	public function getCours()
-	{
-		return $this->cours;
-	}
+    /**
+     * Get cours
+     *
+     * @return Cours
+     */
+    public function getCours()
+    {
+        return $this->cours;
+    }
 
-	/**
-	 * Set traineeFile
-	 *
-	 * @param TraineeFile $traineeFile
-	 *
-	 * @return CoursDocument
-	 */
-	public function setTraineeFile(TraineeFile $traineeFile)
-	{
-		$this->traineeFile = $traineeFile;
+    /**
+     * Set traineeFile
+     *
+     * @param TraineeFile $traineeFile
+     *
+     * @return CoursDocument
+     */
+    public function setTraineeFile(TraineeFile $traineeFile)
+    {
+        $this->traineeFile = $traineeFile;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get traineeFile
-	 *
-	 * @return TraineeFile
-	 */
-	public function getTraineeFile()
-	{
-		return $this->traineeFile;
-	}
+    /**
+     * Get traineeFile
+     *
+     * @return TraineeFile
+     */
+    public function getTraineeFile()
+    {
+        return $this->traineeFile;
+    }
 
-	/**
-	 * Set msg
-	 *
-	 * @param string $msg
-	 *
-	 * @return CoursDocument
-	 */
-	public function setMsg($msg)
-	{
-		$this->msg = $msg;
+    /**
+     * Set msg
+     *
+     * @param string $msg
+     *
+     * @return CoursDocument
+     */
+    public function setMsg($msg)
+    {
+        $this->msg = $msg;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get msg
-	 *
-	 * @return string
-	 */
-	public function getMsg()
-	{
-		return $this->msg;
-	}
+    /**
+     * Get msg
+     *
+     * @return string
+     */
+    public function getMsg()
+    {
+        return $this->msg;
+    }
 
-	/**
-	 * Validator content
-	 *
-	 * @param ExecutionContextInterface $context
-	 */
-	public function checkValidContent($context)
-	{
-		if (($this->getMsg() == null || trim($this->getMsg()) == '') && $this->getTraineeFile() == null) {
-			$context->addViolationAt('traineeFile', 'CoursDocument.traineeFile.null', array(), null);
-			$context->addViolationAt('msg', 'CoursDocument.msg.null', array(), null);
-		}
-	}
+    /**
+     * Validator content
+     *
+     * @param ExecutionContextInterface $context
+     */
+    public function checkValidContent($context)
+    {
+        if (($this->getMsg() == null || trim($this->getMsg()) == '') && $this->getTraineeFile() == null) {
+            $context->addViolationAt('traineeFile', 'CoursDocument.traineeFile.null', array(), null);
+            $context->addViolationAt('msg', 'CoursDocument.msg.null', array(), null);
+        }
+    }
 }

@@ -2,6 +2,7 @@
 namespace Ilcfrance\Worldspeak\Shared\DataBundle\Repository;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
+use Doctrine\ODM\MongoDB\Query\Query;
 
 /**
  * TeacherAvatar DocumentRepository
@@ -11,29 +12,25 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
 class TeacherAvatarRepository extends DocumentRepository
 {
 
-	/**
-	 * Get Query for All Documents
-	 *
-	 * @return Ambigous <\Doctrine\MongoDB\Query\Query, \Doctrine\ODM\MongoDB\Query\Query>
-	 */
-	public function getAllQuery()
-	{
-		$qb = $this->createQueryBuilder()->sort('dtCrea', 'ASC');
+    /**
+     * Get Query for All Documents
+     *
+     * @return Query
+     */
+    public function getAllQuery()
+    {
+        return $this->createQueryBuilder()
+            ->sort('dtCrea', 'ASC')
+            ->getQuery();
+    }
 
-		$query = $qb->getQuery();
-
-		return $query;
-	}
-
-	/**
-	 * Get All Documents
-	 *
-	 * @return Ambigous <\Doctrine\MongoDB\Cursor, Cursor, \Doctrine\MongoDB\EagerCursor, boolean,
-	 *         multitype:,
-	 *         \Doctrine\MongoDB\ArrayIterator, NULL, unknown, number, object>
-	 */
-	public function getAll()
-	{
-		return $this->getAllQuery()->execute();
-	}
+    /**
+     * Get All Documents
+     *
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->getAllQuery()->execute();
+    }
 }

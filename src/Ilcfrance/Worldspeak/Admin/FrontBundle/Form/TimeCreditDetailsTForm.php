@@ -2,9 +2,9 @@
 namespace Ilcfrance\Worldspeak\Admin\FrontBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * TimeCredit Details Form
@@ -14,45 +14,61 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 class TimeCreditDetailsTForm extends AbstractType
 {
 
-	/**
-	 * Form builder
-	 *
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder->add('objectives', TextareaType::class, array(
-			'label' => 'TimeCredit.objectives.label',
-			'required' => false
-		));
+    /**
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'TimeCreditDetailsForm';
+    }
 
-		$builder->add('comments', TextareaType::class, array(
-			'label' => 'TimeCredit.comments.label',
-			'required' => false
-		));
+    /**
+     * get the default options
+     *
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return array();
+    }
 
-		$builder->add('submit', SubmitType::class, array(
-			'label' => '_action.btnEdit'
-		));
-	}
+    /**
+     * Form builder
+     *
+     * {@inheritdoc}
+     * @see AbstractType::buildForm()
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('objectives', TextareaType::class, array(
+            'label' => 'TimeCredit.objectives.label',
+            'required' => false
+        ));
 
-	/**
-	 * (non-PHPdoc) @see \Symfony\Component\Form\FormTypeInterface::getName()
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'TimeCreditDetailsForm';
-	}
+        $builder->add('comments', TextareaType::class, array(
+            'label' => 'TimeCredit.comments.label',
+            'required' => false
+        ));
+    }
 
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::getBlockPrefix()
-	 */
-	public function getBlockPrefix()
-	{
-		return $this->getName();
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return $this->getName();
+    }
+
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults($this->getDefaultOptions());
+    }
 }

@@ -307,7 +307,7 @@
           <div class="panel-body">
             {{form_start(traineeCefForm, {'method':'POST', 'action': path('Admin__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
             {{form_row(traineeCefForm.cef, {'label_col': 3, 'widget_col': 2})}}
-            {{form_row(traineeCefForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(traineeCefForm)}}
           </div>
         </div>
@@ -318,7 +318,7 @@
           <div class="panel-body">
             {{form_start(traineeEmailForm, {'method':'POST', 'action': path('Admin__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
             {{form_row(traineeEmailForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
-            {{form_row(traineeEmailForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(traineeEmailForm)}}
           </div>
         </div>
@@ -336,7 +336,7 @@
             {{form_row(traineeProfileForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
             {{form_row(traineeProfileForm.phone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'} }) }}
             {{form_row(traineeProfileForm.mobile, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}}) }}
-            {{form_row(traineeProfileForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(traineeProfileForm)}}
           </div>
         </div>
@@ -351,7 +351,7 @@
             {{form_row(traineeProfileAdvancedForm.needs, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
             {{form_row(traineeProfileAdvancedForm.outsideInterests, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
             {{form_row(traineeProfileAdvancedForm.comments, {'label_col': 3, 'widget_col': 5, 'attr':{'class':'wysiwyg'}})}}
-            {{form_row(traineeProfileAdvancedForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(traineeProfileAdvancedForm)}}
           </div>
         </div>
@@ -362,7 +362,7 @@
           <div class="panel-body">
             {{form_start(traineePreferedLocaleForm, {'method':'POST', 'action': path('Admin__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
             {{form_row(traineePreferedLocaleForm.preferedLocale, {'label_col': 3, 'widget_col': 4, 'input_group': { 'append': icon('flag') }})}}
-            {{form_row(traineePreferedLocaleForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(traineePreferedLocaleForm)}}
           </div>
         </div>
@@ -373,7 +373,7 @@
           <div class="panel-body">
             {{form_start(traineeLockoutForm, {'method':'POST', 'action': path('Admin__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
             {{form_row(traineeLockoutForm.lockout, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('lock') }})}}
-            {{form_row(traineeLockoutForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(traineeLockoutForm)}}
           </div>
         </div>
@@ -384,7 +384,7 @@
           <div class="panel-body">
             {{form_start(traineeProjectForm, {'method':'POST', 'action': path('Admin__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
             {{form_row(traineeProjectForm.project, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': '<i class="fa fa-flask"></i>' } }) }}
-            {{form_row(traineeProjectForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(traineeProjectForm)}}
           </div>
         </div>
@@ -395,7 +395,7 @@
           <div class="panel-body">
             {{form_start(traineeCompanyForm, {'method':'POST', 'action': path('Admin__trainee_edit_post', {'id': trainee.id}), 'style': 'horizontal'})}}
             {{form_row(traineeCompanyForm.company, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': '<i class="fa fa-umbrella"></i>' } }) }}
-            {{form_row(traineeCompanyForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(traineeCompanyForm)}}
           </div>
         </div>
@@ -412,7 +412,7 @@
                 {{form_row(timeCreditAddForm.deadLine, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('calendar') }})}}
                 {{form_row(timeCreditAddForm.notifyByMail, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('envelope') }})}}
                 {{form_row(timeCreditAddForm.totalHours, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('time') }})}}
-                {{form_row(timeCreditAddForm.submit, {'label_col': 3,'widget_col': 2})}}
+                <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(timeCreditAddForm)}}
           </div>
         </div>
@@ -611,7 +611,7 @@ $(function()
 	      {
 	        var options =
 	        {
-	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          script_url : '{{asset('/res/bower_components/tinymce/tinymce.min.js')}}',
 	          theme: "modern",
 	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
 	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"

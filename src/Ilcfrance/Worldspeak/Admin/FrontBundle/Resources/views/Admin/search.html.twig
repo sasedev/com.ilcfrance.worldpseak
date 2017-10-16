@@ -45,7 +45,7 @@
 	            {{form_row(adminAddForm.lastName, {'label_col': 3, 'widget_col': 6})}}
 	            {{form_row(adminAddForm.firstName, {'label_col': 3, 'widget_col': 6})}}
 	            {{form_row(adminAddForm.preferedLocale, {'label_col': 3, 'widget_col': 7, 'input_group': { 'append': icon('flag') }})}}
-              {{form_row(adminAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+	            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnAdd'|trans|raw}}</button></div></div>
             {{form_end(adminAddForm)}}
           </div>
         </div>

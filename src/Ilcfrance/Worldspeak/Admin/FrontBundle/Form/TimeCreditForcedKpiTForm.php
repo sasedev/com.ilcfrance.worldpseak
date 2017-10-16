@@ -3,10 +3,9 @@ namespace Ilcfrance\Worldspeak\Admin\FrontBundle\Form;
 
 use Ilcfrance\Worldspeak\Shared\DataBundle\Entity\TimeCredit;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * TimeCredit Forced Kpi Form
@@ -16,83 +15,80 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class TimeCreditForcedKpiTForm extends AbstractType
 {
 
-	/**
-	 * Form builder
-	 *
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder->add('forcedKpiHomeworkPerformed', ChoiceType::class, array(
-			'label' => 'TimeCredit.forcedKpiHomeworkPerformed.label',
-			'choices' => TimeCredit::choiceKPI(),
-			'required' => false
-		));
+    /**
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'TimeCreditForcedKpiForm';
+    }
 
-		$builder->add('forcedKpiParticipation', ChoiceType::class, array(
-			'label' => 'TimeCredit.forcedKpiParticipation.label',
-			'choices' => TimeCredit::choiceKPI(),
-			'required' => false
-		));
+    /**
+     * get the default options
+     *
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return array(
+            'validation_groups' => array(
+                'admKPI',
+                'Default'
+            )
+        );
+    }
 
-		$builder->add('forcedKpiVocabularyRetention', ChoiceType::class, array(
-			'label' => 'TimeCredit.forcedKpiVocabularyRetention.label',
-			'choices' => TimeCredit::choiceKPI(),
-			'required' => false
-		));
+    /**
+     * Form builder
+     *
+     * {@inheritdoc}
+     * @see AbstractType::buildForm()
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('forcedKpiHomeworkPerformed', ChoiceType::class, array(
+            'label' => 'TimeCredit.forcedKpiHomeworkPerformed.label',
+            'choices' => TimeCredit::choiceKPI(),
+            'required' => false
+        ));
 
-		$builder->add('forcedKpiCorrectionConsideration', ChoiceType::class, array(
-			'label' => 'TimeCredit.forcedKpiCorrectionConsideration.label',
-			'choices' => TimeCredit::choiceKPI(),
-			'required' => false
-		));
+        $builder->add('forcedKpiParticipation', ChoiceType::class, array(
+            'label' => 'TimeCredit.forcedKpiParticipation.label',
+            'choices' => TimeCredit::choiceKPI(),
+            'required' => false
+        ));
 
-		$builder->add('submit', SubmitType::class, array(
-			'label' => '_action.btnEdit'
-		));
-	}
+        $builder->add('forcedKpiVocabularyRetention', ChoiceType::class, array(
+            'label' => 'TimeCredit.forcedKpiVocabularyRetention.label',
+            'choices' => TimeCredit::choiceKPI(),
+            'required' => false
+        ));
 
-	/**
-	 * (non-PHPdoc) @see \Symfony\Component\Form\FormTypeInterface::getName()
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'TimeCreditForcedKpiForm';
-	}
+        $builder->add('forcedKpiCorrectionConsideration', ChoiceType::class, array(
+            'label' => 'TimeCredit.forcedKpiCorrectionConsideration.label',
+            'choices' => TimeCredit::choiceKPI(),
+            'required' => false
+        ));
+    }
 
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::getBlockPrefix()
-	 */
-	public function getBlockPrefix()
-	{
-		return $this->getName();
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return $this->getName();
+    }
 
-	/**
-	 * get the default options
-	 *
-	 * @return multitype:string multitype:string
-	 */
-	public function getDefaultOptions()
-	{
-		return array(
-			'validation_groups' => array(
-				'admKPI',
-				'Default'
-			)
-		);
-	}
-
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults($this->getDefaultOptions());
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults($this->getDefaultOptions());
+    }
 }

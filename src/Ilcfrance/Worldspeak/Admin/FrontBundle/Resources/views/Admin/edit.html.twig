@@ -216,7 +216,7 @@
             {{form_row(adminProfileForm.country, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('flag') }})}}
             {{form_row(adminProfileForm.phone, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'} }) }}
             {{form_row(adminProfileForm.mobile, {'label_col': 3, 'widget_col': 2, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}}) }}
-            {{form_row(adminProfileForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(adminProfileForm)}}
           </div>
         </div>
@@ -227,7 +227,7 @@
           <div class="panel-body">
             {{form_start(adminPreferedLocaleForm, {'method':'POST', 'action': path('Admin__admin_edit_post', {'id': admin.id}), 'style': 'horizontal'})}}
             {{form_row(adminPreferedLocaleForm.preferedLocale, {'label_col': 3, 'widget_col': 4, 'input_group': { 'append': icon('flag') }})}}
-            {{form_row(adminPreferedLocaleForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(adminPreferedLocaleForm)}}
           </div>
         </div>
@@ -238,7 +238,7 @@
           <div class="panel-body">
             {{form_start(adminEmailForm, {'method':'POST', 'action': path('Admin__admin_edit_post', {'id': admin.id}), 'style': 'horizontal'})}}
             {{form_row(adminEmailForm.email, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('envelope') }})}}
-            {{form_row(adminEmailForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(adminEmailForm)}}
           </div>
         </div>
@@ -249,7 +249,7 @@
           <div class="panel-body">
             {{form_start(adminLockoutForm, {'method':'POST', 'action': path('Admin__admin_edit_post', {'id': admin.id}), 'style': 'horizontal'})}}
             {{form_row(adminLockoutForm.lockout, {'label_col': 3, 'widget_col': 3, 'input_group': { 'append': icon('lock') }})}}
-            {{form_row(adminLockoutForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(adminLockoutForm)}}
           </div>
         </div>
@@ -261,7 +261,7 @@
           <div class="panel-body">
             {{form_start(adminRoleForm, {'method':'POST', 'action': path('Admin__admin_edit_post', {'id': admin.id}), 'style': 'horizontal'})}}
             {{form_row(adminRoleForm.adminRoles, {'label_col': 3, 'widget_col': 9})}}
-            {{form_row(adminRoleForm.submit, {'label_col': 3,'widget_col': 2})}}
+            <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
             {{form_end(adminRoleForm)}}
           </div>
         </div>

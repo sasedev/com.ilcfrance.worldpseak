@@ -14,77 +14,72 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class UserAvatarResizeTForm extends AbstractType
 {
 
-	private $filename;
+    /**
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return 'UserAvatarResizeForm';
+    }
 
-	/**
-	 * BuildForm
-	 * (non-PHPdoc) @see \Symfony\Component\Form\AbstractType::buildForm()
-	 *
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$this->filename = $options['filename'];
-		$builder->add('x1', HiddenType::class, array(
-			'required' => true
-		));
+    /**
+     * get the default options
+     *
+     * @return array
+     */
+    public function getDefaultOptions()
+    {
+        return array();
+    }
 
-		$builder->add('y1', HiddenType::class, array(
-			'required' => true
-		));
+    /**
+     * Form builder
+     *
+     * {@inheritdoc}
+     * @see AbstractType::buildForm()
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('x1', HiddenType::class, array(
+            'required' => true
+        ));
 
-		$builder->add('w', HiddenType::class, array(
-			'required' => true
-		));
+        $builder->add('y1', HiddenType::class, array(
+            'required' => true
+        ));
 
-		$builder->add('h', HiddenType::class, array(
-			'required' => true
-		));
+        $builder->add('w', HiddenType::class, array(
+            'required' => true
+        ));
 
-		$builder->add('avatar_tmp', HiddenType::class, array(
-			'data' => $this->filename,
-			'required' => true
-		));
-	}
+        $builder->add('h', HiddenType::class, array(
+            'required' => true
+        ));
 
-	/**
-	 * (non-PHPdoc) @see \Symfony\Component\Form\FormTypeInterface::getName()
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'UserAvatarResizeForm';
-	}
+        $builder->add('avatar_tmp', HiddenType::class, array(
+            'data' => $options['filename'],
+            'required' => true
+        ));
+    }
 
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::getBlockPrefix()
-	 */
-	public function getBlockPrefix()
-	{
-		return $this->getName();
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return $this->getName();
+    }
 
-	/**
-	 * get the default options
-	 *
-	 * @return multitype:string multitype:string
-	 */
-	public function getDefaultOptions()
-	{
-		return array(
-			'level' => null
-		);
-	}
-
-	/**
-	 *
-	 * {@inheritdoc} @see AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults($this->getDefaultOptions());
-	}
+    /**
+     *
+     * {@inheritdoc}
+     * @see AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults($this->getDefaultOptions());
+    }
 }

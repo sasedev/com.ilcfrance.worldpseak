@@ -281,17 +281,15 @@
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editCefEnd'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditCefEndForm, {'method':'POST', 'action':
-                        path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                    <div class="panel-body">{{form_start(timeCreditCefEndForm, {'method':'POST', 'action': path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditCefEndForm.cefEnd, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditCefEndForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div>
                         {{form_end(timeCreditCefEndForm)}}</div>
                 </div>
                 <br>
                 <h3 class="legend">{{'TimeCredit.tlabel.editEndReport'|trans}}</h3>
                 <div class="panel panel-danger">
-                    <div class="panel-body">{{form_start(timeCreditEndReportForm, {'method':'POST', 'action':
-                        path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
+                    <div class="panel-body">{{form_start(timeCreditEndReportForm, {'method':'POST', 'action': path('Teacher__timeCredit_edit_post', {'id': timeCredit.id}), 'style': 'horizontal'})}}
                         {{form_row(timeCreditEndReportForm.progress1, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.progress2, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.progress3, {'label_col': 3, 'widget_col': 2})}}
@@ -311,9 +309,9 @@
                         {{form_row(timeCreditEndReportForm.improvement3, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.improvement4, {'label_col': 3, 'widget_col': 2})}}
                         {{form_row(timeCreditEndReportForm.improvement5, {'label_col': 3, 'widget_col': 2})}}
-                        {{form_row(timeCreditEndReportForm.lastTeacherReport, {'label_col': 3, 'widget_col': 9, 'attr':
-                        { 'class': 'wysiwyg' }})}} {{form_row(timeCreditEndReportForm.submit, {'label_col':
-                        3,'widget_col': 2})}} {{form_end(timeCreditEndReportForm)}}</div>
+                        {{form_row(timeCreditEndReportForm.lastTeacherReport, {'label_col': 3, 'widget_col': 9, 'attr': { 'class': 'wysiwyg' }})}} 
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnEdit'|trans|raw}}</button></div></div> 
+                      {{form_end(timeCreditEndReportForm)}}</div>
                 </div>
             </div>
             {%endif%}
@@ -404,7 +402,7 @@
                         {{form_row(timeCreditDocumentAddForm.teachingResource, {'label_col': 3, 'widget_col': 3, 'input_group': {'append': icon('file') }})}}
                         {{form_row(timeCreditDocumentAddForm.msg, {'label_col': 3, 'widget_col': 9, 'attr' : {'class': 'wysiwyg'}})}}
                         {{form_row(timeCreditDocumentAddForm.notifyByMail, {'label_col': 3, 'widget_col': 2, 'input_group': {'append': icon('envelope') }})}}
-                        {{form_row(timeCreditDocumentAddForm.submit, {'label_col': 3,'widget_col': 2})}}
+                        <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnAdd'|trans|raw}}</button></div></div>
                     {{form_end(timeCreditDocumentAddForm)}}
                     </div>
                 </div>
@@ -493,7 +491,7 @@ $(function()
 	      {
 	        var options =
 	        {
-	          script_url : '{{asset('res/bower_components/tinymce/tinymce.min.js')}}',
+	          script_url : '{{asset('/res/bower_components/tinymce/tinymce.min.js')}}',
 	          theme: "modern",
 	          plugins: [ "advlist autolink lists link image charmap print preview hr anchor pagebreak", "searchreplace wordcount visualblocks visualchars code fullscreen", "insertdatetime media nonbreaking save table contextmenu directionality", "emoticons template paste textcolor" ],
 	          toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons"

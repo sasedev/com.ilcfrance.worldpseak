@@ -1,9 +1,9 @@
 <?php
 namespace Ilcfrance\Worldspeak\Trainee\SecurityBundle\Listener;
 
-use Ilcfrance\Worldspeak\Shared\DataBundle\Entity\Trainee;
 use Doctrine\Bundle\DoctrineBundle\Registry as Doctrine;
 use Doctrine\ORM\EntityManager;
+use Ilcfrance\Worldspeak\Shared\DataBundle\Entity\Trainee;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -16,63 +16,64 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 class Activity
 {
 
-	/**
-	 *
-	 * @var Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
-	 */
-	private $tokenStorage;
+    /**
+     *
+     * @var TokenStorage
+     */
+    private $tokenStorage;
 
-	/**
-	 *
-	 * @var EntityManager
-	 */
-	private $em;
+    /**
+     *
+     * @var EntityManager
+     */
+    private $em;
 
-	/**
-	 * Constructor
-	 *
-	 * @param TokenStorage $tokenStorage
-	 * @param Doctrine $doctrine
-	 */
-	public function __construct(TokenStorage $tokenStorage, Doctrine $doctrine)
-	{
-		$this->tokenStorage = $tokenStorage;
-		$this->em = $doctrine->getManager();
-	}
+    /**
+     * Constructor
+     *
+     * @param TokenStorage $tokenStorage
+     * @param Doctrine $doctrine
+     *
+     */
+    public function __construct(TokenStorage $tokenStorage, Doctrine $doctrine)
+    {
+        $this->tokenStorage = $tokenStorage;
+        $this->em = $doctrine->getManager();
+    }
 
-	/**
-	 * Update the user "lastActivity" on each request
-	 *
-	 * @param FilterControllerEvent $event
-	 */
-	public function onCoreController(FilterControllerEvent $event)
-	{
-		// Here we are checking that the current request is a "MASTER_REQUEST",
-		// and ignore any
-		// subrequest in the process (for example when
-		// doing a render() in a twig template)
-		if ($event->getRequestType() !== HttpKernel::MASTER_REQUEST) {
-			return;
-		}
+    /**
+     * Update the user "lastActivity" on each request
+     *
+     * @param FilterControllerEvent $event
+     */
+    public function onCoreController(FilterControllerEvent $event)
+    {
+        // Here we are checking that the current request is a "MASTER_REQUEST",
+        // and ignore any
+        // subrequest in the process (for example when
+        // doing a render() in a twig template)
+        if ($event->getRequestType() !== HttpKernel::MASTER_REQUEST) {
+            return;
+        }
 
-		// We are checking a token authentification is available before using
-		// the User
-		if ($this->tokenStorage->getToken()) {
-			$user = $this->tokenStorage->getToken()->getUser();
+        // We are checking a token authentification is available before using
+        // the User
+        if ($this->tokenStorage->getToken()) {
+            $user = $this->tokenStorage->getToken()->getUser();
 
-			// We are using a delay during wich the user will be considered as still active, in order to
-			// avoid too much UPDATE in the
-			// database
-			// $delay = new \DateTime ();
-			// $delay->setTimestamp (strtotime ('2 minutes ago'));
+            // We are using a delay during wich the user will be considered as still active, in order to
+            // avoid too much UPDATE in the
+            // database
+            // $delay = new DateTime ();
+            // $delay->setTimestamp (strtotime ('2 minutes ago'));
 
-			// We are checking the Trainee class in order to be certain we can call "getLastActivity".
-			// && $user->getLastActivity() < $delay) {
-			if ($user instanceof Trainee) {
-				$user->isActiveNow();
-				$this->em->persist($user);
-				$this->em->flush();
-			}
-		}
-	}
+            // We are checking the Trainee class in order to be certain we can call "getLastActivity".
+            // && $user->getLastActivity() < $delay) {
+            if ($user instanceof Trainee) {
+                $user->isActiveNow();
+                $this->em->persist($user);
+                $this->em->flush();
+            }
+        }
+    }
 }

@@ -1,6 +1,9 @@
 <?php
 namespace Ilcfrance\Worldspeak\Shared\ResBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * WidgetController
  *
@@ -9,16 +12,20 @@ namespace Ilcfrance\Worldspeak\Shared\ResBundle\Controller;
 class WidgetController extends BaseController
 {
 
-	/**
-	 * whoamiAction
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
-	 */
-	public function whoamiAction()
-	{
-		$user = $this->getSecurityTokenStorage()->getToken()->getUser();
-		$this->addTwigVar('user', $user);
+    /**
+     * whoamiAction
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function whoamiAction(Request $request)
+    {
+        $user = $this->getSecurityTokenStorage()
+            ->getToken()
+            ->getUser();
+        $this->addTwigVar('user', $user);
 
-		return $this->render('IlcfranceWorldspeakSharedResBundle:Widget:whoami.html.twig', $this->getTwigVars());
-	}
+        return $this->render('IlcfranceWorldspeakSharedResBundle:Widget:whoami.html.twig', $this->getTwigVars());
+    }
 }

@@ -44,7 +44,7 @@
               {{form_row(teacherAddForm.registerMail, {'label_col': 3, 'widget_col': 5, 'input_group': { 'append': icon('envelope') }})}}
               {{form_row(teacherAddForm.phone, {'label_col': 3, 'widget_col': 6, 'input_group': { 'append': icon('phone-alt') }, 'attr':{'placeholder':'_phone.format'}})}}
               {{form_row(teacherAddForm.mobile, {'label_col': 3, 'widget_col': 6, 'input_group': { 'append': icon('phone') }, 'attr':{'placeholder':'_phone.format'}})}}
-              {{form_row(teacherAddForm.submit, {'label_col': 3,'widget_col': 2}) }}
+              <div class="form-group"><div class="col-lg-offset-3 col-lg-2"><button class="btn-primary btn" type="submit">{{'_action.btnAdd'|trans|raw}}</button></div></div>
             {{form_end(teacherAddForm)}}
           </div>
         </div>
