@@ -13,7 +13,7 @@
 </head>
 <body>
 {%set dtStart=null%}{%set dtEnd=null%}{%set i=0%}{%for cours in timeCredit.courses%}{%if i==0%}{%set dtEnd = cours.dtEnd%}{%endif%}{%if loop.last==true%}{%set dtStart = cours.dtStart%}{% endif%}{%set i=i+1%}{%endfor%}
-<img alt="ILCWorldSpeak" src="{{asset('bundles/ilcfranceworldspeaksharedres/images/ilcfrance.jpg')}}">
+<img alt="ILCWorldSpeak" src="{{asset('/bundles/ilcfranceworldspeaksharedres/images/ilcfrance.jpg')}}">
 <h2 style="text-align: center;">{%if pagetitle is defined%}{{pagetitle|raw}}{%else%}ILCWorldSpeak{%endif%}</h2>
 <br>
 <br>

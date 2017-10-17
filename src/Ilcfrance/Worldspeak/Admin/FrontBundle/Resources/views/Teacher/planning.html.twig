@@ -437,7 +437,7 @@ $(function()
       }
     );
 {%if teacher.type is constant('TYPE_INTERNAL', teacher)%}
-    $('.fc-header-right').append('<div id="calendarTrash" class="calendar-trash"><img src="{{asset('bundles/ilcfranceworldspeaksharedres/images/cal-trash.png')}}" /></div>');
+    $('.fc-header-right').append('<div id="calendarTrash" class="calendar-trash"><img src="{{asset('/bundles/ilcfranceworldspeaksharedres/images/cal-trash.png')}}" /></div>');
     $(document).on("mousemove", function (event)
       {
         currentMousePos.x = event.pageX; currentMousePos.y = event.pageY;
