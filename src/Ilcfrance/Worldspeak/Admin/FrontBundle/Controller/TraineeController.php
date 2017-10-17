@@ -267,7 +267,7 @@ class TraineeController extends BaseController
                     $mvars['userPreferedLocale'] = $locale;
                     $from = $this->getParameter('mail_from');
                     $fromName = $this->getParameter('mail_from_name');
-                    $subject = $this->translate('_mail.registerAdmin__trainee_subject', array(), null, $locale);
+                    $subject = $this->translate('_mail.registerAdmin_trainee_subject', array(), null, $locale);
 
                     $message = Swift_Message::newInstance()->setFrom($from, $fromName)
                         ->setTo($trainee->getEmail(), $trainee->getFullname())
@@ -380,7 +380,7 @@ class TraineeController extends BaseController
                     $mvars['userPreferedLocale'] = $locale;
                     $from = $this->getParameter('mail_from');
                     $fromName = $this->getParameter('mail_from_name');
-                    $subject = $this->translate('_mail.registerAdmin__trainee_subject', array(), null, $locale);
+                    $subject = $this->translate('_mail.registerAdmin_trainee_subject', array(), null, $locale);
 
                     $message = Swift_Message::newInstance()->setFrom($from, $fromName)
                         ->setTo($trainee->getEmail(), $trainee->getFullname())
