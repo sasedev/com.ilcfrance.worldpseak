@@ -114,9 +114,9 @@
                                 {%for teacherAvailability in teacherAvailabilities%}
                                 <tr>
                                     <td>{{teacherAvailability.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{teacherAvailability.dtStart|localizeddate('long', 'none', app.request.locale)}}</td>
+                                        {{teacherAvailability.dtStart|localizeddate('none', 'medium', app.request.locale)}}</td>
                                     <td>{{teacherAvailability.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{teacherAvailability.dtEnd|localizeddate('long', 'none', app.request.locale)}}</td>
+                                        {{teacherAvailability.dtEnd|localizeddate('none', 'medium', app.request.locale)}}</td>
                                 </tr>
                                 {%else%}
                                 <tr>
@@ -150,7 +150,7 @@
                                     </td>
                                     <td>
                                         {{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}
+                                        {{cours.dtStart|localizeddate('none', 'medium', app.request.locale)}}
                                     </td>
                                     <td>
                                         {{cours.duration}} {{'_minutes'|trans}}

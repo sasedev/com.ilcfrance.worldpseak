@@ -21,7 +21,7 @@
         <tr>
             <td style="text-align: right; width: 35%">{{'TimeCredit.dtStart'|trans}} :</td>
             <td style="width: 5%">&nbsp;</td>
-            <th style="width: 60%">{%if dtStart is null%}{{label_warning('_NA'|trans)}}{%else%}<b>{{dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{dtStart|localizeddate('long', 'none', app.request.locale)}}</b>{%endif%}</th>
+            <th style="width: 60%">{%if dtStart is null%}{{label_warning('_NA'|trans)}}{%else%}<b>{{dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{dtStart|localizeddate('none', 'medium', app.request.locale)}}</b>{%endif%}</th>
         </tr>
         <tr>
             <td style="text-align: right;">&nbsp;</td>
@@ -31,7 +31,7 @@
         <tr>
             <td style="text-align: right;">{{'TimeCredit.dtEnd'|trans}} :</td>
             <td>&nbsp;</td>
-            <th>{%if dtEnd is null%}{{label_warning('_NA'|trans)}}{%else%}<b>{{dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{dtEnd|localizeddate('long', 'none', app.request.locale)}}</b>{%endif%}</th>
+            <th>{%if dtEnd is null%}{{label_warning('_NA'|trans)}}{%else%}<b>{{dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{dtEnd|localizeddate('none', 'medium', app.request.locale)}}</b>{%endif%}</th>
         </tr>
         <tr>
             <td style="text-align: right;">&nbsp;</td>

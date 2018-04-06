@@ -86,7 +86,7 @@
                             <td>
                                 {{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}}
                                 {{'_at'|trans}}
-                                {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}
+                                {{cours.dtStart|localizeddate('none', 'medium', app.request.locale)}}
                             </td>
                             <td>{{cours.duration}} {{'_minutes'|trans}}</td>
                             <td>

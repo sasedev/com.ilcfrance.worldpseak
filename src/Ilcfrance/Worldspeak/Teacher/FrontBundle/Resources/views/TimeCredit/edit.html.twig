@@ -337,7 +337,7 @@
                                 <tr {%if cours.buggy is constant('HEALTH_BUGGY', cours)%}class="danger"{%endif%}>
                                     <td>
                                         {{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}
+                                        {{cours.dtStart|localizeddate('none', 'medium', app.request.locale)}}
                                     </td>
                                     <td>
                                         {{cours.duration}} {{'_minutes'|trans}}
@@ -430,7 +430,7 @@
                                         {{timeCreditDocument.teachingResource|trans}} {%else%} {{label_info('_NA'|trans)}}
                                         {%endif%}</td>
                                     <td>{{timeCreditDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{timeCreditDocument.dtCrea|localizeddate('long', 'none', app.request.locale)}}</td>
+                                        {{timeCreditDocument.dtCrea|localizeddate('none', 'medium', app.request.locale)}}</td>
                                     <td>
                                         {%if timeCreditDocument.teachingResource is not null%}
                                         <a class="btn btn-sm btn-primary"

@@ -132,9 +132,9 @@
                                         <a href="{{path('Admin__teacher_edit_get', {'id': teacherAvailability.teacher.id})}}">
                                        {{icon('user')}} {{teacherAvailability.teacher.fullname}}</a></td>
                                     <td>{{teacherAvailability.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{teacherAvailability.dtStart|localizeddate('long', 'none', app.request.locale)}}</td>
+                                        {{teacherAvailability.dtStart|localizeddate('none', 'medium', app.request.locale)}}</td>
                                     <td>{{teacherAvailability.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{teacherAvailability.dtEnd|localizeddate('long', 'none', app.request.locale)}}</td>
+                                        {{teacherAvailability.dtEnd|localizeddate('none', 'medium', app.request.locale)}}</td>
                                     <td><a class="btn btn-sm btn-info"
                                         href="{{path('Admin__teacher_planning', {'id': teacherAvailability.teacher.id,
                                         'year': currentYear, 'week': currentWeek})}}">{{icon('calendar')}}</a></td>

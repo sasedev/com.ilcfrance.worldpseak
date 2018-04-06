@@ -25,7 +25,7 @@
                   {{('TeacherNotif.type.'~n.type)|trans|raw}}
                   {%if n.type is constant('TYPE_TXT_COURS_EDIT', n)%}
                   (<a href="{{path('Teacher__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a> -
-                  {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('long', 'none', app.request.locale)}})
+                  {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('none', 'medium', app.request.locale)}})
                   {%endif%}
                   {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n)%}
                   ({{ 'TimeCredit'|trans }} : <a href="{{path('Teacher__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}">{{ n.timeCredit.trainee.fullname }}</a>)

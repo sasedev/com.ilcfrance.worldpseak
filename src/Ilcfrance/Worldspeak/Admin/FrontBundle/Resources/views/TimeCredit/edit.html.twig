@@ -696,7 +696,7 @@
                                     <td>
                                         {{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}}
                                         {{'_at'|trans}}
-                                        {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}
+                                        {{cours.dtStart|localizeddate('none', 'medium', app.request.locale)}}
                                     </td>
                                     <td>
                                         {{cours.duration}} {{'_minutes'|trans}}
@@ -797,7 +797,7 @@
                                         {{timeCreditDocument.teachingResource|trans}} {%else%} {{label_info('_NA'|trans)}}
                                         {%endif%}</td>
                                     <td>{{timeCreditDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{timeCreditDocument.dtCrea|localizeddate('long', 'none', app.request.locale)}}</td>
+                                        {{timeCreditDocument.dtCrea|localizeddate('none', 'medium', app.request.locale)}}</td>
                                     <td>
                                         {%if timeCreditDocument.teachingResource is not null%}
                                         <a class="btn btn-sm btn-primary"
@@ -875,13 +875,13 @@
                                         {{('TeacherNotif.type.'~n.type)|trans|raw}}
                                         {%if n.type is constant('TYPE_TXT_COURS_EDIT', n) or n.type is constant('TYPE_EMAIL_COURS_EDIT', n)%}
                                             (<a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a> -
-                                             {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('long', 'none', app.request.locale)}})
+                                             {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('none', 'medium', app.request.locale)}})
                                         {%endif%}
                                         {%if n.type is constant('TYPE_TXT_TIMECREDIT_EDIT', n) or n.type is constant('TYPE_EMAIL_TIMECREDIT_EDIT', n)%}
                                             ({{ 'TimeCredit'|trans }} : <a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}">{{ n.timeCredit.trainee.fullname }}</a>)
                                         {%endif%}
                                     </td>
-                                    <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>
+                                    <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'medium', app.request.locale )}}</td>
                                     <td>{{('TeacherNotif.status.'~n.status)|trans}}</td>
                                     <td>
                                         {%if n.type is constant('TYPE_TXT_COURS_EDIT', n) or n.type is constant('TYPE_EMAIL_COURS_EDIT', n)%}
@@ -919,7 +919,7 @@
                                     <td>{{('TraineeNotif.type.'~n.type)|trans|raw}}
                                     {%if n.type is constant('TYPE_EMAIL_24H_BEFORE_COURS', n)%}
                                             (<a href="{{path('Admin__trainee_edit_get', {'id': n.timeCredit.trainee.id})}}"><i class="fa fa-user"></i> {{ n.timeCredit.trainee.fullname }}</a> -
-                                             {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('long', 'none', app.request.locale)}})
+                                             {{n.cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{n.cours.dtStart|localizeddate('none', 'medium', app.request.locale)}})
                                     {%endif%}
                                     </td>
                                     <td>{{n.dtStart|localizeddate('full', 'none', app.request.locale )}} {{'_at'|trans}} {{n.dtStart|localizeddate('none', 'long', app.request.locale )}}</td>

@@ -4,8 +4,8 @@
     <li class="active">
         <a href="{{path('Trainee__cours_edit_get', {'id': cours.id})}}">
             {{icon('earphone')}} &nbsp;
-            {{'breadcrumb.cours.edit'|trans({'%dStart%':cours.dtStart|localizeddate('long', 'none', app.request.locale )|capitalize, '%tStart%':
-                cours.dtStart|localizeddate('none', 'medium', app.request.locale ), '%dtEnd%': cours.dtEnd|localizeddate('long', 'none', app.request.locale)})|raw }}
+            {{'breadcrumb.cours.edit'|trans({'%dStart%':cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize, '%tStart%':
+                cours.dtStart|localizeddate('none', 'medium', app.request.locale ), '%dtEnd%': cours.dtEnd|localizeddate('none', 'medium', app.request.locale)})|raw }}
         </a>
     </li>
 </ol>
@@ -40,11 +40,11 @@
                         <div class="row">
                             <div class="col-lg-3 text-right">{{'Cours.dtStart'|trans|raw}} :</div>
                             <div class="col-lg-9">{{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                            {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}</div>
+                            {{cours.dtStart|localizeddate('none', 'medium', app.request.locale)}}</div>
 
                             <div class="col-lg-3 text-right">{{'Cours.dtEnd'|trans|raw}} :</div>
                             <div class="col-lg-9">{{cours.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                            {{cours.dtEnd|localizeddate('long', 'none', app.request.locale)}}</div>
+                            {{cours.dtEnd|localizeddate('none', 'medium', app.request.locale)}}</div>
                             <div class="col-lg-3 text-right">{{'Cours.duration'|trans|raw}} :</div>
                             <div class="col-lg-9">{{cours.duration}} {{'_minutes'|trans}}</div>
                         </div>

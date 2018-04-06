@@ -10,7 +10,7 @@
             ('TimeCredit.ftype.'~cours.timeCredit.ftype)|trans,'%level%':
             ('TimeCredit.level.'~cours.timeCredit.level)|trans})|raw}}</a></li>
     <li class="active"><a href="{{path('Admin__cours_edit_get', {'id': cours.id})}}">{{icon('earphone')}} &nbsp;
-            {{'breadcrumb.cours.edit'|trans({'%dStart%':cours.dtStart|localizeddate('long', 'none', app.request.locale )|capitalize, '%tStart%':
+            {{'breadcrumb.cours.edit'|trans({'%dStart%':cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize, '%tStart%':
             cours.dtStart|localizeddate('none', 'medium', app.request.locale ), '%dtEnd%': cours.dtEnd|localizeddate('none', 'long', app.request.locale )})|raw }}</a></li>
 </ol>
 {%endblock breadcrumb%} {%block pagebody_content%}

@@ -38,12 +38,12 @@
         <tr>
             <td>{{'Cours.dtStart.pdf'|trans|raw}} :</td>
             <td>&nbsp;</td>
-            <th><b>{{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}</b></th>
+            <th><b>{{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{cours.dtStart|localizeddate('none', 'medium', app.request.locale)}}</b></th>
         </tr>
         <tr>
             <td>{{'Cours.dtEnd.pdf'|trans|raw}} :</td>
             <td>&nbsp;</td>
-            <th><b>{{cours.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{cours.dtEnd|localizeddate('long', 'none', app.request.locale)}}</b></th>
+            <th><b>{{cours.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}} {{cours.dtEnd|localizeddate('none', 'medium', app.request.locale)}}</b></th>
         </tr>
         {%if cours.status is constant('STATUS_PLANNED', cours)%}
         <tr>

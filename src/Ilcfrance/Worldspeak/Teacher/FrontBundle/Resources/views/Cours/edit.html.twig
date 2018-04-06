@@ -12,9 +12,9 @@
             ('TimeCredit.ftype.'~timeCredit.ftype)|trans,'%level%': ('TimeCredit.level.'~timeCredit.level)|trans})|raw}}</a>
     </li>
     <li class="active"><a href="{{path('Teacher__cours_edit_get', {'id': cours.id})}}">{{icon('earphone')}} &nbsp;
-            {{'breadcrumb.cours.edit'|trans({'%dStart%':cours.dtStart|localizeddate('long', 'none', app.request.locale )|capitalize,
+            {{'breadcrumb.cours.edit'|trans({'%dStart%':cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize,
             '%tStart%': cours.dtStart|localizeddate('none', 'medium', app.request.locale ),
-            '%dtEnd%': cours.dtEnd|localizeddate('long', 'none', app.request.locale)})|raw }}</a>
+            '%dtEnd%': cours.dtEnd|localizeddate('none', 'medium', app.request.locale)})|raw }}</a>
     </li>
 </ol>
 {%endblock breadcrumb%}
@@ -65,14 +65,14 @@
 
                             <div class="col-lg-3 text-right">{{'Cours.dtStart'|trans|raw}} :</div>
                             <div class="col-lg-9">{{cours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                            {{cours.dtStart|localizeddate('long', 'none', app.request.locale)}}</div>
+                            {{cours.dtStart|localizeddate('none', 'medium', app.request.locale)}}</div>
                         </div>
                         <br>
                         <div class="row">
 
                             <div class="col-lg-3 text-right">{{'Cours.dtEnd'|trans|raw}} :</div>
                             <div class="col-lg-9">{{cours.dtEnd|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                            {{cours.dtEnd|localizeddate('long', 'none', app.request.locale)}}</div>
+                            {{cours.dtEnd|localizeddate('none', 'medium', app.request.locale)}}</div>
                         </div>
                         <br>
                         <div class="row">
@@ -244,9 +244,9 @@
                         <div class="row">
                             <div class="col-lg-12">
                             <a href="{{path('Teacher__cours_edit_get', {'id': prevcours.id})}}">{{icon('earphone')}} &nbsp;
-                            {{'breadcrumb.cours.edit'|trans({'%dStart%':prevcours.dtStart|localizeddate('long', 'none', app.request.locale )|capitalize,
+                            {{'breadcrumb.cours.edit'|trans({'%dStart%':prevcours.dtStart|localizeddate('full', 'none', app.request.locale )|capitalize,
                             '%tStart%': prevcours.dtStart|localizeddate('none', 'medium', app.request.locale ),
-                            '%dtEnd%': prevcours.dtEnd|localizeddate('long', 'none', app.request.locale)})|raw }}</a>
+                            '%dtEnd%': prevcours.dtEnd|localizeddate('none', 'medium', app.request.locale)})|raw }}</a>
                             </div>
                         </div>
                         <br>
@@ -436,7 +436,7 @@
                                         {%endif%}
                                     </td>
                                     <td>{{coursDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{coursDocument.dtCrea|localizeddate('long', 'none', app.request.locale)}}</td>
+                                        {{coursDocument.dtCrea|localizeddate('none', 'medium', app.request.locale)}}</td>
                                 </tr>
                                 {%endfor%}
                             </tbody>
@@ -550,7 +550,7 @@
                                         {%endif%}
                                     </td>
                                     <td>{{coursDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{coursDocument.dtCrea|localizeddate('long', 'none', app.request.locale)}}</td>
+                                        {{coursDocument.dtCrea|localizeddate('none', 'medium', app.request.locale)}}</td>
                                 </tr>
                                 {%else%}
                                 <tr>
@@ -602,7 +602,7 @@
                                         {{timeCreditDocument.teachingResource|trans}} {%else%} {{label_info('_NA'|trans)}}
                                         {%endif%}</td>
                                     <td>{{timeCreditDocument.dtCrea|localizeddate('full', 'none', app.request.locale )|capitalize}} {{'_at'|trans}}
-                                        {{timeCreditDocument.dtCrea|localizeddate('long', 'none', app.request.locale)}}</td>
+                                        {{timeCreditDocument.dtCrea|localizeddate('none', 'medium', app.request.locale)}}</td>
                                     <td>
                                         {%if timeCreditDocument.teachingResource is not null%}
                                         <a class="btn btn-sm btn-primary"
